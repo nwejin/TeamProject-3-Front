@@ -1,0 +1,37 @@
+// 변수로 색 지정
+
+$color-blue-1: blue;
+$color-blue-2: blue;
+$color-blue-3: blue;
+$color-blue-4: blue;
+$color-blue-5: blue;
+
+// $color--1: ;
+// $color--2: ;
+// $color--3: ;
+// $color--4: ;
+// $color--5: ;
+
+// $color--1: ;
+// $color--2: ;
+// $color--3: ;
+// $color--4: ;
+// $color--5: ;
+
+$color-white: #ffffff;
+$color-black: #333 ;
+
+$rarius: 50px;
+
+
+
+.class {
+    border-radius: $rarius;
+    background-color: $color-blue-1;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+}
+
+

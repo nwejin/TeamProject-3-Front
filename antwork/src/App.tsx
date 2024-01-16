@@ -1,10 +1,11 @@
 import React from 'react';
+import './styles/Component.scss';
 
 
 function App() {
   return (
     <div className="App">
-      <div>hi</div>
+      <div className='class'>hi</div>
     </div>
   );
 }
