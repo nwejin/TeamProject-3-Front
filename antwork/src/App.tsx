@@ -1,11 +1,12 @@
 import React from 'react';
-import './styles/Component.scss';
+import CommunityMain from './community/CommunityMain';
 
+import './styles/Component.scss';
 
 function App() {
   return (
     <div className="App">
-      <div className='class'>hi</div>
+      <CommunityMain></CommunityMain>
     </div>
   );
 }

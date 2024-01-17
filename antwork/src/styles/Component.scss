@@ -19,19 +19,12 @@ $color-blue-5: blue;
 // $color--5: ;
 
 $color-white: #ffffff;
-$color-black: #333 ;
+$color-black: #333;
 
 $rarius: 50px;
 
-
-
-.class {
-    border-radius: $rarius;
-    background-color: $color-blue-1;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    line-height: 100px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-
-
