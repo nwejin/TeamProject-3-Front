@@ -20,7 +20,6 @@ function Community() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-evenly',
-          backgroundColor: 'pink',
         }}
       >
         {/* 프로필 */}
@@ -51,39 +50,49 @@ function Community() {
         </div>
 
         {/* 게시글 표시 */}
-        <div>
-          <p
-            style={{
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              fontSize: '18px',
-              fontWeight: '700',
-            }}
-          >
-            안녕하세요, 처음 인사드립니다.
-          </p>
-          <p
-            style={{
-              overflow: 'hidden',
-              display: '-webkit-box',
-              WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 2,
-              whiteSpace: 'normal',
-              lineHeight: '1.4',
-            }}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus aut
-            fugiat iusto, voluptatem a sequi est rerum. Praesentium architecto
-            alias dolorum, adipisci voluptas officiis, quae Lorem ipsum dolor
-            sit amet, consectetur adipisicing elit. Doloremque similique
-            voluptatibus hic ullam veniam minus ex non nulla
-          </p>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            // backgroundColor: 'red',
+          }}
+        >
+          <div style={{ width: '80%' }}>
+            <p
+              style={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                fontSize: '18px',
+                fontWeight: '700',
+              }}
+            >
+              안녕하세요, 처음 인사드립니다.
+            </p>
+            <p
+              style={{
+                overflow: 'hidden',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+                whiteSpace: 'normal',
+                lineHeight: '1.4',
+              }}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
+              aut fugiat iusto, voluptatem a sequi est rerum. Praesentium
+              architecto alias dolorum, adipisci voluptas officiis, quae Lorem
+              ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
+              similique voluptatibus hic ullam veniam minus ex non nulla
+            </p>
+          </div>
+
           <div style={{ width: '100px', height: '100px' }}>
             <img
               src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
               alt=""
-              style={{ width: '100%', height: '100%' }}
+              style={{ width: '100%', height: 'auto' }}
             />
           </div>
         </div>

@@ -11,6 +11,7 @@ import './styles/Component.scss';
 function App() {
   return (
     <div className="App">
+
       <BrowserRouter>
       <Header />
         <Routes>
