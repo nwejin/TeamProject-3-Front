@@ -17,10 +17,10 @@ function App() {
         <Routes>
           <Route path="/news" element={< MainPage />} />
           {/* <Route path="/stockGuide" element={<MainPage />} /> */}
-          {/* <Route path="/community" element={<MainPage />} /> */}
+          <Route path="/community" element={<CommunityMain />} />
         </Routes>
       </BrowserRouter>
-        <CommunityMain></CommunityMain>
+
       {/* <div className='class'>hi</div> */}
 
     </div>
