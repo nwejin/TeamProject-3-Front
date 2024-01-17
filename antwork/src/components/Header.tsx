@@ -2,7 +2,7 @@ const Header =()=>{
     return (
        <>
         <div className = "header">
-            <img src={`${process.env.PUBLIC_URL}/temp_logo.png`}></img>
+            <img src={process.env.PUBLIC_URL+"temp_logo.png"}/>
             <ul>
                 <li>뉴스룸</li>
                 <li>주식 길잡이</li>
