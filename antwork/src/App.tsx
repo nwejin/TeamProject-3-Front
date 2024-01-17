@@ -9,11 +9,8 @@ import './styles/Component.scss';
 function App() {
   return (
     <div className="App">
-    
       <Header></Header>
-        <CommunityMain></CommunityMain>
-      {/* <div className='class'>hi</div> */}
-
+      <CommunityMain></CommunityMain>
     </div>
   );
 }
