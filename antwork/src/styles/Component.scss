@@ -23,7 +23,14 @@ $color-black: #333 ;
 
 $rarius: 50px;
 
-
+.App{
+    margin:0;
+    padding:0;
+}
+body{
+    margin:0;
+    padding:0;
+}
 
 .class {
     border-radius: $rarius;
