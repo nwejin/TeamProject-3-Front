@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-function AddPost() {
-  const closeModal = () => {
-    console.log('모달 닫기');
-  };
+// props 타입 지정
+interface props {
+  open: Boolean;
+  close: () => void;
+}
+
+const AddPost = (props: props): ReactElement => {
+  // const { open, close } = props;
+
   return (
     <div
       className="modalBack"
@@ -50,10 +55,7 @@ function AddPost() {
             }}
           >
             <h2>글 작성하기</h2>
-            <button
-              style={{ backgroundColor: 'white', border: 'none' }}
-              onClick={closeModal}
-            >
+            <button style={{ backgroundColor: 'white', border: 'none' }}>
               <span>X</span>
             </button>
           </div>
@@ -101,6 +103,7 @@ function AddPost() {
               rows={7}
               style={{ textAlign: 'left', resize: 'none' }}
             ></textarea>
+            <input type="file" name="" id="" />
           </div>
 
           <div
@@ -116,6 +119,6 @@ function AddPost() {
       </div>
     </div>
   );
-}
+};
 
 export default AddPost;
