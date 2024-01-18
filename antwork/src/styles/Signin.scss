@@ -1,0 +1,42 @@
+@import './Component.scss';
+
+.form-box {
+    margin: auto auto;
+    text-align: center;
+    width: 400px;
+    height: calc(100vh - 100px);
+    // transform: translateY(-50%);
+}
+
+.input-box{
+    width: 89%;
+    height: 46px;
+    border: none;
+    margin-bottom: 1vw;
+    padding: 0 5%;
+    background-color: #ececec;
+
+    &:focus{
+        background-color: white;
+        outline:$color-blue-1 solid 2px;
+    }
+}
+.link-btn{
+    cursor: pointer;
+    color:$color-blue-1;
+}
+.hr-div{
+    height:1px;
+    width:100%;
+    background-color: $color-gray;
+    margin:10px 0;
+}
+.kakao-login-btn{
+    img{
+        width: 80%;
+        height: 46px;
+    }
+    background-color: #fee500;
+    width: 100%;
+    height: 46px;
+}
