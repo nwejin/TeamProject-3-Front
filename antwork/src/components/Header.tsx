@@ -32,13 +32,13 @@ const Header = () => {
   return (
     <>
       <div className="header">
-        <img src={process.env.PUBLIC_URL + "temp_logo.png"} alt="Logo" />
+        <Link to="/"><img src={process.env.PUBLIC_URL + "temp_logo.png"} alt="Logo" /></Link>
         <ul>
           <li><Link to="/news">뉴스룸</Link></li>
           <li><Link to="/stockGuide">주식 길잡이</Link></li>
           <li><Link to="/community">개미의 시선</Link></li>
         </ul>
-        <div className="Header-login-btn">로그인</div>
+        <Link to ="/signin"><div className="Header-login-btn">로그인</div></Link>
       </div>
     </>
   );

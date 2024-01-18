@@ -1,6 +1,6 @@
 // 변수로 색 지정
 
-$color-blue-1: blue;
+$color-blue-1: #0056F3;
 $color-blue-2: blue;
 $color-blue-3: blue;
 $color-blue-4: blue;
@@ -12,12 +12,7 @@ $color-blue-5: blue;
 // $color--4: ;
 // $color--5: ;
 
-// $color--1: ;
-// $color--2: ;
-// $color--3: ;
-// $color--4: ;
-// $color--5: ;
-
+$color-gray: #ececec;
 $color-white: #ffffff;
 $color-black: #333;
 
@@ -38,6 +33,12 @@ $rarius: 50px;
 
 * {
     font-family:'Pretendard';
+    color:$color-black;
+}
+
+a{
+    text-decoration: none;
+    color:$color-black;
 }
 
 body{
