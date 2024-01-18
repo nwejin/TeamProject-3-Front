@@ -11,18 +11,16 @@ import './styles/Component.scss';
 function App() {
   return (
     <div className="App">
-
       <BrowserRouter>
-      <Header />
+        <Header />
         <Routes>
-          <Route path="/news" element={< MainPage />} />
+          <Route path="/news" element={<MainPage />} />
           {/* <Route path="/stockGuide" element={<MainPage />} /> */}
           <Route path="/community" element={<CommunityMain />} />
         </Routes>
       </BrowserRouter>
 
       {/* <div className='class'>hi</div> */}
-
     </div>
   );
 }

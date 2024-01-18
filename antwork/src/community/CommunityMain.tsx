@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import AddPost from './AddPost';
 import '../styles/Community.scss';
 import Community from './Commnunity';
 import { useState } from 'react';
 
-function CommunityMain() {
-  const [modal, setModal] = useState(false);
+function CommunityMain(): ReactElement {
+  const [openModal, setOpenModal] = useState<Boolean>(false);
+
+  const showModal = () => {
+    setOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
+  };
 
   return (
     <div
@@ -13,10 +21,11 @@ function CommunityMain() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: '100vw',
+        width: '80%',
+        backgroundColor: 'pink',
+        margin: 'auto',
       }}
     >
-      {/* <AddPost></AddPost> */}
       <div
         style={{
           width: '1000px',
@@ -61,16 +70,30 @@ function CommunityMain() {
               border: '1px solid grey',
               width: '100px',
             }}
-            onClick={() => {
-              setModal(true);
-            }}
+            // onClick={() => {
+            //   setModal(true);
+            // }}
+            onClick={showModal}
           >
             글 작성
           </button>
-          {modal === true ? <AddPost /> : null}
+          {/* {modal === true ? <AddPost /> : null} */}
+          {openModal && <AddPost open={openModal} close={closeModal} />}
         </div>
       </div>
 
+      <Community></Community>
+      <Community></Community>
+
+      <Community></Community>
+      <Community></Community>
+      <Community></Community>
+      <Community></Community>
+      <Community></Community>
+      <Community></Community>
+      <Community></Community>
+      <Community></Community>
+      <Community></Community>
       <Community></Community>
     </div>
   );
