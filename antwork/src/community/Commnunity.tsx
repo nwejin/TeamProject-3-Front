@@ -1,3 +1,5 @@
+import '../styles/Community.scss';
+
 function Community() {
   return (
     <div
@@ -59,41 +61,45 @@ function Community() {
           }}
         >
           <div style={{ width: '80%' }}>
-            <p
-              style={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-                fontSize: '18px',
-                fontWeight: '700',
-              }}
-            >
-              안녕하세요, 처음 인사드립니다.
-            </p>
-            <p
-              style={{
-                overflow: 'hidden',
-                display: '-webkit-box',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 2,
-                whiteSpace: 'normal',
-                lineHeight: '1.4',
-              }}
-            >
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-              aut fugiat iusto, voluptatem a sequi est rerum. Praesentium
-              architecto alias dolorum, adipisci voluptas officiis, quae Lorem
-              ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
-              similique voluptatibus hic ullam veniam minus ex non nulla
-            </p>
+            <a href="">
+              <p
+                style={{
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                  fontSize: '18px',
+                  fontWeight: '700',
+                }}
+              >
+                안녕하세요, 처음 인사드립니다.
+              </p>
+              <p
+                style={{
+                  overflow: 'hidden',
+                  display: '-webkit-box',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 2,
+                  whiteSpace: 'normal',
+                  lineHeight: '1.4',
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
+                aut fugiat iusto, voluptatem a sequi est rerum. Praesentium
+                architecto alias dolorum, adipisci voluptas officiis, quae Lorem
+                ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
+                similique voluptatibus hic ullam veniam minus ex non nulla
+              </p>
+            </a>
           </div>
 
           <div style={{ width: '100px', height: '100px' }}>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
-              alt=""
-              style={{ width: '100%', height: 'auto' }}
-            />
+            <a href="">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
+                alt=""
+                style={{ width: '100%', height: 'auto' }}
+              />
+            </a>
           </div>
         </div>
 
@@ -110,14 +116,19 @@ function Community() {
           <div
             style={{
               display: 'flex',
-              justifyContent: 'space-around',
+              justifyContent: 'space-between',
               width: '150px',
             }}
           >
-            <span>좋아요</span>
-            <span>0</span>
-            <span>댓글</span>
-            <span>0</span>
+            <span>
+              <button>좋아요</button>
+              <span>0</span>
+            </span>
+
+            <span>
+              <button>댓글</button>
+              <span>0</span>
+            </span>
           </div>
           <span
             style={{
@@ -127,8 +138,7 @@ function Community() {
               marginRight: '2px',
             }}
           >
-            {' '}
-            경제{' '}
+            경제
           </span>
         </div>
       </div>
