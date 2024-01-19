@@ -37,7 +37,7 @@ function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    {/*<Route path="/" element={serverData} />*/}
+                    <Route path="/" element={serverData} />
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
