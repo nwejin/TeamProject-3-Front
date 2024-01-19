@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 const StyledBox = styled.div`
     width: 100%;
-    height: 50px;
+    height: 46px;
     background-color: #0056F3;
     color: white;
     line-height: 50px;
