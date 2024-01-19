@@ -1,15 +1,23 @@
 @import './Component.scss';
 
+@mixin login-align($align){
+    width: 50%;
+    display: inline-block;
+    text-align: $align;
+}
+
 .form-box {
-    margin: auto auto;
+    margin: 70px auto 0 auto;
     text-align: center;
-    width: 400px;
-    height: calc(100vh - 100px);
-    // transform: translateY(-50%);
+    width: 380px;
+    .page-title{
+        font-size: 24px;
+        margin: 20px 0;
+    }
 }
 
 .input-box{
-    width: 89%;
+    width: 100%;
     height: 46px;
     border: none;
     margin-bottom: 1vw;
@@ -20,6 +28,14 @@
         background-color: white;
         outline:$color-blue-1 solid 2px;
     }
+}
+.signinBtn{
+    width: 100%;
+    height: 46px;
+    background-color: #0056F3;
+    color: white;
+    line-height: 46px;
+    border: none;
 }
 .link-btn{
     cursor: pointer;
@@ -39,4 +55,13 @@
     background-color: #fee500;
     width: 100%;
     height: 46px;
+}
+.remember-id{
+    @include login-align(left);
+}
+.find-id{
+    @include login-align(right);
+}
+.account-options{
+    margin:10px 0;
 }
