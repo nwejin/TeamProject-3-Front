@@ -56,7 +56,10 @@ const AddPost = (props: props): ReactElement => {
             }}
           >
             <h2>글 작성하기</h2>
-            <button style={{ backgroundColor: 'white', border: 'none' }}>
+            <button
+              style={{ backgroundColor: 'white', border: 'none' }}
+              onClick={props.close}
+            >
               <span>X</span>
             </button>
           </div>
