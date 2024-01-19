@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import AddPost from './AddPost';
+import PostRank from './PostRank';
 import '../styles/Community.scss';
 import Community from './Commnunity';
 import { useState } from 'react';
@@ -16,85 +17,32 @@ function CommunityMain(): ReactElement {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '80%',
-        backgroundColor: 'pink',
-        margin: 'auto',
-      }}
-    >
-      <div
-        style={{
-          width: '1000px',
-          height: '70px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
+    <div className="main">
+      <div className="communityHeader">
         <h2> 커뮤니티</h2>
-        <div
-          style={{
-            width: '420px',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
+
+        <button
+          // onClick={() => {
+          //   setModal(true);
+          // }}
+          onClick={showModal}
         >
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="검색어를 입력하세요"
-            style={{
-              borderRadius: '5px',
-              width: '200px',
-              height: '30px',
-              border: '1px solid grey',
-            }}
-          />
-          <button
-            style={{
-              borderRadius: '5px',
-              border: '1px solid grey',
-              width: '100px',
-            }}
-          >
-            검색
-          </button>
-          <button
-            style={{
-              borderRadius: '5px',
-              border: '1px solid grey',
-              width: '100px',
-            }}
-            // onClick={() => {
-            //   setModal(true);
-            // }}
-            onClick={showModal}
-          >
-            글 작성
-          </button>
-          {/* {modal === true ? <AddPost /> : null} */}
-          {openModal && <AddPost open={openModal} close={closeModal} />}
-        </div>
+          글 작성
+        </button>
+        {/* {modal === true ? <AddPost /> : null} */}
+        {openModal && <AddPost open={openModal} close={closeModal} />}
       </div>
 
-      <Community></Community>
-      <Community></Community>
-
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
-      <Community></Community>
+      <div className="communityContentBox">
+        <div className="rankingBox">
+          <PostRank />
+        </div>
+        <div className="postBox">
+          <Community></Community>
+          <Community></Community>
+          <Community></Community>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,222 @@
 @import './Component.scss';
 
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+// 커뮤니티 페이지 메인
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 70%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+// 커뮤니티 페이지 제목&검색창 부분
+.communityHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eeeeee;
+  //   background-color: pink;
+  button {
+    // border: 1px solid blue;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    background-color: rgb(52, 52, 236);
+    border: none;
+    font-size: 16px;
+    color: white;
+  }
+}
+
+.communityContentBox {
+  width: 100%;
+  display: flex;
+  //   background-color: blue;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+// 게시글 부분
+.post {
+  //   background-color: pink;
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #eeeeee;
+  align-items: space-around;
+  margin-bottom: 30px;
+
+  //   게시글 내용
+  .postContents {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  //  (1) 유저 정보
+  .userProfile {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    // background-color: red;
+    a {
+      display: flex;
+      align-items: center;
+    }
+    img {
+      width: auto;
+      height: 20px;
+      margin-right: 6px;
+    }
+    span {
+      margin-right: 2px;
+    }
+  }
+  //   (2) 게시글 정보
+  .contentBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    // background-color: red;
+    .textContent {
+      width: 80%;
+      .title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 18px;
+        font-weight: 700;
+        width: 70%;
+      }
+      .text {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        white-space: normal;
+        line-height: 1.4;
+      }
+    }
+    .imgBox {
+      width: 100px;
+      height: 100px;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  // (3) 좋아요, 댓글 버튼
+  .statusBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // background-color: red;
+    height: 30px;
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 150px;
+      button {
+        border: 0;
+        outline: 0;
+        background: none;
+      }
+    }
+    .category {
+      border: 1px solid #eeeeee;
+      background-color: none;
+      padding: 4px 8px;
+      border-radius: 5px;
+      margin-right: 2px;
+    }
+  }
+}
+
+.postBox {
+  width: 78%;
+  //   background-color: red;
+}
+
+.rankingBox {
+  //   background-color: pink;
+  width: 20%;
+  input {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #eeeeee;
+  }
+  .postListBox {
+    width: 100%;
+    height: 400px;
+    margin-top: 10%;
+    border-radius: 5px;
+    border: 1px solid #eeeeee;
+  }
+  .postListTitle {
+    width: 100%;
+    // background-color: pink;
+    margin-top: 0.5rem;
+    padding: 0.5em;
+    span {
+      font-weight: 700;
+      font-size: 18px;
+      color: rgb(63, 63, 255);
+    }
+  }
+  .postListContent {
+    ul {
+      list-style: none;
+      padding: 0.7em 0.5rem;
+      margin: 0;
+      li {
+        margin-top: 0.5rem;
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #eeeeee;
+        a {
+          display: flex;
+          justify-content: space-between;
+          .category {
+            font-size: 14px;
+          }
+          .listTitle {
+            font-size: 16px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 140px;
+          }
+          .listComment {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 40px;
+            font-size: 14px;
+            .material-symbols-outlined {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
