@@ -46,21 +46,6 @@ const SignupPage = () => {
     };
     const [dataFromBackend, setDataFromBackend] = useState<string>("");
 
-    // useEffect(() => {
-    //   // 백엔드로부터 데이터를 받아오는 함수
-    //   const fetchDataFromBackend = async () => {
-    //     try {
-    //       const response = await axios.get('http://localhost:5000/register'); // 백엔드 API 엔드포인트
-    //       setDataFromBackend(response.data);
-    //     //   console.log(dataFromBackend);
-    //     } catch (error:any) {
-    //       console.error('Error fetching data from backend:', error);
-    //     }
-    //   };
-
-    //   fetchDataFromBackend();
-    // }, []); // 컴포넌트가 마운트될 때 한 번만 실행
-
     return (
         <>
             <div className="form-box">
@@ -109,7 +94,6 @@ const SignupPage = () => {
                         </span>
                     </div>
                 </form>
-                <p>Data from Backend: {dataFromBackend}</p>
             </div>
         </>
     );
