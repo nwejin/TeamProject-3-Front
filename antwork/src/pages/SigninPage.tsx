@@ -10,12 +10,14 @@ const SigninPage=()=>{
         <div className="hr-div"></div>
         <div className="page-title">로그인</div>
         <form>
-            <input className="input-box"/><br/>
-            <input className="input-box" /><br/>
-            <input type="checkbox"/> 아이디 기억하기
-            <Link to="/findId">아이디 | 비밀번호 찾기</Link><br/>
+            <input placeholder="아이디" className="input-box"/><br/>
+            <input placeholder="비밀번호" className="input-box" /><br/>
+            <div className="account-options">
+                <div className="remember-id"><input type="checkbox"/> 아이디 기억하기</div>
+                <div className="find-id"><Link to="/findId">아이디 | 비밀번호 찾기</Link></div>
+            </div>
             <LoginBtnComponent>로그인</LoginBtnComponent>
-            <div>아직 계정이 없으신가요? <span className="link-btn" onClick={()=>{
+            <div className="account-options">아직 계정이 없으신가요?&nbsp;&nbsp; <span className="link-btn" onClick={()=>{
                 navigate('/signup');
             }}>회원가입하기</span></div>
         </form>
