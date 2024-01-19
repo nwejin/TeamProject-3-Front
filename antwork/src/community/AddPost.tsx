@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import '../styles/Community.scss';
 
 // props 타입 지정
 interface props {
@@ -84,7 +85,12 @@ const AddPost = (props: props): ReactElement => {
             }}
           >
             <label htmlFor="">제목</label>
-            <input type="text" name="" id="" style={{ height: '30px' }} />
+            <input
+              type="text"
+              name=""
+              id=""
+              style={{ height: '30px', boxSizing: 'content-box' }}
+            />
           </div>
 
           <div

@@ -9,6 +9,7 @@ import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SignupPage';
 import FindIdPage from './pages/FindIdPage';
 import CommunityMain from './community/CommunityMain';
+import CommunityReadPage from './community/CommunityReadPage';
 
 function App() {
   return (
@@ -16,18 +17,16 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-
-          <Route path="/signin" element={<SigninPage/>} />
-          <Route path="/signup" element={< SignupPage />} />
-          <Route path="/" element={< MainPage />} />
-          <Route path="/findId" element={< FindIdPage />} />
+          <Route path="/signin" element={<SigninPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/findId" element={<FindIdPage />} />
 
           {/* <Route path="/stockGuide" element={<MainPage />} /> */}
           <Route path="/community" element={<CommunityMain />} />
+          <Route path="/community/read" element={<CommunityReadPage />} />
         </Routes>
       </BrowserRouter>
-
-      {/* <div className='class'>hi</div> */}
     </div>
   );
 }

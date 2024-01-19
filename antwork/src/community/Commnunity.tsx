@@ -23,7 +23,7 @@ function Community() {
         {/* 게시글 */}
         <div className="contentBox">
           <div className="textContent">
-            <a href="/">
+            <a href="/community/read">
               <p className="title">
                 안녕하세요 Lorem ipsum dolor sit amet consectetur adipisicing
                 elit. Laudantium quisquam ut dolor inventore sequi voluptatem.
@@ -43,7 +43,7 @@ function Community() {
           <div className="imgBox">
             <a href="/">
               <img
-                src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
+                src="https://wimg.mk.co.kr/news/cms/202303/06/news-p.v1.20230303.7da9e984074048beb88b016ae6e26b68_P1.jpg"
                 alt=""
               />
             </a>
