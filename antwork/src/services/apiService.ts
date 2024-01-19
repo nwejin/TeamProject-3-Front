@@ -7,7 +7,11 @@ export const register = async (userData: any) => {
     try {
         const response = await axios.post(
             "http://localhost:5000/register",
-            userData
+            userData,{
+              headers: {
+                 'Content-Type': 'application/json',
+              },
+           }
         );
         return response.data;
     } catch (error) {
