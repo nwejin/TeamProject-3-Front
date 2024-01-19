@@ -11,6 +11,7 @@ import FindIdPage from "./pages/FindIdPage";
 import CommunityMain from "./community/CommunityMain";
 import CommunityReadPage from './community/CommunityReadPage';
 import axios from "axios";
+import NewsPage from './pages/NewsPage';
 // import ExampleComponent from "./components/ExampleComponent";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
+                    <Route path='/news' element={<NewsPage />}/>
 
                     {/* <Route path="/stockGuide" element={<MainPage />} /> */}
                     <Route path="/community" element={<CommunityMain />} />
