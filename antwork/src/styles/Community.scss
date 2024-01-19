@@ -8,6 +8,9 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+button {
+  cursor: pointer;
+}
 
 // 커뮤니티 페이지 메인
 .main {
@@ -25,7 +28,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid rgb(204, 204, 204);
   //   background-color: pink;
   button {
     // border: 1px solid blue;
@@ -49,28 +52,31 @@ a {
 
 // 게시글 부분
 .post {
-  //   background-color: pink;
+  // background-color: pink;
   width: 100%;
   height: 250px;
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  border: 1px solid #eeeeee;
+  border: 1px solid rgb(204, 204, 204);
   align-items: space-around;
   margin-bottom: 30px;
 
   //   게시글 내용
   .postContents {
-    width: 80%;
+    width: 90%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    // background-color: rgb(204, 204, 204);
   }
   //  (1) 유저 정보
   .userProfile {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 140px;
     height: 30px;
     // background-color: red;
     a {
@@ -113,8 +119,10 @@ a {
       }
     }
     .imgBox {
-      width: 100px;
+      width: 150px;
       height: 100px;
+      overflow: hidden;
+      border-radius: 5px;
       img {
         width: 100%;
         height: auto;
@@ -140,7 +148,7 @@ a {
       }
     }
     .category {
-      border: 1px solid #eeeeee;
+      border: 1px solid rgb(204, 204, 204);
       background-color: none;
       padding: 4px 8px;
       border-radius: 5px;
@@ -161,14 +169,14 @@ a {
     width: 100%;
     height: 30px;
     border-radius: 5px;
-    border: 1px solid #eeeeee;
+    border: 1px solid rgb(204, 204, 204);
   }
   .postListBox {
     width: 100%;
     height: 400px;
     margin-top: 10%;
     border-radius: 5px;
-    border: 1px solid #eeeeee;
+    border: 1px solid rgb(204, 204, 204);
   }
   .postListTitle {
     width: 100%;
@@ -186,11 +194,15 @@ a {
       list-style: none;
       padding: 0.7em 0.5rem;
       margin: 0;
+      li:hover {
+        // background-color: rgb(204, 204, 204);
+        filter: opacity(0.7);
+      }
       li {
         margin-top: 0.5rem;
         width: 100%;
         height: 50px;
-        border-bottom: 1px solid #eeeeee;
+        border-bottom: 1px solid rgb(204, 204, 204);
         a {
           display: flex;
           justify-content: space-between;
@@ -204,6 +216,7 @@ a {
             text-overflow: ellipsis;
             white-space: nowrap;
             width: 140px;
+            // background-color: pink;
           }
           .listComment {
             display: flex;
@@ -211,6 +224,7 @@ a {
             justify-content: space-between;
             width: 40px;
             font-size: 14px;
+            // background-color: pink;
             .material-symbols-outlined {
               font-size: 18px;
             }
@@ -218,5 +232,249 @@ a {
         }
       }
     }
+  }
+}
+
+// 게시글 읽기 페이지
+
+.communityReadBox {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  // background-color: blue;
+  margin-top: 1rem;
+  justify-content: space-between;
+  .postRead {
+    // background-color: pink;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: space-around;
+    margin-bottom: 30px;
+    .postContents {
+      width: 90%;
+      height: 100%;
+      display: flex;
+      // align-items: center;
+      flex-direction: column;
+      justify-content: space-around;
+      // background-color: rgb(204, 204, 204);
+      .userProfile {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+        // background-color: red;
+        .profile {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 140px;
+          height: 30px;
+        }
+        a {
+          display: flex;
+          align-items: center;
+        }
+        img {
+          width: auto;
+          height: 20px;
+          margin-right: 6px;
+        }
+        span {
+          margin-right: 2px;
+        }
+        .category {
+          border: 1px solid rgb(204, 204, 204);
+          background-color: none;
+          padding: 4px 8px;
+          border-radius: 5px;
+          margin-right: 2px;
+        }
+      }
+      .contentBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        // background-color: red;
+        .textContent {
+          width: 90%;
+          .title {
+            font-size: 22px;
+            font-weight: 1000;
+            width: 100%;
+          }
+          .text {
+            white-space: normal;
+            line-height: 1.4;
+          }
+        }
+      }
+    }
+  }
+
+  .statusBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // background-color: red;
+    height: 30px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 150px;
+      button {
+        border: 0;
+        outline: 0;
+        background: none;
+      }
+    }
+    .report {
+      width: auto;
+    }
+  }
+  .readImgBox {
+    display: flex;
+    margin: 1rem 0;
+    justify-content: center;
+    img {
+      width: 30%;
+    }
+  }
+}
+
+.countComment {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+// 댓글창 부분
+.commentBox {
+  width: 100%;
+  // height: 50vh;
+  border-top: 1px solid rgb(204, 204, 204);
+  // background-color: #f3f2f2;
+  // justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .commentInnerBox {
+    width: 90%;
+    // max-height: 30%;
+    // height: 30%;
+    // background-color: pink;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 1rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgb(204, 204, 204);
+    .userProfile {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+      // background-color: red;
+      .profile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 140px;
+        height: 30px;
+      }
+      a {
+        display: flex;
+        align-items: center;
+      }
+      img {
+        width: auto;
+        height: 20px;
+        margin-right: 6px;
+      }
+      span {
+        margin-right: 2px;
+      }
+    }
+    .commentText {
+      // background-color: red;
+      width: 70%;
+      height: auto;
+    }
+    .statusBox {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      // background-color: red;
+      height: 30px;
+      span {
+        font-size: 16px;
+      }
+      div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 120px;
+        button {
+          border: 0;
+          outline: 0;
+          background: none;
+        }
+      }
+      .report {
+        width: auto;
+      }
+    }
+  }
+}
+
+.commentWriteBox {
+  width: 90%;
+  border-radius: 10px;
+  border: 1px solid rgb(204, 204, 204);
+  display: flex;
+  justify-content: center;
+  .commentWriteInnerBox {
+    width: 95%;
+    margin: 1rem 0;
+  }
+  .userProfile {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+
+    // background-color: red;
+    a {
+      display: flex;
+      align-items: center;
+    }
+    img {
+      width: auto;
+      height: 20px;
+      margin-right: 6px;
+    }
+    span {
+      margin-right: 2px;
+    }
+    button {
+      border: 0;
+      outline: 0;
+      background: none;
+    }
+  }
+  textarea {
+    text-align: left;
+    resize: none;
+    width: 100%;
+    margin-top: 1rem;
   }
 }

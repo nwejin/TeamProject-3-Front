@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/Component.scss";
@@ -47,6 +48,7 @@ function App() {
             {/* <div className='class'>{serverData}</div> */}
         </div>
     );
+
 }
 
 export default App;
