@@ -1,4 +1,16 @@
-function Comment() {
+import React, { ReactElement } from 'react';
+import { useState } from 'react';
+import CommentWrite from './CommentWrite';
+
+function Comment(): ReactElement {
+  // 댓글창 추가
+  const [commentBox, setCommentBox] = useState(false);
+
+  const addComment = () => {
+    console.log('대댓글 추가');
+    setCommentBox((prev) => !prev);
+  };
+
   return (
     <>
       <div className="commentInnerBox">
@@ -35,7 +47,7 @@ function Comment() {
             </span>
 
             <span>
-              <button>
+              <button onClick={addComment}>
                 <span>댓글 달기</span>
               </button>
             </span>
@@ -51,6 +63,7 @@ function Comment() {
             </span>
           </div>
         </div>
+        {commentBox && <CommentWrite />}
       </div>
     </>
   );

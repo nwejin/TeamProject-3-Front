@@ -1,15 +1,15 @@
-
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./styles/Component.scss";
-import "./styles/Header.scss";
-import "./styles/Signin.scss";
-import Header from "./components/Header";
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './styles/Component.scss';
+import './styles/Header.scss';
+import './styles/Signin.scss';
+import Header from './components/Header';
 // import MainPage from "./pages/MainPage";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
 import FindIdPage from "./pages/FindIdPage";
 import CommunityMain from "./community/CommunityMain";
+import CommunityReadPage from './community/CommunityReadPage';
 import axios from "axios";
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -44,6 +44,7 @@ function App() {
 
                     {/* <Route path="/stockGuide" element={<MainPage />} /> */}
                     <Route path="/community" element={<CommunityMain />} />
+                  <Route path="/community/read" element={<CommunityReadPage />} />
                 </Routes>
             </BrowserRouter>
             {/* <ExampleComponent></ExampleComponent> */}
@@ -51,6 +52,7 @@ function App() {
             <div>{serverData}</div>
         </div>
     );
+
 
 }
 
