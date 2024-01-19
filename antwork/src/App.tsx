@@ -10,6 +10,7 @@ import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
 import FindIdPage from "./pages/FindIdPage";
 import CommunityMain from "./community/CommunityMain";
+import axios from "axios";
 // import ExampleComponent from "./components/ExampleComponent";
 
 function App() {
@@ -21,10 +22,11 @@ function App() {
 
     const fetchDataFromServer = async () => {
         try {
-            const response = await fetch("http://localhost:5000/");
-            const data = await response.json();
-
-            setServerData(data.message); // 서버에서 전송한 데이터에 따라 변경
+            // Axios를 사용하여 서버에 GET 요청
+            await axios.get("http://localhost:5000").then((res) => {
+                console.log(res.data);
+                setServerData(res.data.message); // 서버에서 전송한 데이터에 따라 변경
+            });
         } catch (error) {
             console.error("Error fetching data from server:", error);
         }
@@ -35,7 +37,7 @@ function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    <Route path="/" element={serverData} />
+                    {/*<Route path="/" element={serverData} />*/}
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
@@ -45,7 +47,8 @@ function App() {
                 </Routes>
             </BrowserRouter>
             {/* <ExampleComponent></ExampleComponent> */}
-            {/* <div className='class'>{serverData}</div> */}
+            {/* <div className="class">{serverData}</div> */}
+            <div>{serverData}</div>
         </div>
     );
 
