@@ -23,11 +23,17 @@ function App() {
 
     const fetchDataFromServer = async () => {
         try {
-            // Axios를 사용하여 서버에 GET 요청
-            await axios.get("http://localhost:5000").then((res) => {
-                console.log(res.data);
-                setServerData(res.data.message); // 서버에서 전송한 데이터에 따라 변경
-            });
+            if (process.env.REACT_APP_BACKSERVER) {
+                // Axios를 사용하여 서버에 GET 요청
+                await axios
+                    .get(process.env.REACT_APP_BACKSERVER!)
+                    .then((res) => {
+                        console.log(res.data);
+                        setServerData(res.data.message); // 서버에서 전송한 데이터에 따라 변경
+                    });
+            } else {
+                return;
+            }
         } catch (error) {
             console.error("Error fetching data from server:", error);
         }
