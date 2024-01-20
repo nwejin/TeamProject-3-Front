@@ -8,71 +8,30 @@ interface props {
 }
 
 const AddPost = (props: props): ReactElement => {
-  // const { open, close } = props;
-
   return (
-    <div
-      className="modalBack"
-      style={{
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgb(0, 0, 0, 0.5)',
-        // backdropFilter: 'blur(5px)',
-        zIndex: 1,
-        position: 'absolute',
-      }}
-    >
+    <div className="modalBackGround">
       {/* 모달창 */}
-      <div
-        className="postModal"
-        style={{
-          position: 'absolute',
-          width: '50%',
-          height: '80%',
-          backgroundColor: 'white',
-          borderRadius: '20px',
-          zIndex: 100,
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%) scale(1)',
-        }}
-      >
-        <div
-          style={{
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'column',
-            width: '95%',
-            height: '90%',
-            margin: '30px auto ',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
+      <div className="modalBox">
+        <div className="modalInnerBox">
+          <div className="modalHeader">
             <h2>글 작성하기</h2>
             <button
-              style={{ backgroundColor: 'white', border: 'none' }}
+              style={{
+                backgroundColor: 'white',
+                width: 'fit-content',
+                border: 'none',
+                textAlign: 'right',
+                fontSize: '20px',
+              }}
               onClick={props.close}
             >
-              <span>X</span>
+              <span className="material-symbols-outlined">close</span>
             </button>
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginTop: '20px',
-            }}
-          >
+          <div className="postContentBox subject">
             <label htmlFor="">주제</label>
-            <select name="" id="" style={{ height: '30px' }}>
+            <select name="" id="">
               <option value="">자유</option>
               <option value="">경제</option>
               <option value="">주식</option>
@@ -80,29 +39,12 @@ const AddPost = (props: props): ReactElement => {
             </select>
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginTop: '20px',
-            }}
-          >
+          <div className="postContentBox">
             <label htmlFor="">제목</label>
-            <input
-              type="text"
-              name=""
-              id=""
-              style={{ height: '30px', boxSizing: 'content-box' }}
-            />
+            <input type="text" name="" id="" />
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              marginTop: '20px',
-            }}
-          >
+          <div className="postContentBox">
             <label htmlFor="">내용</label>
             <textarea
               name=""
@@ -112,13 +54,25 @@ const AddPost = (props: props): ReactElement => {
               rows={7}
               style={{ textAlign: 'left', resize: 'none' }}
             ></textarea>
-            <input type="file" name="" id="" />
+          </div>
+          <div className="postContentBox">
+            <label htmlFor="">사진</label>
+            <input
+              type="file"
+              name=""
+              id=""
+              style={{
+                border: 'none',
+                borderRadius: 0,
+              }}
+            />
           </div>
 
           <div
+            className="postContentBox"
             style={{
-              marginTop: '20px',
               display: 'flex',
+              flexDirection: 'row',
               justifyContent: 'end',
             }}
           >
