@@ -12,7 +12,9 @@ import CommunityMain from "./community/CommunityMain";
 // import CommunityReadPage from "./community/CommunityReadPage";
 import axios from "axios";
 import NewsPage from "./pages/NewsPage";
+import NewsDetailPage from "./pages/NewsDetailPage";
 // import ExampleComponent from "./components/ExampleComponent";
+
 
 function App() {
     const [serverData, setServerData] = useState("");
@@ -49,7 +51,7 @@ function App() {
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
-                    <Route path="/news" element={<NewsPage />} />
+                    <Route path="/news/:id" element={<NewsDetailPage />} />
 
                     {/* <Route path="/stockGuide" element={<MainPage />} /> */}
                     <Route path="/community" element={<CommunityMain />} />
