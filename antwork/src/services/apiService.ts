@@ -6,7 +6,7 @@ export const register = async (userData: any) => {
   console.log(userData);
   try {
     const response = await axios.post(
-      process.env.REACT_APP_BACKSERVER + '/register',
+       "http://localhost:5000/register",
       userData,
       {
         headers: {
