@@ -43,6 +43,7 @@ function App() {
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
+                    <Route path="/news" element={<NewsPage />} />
 
                     {/* <Route path="/stockGuide" element={<MainPage />} /> */}
                     <Route path="/community" element={<CommunityMain />} />
