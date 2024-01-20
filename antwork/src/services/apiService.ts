@@ -6,12 +6,13 @@ export const register = async (userData: any) => {
     console.log(userData);
     try {
         const response = await axios.post(
-            "http://localhost:5000/register",
-            userData,{
-              headers: {
-                 'Content-Type': 'application/json',
-              },
-           }
+            process.env.REACT_APP_BACKSERVER + "/register",
+            userData,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
         );
         return response.data;
     } catch (error) {
