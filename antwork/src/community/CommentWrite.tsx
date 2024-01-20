@@ -10,7 +10,7 @@ function CommentWrite() {
                 alt=""
               />
               <p>
-                작성자<span>님의 댓글</span>
+                작성자<span> 님의 댓글</span>
               </p>
             </a>
           </span>
