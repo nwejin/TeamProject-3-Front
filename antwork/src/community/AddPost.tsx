@@ -1,5 +1,7 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import '../styles/Community.scss';
+
+import axios from "axios";
 
 // props 타입 지정
 interface props {
@@ -13,9 +15,44 @@ const AddPost = (props: props): ReactElement => {
   //   console.log(e);
   // };
 
-  const uploadPost = () => {
-    console.log('커뮤니티 글 보내기');
-  };
+  //  state
+  const [formData, setFormData] = useState({
+        subject: "free",
+        title: "",
+        content: "",
+        file: null as File | null,
+    });
+
+    // 각 input창 입력 값
+    const postDataChange = (e: any) => {
+      const {name, value, files} = e.target;
+      console.log(name) //  input창 이름
+      console.log(value) // 입력값
+      setFormData({
+        ...formData,
+        [name]: name === 'file' ? files[0]: value,
+      });
+    };
+
+    // 데이터 서버 전송
+    const uploadPost = async () => {
+      try {
+        const postData = new FormData();
+        postData.append('subject', formData.subject);
+        postData.append('title', formData.title);
+        postData.append('content', formData.content);
+        if (formData.file) {
+            postData.append('file', formData.file);
+        }
+      
+        const response = await axios.post ('/community/uploadPost', postData)
+        console.log(response.data)
+      } catch(err) {
+        console.log(err)
+      }
+    }
+
+
 
   return (
     <div className="modalBackGround">
@@ -41,7 +78,7 @@ const AddPost = (props: props): ReactElement => {
           <form action="">
             <div className="postContentBox subject">
               <label htmlFor="">주제</label>
-              <select name="" id="">
+              <select name="subject" id="subject" onChange={postDataChange} value={formData.subject}> 
                 <option value="free">자유</option>
                 <option value="economy">경제</option>
                 <option value="stock">주식</option>
@@ -51,23 +88,24 @@ const AddPost = (props: props): ReactElement => {
 
             <div className="postContentBox">
               <label htmlFor="title">제목</label>
-              <input type="text" name="title" id="title" />
+              <input type="text" name="title" id="title" onChange={postDataChange} value={formData.title}/>
             </div>
 
             <div className="postContentBox">
-              <label htmlFor="description">내용</label>
+              <label htmlFor="content">내용</label>
               <textarea
-                name="description"
-                id="description"
+                name="content"
+                id="content"
                 placeholder="상대방 비방 및 욕설과 같은 게시글은 검토 후 삭제 될 수 있습니다."
                 cols={20}
                 rows={7}
                 style={{ textAlign: 'left', resize: 'none' }}
+                onChange={postDataChange}
+                value={formData.content}
               ></textarea>
             </div>
             <div className="postContentBox" style={{ flexDirection: 'row' }}>
               <input
-                value="첨부파일"
                 name=""
                 id=""
                 placeholder="첨부파일"
@@ -75,7 +113,9 @@ const AddPost = (props: props): ReactElement => {
                   padding: '0 10px',
 
                   width: '80%',
-                }}
+                }}    
+                readOnly
+                value={formData.file ? formData.file.name : ''}
               />
               <label
                 htmlFor="file"
@@ -100,6 +140,7 @@ const AddPost = (props: props): ReactElement => {
                   height: 0,
                   padding: 0,
                 }}
+                onChange={postDataChange}
               />
             </div>
 
