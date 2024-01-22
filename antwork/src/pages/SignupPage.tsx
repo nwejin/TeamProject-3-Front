@@ -1,7 +1,7 @@
 // SignupPage 컴포넌트
 
 import { useNavigate } from "react-router";
-import { idChecker, register } from "../services/apiService";
+import { idChecker, nicknameChecker, register } from "../services/apiService";
 import React, {  useRef, useState } from "react";
 
 const SignupPage = () => {
@@ -12,14 +12,17 @@ const SignupPage = () => {
         user_id: "",
         user_password: "",
         user_pwCheck: "",
+        user_nickname:"",
         user_email: "",
     });
 
     const [pwCheck, setPwCheck] = useState('');
     const [idCheck, setIdCheck] = useState('');
+    const [nicknameCheck, setNicknameCheck] = useState('');
 
     const pwRef = useRef<HTMLInputElement>(null);
     const idRef = useRef<HTMLInputElement>(null);
+    const nickRef = useRef<HTMLInputElement>(null);
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -57,6 +60,33 @@ const SignupPage = () => {
         }
     }
 
+
+    const nicknameReCheck= async(event:any)=>{
+        try {
+            event.preventDefault(); 
+            const response = await nicknameChecker(formData);
+            console.log(response);
+            const nicknameCheckBox = document.querySelector('.nicknameCheckBox');
+    
+            if (response.success) {
+                nicknameCheckBox?.classList.add('blue');
+                nicknameCheckBox?.classList.remove('red');
+                return setNicknameCheck(`ⓘ ${response.message}`);
+            } else if(response.success===false){
+                nicknameCheckBox?.classList.add('red');
+                nicknameCheckBox?.classList.remove('blue');
+                return setNicknameCheck(`ⓘ ${response.message}`);
+            }else{
+                nicknameCheckBox?.classList.remove('red');
+                nicknameCheckBox?.classList.remove('blue');
+                return setNicknameCheck('');
+            }
+        } catch (error: any) {
+            // 에러 처리
+            console.error("아이디 유효성 검사 실패:", error.message);
+        }
+    }
+
     const passwordReCheck=(e:any)=>{
         const pwCheckBox = document.querySelector('.pwCheckBox');
         if(formData.user_password === formData.user_pwCheck && formData.user_password !== ""){
@@ -87,6 +117,9 @@ const SignupPage = () => {
             }else if(pwCheck.includes('일치')){
                 alert('비밀번호가 일치하지 않습니다.')
                 pwRef.current?.focus();
+            }else if(nicknameCheck.includes('중복')){
+                alert('중복되는 닉네임입니다.')
+                nickRef.current?.focus();
             }else{
                 const response = await register(formData);
                 if (response.success) {
@@ -142,6 +175,16 @@ const SignupPage = () => {
                         ref={pwRef}
                     />
                     <div className="pwCheckBox">{pwCheck}</div>
+                    <input
+                        id="user_nickname"
+                        name="user_nickname"
+                        placeholder="닉네임 (최소 4자리 이상)"
+                        className="input-box"
+                        onChange={handleInputChange}
+                        onKeyUp={nicknameReCheck}
+                        ref={nickRef}
+                    />
+                    <div className="nicknameCheckBox">{nicknameCheck}</div>
        
                     <input
                         name="user_email"

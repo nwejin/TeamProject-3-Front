@@ -60,6 +60,25 @@ export const idChecker = async (userData: any) => {
     }
 };
 
+export const nicknameChecker = async (userData: any) => {
+    console.log(userData);
+    console.log(process.env.REACT_APP_BACKSERVER);
+    try {
+        const response = await axios.post(
+            process.env.REACT_APP_BACKSERVER +"/nicknameValidate",
+            userData,{
+              headers: {
+                 'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+           },
+        );
+        return response.data;
+    } catch (error) {
+        throw new Error("예상치 못한 오류가 발생했습니다!");
+    }
+};
+
 export const FindId = async (userData: any) => {
     console.log(userData);
     try {
