@@ -1,6 +1,8 @@
 import React, { ReactElement, useState } from 'react';
+import { newPost } from "../../services/apiService";
 import '../../styles/Community.scss';
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 // props 타입 지정
 interface props {
@@ -9,6 +11,7 @@ interface props {
 }
 
 const AddPost = (props: props): ReactElement => {
+   const navigate = useNavigate();
   // const fileName = (e: any) => {
   //   console.log('파일업로드 완료!');
   //   console.log(e);
@@ -25,16 +28,16 @@ const AddPost = (props: props): ReactElement => {
     // 각 input창 입력 값 가져오기
     const postDataChange = (e:any) => {
       const {name, value, files} = e.target;
-      console.log(name) //  input창 이름
-      console.log(value) // 입력값
+      // console.log(name) //  input창 이름
+      // console.log(value) // 입력값
       setFormData({
         ...formData,
         [name]: name === 'file' ? files[0]: value,
       });
     };
 
-    // 데이터 서버 전송
-    const uploadPost = async () => {
+
+     const uploadPost = async () => {
       try {
         const postData = new FormData();
         postData.append('subject', formData.subject);
@@ -43,14 +46,16 @@ const AddPost = (props: props): ReactElement => {
         if (formData.file) {
             postData.append('file', formData.file);
         }
-        // 아래 url로 데이터 전달
-        const response = await axios.post ('/community/uploadPost', postData)
-        console.log(response.data)
+
+        const response = await newPost(postData)
+        console.log(response);
+        alert('글작성 완료!');
+        navigate('/community');
       } catch(err) {
         console.log(err)
+        alert('작성에 실패했습니다!')
       }
     }
-
 
 
   return (
@@ -74,7 +79,7 @@ const AddPost = (props: props): ReactElement => {
             </button>
           </div>
 
-          <form action="">
+          <form action="/community" method='POST'>
             <div className="postContentBox subject">
               <label htmlFor="">주제</label>
               <select name="subject" id="subject" onChange={postDataChange} value={formData.subject}> 
@@ -152,7 +157,6 @@ const AddPost = (props: props): ReactElement => {
               }}
             >
               <button
-               type='button'
                onClick={uploadPost}>작성하기</button>
             </div>
           </form>
