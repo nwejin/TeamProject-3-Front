@@ -10,6 +10,9 @@ interface props {
   close: () => void;
 }
 
+
+
+
 const AddPost = (props: props): ReactElement => {
    const navigate = useNavigate();
   // const fileName = (e: any) => {

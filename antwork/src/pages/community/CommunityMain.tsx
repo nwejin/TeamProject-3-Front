@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import PostRank from '../../components/community/PostRank';
 import '../../styles/Community.scss';
-import Community from '../../components/community/Commnunity';
+import Community from '../../components/community/Community';
 import CommuniutyHeader from '../../components/community/CommunityHeader';
 
 function CommunityMain(): ReactElement {
