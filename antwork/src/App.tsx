@@ -20,7 +20,15 @@ function App() {
 
     const fetchDataFromServer = async () => {
         try {
-            const response = await fetch("http://localhost:5000/");
+            const response = await fetch("http://localhost:5000/", {
+                method: 'GET',
+                credentials: 'include', // include로 설정하여 쿠키를 전송
+                headers: {
+                  'Content-Type': 'application/json',
+                  // 필요에 따라 다른 헤더를 추가할 수 있음
+                },
+                
+            });
             const data = await response.json();
 
             setServerData(data.message); // 서버에서 전송한 데이터에 따라 변경
