@@ -24,20 +24,23 @@ function App() {
     }, []);
 
     const fetchDataFromServer = async () => {
-        try {
-            if (process.env.REACT_APP_BACKSERVER) {
-                // Axios를 사용하여 서버에 GET 요청
-                await axios
-                    .get(process.env.REACT_APP_BACKSERVER!)
-                    .then((res) => {
-                        console.log(res.data);
-                        setServerData(res.data.message); // 서버에서 전송한 데이터에 따라 변경
-                    });
-            } else {
-                return;
+        if (process.env.REACT_APP_BACKSERVER) {
+            try {
+                const response = await axios.get(process.env.REACT_APP_BACKSERVER!, {
+                    withCredentials: true, // axios에서는 credentials를 설정할 때 withCredentials를 사용
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 필요에 따라 다른 헤더를 추가할 수 있음
+                    },
+                });
+        
+                console.log(response.data);
+                setServerData(response.data.message);
+            } catch (error) {
+                console.error("Error fetching data with axios:", error);
             }
-        } catch (error) {
-            console.error("Error fetching data from server:", error);
+        } else {
+            return;
         }
     };
 
