@@ -101,7 +101,7 @@ const FindIdPage = () => {
                     const response = await ChangePw(formData);
                     if (response.success) {
                         alert('비밀번호가 재설정되었습니다.');
-                        navigate('/login');
+                        navigate('/signin');
                     } else {
                         alert('비밀번호 재설정에 실패했습니다. 다시 시도해주세요');
                         console.error("비밀번호 찾기 실패:", response);
