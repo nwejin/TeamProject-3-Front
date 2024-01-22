@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./styles/Component.scss";
 import "./styles/Header.scss";
 import "./styles/Signin.scss";
+import "./styles/Main.scss";
+import "./styles/StockGuide.scss";
 import Header from "./components/Header";
-// import MainPage from "./pages/MainPage";
+import MainPage from "./pages/MainPage";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
 import FindIdPage from "./pages/FindIdPage";
@@ -13,6 +15,7 @@ import CommunityReadPage from "./pages/community/CommunityReadPage";
 import axios from "axios";
 import NewsPage from "./pages/NewsPage";
 import NewsDetailPage from "./pages/NewsDetailPage";
+import StockGuidePage from "./pages/StockGuidePage";
 // import ExampleComponent from "./components/ExampleComponent";
 
 
@@ -49,14 +52,14 @@ function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    <Route path="/" element={serverData} />
+                    <Route path="/" element={<MainPage/>} />
                     <Route path="/news" element={<NewsPage />} />
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
                     <Route path="/news/:id" element={<NewsDetailPage />} />
 
-                    {/* <Route path="/stockGuide" element={<MainPage />} /> */}
+                    <Route path="/stockGuide" element={<StockGuidePage />} />
                     <Route path="/community" element={<CommunityMain />} />
                     <Route
                         path="/community/read"
