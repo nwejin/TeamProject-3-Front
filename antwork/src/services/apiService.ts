@@ -132,3 +132,26 @@ export const ChangePw = async (userData: any) => {
         throw new Error("예상치 못한 오류가 발생했습니다!");
     }
 };
+
+
+// 커뮤니티 게시글 생성
+export const newPost = async (communityData: any) => {
+    console.log('communityData>', communityData );
+    try {
+        const response = await axios.post(
+            process.env.REACT_APP_BACKSERVER +"/community",
+            communityData,{
+              headers: {
+                 'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+           }
+
+        );
+        return response.data;
+    } catch (error) {
+        throw new Error("예상치 못한 오류가 발생했습니다!");
+    }
+};
+
+// 커뮤니티 게시글 가져오기 (커뮤니티 메인 화면에 띄우기)

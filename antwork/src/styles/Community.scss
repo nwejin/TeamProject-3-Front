@@ -543,3 +543,13 @@ button {
     }
   }
 }
+
+.moreInfos {
+  width: fit-content;
+  border: none;
+  padding: 0;
+  background: none;
+  span {
+  color: black;
+  }
+}

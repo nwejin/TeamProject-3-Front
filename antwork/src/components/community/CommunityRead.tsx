@@ -2,9 +2,9 @@ function CommunityRead() {
   return (
     <div className="postRead">
       {/* 콘텐츠 박스*/}
-      <div className="postContents">
+      <div className="postContents" >
         {/* 유저 정보*/}
-        <div className="userProfile">
+        <div className="userProfile" >
           <div className="profile">
             <span>
               <a href="/">
@@ -18,9 +18,14 @@ function CommunityRead() {
             <span>•</span>
             <span>10분전</span>
           </div>
-          <div>
+          <div style={{display:'flex', alignItems:'center'}}>
             <span className="category">경제</span>
+         <button className="moreInfos">
+          <span className="material-symbols-outlined">
+more_vert
+</span></button>
           </div>
+        
         </div>
 
         {/* 게시글 */}
