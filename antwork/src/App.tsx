@@ -9,7 +9,12 @@ import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
 import FindIdPage from "./pages/FindIdPage";
 import CommunityMain from "./community/CommunityMain";
+import CommunityReadPage from "./community/CommunityReadPage";
+import axios from "axios";
+import NewsPage from "./pages/NewsPage";
+import NewsDetailPage from "./pages/NewsDetailPage";
 // import ExampleComponent from "./components/ExampleComponent";
+
 
 function App() {
     const [serverData, setServerData] = useState("");
@@ -19,21 +24,23 @@ function App() {
     }, []);
 
     const fetchDataFromServer = async () => {
-        try {
-            const response = await fetch("http://localhost:5000/", {
-                method: 'GET',
-                credentials: 'include', // include로 설정하여 쿠키를 전송
-                headers: {
-                  'Content-Type': 'application/json',
-                  // 필요에 따라 다른 헤더를 추가할 수 있음
-                },
-                
-            });
-            const data = await response.json();
-
-            setServerData(data.message); // 서버에서 전송한 데이터에 따라 변경
-        } catch (error) {
-            console.error("Error fetching data from server:", error);
+        if (process.env.REACT_APP_BACKSERVER) {
+            try {
+                const response = await axios.get(process.env.REACT_APP_BACKSERVER!, {
+                    withCredentials: true, // axios에서는 credentials를 설정할 때 withCredentials를 사용
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 필요에 따라 다른 헤더를 추가할 수 있음
+                    },
+                });
+        
+                console.log(response.data);
+                setServerData(response.data.message);
+            } catch (error) {
+                console.error("Error fetching data with axios:", error);
+            }
+        } else {
+            return;
         }
     };
 
@@ -43,16 +50,23 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={serverData} />
+                    <Route path="/news" element={<NewsPage />} />
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
+                    <Route path="/news/:id" element={<NewsDetailPage />} />
 
                     {/* <Route path="/stockGuide" element={<MainPage />} /> */}
                     <Route path="/community" element={<CommunityMain />} />
+                    <Route
+                        path="/community/read"
+                        element={<CommunityReadPage />}
+                    />
                 </Routes>
             </BrowserRouter>
             {/* <ExampleComponent></ExampleComponent> */}
-            {/* <div className='class'>{serverData}</div> */}
+            {/* <div className="class">{serverData}</div> */}
+            <div>{serverData}</div>
         </div>
     );
 }

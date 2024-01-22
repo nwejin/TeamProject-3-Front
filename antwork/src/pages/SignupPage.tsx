@@ -2,7 +2,8 @@
 
 import { useNavigate } from "react-router";
 import { idChecker, register } from "../services/apiService";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 const SignupPage = () => {
     const navigate = useNavigate();
