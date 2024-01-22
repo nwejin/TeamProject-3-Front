@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import '../styles/Community.scss';
-
+import '../../styles/Community.scss';
 import axios from "axios";
 
 // props 타입 지정
@@ -15,7 +14,7 @@ const AddPost = (props: props): ReactElement => {
   //   console.log(e);
   // };
 
-  //  state
+  //  state 지정
   const [formData, setFormData] = useState({
         subject: "free",
         title: "",
@@ -23,8 +22,8 @@ const AddPost = (props: props): ReactElement => {
         file: null as File | null,
     });
 
-    // 각 input창 입력 값
-    const postDataChange = (e: any) => {
+    // 각 input창 입력 값 가져오기
+    const postDataChange = (e:any) => {
       const {name, value, files} = e.target;
       console.log(name) //  input창 이름
       console.log(value) // 입력값
@@ -44,7 +43,7 @@ const AddPost = (props: props): ReactElement => {
         if (formData.file) {
             postData.append('file', formData.file);
         }
-      
+        // 아래 url로 데이터 전달
         const response = await axios.post ('/community/uploadPost', postData)
         console.log(response.data)
       } catch(err) {
@@ -152,7 +151,9 @@ const AddPost = (props: props): ReactElement => {
                 justifyContent: 'end',
               }}
             >
-              <button onClick={uploadPost}>작성하기</button>
+              <button
+               type='button'
+               onClick={uploadPost}>작성하기</button>
             </div>
           </form>
         </div>

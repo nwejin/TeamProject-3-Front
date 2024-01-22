@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddPost from '../../community/AddPost';
+import AddPost from '../../pages/community/AddPost';
 
 function CommuniutyHeader() {
   const [openModal, setOpenModal] = useState<Boolean>(false);
