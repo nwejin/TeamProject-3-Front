@@ -24,6 +24,7 @@ export const register = async (userData: any) => {
 // 로그인
 export const login = async (userData: any) => {
     console.log(userData);
+    console.log(process.env.REACT_APP_BACKSERVER);
     try {
         const response = await axios.post(
             process.env.REACT_APP_BACKSERVER +"/login",
@@ -42,9 +43,10 @@ export const login = async (userData: any) => {
 
 export const idChecker = async (userData: any) => {
     console.log(userData);
+    console.log(process.env.REACT_APP_BACKSERVER);
     try {
         const response = await axios.post(
-            process.env.REACT_APP_BACKSERVER +"/idDuplicate",
+            process.env.REACT_APP_BACKSERVER +"/idValidate",
             userData,{
               headers: {
                  'Content-Type': 'application/json',

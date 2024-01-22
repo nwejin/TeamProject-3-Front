@@ -2,8 +2,7 @@
 
 import { useNavigate } from "react-router";
 import { idChecker, register } from "../services/apiService";
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import React, {  useRef, useState } from "react";
 
 const SignupPage = () => {
     const navigate = useNavigate();
@@ -54,7 +53,7 @@ const SignupPage = () => {
             }
         } catch (error: any) {
             // 에러 처리
-            console.error("회원가입 실패:", error.message);
+            console.error("아이디 유효성 검사 실패:", error.message);
         }
     }
 

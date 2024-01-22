@@ -15,28 +15,21 @@ const SigninPage = () => {
     isChecked: false,
   });
 
-  // 컴포넌트가 처음 마운트될 때 실행
-//   useEffect(() => {
-//     // 쿠키에서 아이디 값을 가져와서 상태에 설정
-//     console.log("Attempting to get saveId from cookies");
-//     const savedId = cookies.get("saveId");
-//     console.log("Saved ID from cookies:", savedId);
-  
-//     if (savedId) {
-//       setFormData((prevData) => ({
-//         ...prevData,
-//         user_id: savedId,
-//         isChecked: true,
-//       }));
-//     }
-//   }, []);
 
 const [cookies, setCookie, removeCookie] = useCookies(['saveId']);
-// console.log(cookies)
 useEffect(() => {
-    const savedId = cookies.saveId;
-    console.log("Saved ID:", savedId);
+  console.log( cookies )
+  const savedId = cookies['saveId'];  // 대괄호를 사용하여 속성에 액세스합니다.
+  if(savedId){
+    setFormData((prevData) => ({
+      ...prevData,
+      user_id: savedId,
+      isChecked: true
+    }));
+  }
+  console.log("Saved ID:", savedId);
 }, []);
+
 
   const handleInputChange = (e: any) => {
     const { name, value, type, checked } = e.target;
@@ -59,17 +52,17 @@ useEffect(() => {
 
       // register 함수에 유저 데이터를 전달
       const response = await login(formData);
-
+      if(!formData.isChecked){
+        removeCookie('saveId');
+      }
+      
       if (response.success) {
         console.log("로그인 성공:", response);
         alert("로그인 성공!");
-        console.log(response.cookieId);
-        // navigate('/');
-        // 성공 메시지 출력 또는 리다이렉트 등 필요한 처리
+        navigate('/');
       } else {
         console.error("로그인 실패:", response);
         alert(response.message);
-        console.log(response.cookieId);
         navigate("/signin");
         // 실패 메시지 출력 또는 필요한 처리
       }
