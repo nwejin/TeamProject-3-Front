@@ -15,7 +15,6 @@ function CommunityMain(): ReactElement {
         </div>
         <div className="postBox">
           <Community></Community>
-    
         </div>
       </div>
     </div>

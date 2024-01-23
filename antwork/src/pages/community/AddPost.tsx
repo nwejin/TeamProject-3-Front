@@ -3,6 +3,7 @@ import { newPost } from "../../services/apiService";
 import '../../styles/Community.scss';
 import axios from "axios";
 import { useNavigate } from "react-router";
+import Community from '../../components/community/Community';
 
 // props 타입 지정
 interface props {
@@ -10,11 +11,7 @@ interface props {
   close: () => void;
 }
 
-
-
-
 const AddPost = (props: props): ReactElement => {
-   const navigate = useNavigate();
   // const fileName = (e: any) => {
   //   console.log('파일업로드 완료!');
   //   console.log(e);
@@ -31,8 +28,8 @@ const AddPost = (props: props): ReactElement => {
     // 각 input창 입력 값 가져오기
     const postDataChange = (e:any) => {
       const {name, value, files} = e.target;
-      // console.log(name) //  input창 이름
-      // console.log(value) // 입력값
+      console.log(name) //  input창 이름
+      console.log(value) // 입력값
       setFormData({
         ...formData,
         [name]: name === 'file' ? files[0]: value,
@@ -53,7 +50,7 @@ const AddPost = (props: props): ReactElement => {
         const response = await newPost(postData)
         console.log(response);
         alert('글작성 완료!');
-        navigate('/community');
+        props.close();
       } catch(err) {
         console.log(err)
         alert('작성에 실패했습니다!')
@@ -140,7 +137,6 @@ const AddPost = (props: props): ReactElement => {
                 name="file"
                 id="file"
                 style={{
-                  // color: 'black',
                   border: 0,
                   borderRadius: 0,
                   width: 0,
@@ -160,7 +156,7 @@ const AddPost = (props: props): ReactElement => {
               }}
             >
               <button
-               onClick={uploadPost}>작성하기</button>
+               onClick={uploadPost} type='button'>작성하기</button>
             </div>
           </form>
         </div>
