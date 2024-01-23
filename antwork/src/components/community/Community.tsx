@@ -13,6 +13,7 @@ function Community() {
       try {
         const communityPosts = await getCommunityPosts();
         setPosts(communityPosts);
+       
       } catch (error) {
         console.error(error);
       }
@@ -20,28 +21,70 @@ function Community() {
         fetchData();
   }, []); 
 
-
   return (
     <>
-  
       {/* 콘텐츠 박스*/}
+      {posts.map((post: any) => {
+        // const curruntTime = new Date().toLocaleString('ko-KR', {hour: 'numeric', minute: 'numeric',  second: 'numeric',})
+        // const postTime = post.date
+
+        // console.log(post._id)
+        // const addTime = curruntTime - postTime;
       
-      {posts.map((post: any) => (
-        <div className="post">
-        <div className="postContents" key={post.id}>
+        // const minute = Math.floor(addTime / (1000*60))
+
+ 
+        const postDate = new Date(post.date);
+        const currentTime = new Date();
+
+        const timeDifference = currentTime.getTime() - postDate.getTime();
+        const minutesAgo = Math.floor(timeDifference / (1000 * 60));
+
+        // console.log(minutesAgo)
+      
+        
+      
+        // console.log('현재시간',curruntTime)
+        // console.log('업로드시간', postTime)
+        // console.log(addTime)
+        // const id = post._id
+        // console.log(id)
+
+      
+        // 카테고리 분류
+        const getSubject = () => {
+            const subject = post.subject
+            let subjectname
+            if (subject === 'free') {
+            subjectname = '자유'
+          } else if (subject === 'economy'){
+           subjectname = '경제'
+          } else if (subject === 'coin') {
+          subjectname = '코인'
+          } else if  (subject === 'stock')
+          {  subjectname = '주식'}
+          return subjectname
+          }
+
+         return(
+        <div className="post" key={post._id}>
+        <div className="postContents"  >
         {/* 유저 정보*/}
         <div className="userProfile">
           <span>
             <a href="/">
               <img
-                src="https://wimg.mk.co.kr/news/cms/202303/06/news-p.v1.20230303.7da9e984074048beb88b016ae6e26b68_P1.jpg"
-                alt=""
+                src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
+                alt="기본 이미지"
               />
               <p> 작성자</p>
             </a>
           </span>
           <span>•</span>
-          <span>{post.date}: 시간</span>
+          <span>
+          {post.date}
+          {/* {{minutesAgo}} */}
+           </span>
         </div>
 
         {/* 게시글 */}
@@ -53,6 +96,7 @@ function Community() {
               </p>
               <p className="text">
               {post.content}
+
               </p>
             </a>
           </div>
@@ -71,7 +115,11 @@ function Community() {
         <div className="statusBox">
           <div>
             <span>
-              <button>
+              {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
+              <button onClick={() => {
+              
+                console.log(post.date)
+              }}>
                 <span className="material-symbols-outlined">favorite</span>
               </button>
               <span>0</span>
@@ -84,12 +132,12 @@ function Community() {
               <span>0</span>
             </span>
           </div>
-          <span className="category">{post.subject}</span>
+          <span className="category">{getSubject()}</span>
         </div>
       </div>
     </div>
-      ))}
-   
+      )
+      })}
     </>
   );
 }

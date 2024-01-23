@@ -11,6 +11,7 @@ function CommuniutyHeader() {
   const closeModal = () => {
     setOpenModal(false);
   };
+  
   return (
     <div className="communityHeader">
       <a href="/community">
