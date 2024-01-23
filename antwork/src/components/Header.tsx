@@ -34,7 +34,7 @@ const Header = () => {
       <div className="header">
         <Link to="/"><img src={process.env.PUBLIC_URL + "temp_logo.png"} alt="Logo" /></Link>
         <ul>
-          <li><Link to="/news">뉴스룸</Link></li>
+          <li><Link to="/news/all">뉴스룸</Link></li>
           <li><Link to="/stockGuide">주식 길잡이</Link></li>
           <li><Link to="/community">개미의 시선</Link></li>
         </ul>
