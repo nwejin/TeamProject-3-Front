@@ -1,8 +1,8 @@
-import '../styles/Community.scss';
-import CommuniutyHeader from '../components/community/CommunityHeader';
-import CommunityRead from './CommunityRead';
-import Comment from './Comment';
-import CommentWrite from './CommentWrite';
+import '../../styles/Community.scss';
+import CommuniutyHeader from '../../components/community/CommunityHeader';
+import CommunityRead from '../../components/community/CommunityRead';
+import Comment from '../../components/community/Comment';
+import CommentWrite from '../../components/community/CommentWrite';
 
 function CommunityReadPage() {
   return (

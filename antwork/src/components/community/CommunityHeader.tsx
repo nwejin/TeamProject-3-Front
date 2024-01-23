@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddPost from '../../community/AddPost';
+import AddPost from '../../pages/community/AddPost';
 
 function CommuniutyHeader() {
   const [openModal, setOpenModal] = useState<Boolean>(false);
@@ -11,6 +11,7 @@ function CommuniutyHeader() {
   const closeModal = () => {
     setOpenModal(false);
   };
+  
   return (
     <div className="communityHeader">
       <a href="/community">

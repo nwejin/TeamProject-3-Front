@@ -4,7 +4,7 @@ export interface NewsProp {
     title: string;
     smallimg: string;
     bigimg?: string | undefined;
-    context: string;
+    content: string;
     date: string;
     group: number;
 }
