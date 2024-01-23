@@ -1,23 +1,47 @@
-import '../styles/Community.scss';
+import '../../styles/Community.scss';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import { getCommunityPosts } from '../../services/apiService';
+import AddPost from '../../pages/community/AddPost'; 
 
 function Community() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // 서버에서 데이터를 불러와서 posts 상태 업데이트
+    const fetchData = async () => {
+      try {
+        const communityPosts = await getCommunityPosts();
+        setPosts(communityPosts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+        fetchData();
+  }, []); 
+
+
   return (
-    <div className="post">
+    <>
+  
       {/* 콘텐츠 박스*/}
-      <div className="postContents">
+      
+      {posts.map((post: any) => (
+        <div className="post">
+        <div className="postContents" key={post.id}>
         {/* 유저 정보*/}
         <div className="userProfile">
           <span>
             <a href="/">
               <img
-                src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
+                src="https://wimg.mk.co.kr/news/cms/202303/06/news-p.v1.20230303.7da9e984074048beb88b016ae6e26b68_P1.jpg"
                 alt=""
               />
               <p> 작성자</p>
             </a>
           </span>
           <span>•</span>
-          <span>10분전</span>
+          <span>{post.date}: 시간</span>
         </div>
 
         {/* 게시글 */}
@@ -25,17 +49,10 @@ function Community() {
           <div className="textContent">
             <a href="/community/read">
               <p className="title">
-                안녕하세요 Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Laudantium quisquam ut dolor inventore sequi voluptatem.
-                Maxime corrupti necessitatibus quo rem commodi officia ipsa,
-                magni nesciunt repellendus sit, illo illum tempore!
+                {post.title}
               </p>
               <p className="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-                aut fugiat iusto, voluptatem a sequi est rerum. Praesentium
-                architecto alias dolorum, adipisci voluptas officiis, quae Lorem
-                ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
-                similique voluptatibus hic ullam veniam minus ex non nulla
+              {post.content}
               </p>
             </a>
           </div>
@@ -67,10 +84,13 @@ function Community() {
               <span>0</span>
             </span>
           </div>
-          <span className="category">경제</span>
+          <span className="category">{post.subject}</span>
         </div>
       </div>
     </div>
+      ))}
+   
+    </>
   );
 }
 

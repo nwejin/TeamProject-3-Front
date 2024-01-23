@@ -1,4 +1,4 @@
-import '../styles/Community.scss';
+import '../../styles/Community.scss';
 import PostRankList from './PostRankList';
 
 function PostRank() {
@@ -13,9 +13,7 @@ function PostRank() {
           <ul>
             <PostRankList></PostRankList>
             <PostRankList></PostRankList>
-            <PostRankList></PostRankList>
-            <PostRankList></PostRankList>
-            <PostRankList></PostRankList>
+        
           </ul>
         </div>
       </div>
