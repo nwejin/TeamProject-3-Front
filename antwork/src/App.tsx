@@ -53,7 +53,11 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="/" element={<MainPage/>} />
-                    <Route path="/news" element={<NewsPage />} />
+                    <Route path="/news/all" element={<NewsPage />} />
+                    <Route path="/news/economy" element={<NewsPage />} />
+                    <Route path="/news/stock" element={<NewsPage />} />
+                    <Route path="/news/coin" element={<NewsPage />} />
+
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
