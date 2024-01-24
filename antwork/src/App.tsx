@@ -4,19 +4,23 @@ import './styles/Component.scss';
 import './styles/Header.scss';
 import './styles/Signin.scss';
 import './styles/Main.scss';
-import './styles/StockGuide.scss';
+
 import Header from './components/Header';
 import MainPage from './pages/MainPage';
-import SigninPage from './pages/SigninPage';
-import SignupPage from './pages/SignupPage';
-import FindIdPage from './pages/FindIdPage';
+import SigninPage from './pages/member/SigninPage';
+import SignupPage from './pages/member/SignupPage';
+import FindIdPage from './pages/member/FindIdPage';
+
 import CommunityMain from './pages/community/CommunityMain';
 import CommunityReadPage from './pages/community/CommunityReadPage';
 import axios from 'axios';
 import NewsPage from './pages/NewsPage';
-import NewsDetailPage from './pages/NewsDetailPage';
-import StockGuidePage from './pages/StockGuidePage';
 import KakaoCallback from './components/KakaoCallback';
+import NewsDetailPage from './pages/NewsDetailPage';
+import StockGuidePage from './pages/stockGuide/StockGuidePage';
+import MyPage from './pages/member/MyPage';
+import Virtual from './pages/Virtual';
+
 // import ExampleComponent from "./components/ExampleComponent";
 
 function App() {
@@ -53,10 +57,12 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/news/all" element={<NewsPage />} />
           <Route path="/news/economy" element={<NewsPage />} />
           <Route path="/news/stock" element={<NewsPage />} />
           <Route path="/news/coin" element={<NewsPage />} />
+          <Route path="/news/:id" element={<NewsDetailPage />} />
 
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
@@ -64,9 +70,13 @@ function App() {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/kakao/callback" element={<KakaoCallback />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
+          <Route path="/mypage" element={<MyPage />} />
+
           <Route path="/stockGuide" element={<StockGuidePage />} />
           <Route path="/community" element={<CommunityMain />} />
           <Route path="/community/read" element={<CommunityReadPage />} />
+
+          <Route path="/virtual" element={<Virtual />} />
         </Routes>
       </BrowserRouter>
       {/* <ExampleComponent></ExampleComponent> */}

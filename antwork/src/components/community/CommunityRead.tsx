@@ -1,10 +1,33 @@
+import React, { useState, useEffect } from 'react';
+import { getCommunityPosts } from '../../services/apiService';
+import { useParams } from 'react-router-dom';
+
 function CommunityRead() {
+  const [posts, setPosts] = useState([]);
+  console.log(posts);
+
+  useEffect(() => {
+    // 서버에서 데이터를 불러와서 posts 상태 업데이트
+    const fetchData = async () => {
+      try {
+        const communityPosts = await getCommunityPosts();
+        setPosts(communityPosts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const { id } = useParams();
+  console.log(id);
+
   return (
     <div className="postRead">
       {/* 콘텐츠 박스*/}
-      <div className="postContents" >
+      <div className="postContents">
         {/* 유저 정보*/}
-        <div className="userProfile" >
+        <div className="userProfile">
           <div className="profile">
             <span>
               <a href="/">
@@ -12,43 +35,30 @@ function CommunityRead() {
                   src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
                   alt=""
                 />
-                <p> 작성자</p>
+                <p>제목</p>
               </a>
             </span>
             <span>•</span>
             <span>10분전</span>
           </div>
-          <div style={{display:'flex', alignItems:'center'}}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <span className="category">경제</span>
-         <button className="moreInfos">
-          <span className="material-symbols-outlined">
-more_vert
-</span></button>
+            <button className="moreInfos">
+              <span className="material-symbols-outlined">more_vert</span>
+            </button>
           </div>
-        
         </div>
 
         {/* 게시글 */}
         <div className="contentBox">
           <div className="textContent">
-            <p className="title">안녕하세요 제목입니다.</p>
-            <p className="text">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus
-              aut fugiat iusto, voluptatem a sequi est Lorem ipsum dolor sit
-              amet consectetur adipisicing elit. Reprehenderit cumque officia,
-              corporis hic debitis, voluptatibus rerum pariatur recusandae
-              dolorem sit, animi minus vitae itaque aspernatur blanditiis
-              consectetur. Aliquid, enim nesciunt. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Architecto, dignissimos nulla ex
-              quia possimus saepe maiores alias velit, soluta assumenda, quidem
-              commodi cum accusantium repellendus quis dolorem unde consequuntur
-              voluptatibus!
-            </p>
+            <p className="title">안녕</p>
+            <p className="text">음음음</p>
           </div>
         </div>
 
         <div className="readImgBox">
-          <img src="https://wimg.mk.co.kr/news/cms/202303/06/news-p.v1.20230303.7da9e984074048beb88b016ae6e26b68_P1.jpg" />
+          <img src="" />
         </div>
 
         {/* 아이콘 리스트 */}
