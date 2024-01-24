@@ -1,7 +1,7 @@
 // SignupPage 컴포넌트
 
 import { useNavigate } from "react-router";
-import {  ChangePw, FindId, FindPw } from "../../services/apiService";
+import {  ChangePw, FindId, FindPw } from "./../../services/apiService";
 import React, { useRef, useState } from "react";
 
 const FindIdPage = () => {
