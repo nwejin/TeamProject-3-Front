@@ -19,7 +19,8 @@ import NewsPage from './pages/NewsPage';
 import Redirection from './components/Redirection';
 import NewsDetailPage from './pages/NewsDetailPage';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
-import MyPage from "./pages/member/MyPage";
+import MyPage from './pages/member/MyPage';
+import Virtual from './pages/Virtual';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -75,6 +76,8 @@ function App() {
           <Route path="/stockGuide" element={<StockGuidePage />} />
           <Route path="/community" element={<CommunityMain />} />
           <Route path="/community/read" element={<CommunityReadPage />} />
+
+          <Route path="/virtual" element={<Virtual />} />
         </Routes>
       </BrowserRouter>
       {/* <ExampleComponent></ExampleComponent> */}
