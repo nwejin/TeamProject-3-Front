@@ -20,7 +20,6 @@ function CommunityReadPage() {
       <div className="commentBox">
         <Comment></Comment>
         <Comment></Comment>
-
         <CommentWrite />
       </div>
     </div>

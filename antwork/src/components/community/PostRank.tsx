@@ -12,8 +12,6 @@ function PostRank() {
         <div className="postListContent">
           <ul>
             <PostRankList></PostRankList>
-            <PostRankList></PostRankList>
-        
           </ul>
         </div>
       </div>
