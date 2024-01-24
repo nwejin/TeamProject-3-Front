@@ -34,6 +34,7 @@ const Header = () => {
 
   const handleLogout =()=>{
     removeCookie('jwtCookie');
+    alert('로그아웃 되었습니다.');
     setIsToggle(false);
   }
   return (

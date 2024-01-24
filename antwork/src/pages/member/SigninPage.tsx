@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
-import { login } from "./../../services/apiService"
 import { useCookies } from 'react-cookie';
+import { login } from "../../services/apiService";
 
 const SigninPage = () => {
   const navigate = useNavigate();
