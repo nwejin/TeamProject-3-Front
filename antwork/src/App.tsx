@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./styles/Component.scss";
 import "./styles/Header.scss";
 import "./styles/Signin.scss";
 import "./styles/Main.scss";
-import "./styles/StockGuide.scss";
 import Header from "./components/Header";
 import MainPage from "./pages/MainPage";
-import SigninPage from "./pages/SigninPage";
-import SignupPage from "./pages/SignupPage";
-import FindIdPage from "./pages/FindIdPage";
+import SigninPage from "./pages/member/SigninPage";
+import SignupPage from "./pages/member/SignupPage";
+import FindIdPage from "./pages/member/FindIdPage";
 import CommunityMain from "./pages/community/CommunityMain";
 import CommunityReadPage from "./pages/community/CommunityReadPage";
 import axios from "axios";
 import NewsPage from "./pages/NewsPage";
 import NewsDetailPage from "./pages/NewsDetailPage";
-import StockGuidePage from "./pages/StockGuidePage";
+import StockGuidePage from "./pages/stockGuide/StockGuidePage";
+import MyPage from "./pages/member/MyPage";
 // import ExampleComponent from "./components/ExampleComponent";
 
 
@@ -57,6 +56,7 @@ function App() {
                     <Route path="/signin" element={<SigninPage />} />
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/findId" element={<FindIdPage />} />
+                    <Route path="/mypage" element={<MyPage />} />
                     <Route path="/news/:id" element={<NewsDetailPage />} />
 
                     <Route path="/stockGuide" element={<StockGuidePage />} />

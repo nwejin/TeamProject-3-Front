@@ -28,17 +28,45 @@
     .stock-guide{
         display:flex;
         justify-content: flex-start;
+        .graph-y{
+            width: 0.5vw;
+            height: 30vw;
+            background-color: black;
+            position: absolute;
+        }
         .stock-section{
             width:60%;
             margin-right:1vw;
             .stock-chart{
-                border:1px solid black;
-                height:30vw;
-                margin-bottom:1vw;
+                // border: 1px solid black;
+                height: 30vw;
+            }
+            .graph-x{
+                height:0.5vw;
+                margin-bottom: 1vw;
+                background-color: red;
+                &:hover{
+                    background-color: rgb(189, 0, 0)
+                }
+            }
+            .graph-btn{
+                height: 2vw;
+                width: fit-content;
+                line-height: 3vw;
+                display: inline-block;
+                /* margin: 0.5vw; */
+                /* text-align: center; */
+                margin-right:10px;
+                img{
+                    width:2vw;
+                    // margin:0.5vw;
+                }
+               
             }
             .stock-explain{
+                padding-top:10px;
                 border:1px solid black;
-                height:19vw;
+                height:18.5vw;
                 
 
             }
