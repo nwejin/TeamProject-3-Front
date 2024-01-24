@@ -14,9 +14,9 @@ import CommunityMain from './pages/community/CommunityMain';
 import CommunityReadPage from './pages/community/CommunityReadPage';
 import axios from 'axios';
 import NewsPage from './pages/NewsPage';
-import Redirection from './components/Redirection';
 import NewsDetailPage from './pages/NewsDetailPage';
 import StockGuidePage from './pages/StockGuidePage';
+import KakaoCallback from './components/KakaoCallback';
 // import ExampleComponent from "./components/ExampleComponent";
 
 function App() {
@@ -62,7 +62,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/findId" element={<FindIdPage />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/kakao/callback" element={<Redirection />} />
+          <Route path="/kakao/callback" element={<KakaoCallback />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/stockGuide" element={<StockGuidePage />} />
           <Route path="/community" element={<CommunityMain />} />
