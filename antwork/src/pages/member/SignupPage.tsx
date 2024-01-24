@@ -1,8 +1,8 @@
 // SignupPage 컴포넌트
 
 import { useNavigate } from "react-router";
-import { idChecker, nicknameChecker, register } from "./../../services/apiService";
 import React, {  useRef, useState } from "react";
+import { idChecker, nicknameChecker, register } from "../../services/apiService";
 
 const SignupPage = () => {
     const navigate = useNavigate();
