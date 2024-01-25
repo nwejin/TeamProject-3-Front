@@ -1,11 +1,12 @@
 // SignupPage 컴포넌트
 
 import { useNavigate } from "react-router";
-import { idChecker, nicknameChecker, register } from "../services/apiService";
 import React, {  useRef, useState } from "react";
+import { idChecker, nicknameChecker, register } from "../../services/apiService";
 
 const SignupPage = () => {
     const navigate = useNavigate();
+    
 
     // 폼 데이터 상태 관리
     const [formData, setFormData] = React.useState({
