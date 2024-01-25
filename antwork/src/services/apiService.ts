@@ -150,6 +150,7 @@ export const newPost = async (communityData: any) => {
       communityData,
       {
         headers: {
+          // form-data 전송
           // 'Content-Type': 'application/json',
           'Content-Type': 'multipart/form-data',
         },
