@@ -11,11 +11,6 @@ interface props {
 }
 
 const AddPost = (props: props): ReactElement => {
-  // const fileName = (e: any) => {
-  //   console.log('파일업로드 완료!');
-  //   console.log(e);
-  // };
-
   //  state 지정
   const [formData, setFormData] = useState({
     subject: 'free',
@@ -45,12 +40,18 @@ const AddPost = (props: props): ReactElement => {
         postData.append('file', formData.file);
       }
       const response = await newPost(postData);
+      // const imgUrl = response.imageUrl;
+      // console.log(imgUrl);
+
       console.log(response);
-      alert('글작성 완료!');
+      // alert('글작성 완료!');
+      console.log(formData);
+      console.log(formData.file);
       props.close();
       // 페이지 새로 고침
       window.location.reload();
     } catch (err) {
+      console.log(FormData);
       console.log(err);
       alert('작성에 실패했습니다!');
     }

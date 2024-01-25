@@ -150,14 +150,15 @@ export const newPost = async (communityData: any) => {
       communityData,
       {
         headers: {
-          'Content-Type': 'application/json',
-          // 'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       }
     );
     return response.data;
   } catch (error) {
+    console.log(process.env.REACT_APP_BACKSERVER + '/community/write');
     throw new Error('예상치 못한 오류가 발생했습니다!');
   }
 };
@@ -183,7 +184,8 @@ export const like = async (like: any) => {
       like,
       {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'application/json',
         },
         withCredentials: true,
       }
