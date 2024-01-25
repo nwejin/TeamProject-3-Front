@@ -11,54 +11,58 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest }) => {
   const dispatch = useDispatch();
 
   const SellBtnClick = async () => {
-    const cal = currentVal * sellOrder; // 매도 총 금액
-
-    // 매도 주문수량보다 보유수량이 많아야 유효함
     if (stock >= sellOrder) {
+      const cal = currentVal * sellOrder; //주문 총 금액
+
       dispatch({ type: 'SET_STOCK', payload: stock - sellOrder });
       dispatch({
         type: 'SET_ACCOUNT',
         payload: account + cal,
       });
       dispatch({ type: 'SET_PROFIT', payload: cal - prevInvest });
-    }
 
-    // 매도 평단가 (분할 & 전체)
-    // 분할 매도일 경우 평단가 재 갱신필요
-    if (stock > 0) {
-      const remainStock = stock - sellOrder;
-      updatePrevInvest(prevInvest - sellOrder * currentVal); //지금까지의 투자 금액 = 현재 - 매도 금액
+      // 평단 재갱신
+      if (stock > 0) {
+        const remainStock = stock - sellOrder;
+        updatePrevInvest(prevInvest - sellOrder * currentVal);
 
-      if (remainStock > 0) {
-        const remainCal = remainStock * purchasePrice;
-        console.log('remianCal', remainCal);
-        dispatch({
-          type: 'SET_PURCHASE_PRICE',
-          payload: remainCal / remainStock,
-        });
-      } else {
-        // 전액 매도인 경우 평단가 0으로 조정
-        dispatch({
-          type: 'SET_PURCHASE_PRICE',
-          payload: 0,
-        });
+        if (remainStock > 0) {
+          const remainCal = remainStock * purchasePrice;
+          dispatch({
+            type: 'SET_PURCHASE_PRICE',
+            payload: remainCal / remainStock,
+          });
+        } else {
+          dispatch({
+            type: 'SET_PURCHASE_PRICE',
+            payload: 0,
+          });
 
-        // 보유 주식이 0일 경우 투자금액 초기화
-        updatePrevInvest(0);
+          updatePrevInvest(0);
+        }
+
+        try {
+          console.log('버튼 누름');
+          await axios.post(
+            'http://localhost:8000/virtual/profit',
+            {
+              profit: cal - purchasePrice * sellOrder,
+            },
+            {
+              withCredentials: true,
+            }
+          );
+          console.log('아주 잘 전송');
+          console.log('profit > ', profit);
+        } catch (error) {
+          console.error('error send', error);
+        } finally {
+          // 에러 발생 여부와 관계없이 항상 실행되는 부분
+          setSellOrder(0);
+        }
       }
-
-      console.log(`매도 금액 ${cal}`);
-    }
-
-    try {
-      // 리액트에서 dispatch로 값을 반영하는 것은 db의 무결성과 무관하기에 직접 계산값을 넣어야함
-      await axios.post('http://localhost:8000/virtual/profit', {
-        profit: cal - purchasePrice * sellOrder,
-      });
-      console.log('아주 잘 전송');
-      console.log('profit > ', profit);
-    } catch (error) {
-      console.error('error send', error);
+    } else {
+      alert('매도하려는 주식이 부족합니다. 주식 보유 수를 확인하세요');
     }
   };
 
@@ -68,6 +72,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest }) => {
         type="text"
         placeholder="매도 주식 수"
         onChange={(e) => setSellOrder(e.target.value)}
+        value={sellOrder}
       />
       <button onClick={SellBtnClick}>매도</button>
     </div>
