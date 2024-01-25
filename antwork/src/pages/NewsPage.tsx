@@ -4,6 +4,7 @@ import { NewsProp } from "../types/NewsProp";
 import NewsList from "../components/NewsList";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import '../styles/NewsPage.scss';
+import Loading from "../components/Loading";
 
 function NewsPage() {
     const { group } = useParams();
@@ -13,6 +14,7 @@ function NewsPage() {
     // const [economyNews, setEconomyNews] = useState<NewsProp[]>([]);
     // const [stockNews, setStockNews] = useState<NewsProp[]>([]);
     // const [coinNews, setCoinNews] = useState<NewsProp[]>([]);
+    const [loading, setLoading] = useState(false)
 
     const fetchDataFromServer = async () => {
         try {
@@ -36,13 +38,13 @@ function NewsPage() {
                     setNews(res.data);
                     // news = stockNews; // 서버에서 전송한 데이터에 따라 변경
 
-                    const category1 = res.data.filter((singleNews:NewsProp) => singleNews.group === 1);
-                    // setStockNews(category1);
-                    const category2 = res.data.filter((singleNews:NewsProp) => singleNews.group === 2);
-                    console.log(group);
-                    // setCoinNews(category2);
-                    const category3 = res.data.filter((singleNews:NewsProp) => singleNews.group === 3);
-                    // setEconomyNews(category3);
+                    // const category1 = res.data.filter((singleNews:NewsProp) => singleNews.group === 1);
+                    // // setStockNews(category1);
+                    // const category2 = res.data.filter((singleNews:NewsProp) => singleNews.group === 2);
+                    // console.log(group);
+                    // // setCoinNews(category2);
+                    // const category3 = res.data.filter((singleNews:NewsProp) => singleNews.group === 3);
+                    // // setEconomyNews(category3);
 
                     // switch(group) {
                     //     case "economy":
@@ -75,19 +77,21 @@ function NewsPage() {
     //     navigate(`/news${group !== "all" ? `/${group}` : "/all"}`);
     // }
 
-
-// const wordData = wordsDb.find((singleData: WordsProp) => singleData.word === word);
-
-    // const cate1 = () => {
-    //     news.find((singleNews:NewsProp) => singleNews.group === 1)
-    //         }
-
-
     const refresh = async () => {
+        setLoading(true)
         try {
-            // console.log("Refreshing...");
-            await axios.get(process.env.REACT_APP_BACKSERVER + `/news/${group}`);
-            // console.log("Refresh complete.");
+            let url2 = process.env.REACT_APP_BACKSERVER + "/news/get"
+            if(!group) {
+                url2 +="economy"
+            } else {
+                url2 += `${group}`
+            }
+            const newData = await axios.get(url2);
+            // setLoading(false);
+            setNews(newData.data);
+            
+            window.location.reload();
+
         } catch (error) {
             console.error("refresh error:", error);
         }
@@ -96,23 +100,25 @@ function NewsPage() {
 
     return (<>
     <main>
-        <ul className="newsGroup">
+        <div className="newsNav">
             {/* <li onClick={()=> groupClick('all')}>전체</li>
             <li onClick={()=> groupClick('economy')}>경제</li>
             <li onClick={()=> groupClick('stock')}>주식</li>
             <li onClick={()=> groupClick('coin')}>코인</li> */}
 
-            <li className="newsRoom">뉴스룸</li>
-            <li><Link to="/news/economy" >경제</Link></li>
-            <li><Link to="/news/stock" >주식</Link></li>
-            <li><Link to="/news/coin" >코인</Link></li>
-        </ul>
+            <ul className="newsGroup">
+                <li className="newsRoom">뉴스룸</li>
+                <li><Link to="/news/economy" >경제</Link></li>
+                <li><Link to="/news/stock" >주식</Link></li>
+                <li><Link to="/news/coin" >코인</Link></li>
+            </ul>
+            <ul className="refresh-tab">
+                <li className="refresh-btn" onClick={refresh}>최신 뉴스 보기</li>
+            </ul>
+        </div>
 
-        <ul>
-            <li className="refresh">새로고침</li>
-        </ul>
-        
-            {news.map((data: NewsProp, index:number) => {
+            {loading ? <Loading /> :
+            news.map((data: NewsProp, index:number) => {
                 return ( <NewsList key={index} data={data}/>
                     // <p key={data._id}>
                     //     {data.title} {data.date} <br /> {data.context} <br />

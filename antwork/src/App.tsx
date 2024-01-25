@@ -61,7 +61,6 @@ function App() {
           <Route path="/news/:group?" element={<NewsPage />} />
           <Route path="/news/detail/:id" element={<NewsDetailPage />} />
 
-
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/findId" element={<FindIdPage />} />

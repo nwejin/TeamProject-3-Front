@@ -1,15 +1,26 @@
 @import './Component.scss';
 
 main {
-    width: calc(100% - 20vw);
-    margin: 0vw auto 5vw auto;
+    // width: calc(100% - 20vw);
+    // margin: 0vw auto 5vw auto;
+    width: 70%;
+    margin: 0 auto 0 auto;
+
+}
+
+// ------------------------------------------------------------------
+
+
+.newsNav {
+    border-bottom: 1px solid $color-gray;
+    display: flex;
+    justify-content: space-between;
 }
 
 .newsGroup {
     display: flex;
     padding: 0;
     align-items: flex-end;
-    border-bottom: 1px solid $color-gray;
 }
 
 .newsGroup > li {
@@ -18,23 +29,68 @@ main {
     // vertical-align: bottom;
 }
 
-.newsRoom {
-    font-size: x-large;
+
+.refresh-tab {
+    align-items: flex-end;
+    
 }
 
-.refresh {
+.refresh-btn {
     cursor: pointer;
+    list-style-type: none;
+    padding: 0 20px 20px 0;
 }
+
+
+// ------------------------------------------------------------------
+
 
 article {
-    display: flex;
-    // margin: 5px;
+    // display: flex;
+    // margin: 15px 0 15px 0;
     border-bottom: 1px solid $color-gray;
 }
 
-article > div {
+.newsData {
+    display: flex;
+    margin: 15px 0 15px 0;
+}
+
+.dataTxt {
     // width: 500px;
     white-space: nowrap;
     overflow: hidden;
     // text-overflow: ellipsis;
+    margin-left: 20px;
+}
+
+.dataTxt > h3{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    white-space: normal;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.dataTxt > p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    line-height: 1.4;
+}
+
+
+// ------------------------------------------------------------------
+
+
+.loading { 
+    display: flex;
+    height: 65vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

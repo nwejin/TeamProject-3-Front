@@ -11,10 +11,14 @@ function NewsList({data}: NewsListProp) {
     return ( <>
      <Link to={`/news/detail/${data._id}`} state={{data}}>
          <article>
-            <img src={data.smallimg} alt="no img" />
-            <div>
-                <h3>{data.title}</h3>
-                <p>{data.content}</p>
+            <div className="newsData">
+                <div className="imgBox">                
+                    <img src={data.smallimg} alt="no img" />
+                </div>
+                <div className="dataTxt">
+                    <h3>{data.title}</h3>
+                    <p>{data.content}</p>
+                </div>
             </div>
          </article>
      </Link>
