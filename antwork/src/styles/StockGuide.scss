@@ -65,7 +65,7 @@
             }
             .stock-explain{
                 padding-top:10px;
-                border:1px solid #d9dadb;
+                border:1px solid $color-gray-1;
                 height:18.5vw;
                 
 
@@ -75,31 +75,34 @@
         .trade-control{
             width:39%;
             height:50vw;
-            border:1px solid #d9dadb;
-            padding:10px;
+            border:1px solid $color-gray-1;
+            padding:10px 0;
         }
     }
 }
 .company{
+    margin-left: 10px;
     margin-bottom: 10px;
+    font-size: 1.1vw;
 }
 .stock-info{
     display: flex;
     justify-content: flex-start;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #d9dadb;
+    padding: 0 0 10px 10px;
+    font-size: 1.1vw;
+    border-bottom: 1px solid $color-gray-1;
     .market{
         .market-price{
-            font-size: 24px;
+            font-size: 1.6vw;
             color:$color-blue-1;
         }
         .daily-change{
-            font-size: 14px;
+            font-size: 0.9vw;
             color:$color-blue-1;
         }
     }
     .volume{
-        font-size: 10px;
+        font-size: 0.7vw;
         margin-left: 4vw;
         .total-volume{
             margin-top:1.5vw;
@@ -113,14 +116,15 @@
 .trade-tab{
     display:flex;
     justify-content: center;
-    border-bottom: 1px solid #d9dadb;
+    border-bottom: 1px solid $color-gray-1;
+    font-size: 1.1vw;
     .btn-selected{
         border-bottom: 2px solid #333;
 
     }
     .tradeBtn{
         width:calc(100% /3);
-        padding:10px 0;
+        padding:0.6vw 0;
         text-align: center;
     }
 }
@@ -130,25 +134,131 @@
     display:flex;
     justify-content: flex-start;
     width:100%;
-    padding:10px 0;
+    padding-bottom:0.6vw;
+    font-size: 1.1vw;
+    height: calc(50vw - (40px + 6.1vw));
     
     .order-book{
         width:calc(100% / 3);
+        height: calc(50vw - (40px + 6.1vw));
+        .order-wrapper-scroll{
+            overflow: scroll;
+            height:calc(50vw - (40px + 10vw));
+        }
+
+        .max-price{
+            text-align: center;
+            font-size: 0.9vw;
+            color: red;
+            padding: 0.3vw 0;
+            border-bottom: 1px solid $color-gray-1;
+            border-right:1px solid $color-gray-1;
+        }
+        .min-price{
+            text-align: center;
+            font-size: 0.9vw;
+            color: $color-blue-1;
+            padding: 0.3vw 0;
+            border-right:1px solid $color-gray-1;
+            border-bottom: 1px solid $color-gray-1;
+        }
         .order-wrapper{
+            font-size: 1.1vw;
+            border-bottom: 1px solid $color-gray-1;
+            border-right:1px solid $color-gray-1;
             display: flex;
             justify-content: space-around;
-            height: 36px;
-            color:#333;
+            color: #333;
+            padding: 0.39vw 0;
+            .rate-high{
+                color:red;
+            }
+            .rate-row{
+                color:$color-blue-1;
+            }
+
             .daily{
-                font-size: 10px;
+                font-size: 0.6vw;
                 .daily-percent{
                     color:$color-blue-1;
                 }
             }
+           
+        }
+        .w-red{
+            background-color: $color-red-2;;
+        }
+        .w-blue{
+            background-color: $color-blue-4;;
         }
     }
     .order-content{
         width:calc(100% - (100% / 3));
-
+        padding: 0.9vw;
+        .order-method{
+            display:flex;
+            justify-content: flex-start;
+            margin-bottom: 0.6vw;
+            .order-cash,.order-credit{
+                border: 1px solid $color-gray-1;
+                background-color: #fff;
+                width: calc(((100% - (100% / 3)) / 2) - 22px);
+                text-align: center;
+                padding: 0.3vw 0;
+            }
+            .order-credit{
+                margin-right:0.9vw;
+            }
+            .order-margin{
+                border: 1px solid $color-gray-1;
+                background-color: #fff;
+                width: calc((100% - (100% / 3)) - 22px);
+                text-align: center;
+                padding: 0.3vw 0;
+            }
+        }
+        .order-price{
+            display:flex;
+            justify-content: flex-start;
+            select{
+                width: calc((100% - (100% / 3)) - 15px);
+                padding: 0.3vw;
+                font-size: 1.1vw;
+                border: 1px solid $color-gray-1;
+                margin-right: 15px;
+            }
+            .order-market-price{
+                padding: 0.3vw 0;
+                width: calc(100% - ((100% - (100% / 3)) - 30px));
+                border: 1px solid $color-gray-1;
+                background-color: #fff;
+                text-align: center;
+                
+            }
+        }
+        .order-market-sell{
+            padding: 0.3vw 0;
+            display: flex;
+            justify-content: space-between;
+            margin: 0.6vw 0;
+            .order-market-value{
+                display: inline-block;
+                width:10vw;
+                border-bottom: 1px $color-gray-1 solid;
+                text-align: right;
+                padding-bottom:0.6vw;
+            }
+        }
+        .sell-btn{
+            background-color: $color-blue-1;
+            color: white;
+            text-align: center;
+            font-size: 1.1vw;
+            padding: 0.6vw;
+            margin-top: 22vw;
+        }
+    }
+    .order-sell{
+        background-color: $color-blue-3;
     }
 }
