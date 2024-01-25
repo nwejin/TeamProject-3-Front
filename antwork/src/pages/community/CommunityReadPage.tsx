@@ -18,8 +18,8 @@ function CommunityReadPage() {
       </div>
 
       <div className="commentBox">
-        <Comment></Comment>
-        <Comment></Comment>
+        {/* <Comment></Comment>
+        <Comment></Comment> */}
         <CommentWrite />
       </div>
     </div>
