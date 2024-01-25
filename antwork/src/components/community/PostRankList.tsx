@@ -1,6 +1,7 @@
 import '../../styles/Community.scss';
 import React, { useState, useEffect } from 'react';
 import { getCommunityPosts } from '../../services/apiService';
+import { Link } from 'react-router-dom';
 
 function PostRankList() {
   const [posts, setPosts] = useState([]);
@@ -36,8 +37,8 @@ function PostRankList() {
           return subjectname;
         };
         return (
-          <li>
-            <a href="/">
+          <li key={post._id}>
+            <Link to={`/community/${post._id}`} state={{ post }}>
               <div>
                 <div className="category">
                   <span>{getSubject()}</span>
@@ -48,7 +49,7 @@ function PostRankList() {
                 <span className="material-symbols-outlined">maps_ugc</span>
                 <span></span>
               </div>
-            </a>
+            </Link>
           </li>
         );
       })}

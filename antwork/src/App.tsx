@@ -73,8 +73,11 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
+
+          {/* 커뮤니티 */}
           <Route path="/community" element={<CommunityMain />} />
-          <Route path="/community/read" element={<CommunityReadPage />} />
+          {/* 커뮤니티 상세보기 */}
+          <Route path="/community/:id" element={<CommunityReadPage />} />
 
           <Route path="/virtual" element={<Virtual />} />
         </Routes>
