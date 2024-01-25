@@ -1,29 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import { getCommunityPosts } from '../../services/apiService';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 function CommunityRead() {
-  const [posts, setPosts] = useState([]);
-  console.log(posts);
+  // const [posts, setPosts]: any = useState([]);
+  // console.log(posts);
+  // console.log(posts[0]);
+  // console.log(posts._id);
 
-  useEffect(() => {
-    // 서버에서 데이터를 불러와서 posts 상태 업데이트
-    const fetchData = async () => {
-      try {
-        const communityPosts = await getCommunityPosts();
-        setPosts(communityPosts);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   // 서버에서 데이터를 불러와서 posts 상태 업데이트
+  //   const fetchData = async () => {
+  //     try {
+  //       const communityPosts = await getCommunityPosts();
+  //       setPosts(communityPosts);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   const { id } = useParams();
   console.log(id);
 
+  const location = useLocation();
+  const data = location.state.post;
+  console.log(data);
+
+  const formatTimeDifference = (dateString: any) => {
+    const postDate = new Date(dateString);
+    const currentTime = new Date();
+    const timeDifference = currentTime.getTime() - postDate.getTime();
+    const minutesAgo = Math.floor(timeDifference / (1000 * 60));
+
+    console.log(minutesAgo);
+    if (minutesAgo < 1) {
+      return '방금 전';
+    } else if (minutesAgo < 60) {
+      return `${minutesAgo}분 전`;
+    } else if (minutesAgo < 1440) {
+      const hoursAgo = Math.floor(minutesAgo / 60);
+      return `${hoursAgo}시간 전`;
+    } else {
+      // 한국 시간으로 표시
+      const formattedDate = postDate.toLocaleString('ko-KR', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        timeZone: 'Asia/Seoul',
+      });
+
+      return formattedDate;
+    }
+  };
+
+  // 카테고리 분류
+  const getSubject = () => {
+    const subject = data.subject;
+    let subjectname;
+    if (subject === 'free') {
+      subjectname = '자유';
+    } else if (subject === 'economy') {
+      subjectname = '경제';
+    } else if (subject === 'coin') {
+      subjectname = '코인';
+    } else if (subject === 'stock') {
+      subjectname = '주식';
+    }
+    return subjectname;
+  };
+
   return (
-    <div className="postRead">
+    <div className="postRead" key={data._id}>
       {/* 콘텐츠 박스*/}
       <div className="postContents">
         {/* 유저 정보*/}
@@ -35,14 +87,14 @@ function CommunityRead() {
                   src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
                   alt=""
                 />
-                <p>제목</p>
+                <p>사용자</p>
               </a>
             </span>
             <span>•</span>
-            <span>10분전</span>
+            <span>{formatTimeDifference(data.date)}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span className="category">경제</span>
+            <span className="category">{getSubject()}</span>
             <button className="moreInfos">
               <span className="material-symbols-outlined">more_vert</span>
             </button>
@@ -52,13 +104,13 @@ function CommunityRead() {
         {/* 게시글 */}
         <div className="contentBox">
           <div className="textContent">
-            <p className="title">안녕</p>
-            <p className="text">음음음</p>
+            <p className="title">{data.title}</p>
+            <p className="text">{data.content}</p>
           </div>
         </div>
 
         <div className="readImgBox">
-          <img src="" />
+          <img src={data.image} alt="업로드 이미지" />
         </div>
 
         {/* 아이콘 리스트 */}

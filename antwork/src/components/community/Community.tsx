@@ -2,9 +2,12 @@ import '../../styles/Community.scss';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getCommunityPosts, like } from '../../services/apiService';
+import { Link } from 'react-router-dom';
 
 function Community() {
   const [posts, setPosts] = useState([]);
+
+  console.log(posts);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -41,7 +44,7 @@ function Community() {
           const timeDifference = currentTime.getTime() - postDate.getTime();
           const minutesAgo = Math.floor(timeDifference / (1000 * 60));
 
-          console.log(minutesAgo);
+          // console.log(minutesAgo);
           if (minutesAgo < 1) {
             return '방금 전';
           } else if (minutesAgo < 60) {
@@ -81,23 +84,18 @@ function Community() {
           return subjectname;
         };
 
-        const readLink = '/community/read?id=' + post._id;
-        console.log(readLink);
-
         return (
           <div className="post" key={post._id}>
             <div className="postContents">
               {/* 유저 정보*/}
               <div className="userProfile">
                 <span>
-                  <a href="/">
-                    <img
-                      src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
-                      alt="기본 이미지"
-                    />
-                    <p> </p>
-                  </a>
+                  <img
+                    src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
+                    alt="기본 이미지"
+                  />
                 </span>
+                <p>사용자</p>
                 <span>•</span>
                 <span>{formatTimeDifference(post.date)}</span>
               </div>
@@ -105,16 +103,16 @@ function Community() {
               {/* 게시글 */}
               <div className="contentBox">
                 <div className="textContent">
-                  <a href={readLink}>
+                  <Link to={`/community/${post._id}`} state={{ post }}>
                     <p className="title">{post.title}</p>
                     <p className="text">{post.content}</p>
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="imgBox">
-                  <a href={readLink}>
+                  <Link to={`/community/${post._id}`} state={{ post }}>
                     <img src={post.image} alt="업로드 이미지" />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
