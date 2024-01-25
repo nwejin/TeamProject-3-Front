@@ -126,6 +126,7 @@
         width:calc(100% /3);
         padding:0.6vw 0;
         text-align: center;
+        cursor: pointer;
     }
 }
 
@@ -153,6 +154,7 @@
             padding: 0.3vw 0;
             border-bottom: 1px solid $color-gray-1;
             border-right:1px solid $color-gray-1;
+            cursor: pointer;
         }
         .min-price{
             text-align: center;
@@ -172,9 +174,11 @@
             padding: 0.39vw 0;
             .rate-high{
                 color:red;
+                cursor: pointer;
             }
             .rate-row{
                 color:$color-blue-1;
+                cursor: pointer;
             }
 
             .daily{
@@ -216,6 +220,13 @@
                 text-align: center;
                 padding: 0.3vw 0;
             }
+            .open-orders{
+                border: 1px solid $color-gray-1;
+                background-color: #fff;
+                width: 100%;
+                text-align: left;
+                padding: 0.3vw 0 0.3vw 0.6vw;
+            }
         }
         .order-price{
             display:flex;
@@ -249,16 +260,38 @@
                 padding-bottom:0.6vw;
             }
         }
+        .buy-btn{
+            background-color: red;
+            color: white;
+            text-align: center;
+            font-size: 1.1vw;
+            padding: 0.6vw;
+            margin-top: 21.5vw;
+        }
         .sell-btn{
             background-color: $color-blue-1;
             color: white;
             text-align: center;
             font-size: 1.1vw;
             padding: 0.6vw;
-            margin-top: 22vw;
+            margin-top:21.5vw;
+        }
+        .modify-btn{
+            background-color:#2bb93d;
+            color: white;
+            text-align: center;
+            font-size: 1.1vw;
+            padding: 0.6vw;
+            margin-top: 21.5vw;
         }
     }
     .order-sell{
         background-color: $color-blue-3;
+    }
+    .order-buy{
+        background-color: $color-red-3;
+    }
+    .order-modify{
+        background-color: #f3faf0;
     }
 }
