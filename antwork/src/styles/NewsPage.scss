@@ -1,0 +1,40 @@
+@import './Component.scss';
+
+main {
+    width: calc(100% - 20vw);
+    margin: 0vw auto 5vw auto;
+}
+
+.newsGroup {
+    display: flex;
+    padding: 0;
+    align-items: flex-end;
+    border-bottom: 1px solid $color-gray;
+}
+
+.newsGroup > li {
+    list-style-type: none;
+    padding: 0 20px 20px 0;
+    // vertical-align: bottom;
+}
+
+.newsRoom {
+    font-size: x-large;
+}
+
+.refresh {
+    cursor: pointer;
+}
+
+article {
+    display: flex;
+    // margin: 5px;
+    border-bottom: 1px solid $color-gray;
+}
+
+article > div {
+    // width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+}

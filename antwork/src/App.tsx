@@ -57,19 +57,15 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/all" element={<NewsPage />} />
-          <Route path="/news/economy" element={<NewsPage />} />
-          <Route path="/news/stock" element={<NewsPage />} />
-          <Route path="/news/coin" element={<NewsPage />} />
-          <Route path="/news/:id" element={<NewsDetailPage />} />
+
+          <Route path="/news/:group?" element={<NewsPage />} />
+          <Route path="/news/detail/:id" element={<NewsDetailPage />} />
+
 
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/findId" element={<FindIdPage />} />
-          <Route path="/news" element={<NewsPage />} />
           <Route path="/kakao/callback" element={<KakaoCallback />} />
-          <Route path="/news/:id" element={<NewsDetailPage />} />
           <Route path="/mypage" element={<MyPage />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />

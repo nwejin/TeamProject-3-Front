@@ -44,7 +44,7 @@ const Header = () => {
         </Link>
         <ul>
           <li>
-            <Link to="/news/all">뉴스룸</Link>
+            <Link to="/news">뉴스룸</Link>
           </li>
           <li>
             <Link to="/stockGuide">주식 길잡이</Link>
