@@ -1,5 +1,5 @@
 const TradeBuy =()=>{
-    return <div className="order-content order-sell">
+    return <div className="order-content order-buy">
     <div className="order-method">
         <div className="order-cash">현금</div>
         <div className="order-credit">신용</div>
@@ -19,9 +19,9 @@ const TradeBuy =()=>{
         <div className="order-market-price">시장가</div>
     </div>
     <div className="order-market-sell">수량 <div className="order-market-value">0주</div></div>
-    <div className="order-market-sell">호가 <div className="order-market-value">73,600</div></div>
+    <div className="order-market-sell">호가 <div className="order-market-value">74,000</div></div>
     <div className="order-market-sell">금액<div className="order-market-value">원</div></div>
-    <div className="sell-btn">매도</div>
+    <div className="buy-btn">매수</div>
 </div>
 }
 
