@@ -1,8 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { newPost } from '../../services/apiService';
 import '../../styles/Community.scss';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
 
 // props 타입 지정
 interface props {
@@ -39,6 +37,7 @@ const AddPost = (props: props): ReactElement => {
       if (formData.file) {
         postData.append('file', formData.file);
       }
+
       const response = await newPost(postData);
       // const imgUrl = response.imageUrl;
       // console.log(imgUrl);

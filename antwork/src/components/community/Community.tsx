@@ -113,7 +113,7 @@ function Community() {
 
                 <div className="imgBox">
                   <a href={readLink}>
-                    <img src={post.image} alt="" />
+                    <img src={post.image} alt="업로드 이미지" />
                   </a>
                 </div>
               </div>
