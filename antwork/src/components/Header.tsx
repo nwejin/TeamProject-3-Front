@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, redirect, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
@@ -35,12 +35,21 @@ const Header = () => {
     removeCookie('jwtCookie');
     alert('로그아웃 되었습니다.');
     setIsToggle(false);
+    window.location.href = '/';
+  };
+
+  const redirectMain = () => {
+    window.location.href = '/';
   };
   return (
     <>
       <div className="header">
         <Link to="/">
-          <img src={process.env.PUBLIC_URL + '/temp_logo.png'} alt="Logo" />
+          <img
+            src={process.env.PUBLIC_URL + '/temp_logo.png'}
+            alt="Logo"
+            onClick={redirectMain}
+          />
         </Link>
         <ul>
           <li>
