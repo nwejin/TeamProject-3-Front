@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import { log } from 'console';
 
 const KakaoCallback = () => {
   useEffect(() => {
@@ -49,18 +48,33 @@ const KakaoCallback = () => {
     //       console.log('사용자 정보', res.data);
     //     });
     //   });
+
+    // 사용자 정보 요청
     axios
-      .get('http://localhost:8000/redirect', { params: { code } })
+      .get('http://localhost:8000/kakao/login', {
+        params: { code },
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         console.log('/redirect 실행');
+        console.log(res.data);
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
-  const getProfile = async () => {
+
+  const logOut = async () => {
     axios
-      .get('http://localhost:8000/profile')
+      .get('http://localhost:8000/kakao/logout', {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         console.log(res.data);
       })
@@ -68,20 +82,27 @@ const KakaoCallback = () => {
         console.log(e);
       });
   };
-  const logOut = async () => {
+  const disConnect = async () => {
     axios
-      .get('http://localhost:8000/logout')
+      .get('http://localhost:8000/kakao/exit', {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .then((res) => {
         console.log(res.data);
+        console.log('카카오 회원탈퇴');
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
       });
   };
   return (
     <>
-      <button onClick={getProfile}>프로필 가져오기</button>
       <button onClick={logOut}>로그아웃 하기</button>
+      <button onClick={disConnect}>카카오 연결해제(회원탈퇴)</button>
+      <button>카카오 쿠키에 로그인 여부 저장</button>
     </>
   );
 };
