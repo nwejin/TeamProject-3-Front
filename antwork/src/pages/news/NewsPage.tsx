@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { NewsProp } from "../types/NewsProp";
-import NewsList from "../components/NewsList";
+import { NewsProp } from "../../types/NewsProp";
+import NewsList from "../../components/NewsList";
 import { Link, useParams, NavLink } from "react-router-dom";
-import '../styles/NewsPage.scss';
-import Loading from "../components/Loading";
-import "../styles/StockGuide.scss"
+import '../../styles/NewsPage.scss'
+import Loading from "../../components/Loading";
+import "../../styles/StockGuide.scss"
 
 function NewsPage() {
     const { group } = useParams();
