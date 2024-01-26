@@ -24,28 +24,44 @@
       margin: 0;
     }
     .btn-wapper {
-      //   background-color: pink;
+      // background-color: pink;
       width: 90%;
-      height: 10%;
+      height: 15%;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-around;
       border-bottom: 1px solid rgb(204, 204, 204);
-      padding: 2rem 0;
-      .buy {
-        background-color: red;
-        color: white;
-      }
-      .sell {
-        background-color: blue;
-        color: white;
-      }
       .Btn {
         font-size: 18px;
         // background: none;
         border: none;
         padding: 2px 8px;
         border-radius: 5px;
+      }
+      .tradingBtnBox {
+        // background-color: green;
+        width: 85%;
+        display: flex;
+        justify-content: space-around;
+        .buy {
+          background-color: red;
+          color: white;
+          width: 40%;
+        }
+        .sell {
+          background-color: blue;
+          color: white;
+          width: 40%;
+        }
+      }
+      .nextBtnBox {
+        width: 95%;
+        display: flex;
+        justify-content: center;
+        .Btn {
+          width: 80%;
+        }
       }
     }
   }
@@ -61,7 +77,7 @@
     align-items: center;
     width: 90%;
     height: 80%;
-    top: 70px;
+    top: 16%;
     border-radius: 10px;
     border: 1px solid rgb(204, 204, 204);
     .buy-inputBox {
@@ -103,7 +119,7 @@
   align-items: center;
   width: 90%;
   height: 80%;
-  top: 70px;
+  top: 16%;
   border-radius: 10px;
   border: 1px solid rgb(204, 204, 204);
   .sell-inputBox {
@@ -188,6 +204,7 @@
   border-radius: 5px;
   border: 1px solid rgb(204, 204, 204);
   width: 81%;
+  height: 15%;
   text-align: center;
   margin-top: 1rem;
   display: flex;
@@ -200,7 +217,7 @@
   border-radius: 5px;
   border: 1px solid rgb(204, 204, 204);
   width: 81%;
-  height: 20%;
+  height: 15%;
   text-align: center;
   margin-top: 1rem;
   display: flex;
@@ -213,4 +230,20 @@
   font-size: 16px;
   color: grey;
   margin: 0;
+}
+
+.detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background-color: pink;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 80%;
+  top: 16%;
+  border-radius: 10px;
+  border: 1px solid rgb(204, 204, 204);
 }

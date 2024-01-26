@@ -5,6 +5,8 @@ import { getConvertData } from './BybitAPI';
 import Candle from './Candle';
 import SellBtn from './SellOrder';
 import Order from './BuyOrder';
+import Detail from './showDetail';
+
 import { useSelector } from 'react-redux';
 
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
@@ -59,6 +61,7 @@ const Virtual = () => {
   // 모달창
   const [openSellModal, setOpenSellModal] = useState(false);
   const [openBuyModal, setOpenBuyModal] = useState(false);
+  const [openDetailModal, setOpenDetailModal] = useState(false);
 
   //
   const showSellModal = () => {
@@ -77,6 +80,14 @@ const Virtual = () => {
     setOpenBuyModal(false);
   };
 
+  const showDetailModal = () => {
+    setOpenDetailModal(true);
+  };
+
+  const closeDetailModal = () => {
+    setOpenDetailModal(false);
+  };
+
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const stock = useSelector((state) => state.stock); //보유주식 수
   const purchasePrice = useSelector((state) => state.purchasePrice); //보유주식 평단가
@@ -90,33 +101,36 @@ const Virtual = () => {
         <p className="smallTitle">현재 가격</p>
         <h2>{currentCost} $</h2>
         <div className="btn-wapper">
-          <button className="buy Btn" onClick={showBuyModal}>
-            매수
-          </button>
-          {openBuyModal && (
-            <Order
-              currentVal={currentCost}
-              prevInvest={prevInvest}
-              updatePrevInvest={updatePrevInvest}
-              close={closeBuyModal}
-            />
-          )}
+          <div className="tradingBtnBox">
+            <button className="buy Btn" onClick={showBuyModal}>
+              매수
+            </button>
+            {openBuyModal && (
+              <Order
+                currentVal={currentCost}
+                prevInvest={prevInvest}
+                updatePrevInvest={updatePrevInvest}
+                close={closeBuyModal}
+              />
+            )}
 
-          <button className="sell Btn" onClick={showSellModal}>
-            매도
-          </button>
-          {openSellModal && (
-            <SellBtn
-              currentVal={currentCost}
-              prevInvest={prevInvest}
-              updatePrevInvest={updatePrevInvest}
-              close={closeSellModal}
-            />
-          )}
-
-          <button className="next Btn" onClick={nextTurn}>
-            다음턴으로 →
-          </button>
+            <button className="sell Btn" onClick={showSellModal}>
+              매도
+            </button>
+            {openSellModal && (
+              <SellBtn
+                currentVal={currentCost}
+                prevInvest={prevInvest}
+                updatePrevInvest={updatePrevInvest}
+                close={closeSellModal}
+              />
+            )}
+          </div>
+          <div className="nextBtnBox">
+            <button className="next Btn" onClick={nextTurn}>
+              다음턴으로 →
+            </button>
+          </div>
         </div>
         <div className="currentStock">
           <div>
@@ -145,7 +159,13 @@ const Virtual = () => {
           <p className="smallTitle">현재 투자금액</p>
           <p style={{ color: 'blue' }}>{prevInvest} $</p>
         </div>
-        {/* <button>거래 내역 보기</button> */}
+        <button
+          style={{ marginTop: '20px', background: 'none', border: 'none' }}
+          onClick={showDetailModal}
+        >
+          거래 내역 보기
+        </button>
+        {openDetailModal && <Detail close={closeDetailModal} />}
       </div>
     </div>
   );
