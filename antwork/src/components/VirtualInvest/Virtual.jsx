@@ -87,7 +87,8 @@ const Virtual = () => {
         <Candle {...candleProps} />
       </div>
       <div className="invest-input">
-        <h2>현재 가격 : {currentCost} $ </h2>
+        <p className="smallTitle">현재 가격</p>
+        <h2>{currentCost} $</h2>
         <div className="btn-wapper">
           <button className="buy Btn" onClick={showBuyModal}>
             매수
@@ -117,19 +118,34 @@ const Virtual = () => {
             다음턴으로 →
           </button>
         </div>
-        <div style={{ marginTop: '50px' }}>
-          <p>내 주식 현황</p>
-          <p>{stock} 주</p>
-          <p>평단가: {purchasePrice}</p>
+        <div className="currentStock">
+          <div>
+            <p className="smallTitle">내 주식 현황</p>
+            <p>
+              <span>{stock}</span> 주
+            </p>
+          </div>
+          <div>
+            <p className="smallTitle"> 평단가</p>
+            <p>
+              <span>{purchasePrice}</span> $
+            </p>
+          </div>
         </div>
-        <div style={{ display: 'inline-block' }}>
-          <p>잔액: {account} $ </p>
+        <div className="totalMoney">
+          <p className="smallTitle">
+            잔액
+            <p>
+              <span>{account}</span> $
+            </p>
+          </p>
         </div>
 
-        <p style={{ fontWeight: '700' }}>
-          현재 투자금액: <span style={{ color: 'blue' }}>{prevInvest} $</span>
-        </p>
-        <button>거래 내역 보기</button>
+        <div className="investMoney">
+          <p className="smallTitle">현재 투자금액</p>
+          <p style={{ color: 'blue' }}>{prevInvest} $</p>
+        </div>
+        {/* <button>거래 내역 보기</button> */}
       </div>
     </div>
   );

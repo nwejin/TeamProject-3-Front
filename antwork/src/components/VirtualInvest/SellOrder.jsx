@@ -65,6 +65,10 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             );
             console.log('아주 잘 전송');
             console.log('profit > ', profit);
+            alert(
+              `${sellOrder}주 매도가 완료되었습니다. 현재 ${remainStock}주 보유중입니다.`
+            );
+            close();
           } catch (error) {
             console.error('error send', error);
           } finally {
@@ -81,28 +85,91 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
     }
   };
 
+  // 퍼센트 범위 표시
+  const [range, setRange] = useState();
+
+  const dataChange = (e) => {
+    const perValue = e.target.value;
+    setRange(perValue);
+  };
+
   return (
     <div className="sell-wrapper">
       <p>
         <span>매도(판매)</span> 하기
       </p>
-      <div>
-        <input
-          type="text"
-          placeholder="매도 주식 수"
-          onChange={(e) => setSellOrder(e.target.value)}
-          value={sellOrder}
-        />
-        <button onClick={SellBtnClick}>매도</button>
+      <div className="sell-inputBox">
+        <label htmlFor="selfRange">직접 입력</label>
+        <div style={{ display: 'flex', width: '80%' }}>
+          <input
+            id="selfRange"
+            type="text"
+            placeholder="판매할 주식 수를 입력하세요"
+            onChange={(e) => setSellOrder(e.target.value)}
+            value={sellOrder}
+            style={{ width: '87%' }}
+          />
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="주"
+            readOnly
+            style={{
+              width: '13%',
+              border: 'none',
+              textAlign: 'center',
+            }}
+          />
+        </div>
+        <label htmlFor="range">범위 지정</label>
+        <div style={{ display: 'flex', width: '80%' }}>
+          <input
+            id="range"
+            type="range"
+            name=""
+            step="10"
+            list="tickmarks"
+            onChange={dataChange}
+            style={{ width: '87%' }}
+          />
+          <datalist id="tickmarks">
+            <option value="0"></option>
+            <option value="10"></option>
+            <option value="20"></option>
+            <option value="30"></option>
+            <option value="40"></option>
+            <option value="50"></option>
+            <option value="60"></option>
+            <option value="70"></option>
+            <option value="80"></option>
+            <option value="90"></option>
+            <option value="100"></option>
+          </datalist>
+          <input
+            type="text"
+            name=""
+            id=""
+            value={range}
+            placeholder="0%"
+            readOnly
+            style={{
+              width: '13%',
+              border: 'none',
+              textAlign: 'center',
+            }}
+          />
+        </div>
       </div>
-      <div>
-        <button>5%</button>
-        <button>25%</button>
-        <button>50%</button>
-        <button>75%</button>
-        <button>100%</button>
+
+      <div className="btn-wrapper">
+        <button className="sellBtn" onClick={SellBtnClick}>
+          매도
+        </button>
+        <button className="closeBtn" onClick={close}>
+          닫기
+        </button>
       </div>
-      <button onClick={close}>닫기</button>
     </div>
   );
 };
