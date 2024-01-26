@@ -30,7 +30,7 @@ export const Candle = (props) => {
         textColor,
       },
       width: chartContainerRef.current.clientWidth,
-      height: 300,
+      height: 400,
       priceScale: {
         mode: PriceScaleMode.Normal,
       },
