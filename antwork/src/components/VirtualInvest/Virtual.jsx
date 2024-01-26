@@ -11,11 +11,26 @@ import { useSelector } from 'react-redux';
 
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
 
+const numberWithCommas = (numberString) => {
+  if (typeof numberString !== 'string') {
+    // 만약 numberString이 문자열이 아니라면 문자열로 변환합니다.
+    numberString = String(numberString);
+  }
+
+  return numberString.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 const Virtual = () => {
   const [index, setIndex] = useState(180); //시작 캔들 개수
   const [data, setData] = useState([]); //api로 가져온 데이터
   const [currentCost, setCurrentCost] = useState(); //현재 가격
   const [prevInvest, setPrevInvest] = useState(0); // 이전 투자금액 -> profit 계산에 사용
+
+  const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
+  const [formatted_account, setFormatted] = useState(numberWithCommas(account));
+  const [formatted_prevInvest, setFormattedInvest] = useState(
+    prevInvest.toLocaleString()
+  );
 
   // 다음턴 버튼 클릭 시, bybit api 통신
   useEffect(() => {
@@ -31,6 +46,12 @@ const Virtual = () => {
 
     fetchData();
   }, [index]);
+
+  // account 값이 변경될 때마다 formatted_account도 갱신
+  useEffect(() => {
+    setFormatted(numberWithCommas(account));
+    setFormattedInvest(numberWithCommas(prevInvest));
+  }, [account, prevInvest]);
 
   // 초기 부터 currentValue 설정
   useEffect(() => {
@@ -80,6 +101,7 @@ const Virtual = () => {
     setOpenBuyModal(false);
   };
 
+
   const showDetailModal = () => {
     setOpenDetailModal(true);
   };
@@ -89,6 +111,7 @@ const Virtual = () => {
   };
 
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
+
   const stock = useSelector((state) => state.stock); //보유주식 수
   const purchasePrice = useSelector((state) => state.purchasePrice); //보유주식 평단가
 
@@ -150,14 +173,14 @@ const Virtual = () => {
           <p className="smallTitle">
             잔액
             <p>
-              <span>{account}</span> $
+              <span>{formatted_account}</span> $
             </p>
           </p>
         </div>
 
         <div className="investMoney">
           <p className="smallTitle">현재 투자금액</p>
-          <p style={{ color: 'blue' }}>{prevInvest} $</p>
+          <p style={{ color: 'blue' }}>{formatted_prevInvest} $</p>
         </div>
         <button
           style={{ marginTop: '20px', background: 'none', border: 'none' }}

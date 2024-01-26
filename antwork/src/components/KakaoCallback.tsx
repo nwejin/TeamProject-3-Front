@@ -102,7 +102,6 @@ const KakaoCallback = () => {
     <>
       <button onClick={logOut}>로그아웃 하기</button>
       <button onClick={disConnect}>카카오 연결해제(회원탈퇴)</button>
-      <button>카카오 쿠키에 로그인 여부 저장</button>
     </>
   );
 };
