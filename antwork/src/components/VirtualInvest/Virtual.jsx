@@ -1,14 +1,16 @@
 // App.js
 
 import React, { useState, useEffect } from 'react';
-import { Candle } from '../components/VirtualInvest/Candle';
-import { getConvertData } from '../components/VirtualInvest/BybitAPI';
-import SellBtn from '../components/VirtualInvest/SellOrder';
-import Order from '../components/VirtualInvest/BuyOrder';
+import { getConvertData } from './BybitAPI';
+import Candle from './Candle';
+import SellBtn from './SellOrder';
+import Order from './BuyOrder';
+
+
 
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
 
-function App() {
+const Virtual=()=> {
   const [index, setIndex] = useState(180); //시작 캔들 개수
   const [data, setData] = useState([]); //api로 가져온 데이터
   const [currentCost, setCurrentCost] = useState(); //현재 가격
@@ -56,28 +58,31 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>모의 투자 차트</h1>
+    <div className='invest-wrapper'>
+      <div className='invest-chart'>
       <Candle {...candleProps} />
-      <button onClick={nextTurn}>다음턴으로</button>
-      <h2>현재 가격 : {currentCost} $ </h2>
-      <SellBtn
-        currentVal={currentCost}
-        prevInvest={prevInvest}
-        updatePrevInvest={updatePrevInvest}
-      />
-      <Order
-        currentVal={currentCost}
-        prevInvest={prevInvest}
-        updatePrevInvest={updatePrevInvest}
-      />
+      </div>
+      <div className='invest-input'>
+        <button onClick={nextTurn}>다음턴으로</button>
+        <h2>현재 가격 : {currentCost} $ </h2>
+        <SellBtn
+          currentVal={currentCost}
+          prevInvest={prevInvest}
+          updatePrevInvest={updatePrevInvest}
+        />
+        <Order
+          currentVal={currentCost}
+          prevInvest={prevInvest}
+          updatePrevInvest={updatePrevInvest}
+        />
 
-      <p style={{ color: 'green', fontWeight: '700' }}>
-        {' '}
-        지금까지의 투자금액: {prevInvest} $
-      </p>
+        <p style={{ color: 'green', fontWeight: '700' }}>
+          {' '}
+          지금까지의 투자금액: {prevInvest} $
+        </p>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default Virtual;

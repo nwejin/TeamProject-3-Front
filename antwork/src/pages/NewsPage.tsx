@@ -108,7 +108,6 @@ function NewsPage() {
             <li onClick={()=> groupClick('economy')}>경제</li>
             <li onClick={()=> groupClick('stock')}>주식</li>
             <li onClick={()=> groupClick('coin')}>코인</li> */}
-
             {/* <ul className="newsGroup">
                 <li className="newsRoom">뉴스룸</li>
                 <li><Link to="/news/economy" >경제</Link></li>
@@ -156,8 +155,7 @@ function NewsPage() {
         </div>
 
     </>
-        
-    );
+  );
 }
 
 export default NewsPage;

@@ -45,9 +45,8 @@ const AddPost = (props: props): ReactElement => {
       console.log(response);
       // alert('글작성 완료!');
       console.log(formData);
-      console.log(formData.file);
+      // 창 닫기 및 페이지 새로 고침
       props.close();
-      // 페이지 새로 고침
       window.location.reload();
     } catch (err) {
       console.log(FormData);

@@ -295,3 +295,17 @@
         background-color: #f3faf0;
     }
 }
+
+.invest-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    .invest-chart{
+        width:70%;
+    }
+
+    .invest-input{
+        margin-left:2vw;
+        width:28%;
+
+    }
+}
