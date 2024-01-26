@@ -101,7 +101,6 @@ const Virtual = () => {
     setOpenBuyModal(false);
   };
 
-
   const showDetailModal = () => {
     setOpenDetailModal(true);
   };
@@ -109,8 +108,6 @@ const Virtual = () => {
   const closeDetailModal = () => {
     setOpenDetailModal(false);
   };
-
-  const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
 
   const stock = useSelector((state) => state.stock); //보유주식 수
   const purchasePrice = useSelector((state) => state.purchasePrice); //보유주식 평단가
