@@ -47,6 +47,10 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
           type: 'SET_PURCHASE_PRICE',
           payload: newPurchasePrice.toFixed(2),
         });
+        alert(
+          `${buyOrder}주 매수가 완료되었습니다. 현재 ${newStock}주 보유중입니다.`
+        );
+        close();
       } else {
         alert('돈없음');
       }
@@ -71,12 +75,27 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
       </p>
       <div className="buy-inputBox">
         <label htmlFor="selfRange">직접 입력</label>
-        <input
-          id="selfRange"
-          type="text"
-          placeholder="구매할 주식 수를 입력 주세요"
-          onChange={(e) => setBuyOrder(e.target.value)}
-        />
+        <div style={{ display: 'flex', width: '80%' }}>
+          <input
+            id="selfRange"
+            type="text"
+            placeholder="구매할 주식 수를 입력하세요"
+            onChange={(e) => setBuyOrder(e.target.value)}
+            style={{ width: '87%' }}
+          />
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="주"
+            readOnly
+            style={{
+              width: '13%',
+              border: 'none',
+              textAlign: 'center',
+            }}
+          />
+        </div>
 
         <label htmlFor="range">범위 지정</label>
         <div style={{ display: 'flex', width: '80%' }}>
@@ -124,7 +143,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
       <div style={{ display: 'inline-block' }}>
         <p>잔액: {account} $ </p>
       </div> */}
-      <div className="buyBtn">
+      <div className="btn-wrapper">
         <button className="orderBtn" type="button" onClick={CalculatorOrder}>
           매수
         </button>
