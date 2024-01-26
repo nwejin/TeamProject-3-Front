@@ -2,6 +2,7 @@ import { useState } from "react";
 import TrandingViewWidget from "../../components/stockGuide/TrandingViewWidget";
 import "./../../styles/StockGuide.scss";
 import TradeControl from "../../components/stockGuide/TradeControl";
+import Virtual from "../../components/VirtualInvest/Virtual";
 
 export const clickExplain =(selectDiv:string):string=>{
     if(selectDiv === 'x'){
@@ -79,7 +80,7 @@ const StockGuidePage =()=>{
                     <li onClick={()=>setType('exchange')}>환율</li>
                     <li className="selected-blue" onClick={()=>setType('invest')}>모의 투자</li>
                 </ul>    
-                <div>모의투자</div>    
+                <Virtual/>
             </>
             }
         </div>
