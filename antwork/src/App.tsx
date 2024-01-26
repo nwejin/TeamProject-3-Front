@@ -19,7 +19,6 @@ import KakaoCallback from './components/KakaoCallback';
 import NewsDetailPage from './pages/NewsDetailPage';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
-import Virtual from './pages/Virtual';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -74,7 +73,7 @@ function App() {
           {/* 커뮤니티 상세보기 */}
           <Route path="/community/:id" element={<CommunityReadPage />} />
 
-          <Route path="/virtual" element={<Virtual />} />
+          {/* <Route path="/virtual" element={<Virtual />} /> */}
         </Routes>
       </BrowserRouter>
       {/* <ExampleComponent></ExampleComponent> */}
