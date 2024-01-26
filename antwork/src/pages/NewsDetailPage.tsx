@@ -137,7 +137,7 @@ function NewsDetailPage() {
                 <h1>{data.title}</h1>
                 <p>{data.date}</p>
                 <img src={data.bigimg} alt={data.title} />
-                <p style={{ whiteSpace: 'pre-line'}}>{content}</p>
+                <p style={{ whiteSpace: 'pre-line'}} className='detailContent'>{content}</p>
                 <p>출처 : {data.url}</p>
             </main>
         </>
