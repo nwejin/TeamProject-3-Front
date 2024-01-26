@@ -1,32 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { getCommunityPosts } from '../../services/apiService';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function CommunityRead() {
-  // const [posts, setPosts]: any = useState([]);
-  // console.log(posts);
-  // console.log(posts[0]);
-  // console.log(posts._id);
-
-  // useEffect(() => {
-  //   // 서버에서 데이터를 불러와서 posts 상태 업데이트
-  //   const fetchData = async () => {
-  //     try {
-  //       const communityPosts = await getCommunityPosts();
-  //       setPosts(communityPosts);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  const { id } = useParams();
-  console.log(id);
-
   const location = useLocation();
   const data = location.state.post;
-  console.log(data);
+  // console.log(data);
 
   const formatTimeDifference = (dateString: any) => {
     const postDate = new Date(dateString);
@@ -34,7 +11,7 @@ function CommunityRead() {
     const timeDifference = currentTime.getTime() - postDate.getTime();
     const minutesAgo = Math.floor(timeDifference / (1000 * 60));
 
-    console.log(minutesAgo);
+    // console.log(minutesAgo);
     if (minutesAgo < 1) {
       return '방금 전';
     } else if (minutesAgo < 60) {
@@ -110,7 +87,7 @@ function CommunityRead() {
         </div>
 
         <div className="readImgBox">
-          <img src={data.image} alt="업로드 이미지" />
+          <img src={data.image} alt="" />
         </div>
 
         {/* 아이콘 리스트 */}
