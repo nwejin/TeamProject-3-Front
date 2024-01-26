@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
-const SellBtn = ({ currentVal, prevInvest, updatePrevInvest }) => {
+const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   const [sellOrder, setSellOrder] = useState(0);
   const profit = useSelector((state) => state.profit);
   const stock = useSelector((state) => state.stock);
@@ -81,14 +81,27 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest }) => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="매도 주식 수"
-        onChange={(e) => setSellOrder(e.target.value)}
-        value={sellOrder}
-      />
-      <button onClick={SellBtnClick}>매도</button>
+    <div className="sell-wrapper">
+      <p>
+        <span>매도(판매)</span> 하기
+      </p>
+      <div>
+        <input
+          type="text"
+          placeholder="매도 주식 수"
+          onChange={(e) => setSellOrder(e.target.value)}
+          value={sellOrder}
+        />
+        <button onClick={SellBtnClick}>매도</button>
+      </div>
+      <div>
+        <button>5%</button>
+        <button>25%</button>
+        <button>50%</button>
+        <button>75%</button>
+        <button>100%</button>
+      </div>
+      <button onClick={close}>닫기</button>
     </div>
   );
 };

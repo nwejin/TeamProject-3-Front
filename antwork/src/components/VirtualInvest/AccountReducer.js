@@ -7,13 +7,13 @@ const initialState = {
 
 const accountReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_ACCOUNT":
+    case 'SET_ACCOUNT':
       return { ...state, account: action.payload };
-    case "SET_STOCK":
+    case 'SET_STOCK':
       return { ...state, stock: action.payload };
-    case "SET_PROFIT":
+    case 'SET_PROFIT':
       return { ...state, profit: action.payload };
-    case "SET_PURCHASE_PRICE":
+    case 'SET_PURCHASE_PRICE':
       return { ...state, purchasePrice: action.payload };
     default:
       return state;

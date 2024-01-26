@@ -1,0 +1,121 @@
+.invest-wrapper {
+  display: flex;
+  //   justify-content: flex-start;
+  justify-content: space-between;
+  .invest-chart {
+    width: 70%;
+  }
+
+  .invest-input {
+    position: relative;
+    // background-color: pink;
+    margin-left: 2vw;
+    width: 28%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid rgb(204, 204, 204);
+    .btn-wapper {
+      //   background-color: pink;
+      width: 70%;
+      height: 10%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      .buy {
+        background-color: red;
+        color: white;
+      }
+      .sell {
+        background-color: blue;
+        color: white;
+      }
+      .Btn {
+        font-size: 18px;
+        // background: none;
+        border: none;
+        padding: 2px 8px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .buy-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    top: 70px;
+    border-radius: 10px;
+    border: 1px solid rgb(204, 204, 204);
+    .buy-inputBox {
+      width: 100%;
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      label {
+        font-size: 14px;
+        color: rgb(204, 204, 204);
+      }
+      input {
+        width: 80%;
+        margin: 0.5rem 0;
+      }
+    }
+    p {
+      font-weight: bold;
+      font-size: 18px;
+      margin: 2rem 0 0.5rem;
+
+      span {
+        color: red;
+      }
+    }
+
+    .buyBtn {
+      margin: 0.2rem 0;
+      //   background-color: blue;
+      width: 80%;
+      height: 10%;
+      display: flex;
+      justify-content: space-around;
+      button {
+        width: 100px;
+        height: 100%;
+      }
+      .orderBtn {
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+    }
+  }
+  .sell-wrapper {
+    position: absolute;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 70px;
+    border-radius: 10px;
+    border: 1px solid rgb(204, 204, 204);
+  }
+  .closeBtn {
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+}

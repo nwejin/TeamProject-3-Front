@@ -1,16 +1,15 @@
 // App.js
-
+import '../../styles/Virtual.scss';
 import React, { useState, useEffect } from 'react';
 import { getConvertData } from './BybitAPI';
 import Candle from './Candle';
 import SellBtn from './SellOrder';
 import Order from './BuyOrder';
-
-
+import { useSelector } from 'react-redux';
 
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
 
-const Virtual=()=> {
+const Virtual = () => {
   const [index, setIndex] = useState(180); //시작 캔들 개수
   const [data, setData] = useState([]); //api로 가져온 데이터
   const [currentCost, setCurrentCost] = useState(); //현재 가격
@@ -57,32 +56,83 @@ const Virtual=()=> {
     },
   };
 
-  return (
-    <div className='invest-wrapper'>
-      <div className='invest-chart'>
-      <Candle {...candleProps} />
-      </div>
-      <div className='invest-input'>
-        <button onClick={nextTurn}>다음턴으로</button>
-        <h2>현재 가격 : {currentCost} $ </h2>
-        <SellBtn
-          currentVal={currentCost}
-          prevInvest={prevInvest}
-          updatePrevInvest={updatePrevInvest}
-        />
-        <Order
-          currentVal={currentCost}
-          prevInvest={prevInvest}
-          updatePrevInvest={updatePrevInvest}
-        />
+  // 모달창
+  const [openSellModal, setOpenSellModal] = useState(false);
+  const [openBuyModal, setOpenBuyModal] = useState(false);
 
-        <p style={{ color: 'green', fontWeight: '700' }}>
-          {' '}
-          지금까지의 투자금액: {prevInvest} $
+  //
+  const showSellModal = () => {
+    setOpenSellModal(true);
+  };
+
+  const closeSellModal = () => {
+    setOpenSellModal(false);
+  };
+
+  const showBuyModal = () => {
+    setOpenBuyModal(true);
+  };
+
+  const closeBuyModal = () => {
+    setOpenBuyModal(false);
+  };
+
+  const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
+  const stock = useSelector((state) => state.stock); //보유주식 수
+  const purchasePrice = useSelector((state) => state.purchasePrice); //보유주식 평단가
+
+  return (
+    <div className="invest-wrapper">
+      <div className="invest-chart">
+        <Candle {...candleProps} />
+      </div>
+      <div className="invest-input">
+        <h2>현재 가격 : {currentCost} $ </h2>
+        <div className="btn-wapper">
+          <button className="buy Btn" onClick={showBuyModal}>
+            매수
+          </button>
+          {openBuyModal && (
+            <Order
+              currentVal={currentCost}
+              prevInvest={prevInvest}
+              updatePrevInvest={updatePrevInvest}
+              close={closeBuyModal}
+            />
+          )}
+
+          <button className="sell Btn" onClick={showSellModal}>
+            매도
+          </button>
+          {openSellModal && (
+            <SellBtn
+              currentVal={currentCost}
+              prevInvest={prevInvest}
+              updatePrevInvest={updatePrevInvest}
+              close={closeSellModal}
+            />
+          )}
+
+          <button className="next Btn" onClick={nextTurn}>
+            다음턴으로 →
+          </button>
+        </div>
+        <div style={{ marginTop: '50px' }}>
+          <p>내 주식 현황</p>
+          <p>{stock} 주</p>
+          <p>평단가: {purchasePrice}</p>
+        </div>
+        <div style={{ display: 'inline-block' }}>
+          <p>잔액: {account} $ </p>
+        </div>
+
+        <p style={{ fontWeight: '700' }}>
+          현재 투자금액: <span style={{ color: 'blue' }}>{prevInvest} $</span>
         </p>
+        <button>거래 내역 보기</button>
       </div>
     </div>
   );
-}
+};
 
 export default Virtual;
