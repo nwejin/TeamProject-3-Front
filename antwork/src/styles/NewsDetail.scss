@@ -5,8 +5,14 @@
 //     margin: 0vw auto 5vw auto;
 // }
 
+
+.detailContent {
+    line-height: 1.8;
+    margin-top: 30px;
+}
+
 .highlight {
-    background-color: lightblue;
+    background-color: $color-blue-2;
     cursor: pointer;
 }
 
