@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 function Community() {
   const [posts, setPosts] = useState([]);
-
-  console.log(posts);
+  // dbd에서 데이터 불러오기위해 useState
+  // console.log(posts);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -31,14 +31,34 @@ function Community() {
     }
   };
 
+  const [pagination, setPagination] = useState(1);
+  const defaultPage = 5;
+
+  // 마지막 페이지 (1*5)
+  const lastPage = pagination * defaultPage;
+  console.log('lastPage', lastPage);
+  // 첫 페이지 ((1*5)- 5)
+  const firstPage = lastPage - defaultPage;
+  console.log('firstPage', firstPage);
+  // 현재 페이지 데이터 나누기
+  const currentPage = posts.slice(firstPage, lastPage);
+
+  console.log('currentPage', currentPage);
+
+  // 페이지 번호대로 클릭하면 스테이트 값 업데이트
+  const paginate = (pageNumber: any) => {
+    setPagination(pageNumber);
+  };
+
   return (
     <>
       {/* 콘텐츠 박스*/}
-      {posts.map((post: any) => {
+      {currentPage.map((post: any) => {
         // console.log(minutesAgo)
 
-        // 시간 계산
+        // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
+          // 분계산
           const postDate = new Date(dateString);
           const currentTime = new Date();
           const timeDifference = currentTime.getTime() - postDate.getTime();
@@ -68,7 +88,7 @@ function Community() {
           }
         };
 
-        // 카테고리 분류
+        // 카테고리 분류 value값에 맞춰 데이터 생성
         const getSubject = () => {
           const subject = post.subject;
           let subjectname;
@@ -111,7 +131,7 @@ function Community() {
 
                 <div className="imgBox">
                   <Link to={`/community/${post._id}`} state={{ post }}>
-                    <img src={post.image} alt="업로드 이미지" />
+                    <img src={post.image} alt="" />
                   </Link>
                 </div>
               </div>
@@ -144,6 +164,17 @@ function Community() {
           </div>
         );
       })}
+      {/* {posts.map((post: any) => {
+      })} */}
+      <div>
+        {Array.from({ length: Math.ceil(posts.length / defaultPage) }).map(
+          (_, index) => (
+            <button key={index} onClick={() => paginate(index + 1)}>
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
     </>
   );
 }
