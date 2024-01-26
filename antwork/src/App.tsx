@@ -14,9 +14,9 @@ import FindIdPage from './pages/member/FindIdPage';
 import CommunityMain from './pages/community/CommunityMain';
 import CommunityReadPage from './pages/community/CommunityReadPage';
 import axios from 'axios';
-import NewsPage from './pages/NewsPage';
+import NewsPage from './pages/news/NewsPage';
 import KakaoCallback from './components/KakaoCallback';
-import NewsDetailPage from './pages/NewsDetailPage';
+import NewsDetailPage from './pages/news/NewsDetailPage';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 
