@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Order = ({ currentVal, prevInvest, updatePrevInvest }) => {
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
@@ -8,37 +10,48 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest }) => {
   const [buyOrder, setBuyOrder] = useState(0); // text로 입력 받은 주식 수
   const dispatch = useDispatch();
 
+  const cookie = useCookies(['jwtCookie']);
+  const navigate = useNavigate(); //페이지 이동
+  const notLogin = () => {
+    navigate('/signin');
+  };
+
   useEffect(() => {
-    console.log("purchase", purchasePrice);
+    console.log('purchase', purchasePrice);
   }, [purchasePrice]);
 
   const CalculatorOrder = () => {
-    const cal = (buyOrder * currentVal).toFixed(2); //투자 금액
+    if (cookie[0].jwtCookie) {
+      const cal = (buyOrder * currentVal).toFixed(2); //투자 금액
 
-    // 주문 총 금액이 잔고보다 많을 때만 적용
-    if (account - cal >= 0) {
-      dispatch({ type: "SET_ACCOUNT", payload: account - cal });
-      const newStock = Number(stock) + Number(buyOrder);
+      // 주문 총 금액이 잔고보다 많을 때만 적용
+      if (account - cal >= 0) {
+        dispatch({ type: 'SET_ACCOUNT', payload: account - cal });
+        const newStock = Number(stock) + Number(buyOrder);
 
-      updatePrevInvest(prevInvest + Number(cal)); //지금까지의 투자금액은 잔고가 유효한지 확인 필요
+        updatePrevInvest(prevInvest + Number(cal)); //지금까지의 투자금액은 잔고가 유효한지 확인 필요
 
-      //stock이 0이면 평단가를 현재 가격으로 설정
-      const newPurchasePrice =
-        newStock === 0
-          ? Number(currentVal)
-          : (Number(purchasePrice) * stock + Number(cal)) / newStock;
+        //stock이 0이면 평단가를 현재 가격으로 설정
+        const newPurchasePrice =
+          newStock === 0
+            ? Number(currentVal)
+            : (Number(purchasePrice) * stock + Number(cal)) / newStock;
 
-      dispatch({
-        type: "SET_STOCK",
-        payload: newStock,
-      });
+        dispatch({
+          type: 'SET_STOCK',
+          payload: newStock,
+        });
 
-      dispatch({
-        type: "SET_PURCHASE_PRICE",
-        payload: newPurchasePrice.toFixed(2),
-      });
+        dispatch({
+          type: 'SET_PURCHASE_PRICE',
+          payload: newPurchasePrice.toFixed(2),
+        });
+      } else {
+        alert('돈없음');
+      }
     } else {
-      alert("돈없음");
+      alert('로그인이 필요함');
+      notLogin();
     }
   };
 
@@ -55,7 +68,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest }) => {
       <p>
         내 주식 현황: {stock} 주, 평단가: {purchasePrice}
       </p>
-      <div style={{ display: "inline-block" }}>
+      <div style={{ display: 'inline-block' }}>
         <p>Account: {account} $ </p>
       </div>
     </div>
