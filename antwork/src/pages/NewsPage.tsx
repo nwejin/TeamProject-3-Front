@@ -108,15 +108,6 @@ function NewsPage() {
             <li onClick={()=> groupClick('economy')}>경제</li>
             <li onClick={()=> groupClick('stock')}>주식</li>
             <li onClick={()=> groupClick('coin')}>코인</li> */}
-            {/* <ul className="newsGroup">
-                <li className="newsRoom">뉴스룸</li>
-                <li><Link to="/news/economy" >경제</Link></li>
-                <li><Link to="/news/stock" >주식</Link></li>
-                <li><Link to="/news/coin" >코인</Link></li>
-            </ul>
-            <ul className="refresh-tab">
-                <li className="refresh-btn" onClick={refresh}>최신 뉴스 보기</li>
-            </ul> */}
 
             <div className="page-title">뉴스룸</div>
                 <div className="newsNav">
