@@ -52,6 +52,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest }) => {
           }
 
           try {
+            // profit에 직접 값 대입, 쿠키 정보 백엔드로 전송
             console.log('버튼 누름');
             await axios.post(
               'http://localhost:8000/virtual/profit',
