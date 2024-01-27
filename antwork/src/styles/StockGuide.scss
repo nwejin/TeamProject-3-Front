@@ -142,6 +142,7 @@
     .order-book{
         width:calc(100% / 3);
         height: calc(50vw - (40px + 6.1vw));
+        // cursor: pointer;
         .order-wrapper-scroll{
             overflow: scroll;
             height:calc(50vw - (40px + 10vw));
@@ -157,6 +158,7 @@
             cursor: pointer;
         }
         .min-price{
+            cursor: pointer;
             text-align: center;
             font-size: 0.9vw;
             color: $color-blue-1;
@@ -172,20 +174,12 @@
             justify-content: space-around;
             color: #333;
             padding: 0.39vw 0;
-            .rate-high{
-                color:red;
-                cursor: pointer;
-            }
-            .rate-row{
-                color:$color-blue-1;
-                cursor: pointer;
-            }
 
             .daily{
                 font-size: 0.6vw;
-                .daily-percent{
-                    color:$color-blue-1;
-                }
+                // .daily-percent{
+                //     // color:$color-blue-1;
+                // }
             }
            
         }
@@ -308,4 +302,12 @@
         width:28%;
 
     }
+}
+.rate-high{
+    color:red;
+    cursor: pointer;
+}
+.rate-row{
+    color:$color-blue-1;
+    cursor: pointer;
 }

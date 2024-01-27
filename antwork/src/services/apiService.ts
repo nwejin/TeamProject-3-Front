@@ -196,3 +196,44 @@ export const like = async (like: any) => {
     throw new Error('예상치 못한 오류가 발생했습니다!');
   }
 };
+
+// 클릭한 단어의 설명 출력하기
+export const GetWord = async (word: string) => {
+  console.log(word);
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/virtual/vocabulary',
+      {
+        params: {
+          eng_word: word,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+
+export const userInfo = async (userData:any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/UserModify',
+      userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
