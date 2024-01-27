@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { login } from "../../services/apiService";
+import { login } from '../../services/apiService';
 
 const SigninPage = () => {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const SigninPage = () => {
 
   const [cookies, setCookie, removeCookie] = useCookies(['saveId']);
   useEffect(() => {
-    console.log(cookies);
+    // console.log(cookies);
     const savedId = cookies['saveId']; // 대괄호를 사용하여 속성에 액세스합니다.
     if (savedId) {
       setFormData((prevData) => ({
@@ -71,9 +71,7 @@ const SigninPage = () => {
     }
   };
 
-  const REST_API_KEY = 'da5d3b32f284512d0975b638e8a033ea';
-  const REDIRECT_URI = 'http://localhost:3000/kakao/callback';
-  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
   const loginHandler = () => {
     window.location.href = link;

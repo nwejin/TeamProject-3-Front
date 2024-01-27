@@ -32,8 +32,8 @@ const MyPage=()=>{
     return<>
     <div className="outer-wrapper mypage-wrapper">
         <div className="mypage-navbar">
-            <div></div>
-            <div></div>
+          <div></div>
+          <div></div>
         </div>
         <div className="mypage-contents">
             <div>회원정보 수정</div>
@@ -45,6 +45,8 @@ const MyPage=()=>{
         </div>
         <button onClick={getUser}>버튼</button>
     </div>
+
     </>
-}
-export default MyPage
+  );
+};
+export default MyPage;
