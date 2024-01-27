@@ -169,9 +169,7 @@ const Virtual = () => {
         <div className="totalMoney">
           <p className="smallTitle">
             잔액
-            <p>
-              <span>{formatted_account}</span> $
-            </p>
+            <span>{formatted_account}</span> $
           </p>
         </div>
 
