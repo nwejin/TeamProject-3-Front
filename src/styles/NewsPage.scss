@@ -10,8 +10,10 @@
 
 }
 
-.refresh-btn:hover {
-    color: $color-blue-1;;
+.refresh-btn {
+    .material-symbols-outlined:hover {
+        color: $color-blue-1;;
+    }
 }
 
 

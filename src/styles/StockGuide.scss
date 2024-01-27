@@ -66,7 +66,8 @@
             .stock-explain{
                 padding-top:10px;
                 border:1px solid $color-gray-1;
-                height:18.5vw;
+                height:19vw;
+                margin-top: 1vw;
                 
 
             }
@@ -95,8 +96,10 @@
         .market-price{
             font-size: 1.6vw;
             color:$color-blue-1;
+            cursor: pointer;
         }
         .daily-change{
+            cursor: pointer;
             font-size: 0.9vw;
             color:$color-blue-1;
         }
@@ -106,8 +109,10 @@
         margin-left: 4vw;
         .total-volume{
             margin-top:1.5vw;
+            cursor: pointer;
         }
         .volume-change{
+            cursor: pointer;
             color:$color-blue-1;
 
         }
@@ -204,6 +209,10 @@
                 text-align: center;
                 padding: 0.3vw 0;
             }
+            .order-cash{
+                background-color: #444;
+                color:white;
+            }
             .order-credit{
                 margin-right:0.9vw;
             }
@@ -213,6 +222,8 @@
                 width: calc((100% - (100% / 3)) - 22px);
                 text-align: center;
                 padding: 0.3vw 0;
+                cursor: pointer;
+
             }
             .open-orders{
                 border: 1px solid $color-gray-1;
@@ -238,6 +249,7 @@
                 border: 1px solid $color-gray-1;
                 background-color: #fff;
                 text-align: center;
+                cursor: pointer;
                 
             }
         }

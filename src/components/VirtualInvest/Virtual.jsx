@@ -29,7 +29,7 @@ const Virtual = () => {
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const [formatted_account, setFormatted] = useState(numberWithCommas(account));
   const [formatted_prevInvest, setFormattedInvest] = useState(
-    prevInvest.toLocaleString()
+    prevInvest.toFixed(2)
   );
 
   // 다음턴 버튼 클릭 시, bybit api 통신
@@ -175,7 +175,9 @@ const Virtual = () => {
 
         <div className="investMoney">
           <p className="smallTitle">현재 투자금액</p>
-          <p style={{ color: 'blue' }}>{formatted_prevInvest} $</p>
+          <p style={{ color: 'blue' }}>
+            {numberWithCommas(formatted_prevInvest)} $
+          </p>
         </div>
         <button
           style={{ marginTop: '20px', background: 'none', border: 'none' }}

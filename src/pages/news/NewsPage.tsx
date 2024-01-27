@@ -131,8 +131,8 @@ function NewsPage() {
                             };
                           }} >코인</NavLink></li>
                     </ul>
-                    <ul>
-                        <li className="refresh-btn" onClick={refresh}>최신 뉴스 보기</li>
+                    <ul className="refresh-btn">
+                        <li className="material-symbols-outlined" onClick={refresh}>cached</li>
                     </ul>
                 </div>
 	<div/>
