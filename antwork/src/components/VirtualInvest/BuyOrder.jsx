@@ -62,10 +62,17 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
 
   // 퍼센트 범위 표시
   const [range, setRange] = useState();
+  const [calPerVal, setCalPerVal] = useState();
 
   const dataChange = (e) => {
     const perValue = e.target.value;
     setRange(perValue);
+
+    // 퍼센트 조작에 대한 변경
+    const availablePurchase = parseInt(account / currentVal); //구매 가능한 최대
+    console.log('ava', availablePurchase);
+    const cal = parseInt(availablePurchase * (range / 100));
+    setCalPerVal(cal);
   };
 
   return (
@@ -82,6 +89,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="구매할 주식 수를 입력하세요"
             onChange={(e) => setBuyOrder(e.target.value)}
             style={{ width: '87%' }}
+            value={calPerVal}
           />
           <input
             type="text"
@@ -103,6 +111,8 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             id="range"
             type="range"
             name=""
+            min="1"
+            max="10"
             step="10"
             list="tickmarks"
             onChange={dataChange}
