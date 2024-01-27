@@ -1,0 +1,249 @@
+.invest-wrapper {
+  display: flex;
+  //   justify-content: flex-start;
+  justify-content: space-between;
+  .invest-chart {
+    width: 70%;
+  }
+
+  .invest-input {
+    position: relative;
+    // background-color: pink;
+    margin-left: 2vw;
+    width: 28%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid rgb(204, 204, 204);
+    h2 {
+      border-bottom: 1px solid rgb(204, 204, 204);
+      padding: 1rem 0;
+      width: 90%;
+      text-align: center;
+      margin: 0;
+    }
+    .btn-wapper {
+      // background-color: pink;
+      width: 90%;
+      height: 15%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      border-bottom: 1px solid rgb(204, 204, 204);
+      .Btn {
+        font-size: 18px;
+        // background: none;
+        border: none;
+        padding: 2px 8px;
+        border-radius: 5px;
+      }
+      .tradingBtnBox {
+        // background-color: green;
+        width: 85%;
+        display: flex;
+        justify-content: space-around;
+        .buy {
+          background-color: red;
+          color: white;
+          width: 40%;
+        }
+        .sell {
+          background-color: blue;
+          color: white;
+          width: 40%;
+        }
+      }
+      .nextBtnBox {
+        width: 95%;
+        display: flex;
+        justify-content: center;
+        .Btn {
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  .buy-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 80%;
+    top: 16%;
+    border-radius: 10px;
+    border: 1px solid rgb(204, 204, 204);
+    .buy-inputBox {
+      width: 100%;
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      label {
+        font-size: 14px;
+        color: rgb(204, 204, 204);
+      }
+      input {
+        width: 80%;
+        margin: 0.5rem 0;
+      }
+    }
+    p {
+      font-weight: bold;
+      font-size: 20px;
+      margin: 2rem 0 1rem;
+
+      span {
+        color: red;
+      }
+    }
+  }
+}
+
+.sell-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background-color: white;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 80%;
+  top: 16%;
+  border-radius: 10px;
+  border: 1px solid rgb(204, 204, 204);
+  .sell-inputBox {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    label {
+      font-size: 14px;
+      color: rgb(204, 204, 204);
+    }
+    input {
+      width: 80%;
+      margin: 0.5rem 0;
+    }
+  }
+  p {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 2rem 0 1rem;
+
+    span {
+      color: blue;
+    }
+  }
+}
+
+.btn-wrapper {
+  margin: 0.2rem 0;
+  width: 80%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+  button {
+    width: 100px;
+    height: 100%;
+    font-size: 18px;
+  }
+  .orderBtn {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  .sellBtn {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+  .closeBtn {
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+}
+
+.currentStock {
+  display: flex;
+  // background-color: pink;
+  width: 90%;
+  justify-content: space-around;
+  margin-top: 1rem;
+  height: 15%;
+  div {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid rgb(204, 204, 204);
+    p {
+      margin: 0.5rem;
+    }
+  }
+}
+.totalMoney {
+  border-radius: 5px;
+  border: 1px solid rgb(204, 204, 204);
+  width: 81%;
+  height: 15%;
+  text-align: center;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.investMoney {
+  border-radius: 5px;
+  border: 1px solid rgb(204, 204, 204);
+  width: 81%;
+  height: 15%;
+  text-align: center;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.smallTitle {
+  font-size: 16px;
+  color: grey;
+  margin: 0;
+}
+
+.detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background-color: pink;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 80%;
+  top: 16%;
+  border-radius: 10px;
+  border: 1px solid rgb(204, 204, 204);
+}

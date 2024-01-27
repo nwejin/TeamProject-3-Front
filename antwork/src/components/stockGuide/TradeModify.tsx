@@ -11,7 +11,7 @@ const TradeModify =()=>{
             <option>최유리지정가</option>
             <option>최우선지정가</option>
             <option>시간외종가</option>
-            <option>시간외단일간</option>
+            <option>시간외단일가</option>
         </select>
 
         <div className="order-market-price">시장가</div>

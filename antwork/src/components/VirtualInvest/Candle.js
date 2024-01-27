@@ -1,23 +1,23 @@
 // Candle.js
 
-import { createChart, ColorType, PriceScaleMode } from "lightweight-charts";
-import React, { useEffect, useRef, useState } from "react";
+import { createChart, ColorType, PriceScaleMode } from 'lightweight-charts';
+import React, { useEffect, useRef, useState } from 'react';
 
 export const Candle = (props) => {
   const {
     data,
     colors: {
-      backgroundColor = "white",
-      lineColor = "#2962FF",
-      textColor = "black",
-      areaTopColor = "#2962FF",
-      areaBottomColor = "rgba(41, 98, 255, 0.28)",
+      backgroundColor = 'white',
+      lineColor = '#2962FF',
+      textColor = 'black',
+      areaTopColor = '#2962FF',
+      areaBottomColor = 'rgba(41, 98, 255, 0.28)',
     } = {},
-    symbolName = "BTCUSDT", // 심볼 이름
+    symbolName = 'BTCUSDT', // 심볼 이름
   } = props;
 
   const chartContainerRef = useRef();
-  const [legendContent, setLegendContent] = useState(""); // 호버 시 캔들 상태 legend
+  const [legendContent, setLegendContent] = useState(''); // 호버 시 캔들 상태 legend
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,7 +30,7 @@ export const Candle = (props) => {
         textColor,
       },
       width: chartContainerRef.current.clientWidth,
-      height: 300,
+      height: 500,
       priceScale: {
         mode: PriceScaleMode.Normal,
       },
@@ -42,10 +42,10 @@ export const Candle = (props) => {
     // 이동평균선 지표 추가(이평)
 
     const movingAverages = [
-      { length: 7, color: "#F3C5FF" },
-      { length: 14, color: "#FFC75F" },
-      { length: 21, color: "#00C9A7" },
-      { length: 128, color: "#008CCA" },
+      { length: 7, color: '#F3C5FF' },
+      { length: 14, color: '#FFC75F' },
+      { length: 21, color: '#00C9A7' },
+      { length: 128, color: '#008CCA' },
     ];
 
     for (const { length, color } of movingAverages) {
@@ -73,12 +73,12 @@ export const Candle = (props) => {
     // candle 스타일
 
     const newSeries = chart.addCandlestickSeries({
-      upColor: "rgba(38, 166, 154, 1)",
-      downColor: "rgba(255, 78, 66, 1)",
-      borderDownColor: "rgba(255, 78, 66, 1)",
-      borderUpColor: "rgba(38, 166, 154, 1)",
-      wickDownColor: "rgba(255, 78, 66, 1)",
-      wickUpColor: "rgba(38, 166, 154, 1)",
+      upColor: 'rgba(38, 166, 154, 1)',
+      downColor: 'rgba(255, 78, 66, 1)',
+      borderDownColor: 'rgba(255, 78, 66, 1)',
+      borderUpColor: 'rgba(38, 166, 154, 1)',
+      wickDownColor: 'rgba(255, 78, 66, 1)',
+      wickUpColor: 'rgba(38, 166, 154, 1)',
     });
     newSeries.setData(data);
 
@@ -105,12 +105,12 @@ export const Candle = (props) => {
         // checkpercentage = 양, 음봉 체크 후 부호설정
         const gap = Math.abs(closePrice - openPrice).toFixed(2);
         const checkGap =
-          openPrice < closePrice ? String("+" + gap) : String("-" + gap);
+          openPrice < closePrice ? String('+' + gap) : String('-' + gap);
         const percentage = ((gap / closePrice) * 100).toFixed(2);
         const checkPercentage =
           openPrice < closePrice
-            ? String("+" + percentage)
-            : String("-" + percentage);
+            ? String('+' + percentage)
+            : String('-' + percentage);
 
         setLegendContent(
           `
@@ -134,16 +134,16 @@ export const Candle = (props) => {
           <div>
           <div style="font-size: 15px; margin: 5px 10px; display: inline-block; font-weight: bold">${time}</div>
           <div style="font-size: 15px; margin: 5px 5px; display: inline-block; color:#F3C5FF; font-weight:bold">${
-            movingAverages[0].length + "일선"
+            movingAverages[0].length + '일선'
           }</div>
           <div style="font-size: 15px; margin: 5px 5px; display: inline-block; color:#FFC75F; font-weight:bold">${
-            movingAverages[1].length + "일선"
+            movingAverages[1].length + '일선'
           }</div>
           <div style="font-size: 15px; margin: 5px 5px; display: inline-block; color:#00C9A7; font-weight:bold">${
-            movingAverages[2].length + "일선"
+            movingAverages[2].length + '일선'
           }</div>
           <div style="font-size: 15px; margin: 5px 5px; display: inline-block; color:#008CCA; font-weight:bold">${
-            movingAverages[3].length + "일선"
+            movingAverages[3].length + '일선'
           }</div>
           </div>`
         );
@@ -152,28 +152,28 @@ export const Candle = (props) => {
 
     chart.subscribeCrosshairMove(updateLegend);
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
       chart.unsubscribeCrosshairMove(updateLegend);
       chart.remove();
     };
   }, [data, backgroundColor, textColor]);
 
   return (
-    <div style={{ position: "relative", zIndex: 0 }}>
+    <div style={{ position: 'relative', zIndex: 0 }}>
       <div ref={chartContainerRef} />
       <div
         id="legend"
         style={{
-          position: "absolute",
-          left: "12px",
-          top: "12px",
+          position: 'absolute',
+          left: '12px',
+          top: '12px',
           zIndex: 1,
-          fontSize: "14px",
-          fontFamily: "sans-serif",
-          lineHeight: "18px",
+          fontSize: '14px',
+          fontFamily: 'sans-serif',
+          lineHeight: '18px',
           fontWeight: 300,
         }}
         dangerouslySetInnerHTML={{ __html: legendContent }}

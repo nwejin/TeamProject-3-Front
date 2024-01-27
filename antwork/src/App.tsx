@@ -11,14 +11,14 @@ import SigninPage from './pages/member/SigninPage';
 import SignupPage from './pages/member/SignupPage';
 import FindIdPage from './pages/member/FindIdPage';
 
+import NewsPage from './pages/news/NewsPage';
+import NewsDetailPage from './pages/news/NewsDetailPage';
+
 import CommunityMain from './pages/community/CommunityMain';
 import CommunityReadPage from './pages/community/CommunityReadPage';
 import axios from 'axios';
-import NewsPage from './pages/NewsPage';
-import NewsDetailPage from './pages/NewsDetailPage';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
-import Virtual from './pages/Virtual';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -73,7 +73,7 @@ function App() {
           {/* 커뮤니티 상세보기 */}
           <Route path="/community/:id" element={<CommunityReadPage />} />
 
-          <Route path="/virtual" element={<Virtual />} />
+          {/* <Route path="/virtual" element={<Virtual />} /> */}
         </Routes>
       </BrowserRouter>
       {/* <ExampleComponent></ExampleComponent> */}
