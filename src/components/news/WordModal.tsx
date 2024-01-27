@@ -20,9 +20,7 @@ function WordModal({modalWord ,closeModal, modalPosition}: ModalProps) {
         const saveCheck = async () => {
             const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
             // console.log(tokenId);
-            if(!tokenId){
-                alert('로그인 후 사용가능한 기능입니다.');
-            } else {
+            if(tokenId){
                 const checkMyWord = await axios.get(process.env.REACT_APP_BACKSERVER + "/news/checkMyWord",
                 {
                     params: { modalWord },
@@ -36,6 +34,7 @@ function WordModal({modalWord ,closeModal, modalPosition}: ModalProps) {
                 setIsActive(checkMyWord.data.saved);
             }
         }
+        // if(tokenId) {saveCheck();}
         saveCheck();
     }, [cookies, modalWord])
 
