@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+import { kakaoLogout } from '../services/apiService';
 
 const Header = () => {
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
@@ -45,18 +45,7 @@ const Header = () => {
       const header = {
         Authorization: 'Bearer ' + kakaoToken['kakaoToken'],
       };
-      try {
-        var rtn = await axios({
-          method: 'POST',
-          url: uri,
-          data: param,
-          headers: header,
-        });
-        console.log('카카오 로그아웃 아이디', rtn.data);
-      } catch (error) {
-        console.log('카카오 로그아웃 실패');
-        console.log(error);
-      }
+      kakaoLogout(uri, param, header);
       removekakaoToken('kakaoToken');
     }
     removejwtCookie('jwtCookie');

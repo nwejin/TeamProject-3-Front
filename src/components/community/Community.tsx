@@ -1,6 +1,5 @@
 import '../../styles/Community.scss';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { getCommunityPosts, like } from '../../services/apiService';
 import { Link } from 'react-router-dom';
 

@@ -219,8 +219,7 @@ export const GetWord = async (word: string) => {
   }
 };
 
-
-export const userInfo = async (userData:any) => {
+export const userInfo = async (userData: any) => {
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/UserModify',
@@ -238,9 +237,9 @@ export const userInfo = async (userData:any) => {
   }
 };
 
-export const sell = async (userData:any) => {
+export const sell = async (userData: any) => {
   try {
-    const response =   await axios.post(
+    const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/virtual/profit',
       userData,
       {
@@ -253,5 +252,38 @@ export const sell = async (userData:any) => {
     return response.data;
   } catch (error) {
     throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const kakaoLogin = async (code: any) => {
+  axios
+    .get('http://localhost:8000/kakao/login', {
+      params: { code },
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((res) => {
+      console.log('/redirect 실행');
+      console.log(res.data);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const kakaoLogout = async (uri: any, data: any, headers: any) => {
+  try {
+    var rtn = await axios({
+      method: 'POST',
+      url: uri,
+      data: data,
+      headers: headers,
+    });
+    console.log('카카오 로그아웃 아이디', rtn.data);
+  } catch (error) {
+    console.log('카카오 로그아웃 실패');
+    console.log(error);
   }
 };
