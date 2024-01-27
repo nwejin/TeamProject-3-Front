@@ -1,4 +1,29 @@
+import axios from 'axios';
+import { useEffect } from 'react';
+
 const MainPage = () => {
+  useEffect(() => {
+    const params = new URL(document.location.toString()).searchParams;
+    const code = params.get('code');
+    if (code) {
+      axios
+        .get('http://localhost:8000/kakao/login', {
+          params: { code },
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => {
+          console.log('/redirect 실행');
+          console.log(res.data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, []);
+
   return (
     <>
       <div className="outer-wrapper">

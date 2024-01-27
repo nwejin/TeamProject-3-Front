@@ -15,11 +15,11 @@ import CommunityMain from './pages/community/CommunityMain';
 import CommunityReadPage from './pages/community/CommunityReadPage';
 import axios from 'axios';
 import NewsPage from './pages/NewsPage';
-import KakaoCallback from './components/KakaoCallback';
 import NewsDetailPage from './pages/NewsDetailPage';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 import Virtual from './pages/Virtual';
+import KakaoCallback from './components/KakaoCallback';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -64,7 +64,7 @@ function App() {
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/findId" element={<FindIdPage />} />
-          <Route path="/kakao/callback" element={<KakaoCallback />} />
+          <Route path="/kakao/callback" element={<MainPage />} />
           <Route path="/mypage" element={<MyPage />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
