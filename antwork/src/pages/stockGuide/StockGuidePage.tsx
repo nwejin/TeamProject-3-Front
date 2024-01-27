@@ -43,12 +43,12 @@ const StockGuidePage =()=>{
                     <li onClick={()=>setType('invest')}>모의 투자</li>
                 </ul>
                 <div className="stock-guide">
-                    <div className="graph-y" onClick={()=>handleClick('y')}></div>
+                    {/* <div className="graph-y" onClick={()=>handleClick('y')}></div> */}
                     <div className="stock-section">
                         <div className="stock-chart">
                             <TrandingViewWidget/>
                         </div>
-                        <div className="graph-x" onClick={()=>handleClick('x')}></div>
+                        {/* <div className="graph-x" onClick={()=>handleClick('x')}></div> */}
                         
                         <div className="stock-explain">
                         {/* <div className="graph-btn"> */}
@@ -68,8 +68,8 @@ const StockGuidePage =()=>{
                                     <div className="daily-change" onClick={()=>handleClick('prev_price')}>▼ 100(0.14%)</div> 
                                 </div>
                                 <div className="volume">
-                                    <div className="total-volume">6,460,820</div>    
-                                    <div className="volume-change">(50.24%)</div>    
+                                    <div className="total-volume" onClick={()=>handleClick('cumulative_volume')}>6,460,820</div>    
+                                    <div className="volume-change" onClick={()=>handleClick('prev_volume')}>(50.24%)</div>    
                                 </div>
                             </div>
                             {trade==='buy'&& <div className="trade-tab">
@@ -117,9 +117,9 @@ const StockGuidePage =()=>{
                             
                             <div className="order">
                                 <TradeOrder handleClick={handleClick} />
-                                {trade==='buy'&& <TradeBuy/>}
-                                {trade==='sell'&&<TradeSell/>}
-                                {trade==='modify'&& <TradeModify/>}
+                                {trade==='buy'&& <TradeBuy handleClick={handleClick}/>}
+                                {trade==='sell'&&<TradeSell handleClick={handleClick}/>}
+                                {trade==='modify'&& <TradeModify handleClick={handleClick}/>}
                                 
                             </div>
                     </div>    
