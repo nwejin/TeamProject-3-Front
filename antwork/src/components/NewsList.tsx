@@ -12,13 +12,16 @@ function NewsList({data}: NewsListProp) {
      <Link to={`/news/detail/${data._id}`} state={{data}}>
          <article>
             <div className="newsData">
-                <div className="imgBox">                
-                    <img src={data.smallimg} alt="no img" />
+                <div className="dataCover">                
+                    <img className="dataImg" src={data.smallimg || process.env.PUBLIC_URL + "/loading.gif"} alt="no img" />
                 </div>
+
                 <div className="dataTxt">
-                    <h3>{data.title}</h3>
-                    <p>{data.content}</p>
+                    <p className="dataTitle">{data.title}</p>
+                    <p className="dataContent">{data.content}</p>
+                    {/* <p className="dataDate">{data.date}</p> */}
                 </div>
+                
             </div>
          </article>
      </Link>
