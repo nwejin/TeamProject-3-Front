@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import { WordsProp } from "../../types/WordsProp"
 import "../../styles/NewsDetail.scss"
+import WordModal from '../../components/news/WordModal';
 
 function NewsDetailPage() {
     const location = useLocation()
@@ -10,9 +11,9 @@ function NewsDetailPage() {
     const [content, setContent] = useState(data.content);
     const [wordsList, setWordsList] = useState<string[]>([]);
     const [wordsDb, setWordsDb] = useState([]);
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState<boolean>(false);
     const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
-    const [modalWords, setModalWords] = useState<WordsProp | null>(null)
+    const [modalWord, setModalWord] = useState<WordsProp | null>(null)
 
     const getWords = async () => {
         try{
@@ -37,10 +38,6 @@ function NewsDetailPage() {
     useEffect(() => {
         getWords();
     }, []);
-
-    useEffect(()=> {
-        
-    })
 
     useEffect(() => {
         // wordsList가 업데이트되면 content를 하이라이트 처리
@@ -125,7 +122,7 @@ function NewsDetailPage() {
             // console.log('클릭한 단어에 대한 데이터:', wordData);
 
                 // 모달에서 보여줄 단어 저장
-                setModalWords(wordData);
+                setModalWord(wordData);
                 // 모달 열기
                 setOpenModal(true);
             } else {
@@ -156,9 +153,6 @@ function NewsDetailPage() {
         setOpenModal(false);
     }
 
-    const myWord = () => {
-    }
-
     return (
         <>
             <main>
@@ -169,29 +163,7 @@ function NewsDetailPage() {
                 <p>출처 : {data.url}</p>
 
             {/* 모달 */}
-                {openModal && modalWords && (
-                <div className='wordModal'
-                style={{
-                    top: modalPosition.top + 20 +'px',
-                    left: modalPosition.left + 'px',
-                  }}>
-                    <div className='close-btn'>
-                        <button onClick={closeModal}>
-                            <span className="material-symbols-outlined">close</span>
-                        </button>
-                    </div>
-                    <span>
-                        {modalWords.word}
-                    </span>
-                    <span>
-                        <button className='myWord'>
-                            <span className="material-symbols-outlined">favorite</span>
-                        </button>
-                    </span>
-                    <p>{modalWords.explanation}</p>
-                    <p className='defaultTxt'>사전 결과 자동 추출로 오류가 있을 수 있습니다.</p>
-                </div>
-            )}
+                {openModal && modalWord && <WordModal modalWord={modalWord} closeModal={closeModal} modalPosition={modalPosition}/>}
             </main>
 
         </>
