@@ -1,4 +1,6 @@
+import axios from "axios";
 import { WordsProp } from "../../types/WordsProp";
+import { useCookies } from "react-cookie";
 
 interface ModalProps {
     modalWord: WordsProp;
@@ -10,9 +12,25 @@ interface ModalProps {
 }
 
 function WordModal({modalWord ,closeModal, modalPosition}: ModalProps) {
-    const myWord = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
 
+    const myWord = async () => {
+        const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
+        console.log(tokenId);
+        if(!tokenId){
+            alert('로그인 후 사용가능한 기능입니다.');
+        } else {
+            const saveMyWord = await axios.post(process.env.REACT_APP_BACKSERVER + "/saveMyword", tokenId,
+            //  {
+            //     headers: {
+            //       'Content-Type': 'application/json',
+            //     },
+            //     withCredentials: true,
+            //   }
+              )
+        }
     }
+
     return ( <>
     <div className='wordModal'
     style={{
