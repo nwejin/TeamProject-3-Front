@@ -1,22 +1,27 @@
-import { Link, redirect, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 const Header = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
+  const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
+  const [kakaoToken, setkakaoToken, removekakaoToken] = useCookies([
+    'kakaoToken',
+  ]);
+  const [isKakao, setisKakao, removeisKakao] = useCookies(['isKakao']);
   const [isLogin, setIsLogin] = useState(false);
   const [isToggle, setIsToggle] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
+    const tokenId = jwtCookie['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
     console.log(tokenId);
     if (tokenId) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
     }
-  }, [cookies]); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
+  }, [jwtCookie]); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
 
   const mypageToggle = () => {
     setIsToggle((prevIsToggle) => !prevIsToggle);
@@ -31,8 +36,31 @@ const Header = () => {
     setIsToggle(false);
   }, [location.pathname]);
 
-  const handleLogout = () => {
-    removeCookie('jwtCookie');
+  const handleLogout = async () => {
+    console.log(kakaoToken['kakaoToken']);
+    console.log(process.env.REACT_APP_API_HOST);
+    if (isKakao) {
+      const uri = process.env.REACT_APP_API_HOST + '/v1/user/logout';
+      const param = null;
+      const header = {
+        Authorization: 'Bearer ' + kakaoToken['kakaoToken'],
+      };
+      try {
+        var rtn = await axios({
+          method: 'POST',
+          url: uri,
+          data: param,
+          headers: header,
+        });
+        console.log('카카오 로그아웃 아이디', rtn.data);
+      } catch (error) {
+        console.log('카카오 로그아웃 실패');
+        console.log(error);
+      }
+      removekakaoToken('kakaoToken');
+    }
+    removejwtCookie('jwtCookie');
+    removeisKakao('isKakao');
     alert('로그아웃 되었습니다.');
     setIsToggle(false);
     window.location.href = '/';

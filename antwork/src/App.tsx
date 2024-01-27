@@ -11,12 +11,12 @@ import SigninPage from './pages/member/SigninPage';
 import SignupPage from './pages/member/SignupPage';
 import FindIdPage from './pages/member/FindIdPage';
 
+import NewsPage from './pages/news/NewsPage';
+import NewsDetailPage from './pages/news/NewsDetailPage';
+
 import CommunityMain from './pages/community/CommunityMain';
 import CommunityReadPage from './pages/community/CommunityReadPage';
 import axios from 'axios';
-import NewsPage from './pages/news/NewsPage';
-import KakaoCallback from './components/KakaoCallback';
-import NewsDetailPage from './pages/news/NewsDetailPage';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 
@@ -63,7 +63,7 @@ function App() {
           <Route path="/signin" element={<SigninPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/findId" element={<FindIdPage />} />
-          <Route path="/kakao/callback" element={<KakaoCallback />} />
+          <Route path="/kakao/callback" element={<MainPage />} />
           <Route path="/mypage" element={<MyPage />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />

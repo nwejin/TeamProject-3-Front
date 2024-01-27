@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { login } from '../../services/apiService';
+import axios from 'axios';
 
 const SigninPage = () => {
   const navigate = useNavigate();
@@ -73,8 +74,25 @@ const SigninPage = () => {
 
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
     window.location.href = link;
+    const params = new URL(document.location.toString()).searchParams;
+    const code = params.get('code');
+    axios
+      .get('http://localhost:8000/kakao/login', {
+        params: { code },
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        console.log('/redirect 실행');
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
