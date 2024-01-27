@@ -19,7 +19,6 @@ import NewsDetailPage from './pages/NewsDetailPage';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 import Virtual from './pages/Virtual';
-import KakaoCallback from './components/KakaoCallback';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
