@@ -31,19 +31,14 @@ main {
     max-width: 500px;
     padding: 10px;
     // margin-bottom: 100px;
-
-    // .close-btn > button {
-    //     background-color: inherit;
-    //     width: fit-content;
-    //     border: none;
-    //     font-size: 20px;
-    //     }
-    // .myWord {
-    //     background-color: inherit;
-    //     // width: fit-content;
-    //     border: none;
-    //     // font-size: 20px;
-    //     }
+    .material-symbols-outlined {
+        &.heart {
+            color: $color-blue-2;
+            &.active {
+                color: $color-blue-1;
+            }
+        }
+    }
         
     .defaultTxt {
     color:gray;
