@@ -1,4 +1,4 @@
-import '../styles/NewsPage.scss';
+import '../../styles/NewsPage.scss';
 
 function Loading() {
     return ( <>

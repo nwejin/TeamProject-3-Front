@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { NewsProp } from "../../types/NewsProp";
-import NewsList from "../../components/NewsList";
+import NewsList from "../../components/news/NewsList";
 import { Link, useParams, NavLink } from "react-router-dom";
 import '../../styles/NewsPage.scss'
-import Loading from "../../components/Loading";
+import Loading from "../../components/news/Loading";
 import "../../styles/StockGuide.scss"
 
 function NewsPage() {

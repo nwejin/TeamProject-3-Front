@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { NewsProp } from "../types/NewsProp";
-import '../styles/NewsPage.scss';
+import { NewsProp } from "../../types/NewsProp";
+import '../../styles/NewsPage.scss';
 
 interface NewsListProp {
     data: NewsProp;
