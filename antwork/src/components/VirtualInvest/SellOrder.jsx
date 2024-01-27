@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import { sell } from '../../services/apiService';
 
 const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   const [sellOrder, setSellOrder] = useState(0);
@@ -54,20 +55,15 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
           try {
             // profit에 직접 값 대입, 쿠키 정보 백엔드로 전송
             console.log('버튼 누름');
-            await axios.post(
-              'http://localhost:8000/virtual/profit',
-              {
-                profit: cal - purchasePrice * sellOrder,
-              },
-              {
-                withCredentials: true,
-              }
+            const response = await sell({profit: cal - purchasePrice * sellOrder})
+            if (response.success){
+              console.log('아주 잘 전송');
+              console.log('profit > ', profit);
+              alert(
+                `${sellOrder}주 매도가 완료되었습니다. 현재 ${remainStock}주 보유중입니다.`
             );
-            console.log('아주 잘 전송');
-            console.log('profit > ', profit);
-            alert(
-              `${sellOrder}주 매도가 완료되었습니다. 현재 ${remainStock}주 보유중입니다.`
-            );
+
+            }
             close();
           } catch (error) {
             console.error('error send', error);
