@@ -1,5 +1,5 @@
 // TradingViewWidget.jsx
-import React, { useEffect, useRef, memo } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
 const TradingViewWidget =()=> {
   const container = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ const TradingViewWidget =()=> {
       script.innerHTML = `
         {
           "autosize": true,
-          "symbol": "NASDAQ:AAPL",
+          "symbol": "KRX:005930",
           "interval": "D",
           "timezone": "Etc/UTC",
           "theme": "light",
@@ -23,17 +23,16 @@ const TradingViewWidget =()=> {
           "allow_symbol_change": true,
           "support_host": "https://www.tradingview.com"
         }`;
-        
-      // 정리 함수
-      return () => {
-        if (!container.current?.querySelector('script')) {
-          container.current?.appendChild(script);
-        }else if(container.current) {
-          container.current.removeChild(script);
-        }else{
-          return;
-        }
-      };
+        container.current?.appendChild(script);
+        // return () => {
+        //     if (!container.current?.querySelector('script')) {
+        //   container.current?.appendChild(script);
+        //   }else if(container.current) {
+        //     container.current?.removeChild(script);
+        //   }else{
+        //     return;
+        //   }
+        // };
     },
     []
   );
@@ -47,4 +46,5 @@ const TradingViewWidget =()=> {
 }
 
 export default memo(TradingViewWidget);
+
 
