@@ -133,52 +133,57 @@
   font-size: 1.1vw;
   height: calc(50vw - (40px + 6.1vw));
 
-  .order-book {
-    width: calc(100% / 3);
-    height: calc(50vw - (40px + 6.1vw));
-    .order-wrapper-scroll {
-      overflow: scroll;
-      height: calc(50vw - (40px + 10vw));
-    }
+    
+    .order-book{
+        width:calc(100% / 3);
+        height: calc(50vw - (40px + 6.1vw));
+        // cursor: pointer;
+        .order-wrapper-scroll{
+            overflow: scroll;
+            height:calc(50vw - (40px + 10vw));
+        }
 
-    .max-price {
-      text-align: center;
-      font-size: 0.9vw;
-      color: red;
-      padding: 0.3vw 0;
-      border-bottom: 1px solid $color-gray-1;
-      border-right: 1px solid $color-gray-1;
-      cursor: pointer;
-    }
-    .min-price {
-      text-align: center;
-      font-size: 0.9vw;
-      color: $color-blue-1;
-      padding: 0.3vw 0;
-      border-right: 1px solid $color-gray-1;
-      border-bottom: 1px solid $color-gray-1;
-    }
-    .order-wrapper {
-      font-size: 1.1vw;
-      border-bottom: 1px solid $color-gray-1;
-      border-right: 1px solid $color-gray-1;
-      display: flex;
-      justify-content: space-around;
-      color: #333;
-      padding: 0.39vw 0;
-      .rate-high {
-        color: red;
-        cursor: pointer;
-      }
-      .rate-row {
-        color: $color-blue-1;
-        cursor: pointer;
-      }
+        .max-price{
+            text-align: center;
+            font-size: 0.9vw;
+            color: red;
+            padding: 0.3vw 0;
+            border-bottom: 1px solid $color-gray-1;
+            border-right:1px solid $color-gray-1;
+            cursor: pointer;
+        }
+        .min-price{
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.9vw;
+            color: $color-blue-1;
+            padding: 0.3vw 0;
+            border-right:1px solid $color-gray-1;
+            border-bottom: 1px solid $color-gray-1;
+        }
+        .order-wrapper{
+            font-size: 1.1vw;
+            border-bottom: 1px solid $color-gray-1;
+            border-right:1px solid $color-gray-1;
+            display: flex;
+            justify-content: space-around;
+            color: #333;
+            padding: 0.39vw 0;
 
-      .daily {
-        font-size: 0.6vw;
-        .daily-percent {
-          color: $color-blue-1;
+            .daily{
+                font-size: 0.6vw;
+                // .daily-percent{
+                //     // color:$color-blue-1;
+                // }
+            }
+           
+        }
+        .w-red{
+            background-color: $color-red-2;;
+        }
+        .w-blue{
+            background-color: $color-blue-4;;
+
         }
       }
     }
@@ -261,6 +266,16 @@
       padding: 0.6vw;
       margin-top: 21.5vw;
     }
+
+}
+.rate-high{
+    color:red;
+    cursor: pointer;
+}
+.rate-row{
+    color:$color-blue-1;
+    cursor: pointer;
+}
     .sell-btn {
       background-color: $color-blue-1;
       color: white;

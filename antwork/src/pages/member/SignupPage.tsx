@@ -45,6 +45,7 @@ const SignupPage = () => {
             if (response.success) {
                 idCheckBox?.classList.add('blue');
                 idCheckBox?.classList.remove('red');
+                console.log(response);
                 return setIdCheck(`ⓘ ${response.message}`);
             } else if(response.success===false){
                 idCheckBox?.classList.add('red');
