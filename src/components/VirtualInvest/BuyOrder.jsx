@@ -70,7 +70,6 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
 
     // 퍼센트 조작에 대한 변경
     const availablePurchase = parseInt(account / currentVal); //구매 가능한 최대
-    console.log('ava', availablePurchase);
     const cal = parseInt(availablePurchase * (perValue / 100));
     setCalPerVal(cal);
 
