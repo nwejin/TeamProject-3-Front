@@ -19,6 +19,7 @@ import CommunityReadPage from './pages/community/CommunityReadPage';
 import axios from 'axios';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
+import WordBookPage from './pages/member/WordBookPage';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -65,6 +66,7 @@ function App() {
           <Route path="/findId" element={<FindIdPage />} />
           <Route path="/kakao/callback" element={<MainPage />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/wordBook" element={<WordBookPage />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
 

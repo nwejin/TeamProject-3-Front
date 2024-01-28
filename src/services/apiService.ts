@@ -414,6 +414,7 @@ export const myPwChecker = async (userData: any, currentUserId: String) => {
     throw new Error('예상치 못한 오류가 발생했습니다!');
   }
 };
+
 export const modifyUser = async (userData: any, currentUserId: String) => {
   console.log(userData);
   try {
@@ -432,6 +433,7 @@ export const modifyUser = async (userData: any, currentUserId: String) => {
     console.log('회원정보 수정 요청 실패');
   }
 };
+
 export const deleteUser = async (currentUserId: String) => {
   try {
     const response = await axios.post(
@@ -455,6 +457,41 @@ export const mainNews = async () => {
   try {
     const response = await axios.get(
       process.env.REACT_APP_BACKSERVER + '/news/mainNews',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const mainBoards = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/mainBoards',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const wordBook = async (userData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/news/likedWords',
+      userData,
       {
         headers: {
           'Content-Type': 'application/json',
