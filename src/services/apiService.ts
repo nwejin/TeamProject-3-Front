@@ -267,7 +267,6 @@ export const showRecord = async (useData: any) => {
         withCredentials: true,
       }
     );
-
     return response.data;
   } catch(error){
     throw new Error('예상치 못한 오류가 발생했습니다!');
@@ -326,4 +325,22 @@ export const getKakaoId = async (token: String) => {
     console.log('카카오 토큰으로 아이디 찾기', rtn);
     // return rtn.data.id;
   } catch (error) {}
+};
+
+
+export const mainNews = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/news/mainNews',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
 };
