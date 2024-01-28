@@ -160,7 +160,7 @@ export const newPost = async (communityData: any) => {
     return response.data;
   } catch (error) {
     console.log(process.env.REACT_APP_BACKSERVER + '/community/write');
-    throw new Error('예상치 못한 오류가 발생했습니다!');
+    throw new Error('예상치 못한 오류가 발생했습니다! (게시글 입력)');
   }
 };
 
@@ -173,7 +173,7 @@ export const getCommunityPosts = async () => {
     return response.data;
   } catch (error) {
     console.error(error); // 에러 메시지를 콘솔에 출력
-    throw new Error('예상치 못한 오류가 발생했습니다!');
+    throw new Error('예상치 못한 오류가 발생했습니다! (게시글 불러오기)');
   }
 };
 
@@ -194,8 +194,22 @@ export const postComment = async (commentData: any) => {
     );
     return response.data;
   } catch (error) {
-    console.log(process.env.REACT_APP_BACKSERVER + '/community/write');
-    throw new Error('예상치 못한 오류가 발생했습니다!');
+    console.log(process.env.REACT_APP_BACKSERVER + '/community/commentWrite');
+    throw new Error('예상치 못한 오류가 발생했습니다!(댓글 입력)');
+  }
+};
+
+// 댓글 가져오기
+export const getComment = async (postId: any) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/commentRead',
+      { params: { postId } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error); // 에러 메시지를 콘솔에 출력
+    throw new Error('예상치 못한 오류가 발생했습니다! (댓글 불러오기)');
   }
 };
 
@@ -333,7 +347,6 @@ export const getKakaoId = async (token: String) => {
     console.log('카카오 아이디 찾기 에러', error);
   }
 };
-
 
 export const deleteKakao = async (kakaoToken: String) => {
   axios
