@@ -256,7 +256,7 @@ export const sell = async (userData: any) => {
 };
 
 export const showRecord = async (useData: any) => {
-  try{
+  try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/virtual/record',
       useData,
@@ -268,10 +268,10 @@ export const showRecord = async (useData: any) => {
       }
     );
     return response.data;
-  } catch(error){
+  } catch (error) {
     throw new Error('예상치 못한 오류가 발생했습니다!');
   }
-}
+};
 
 export const kakaoLogin = async (code: any) => {
   axios
@@ -327,11 +327,45 @@ export const getKakaoId = async (token: String) => {
   } catch (error) {}
 };
 
-
 export const mainNews = async () => {
   try {
     const response = await axios.get(
       process.env.REACT_APP_BACKSERVER + '/news/mainNews',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const mainBoards = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/mainBoards',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const wordBook = async (userData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/news/likedWords',
+      userData,
       {
         headers: {
           'Content-Type': 'application/json',
