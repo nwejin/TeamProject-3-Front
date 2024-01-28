@@ -265,7 +265,7 @@ export const kakaoLogin = async (code: any) => {
       },
     })
     .then((res) => {
-      console.log('/redirect 실행');
+      console.log('카카오 로그인 성공');
       console.log(res.data);
     })
     .catch((e) => {
@@ -286,4 +286,25 @@ export const kakaoLogout = async (uri: any, data: any, headers: any) => {
     console.log('카카오 로그아웃 실패');
     console.log(error);
   }
+};
+
+export const getKakaoId = async (token: String) => {
+  try {
+    console.log('카카오 아이디 찾기 시작');
+    console.log(token);
+    const uri = process.env.REACT_APP_API_HOST + '/v2/user/me';
+    const param = {};
+    const header = {
+      'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    };
+    const rtn = await axios({
+      method: 'POST',
+      url: uri,
+      data: param,
+      headers: header,
+    });
+    console.log('카카오 토큰으로 아이디 찾기', rtn);
+    // return rtn.data.id;
+  } catch (error) {}
 };
