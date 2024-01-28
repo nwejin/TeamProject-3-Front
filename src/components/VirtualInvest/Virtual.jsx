@@ -8,6 +8,8 @@ import Order from './BuyOrder';
 import Detail from './showDetail';
 
 import { useSelector } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { showRecord } from '../../services/apiService';
 
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
 
@@ -31,6 +33,8 @@ const Virtual = () => {
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const [formatted_account, setFormatted] = useState(numberWithCommas(account));
   const [formatted_prevInvest, setFormattedInvest] = useState(prevInvest);
+
+  const cookie = useCookies(['jwtCookie']);
 
   // 다음턴 버튼 클릭 시, bybit api 통신
   useEffect(() => {
@@ -84,7 +88,6 @@ const Virtual = () => {
   const [openBuyModal, setOpenBuyModal] = useState(false);
   const [openDetailModal, setOpenDetailModal] = useState(false);
 
-  //
   const showSellModal = () => {
     setOpenSellModal(true);
   };
@@ -101,8 +104,21 @@ const Virtual = () => {
     setOpenBuyModal(false);
   };
 
-  const showDetailModal = () => {
+  const showDetailModal = async () => {
     setOpenDetailModal(true);
+
+    // 모달 클릭 시 이벤트 -> axios 요청필요 -> apiService에서 가져오기 ('/virtual/record')
+    try{
+      if(cookie[0].jwtCookie){
+        const response = await showRecord();
+        if(response){
+          const {profit, win, loss} = response;   //db 데이터 받아오기
+          console.log("profit, win, loss" , profit, win, loss);
+        }
+      }
+    }catch(error) {
+      console.log(error)
+    }
   };
 
   const closeDetailModal = () => {
