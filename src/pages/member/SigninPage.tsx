@@ -76,9 +76,6 @@ const SigninPage = () => {
 
   const loginHandler = async () => {
     window.location.href = link;
-    const params = new URL(document.location.toString()).searchParams;
-    const code = params.get('code');
-    kakaoLogin(code);
   };
 
   return (
