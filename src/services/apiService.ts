@@ -219,8 +219,7 @@ export const GetWord = async (word: string) => {
   }
 };
 
-
-export const userInfo = async (userData:any) => {
+export const userInfo = async (userData: any) => {
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/UserModify',
@@ -238,11 +237,101 @@ export const userInfo = async (userData:any) => {
   }
 };
 
-export const sell = async (userData:any) => {
+export const sell = async (userData: any) => {
   try {
-    const response =   await axios.post(
+    const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/virtual/profit',
       userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const showRecord = async (useData: any) => {
+  try{
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/virtual/record',
+      useData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch(error){
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+}
+
+export const kakaoLogin = async (code: any) => {
+  axios
+    .get('http://localhost:8000/kakao/login', {
+      params: { code },
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((res) => {
+      console.log('카카오 로그인 성공');
+      console.log(res.data);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const kakaoLogout = async (uri: any, data: any, headers: any) => {
+  try {
+    var rtn = await axios({
+      method: 'POST',
+      url: uri,
+      data: data,
+      headers: headers,
+    });
+    console.log('카카오 로그아웃 아이디', rtn.data);
+  } catch (error) {
+    console.log('카카오 로그아웃 실패');
+    console.log(error);
+  }
+};
+
+export const getKakaoId = async (token: String) => {
+  try {
+    console.log('카카오 아이디 찾기 시작');
+    console.log(token);
+    const uri = process.env.REACT_APP_API_HOST + '/v2/user/me';
+    const param = {};
+    const header = {
+      'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+      Authorization: `Bearer ${token}`,
+    };
+    const rtn = await axios({
+      method: 'POST',
+      url: uri,
+      data: param,
+      headers: header,
+    });
+    console.log('카카오 토큰으로 아이디 찾기', rtn);
+    // return rtn.data.id;
+  } catch (error) {}
+};
+
+
+export const mainNews = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/news/mainNews',
       {
         headers: {
           'Content-Type': 'application/json',

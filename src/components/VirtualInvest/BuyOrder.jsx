@@ -73,10 +73,15 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
     // 범위값
 
     // 퍼센트 조작에 대한 변경
-    //구매 가능한 최대
-    console.log('ava', availablePurchase);
+
+    const availablePurchase = parseInt(account / currentVal); //구매 가능한 최대
+
     const cal = parseInt(availablePurchase * (perValue / 100));
     setCalPerVal(cal);
+
+    if (calPerVal) {
+      setBuyOrder(cal);
+    }
   };
 
   return (
@@ -115,7 +120,6 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             id="range"
             type="range"
             name=""
-            // value="50"
 
             step="10"
             // min="10"
