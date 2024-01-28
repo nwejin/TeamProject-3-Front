@@ -1,9 +1,11 @@
 import { useLocation } from 'react-router-dom';
+import Comment from '../../components/community/Comment';
+import CommentWrite from '../../components/community/CommentWrite';
 
 function CommunityRead() {
   const location = useLocation();
   const data = location.state.post;
-  // console.log(data);
+  // console.log(data._id);
 
   const formatTimeDifference = (dateString: any) => {
     const postDate = new Date(dateString);
@@ -59,15 +61,13 @@ function CommunityRead() {
         <div className="userProfile">
           <div className="profile">
             <span>
-              <a href="/">
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
-                  alt=""
-                />
-                <p>사용자</p>
-              </a>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
+                alt=""
+              />
             </span>
-            <span>•</span>
+            <p style={{ marginRight: '5px' }}>{data.userNickName}</p>
+            <span style={{ fontSize: '10px' }}>•</span>
             <span>{formatTimeDifference(data.date)}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -118,6 +118,14 @@ function CommunityRead() {
             </span>
           </div>
         </div>
+      </div>
+      <div className="countComment">
+        <span>댓글</span> <span>2</span>
+      </div>
+
+      <div className="commentBox">
+        <Comment />
+        <CommentWrite data={data} />
       </div>
     </div>
   );

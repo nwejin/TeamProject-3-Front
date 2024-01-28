@@ -177,6 +177,28 @@ export const getCommunityPosts = async () => {
   }
 };
 
+// 댓글 서버로 보내기
+export const postComment = async (commentData: any) => {
+  console.log('commentData >', commentData);
+  console.log('Sending POST request to /community/comment');
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/commentWrite',
+      commentData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(process.env.REACT_APP_BACKSERVER + '/community/write');
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
 // 좋아요
 export const like = async (like: any) => {
   try {
@@ -185,8 +207,8 @@ export const like = async (like: any) => {
       like,
       {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          // 'Content-Type': 'application/json',
+          // 'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       }
@@ -256,7 +278,7 @@ export const sell = async (userData: any) => {
 };
 
 export const showRecord = async (useData: any) => {
-  try{
+  try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/virtual/record',
       useData,
@@ -268,10 +290,10 @@ export const showRecord = async (useData: any) => {
       }
     );
     return response.data;
-  } catch(error){
+  } catch (error) {
     throw new Error('예상치 못한 오류가 발생했습니다!');
   }
-}
+};
 
 export const kakaoLogin = async (code: any) => {
   axios
@@ -326,7 +348,6 @@ export const getKakaoId = async (token: String) => {
     // return rtn.data.id;
   } catch (error) {}
 };
-
 
 export const mainNews = async () => {
   try {

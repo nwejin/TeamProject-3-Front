@@ -120,7 +120,6 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             id="range"
             type="range"
             name=""
-
             step="10"
             // min="10"
             // max="100"
@@ -145,11 +144,11 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             type="text"
             name=""
             id=""
-            value={range}
+            value={`${range}%`}
             placeholder="50%"
             readOnly
             style={{
-              width: '13%',
+              width: '14%',
               border: 'none',
               textAlign: 'center',
             }}
