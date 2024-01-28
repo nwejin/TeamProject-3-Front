@@ -7,7 +7,7 @@ function CommuniutyHeader() {
   const [openModal, setOpenModal] = useState<Boolean>(false);
 
   const cookie = useCookies(['jwtCookie']);
-  console.log(cookie[0].jwtCookie);
+  // console.log(cookie[0].jwtCookie);
   const navigate = useNavigate();
   const notLogin = () => {
     navigate('/signin');

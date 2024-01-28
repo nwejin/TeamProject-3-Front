@@ -63,7 +63,6 @@ function Comment(): ReactElement {
             </span>
           </div>
         </div>
-        {commentBox && <CommentWrite />}
       </div>
     </>
   );

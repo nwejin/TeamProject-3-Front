@@ -177,6 +177,28 @@ export const getCommunityPosts = async () => {
   }
 };
 
+// 댓글 서버로 보내기
+export const postComment = async (commentData: any) => {
+  console.log('commentData >', commentData);
+  console.log('Sending POST request to /community/comment');
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/commentWrite',
+      commentData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(process.env.REACT_APP_BACKSERVER + '/community/write');
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
 // 좋아요
 export const like = async (like: any) => {
   try {
@@ -185,8 +207,8 @@ export const like = async (like: any) => {
       like,
       {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          // 'Content-Type': 'application/json',
+          // 'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       }
@@ -311,6 +333,7 @@ export const getKakaoId = async (token: String) => {
     console.log('카카오 아이디 찾기 에러', error);
   }
 };
+
 
 export const deleteKakao = async (kakaoToken: String) => {
   axios
