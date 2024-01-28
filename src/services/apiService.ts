@@ -219,24 +219,6 @@ export const GetWord = async (word: string) => {
   }
 };
 
-export const userInfo = async (userData: any) => {
-  try {
-    const response = await axios.post(
-      process.env.REACT_APP_BACKSERVER + '/mypage/UserModify',
-      userData,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw new Error('예상치 못한 오류가 발생했습니다!');
-  }
-};
-
 export const sell = async (userData: any) => {
   try {
     const response = await axios.post(
@@ -307,4 +289,66 @@ export const getKakaoId = async (token: String) => {
     console.log('카카오 토큰으로 아이디 찾기', rtn);
     // return rtn.data.id;
   } catch (error) {}
+};
+
+// 마이페이지
+export const userInfo = async (userData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/getMyInfo',
+      userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const myNicknameChecker = async (
+  userData: any,
+  currentUserId: String
+) => {
+  console.log(userData);
+  console.log(currentUserId);
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/checkUserNickname',
+      { userData, currentUserId },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const myPwChecker = async (userData: any, currentUserId: String) => {
+  console.log(userData);
+  console.log(currentUserId);
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/checkUserPassword',
+      { userData, currentUserId },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
 };
