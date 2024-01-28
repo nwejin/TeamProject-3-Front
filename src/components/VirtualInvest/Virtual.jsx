@@ -12,8 +12,10 @@ import { useSelector } from 'react-redux';
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
 
 const numberWithCommas = (numberString) => {
+  if (typeof numberString === 'number') {
+    numberString = numberString.toFixed(2);
+  }
   if (typeof numberString !== 'string') {
-    // 만약 numberString이 문자열이 아니라면 문자열로 변환합니다.
     numberString = String(numberString);
   }
 
@@ -28,9 +30,7 @@ const Virtual = () => {
 
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const [formatted_account, setFormatted] = useState(numberWithCommas(account));
-  const [formatted_prevInvest, setFormattedInvest] = useState(
-    prevInvest.toFixed(2)
-  );
+  const [formatted_prevInvest, setFormattedInvest] = useState(prevInvest);
 
   // 다음턴 버튼 클릭 시, bybit api 통신
   useEffect(() => {

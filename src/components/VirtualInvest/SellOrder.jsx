@@ -84,10 +84,19 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
 
   // 퍼센트 범위 표시
   const [range, setRange] = useState();
+  const [calPerVal, setCalPerVal] = useState();
 
   const dataChange = (e) => {
     const perValue = e.target.value;
     setRange(perValue);
+
+    // 퍼센트 조작에 대한 변경
+    const cal = parseInt(stock * (perValue / 100));
+    setCalPerVal(cal);
+
+    if (calPerVal) {
+      setSellOrder(cal);
+    }
   };
 
   return (
