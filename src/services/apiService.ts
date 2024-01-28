@@ -177,6 +177,28 @@ export const getCommunityPosts = async () => {
   }
 };
 
+// 댓글 서버로 보내기
+export const postComment = async (commentData: any) => {
+  console.log('commentData >', commentData);
+  console.log('Sending POST request to /community/comment');
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/commentWrite',
+      commentData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(process.env.REACT_APP_BACKSERVER + '/community/write');
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
 // 좋아요
 export const like = async (like: any) => {
   try {
@@ -185,8 +207,8 @@ export const like = async (like: any) => {
       like,
       {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          // 'Content-Type': 'application/json',
+          // 'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
         withCredentials: true,
       }
@@ -207,24 +229,6 @@ export const GetWord = async (word: string) => {
         params: {
           eng_word: word,
         },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw new Error('예상치 못한 오류가 발생했습니다!');
-  }
-};
-
-export const userInfo = async (userData: any) => {
-  try {
-    const response = await axios.post(
-      process.env.REACT_APP_BACKSERVER + '/mypage/UserModify',
-      userData,
-      {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -273,6 +277,7 @@ export const showRecord = async (useData: any) => {
   }
 };
 
+// 카카오
 export const kakaoLogin = async (code: any) => {
   axios
     .get('http://localhost:8000/kakao/login', {
@@ -324,9 +329,130 @@ export const getKakaoId = async (token: String) => {
     });
     console.log('카카오 토큰으로 아이디 찾기', rtn);
     // return rtn.data.id;
-  } catch (error) {}
+  } catch (error) {
+    console.log('카카오 아이디 찾기 에러', error);
+  }
 };
 
+
+export const deleteKakao = async (kakaoToken: String) => {
+  axios
+    .post(process.env.REACT_APP_BACKSERVER + '/kakao/exit', {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: kakaoToken,
+    })
+    .then((res) => {
+      console.log(res.data);
+      console.log('카카오 회원탈퇴');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// 마이페이지
+export const userInfo = async (userData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/getMyInfo',
+      userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const myNicknameChecker = async (
+  userData: any,
+  currentUserId: String
+) => {
+  console.log(userData);
+  console.log(currentUserId);
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/checkUserNickname',
+      { userData, currentUserId },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const myPwChecker = async (userData: any, currentUserId: String) => {
+  console.log(userData);
+  console.log(currentUserId);
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/checkUserPassword',
+      { userData, currentUserId },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const modifyUser = async (userData: any, currentUserId: String) => {
+  console.log(userData);
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/modifyUserInfo',
+      { userData, currentUserId },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log('회원정보 수정 요청 실패');
+  }
+};
+
+export const deleteUser = async (currentUserId: String) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/mypage/deleteUserinfo',
+      currentUserId,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log('회원정보 삭제 요청 실패');
+  }
+};
+
+// 뉴스
 export const mainNews = async () => {
   try {
     const response = await axios.get(

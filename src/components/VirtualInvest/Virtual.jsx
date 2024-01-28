@@ -104,20 +104,23 @@ const Virtual = () => {
     setOpenBuyModal(false);
   };
 
+  // detail 컴포넌트에 데이터 넘겨주기
+  const [detailData, setDetailData] = useState({});
   const showDetailModal = async () => {
     setOpenDetailModal(true);
 
     // 모달 클릭 시 이벤트 -> axios 요청필요 -> apiService에서 가져오기 ('/virtual/record')
-    try{
-      if(cookie[0].jwtCookie){
+    try {
+      if (cookie[0].jwtCookie) {
         const response = await showRecord();
-        if(response){
-          const {profit, win, loss} = response;   //db 데이터 받아오기
-          console.log("profit, win, loss" , profit, win, loss);
+        if (response) {
+          const { profit, win, loss } = response; //db 데이터 받아오기
+          console.log('profit, win, loss', profit, win, loss);
+          setDetailData({ profit, win, loss });
         }
       }
-    }catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -134,8 +137,12 @@ const Virtual = () => {
         <Candle {...candleProps} />
       </div>
       <div className="invest-input">
-        <p className="smallTitle">현재 가격</p>
-        <h2>{currentCost} $</h2>
+        <div className="currentCostBox">
+          <p className="smallTitle">현재 가격</p>
+          <p>
+            <span>{currentCost}</span> $
+          </p>
+        </div>
         <div className="btn-wapper">
           <div className="tradingBtnBox">
             <button className="buy Btn" onClick={showBuyModal}>
@@ -183,25 +190,27 @@ const Virtual = () => {
           </div>
         </div>
         <div className="totalMoney">
-          <p className="smallTitle">
-            잔액
+          <p className="smallTitle">잔액</p>
+          <p>
             <span>{formatted_account}</span> $
           </p>
         </div>
 
         <div className="investMoney">
           <p className="smallTitle">현재 투자금액</p>
-          <p style={{ color: 'blue' }}>
-            {numberWithCommas(formatted_prevInvest)} $
+          <p>
+            <span>{numberWithCommas(formatted_prevInvest)}</span> $
           </p>
         </div>
         <button
-          style={{ marginTop: '20px', background: 'none', border: 'none' }}
+          style={{ background: 'none', border: 'none' }}
           onClick={showDetailModal}
         >
           거래 내역 보기
         </button>
-        {openDetailModal && <Detail close={closeDetailModal} />}
+        {openDetailModal && (
+          <Detail close={closeDetailModal} response={detailData} />
+        )}
       </div>
     </div>
   );

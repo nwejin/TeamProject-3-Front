@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 function Community() {
   const [posts, setPosts] = useState([]);
-  // dbd에서 데이터 불러오기위해 useState
-  // console.log(posts);
+  // db에서 데이터 불러오기위해 useState
+  console.log('post', posts);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -23,8 +23,8 @@ function Community() {
 
   const addLike = async () => {
     try {
-      const response = await like(1);
-      console.log(response);
+      const likePlus = await like(1);
+      console.log(likePlus);
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +42,7 @@ function Community() {
   // 현재 페이지 데이터 나누기
   const currentPage = posts.slice(firstPage, lastPage);
 
-  console.log('currentPage', currentPage);
+  // console.log('currentPage', currentPage);
 
   // 페이지 번호대로 클릭하면 스테이트 값 업데이트
   const paginate = (pageNumber: any) => {
@@ -114,8 +114,8 @@ function Community() {
                     alt="기본 이미지"
                   />
                 </span>
-                <p>사용자</p>
-                <span>•</span>
+                <p style={{ marginRight: '5px' }}>{post.userNickName}</p>
+                <span style={{ fontSize: '10px' }}>•</span>
                 <span>{formatTimeDifference(post.date)}</span>
               </div>
 
@@ -163,8 +163,7 @@ function Community() {
           </div>
         );
       })}
-      {/* {posts.map((post: any) => {
-      })} */}
+
       <div>
         {Array.from({ length: Math.ceil(posts.length / defaultPage) }).map(
           (_, index) => (
