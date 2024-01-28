@@ -1,5 +1,5 @@
 const initialState = {
-  account: 10000000,
+  account: 3000000, //초기 자본 설정
   stock: 0,
   profit: 0,
   purchasePrice: 0,

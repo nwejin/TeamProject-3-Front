@@ -151,6 +151,7 @@ function NewsDetailPage() {
     // 모달 닫기 버튼 함수
     const closeModal = () => {
         setOpenModal(false);
+        setModalWord(null);
     }
 
     return (

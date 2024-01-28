@@ -237,6 +237,24 @@ export const sell = async (userData: any) => {
   }
 };
 
+export const showRecord = async (useData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/virtual/record',
+      useData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
 export const kakaoLogin = async (code: any) => {
   axios
     .get('http://localhost:8000/kakao/login', {
@@ -340,6 +358,23 @@ export const myPwChecker = async (userData: any, currentUserId: String) => {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/checkUserPassword',
       { userData, currentUserId },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const mainNews = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/news/mainNews',
       {
         headers: {
           'Content-Type': 'application/json',
