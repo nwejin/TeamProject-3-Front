@@ -17,7 +17,7 @@ function CommuniutyHeader() {
     if (cookie[0].jwtCookie) {
       setOpenModal(true);
     } else {
-      alert('로그인 후 이용 가능합니다.');
+      alert('로그인 후 게시글 작성 가능합니다.');
       notLogin();
     }
   };
