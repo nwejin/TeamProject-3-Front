@@ -219,8 +219,7 @@ export const GetWord = async (word: string) => {
   }
 };
 
-
-export const userInfo = async (userData:any) => {
+export const userInfo = async (userData: any) => {
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/UserModify',
@@ -238,11 +237,28 @@ export const userInfo = async (userData:any) => {
   }
 };
 
-export const sell = async (userData:any) => {
+export const sell = async (userData: any) => {
   try {
-    const response =   await axios.post(
+    const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/virtual/profit',
       userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const mainNews = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/news/mainNews',
       {
         headers: {
           'Content-Type': 'application/json',
