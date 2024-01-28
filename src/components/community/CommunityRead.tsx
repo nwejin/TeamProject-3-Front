@@ -119,12 +119,9 @@ function CommunityRead() {
           </div>
         </div>
       </div>
-      <div className="countComment">
-        <span>댓글</span> <span>2</span>
-      </div>
 
       <div className="commentBox">
-        <Comment />
+        <Comment data={data} />
         <CommentWrite data={data} />
       </div>
     </div>

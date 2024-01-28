@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { userInfo } from '../../services/apiService';
 import { postComment } from '../../services/apiService';
 
 function CommentWrite({ data }: { data: any }) {
@@ -9,28 +8,13 @@ function CommentWrite({ data }: { data: any }) {
   const postId = data._id;
   // console.log(postId); // 게시글 id
   // 게시글 id
+  console.log(data);
 
   // 현재 로그인한 사용자 정보 (닉네임 불러오기)
-  const [loginUserData, setLoginUserData] = useState({
-    userId: '',
-    userNickName: '',
-  });
-
-  const cookie = useCookies(['jwtCookie']);
-  useEffect(() => {
-    // 로그인시에만 정보 가져오고 나머지는 X
-    if (cookie[0].jwtCookie) {
-      setLoginUserData({
-        userId: data.userId,
-        userNickName: data.userNickName,
-      });
-    } else {
-      setLoginUserData({
-        userId: '',
-        userNickName: '',
-      });
-    }
-  }, []);
+  // const [loginUserData, setLoginUserData] = useState({
+  //   userId: '',
+  //   userNickName: '',
+  // });
 
   // 댓글 작성 및 서버 전달
   const [commentData, setCommentData] = useState('');
@@ -38,16 +22,15 @@ function CommentWrite({ data }: { data: any }) {
     const value = e.target.value;
     setCommentData(value);
   };
-
+  const cookie = useCookies(['jwtCookie']);
   const uploadComment = async () => {
     try {
-      if (!loginUserData.userId) {
+      if (!cookie[0].jwtCookie) {
         alert('로그인 후 댓글 작성이 가능합니다!');
         return;
       }
       const commentPostData = {
         postId: postId,
-        userId: loginUserData.userId,
         content: commentData,
       };
       const response = await postComment(commentPostData);
@@ -65,11 +48,11 @@ function CommentWrite({ data }: { data: any }) {
           <span>
             <a href="/">
               <img
-                src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
+                src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
                 alt=""
               />
               <p style={{ fontWeight: '700' }}>
-                {loginUserData.userNickName}
+                {/* {loginUserData.userNickName} */}
                 <span>님의 댓글</span>
               </p>
             </a>
