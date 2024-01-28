@@ -64,12 +64,18 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   const [range, setRange] = useState();
   const [calPerVal, setCalPerVal] = useState();
 
+  const availablePurchase = parseInt(account / currentVal);
   const dataChange = (e) => {
     const perValue = e.target.value;
-    setRange(perValue);
+    setRange(Number(perValue));
+    // console.log(perValue);
+    // console.log('def', range);
+    // 범위값
 
     // 퍼센트 조작에 대한 변경
+
     const availablePurchase = parseInt(account / currentVal); //구매 가능한 최대
+
     const cal = parseInt(availablePurchase * (perValue / 100));
     setCalPerVal(cal);
 
@@ -114,7 +120,10 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             id="range"
             type="range"
             name=""
+
             step="10"
+            // min="10"
+            // max="100"
             list="tickmarks"
             onChange={dataChange}
             style={{ width: '87%' }}
@@ -137,7 +146,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             name=""
             id=""
             value={range}
-            placeholder="0%"
+            placeholder="50%"
             readOnly
             style={{
               width: '13%',
