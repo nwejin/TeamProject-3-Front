@@ -3,12 +3,18 @@ import './../../styles/Mypage.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import {
+  deleteUser,
+  modifyUser,
   myNicknameChecker,
   myPwChecker,
   userInfo,
 } from '../../services/apiService';
 const MyPage = () => {
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
+  const [kakaoToken, setkakaoToken, removekakaoToken] = useCookies([
+    'kakaoToken',
+  ]);
+  const [isKakao, setisKakao, removeisKakao] = useCookies(['isKakao']);
   const navigate = useNavigate();
   const [myId, setMyId] = useState('');
   const [formData, setFormData] = React.useState({
@@ -27,7 +33,7 @@ const MyPage = () => {
       navigate('/signin');
     }
     getUserInfo();
-  }, [jwtCookie]); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
+  }); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
 
   const getUserInfo = async () => {
     try {
@@ -50,26 +56,30 @@ const MyPage = () => {
   };
 
   // 현재 비밀번호 일치 확인
-  const [pwCheck, setPwCheck] = useState('');
+  const [pwCheckString, setPwCheckString] = useState('');
+  const [pwCheckState, setPwCheckState] = useState(false);
   const pwRef = useRef<HTMLInputElement>(null);
   const passwordCheck = async (event: any) => {
     try {
       event.preventDefault();
       const response = await myPwChecker(formData, myId);
       // console.log(response);
-      const pwCheckBox = document.querySelector('.nicknameCheckBox');
+      const pwCheckBox = document.querySelector('.pwCheckBox');
       if (response.success === true) {
         pwCheckBox?.classList.add('blue');
         pwCheckBox?.classList.remove('red');
-        return setPwCheck(`ⓘ ${response.message}`);
+        setPwCheckState(true);
+        return setPwCheckString(`ⓘ ${response.message}`);
       } else if (response.success === false) {
         pwCheckBox?.classList.add('red');
         pwCheckBox?.classList.remove('blue');
-        return setPwCheck(`ⓘ ${response.message}`);
+        setPwCheckState(false);
+        return setPwCheckString(`ⓘ ${response.message}`);
       } else {
         pwCheckBox?.classList.remove('red');
         pwCheckBox?.classList.remove('blue');
-        return setPwCheck(``);
+        setPwCheckState(false);
+        return setPwCheckString('');
       }
     } catch (error: any) {
       // 에러 처리
@@ -78,7 +88,8 @@ const MyPage = () => {
   };
 
   // 닉네임 중복 확인
-  const [nicknameCheck, setNicknameCheck] = useState('');
+  const [nicknameCheckString, setNicknameCheckString] = useState('');
+  const [nicknameCheckState, setNicknameCheckState] = useState(false);
   const nickRef = useRef<HTMLInputElement>(null);
   const nicknameReCheck = async (event: any) => {
     try {
@@ -88,17 +99,20 @@ const MyPage = () => {
       const nicknameCheckBox = document.querySelector('.nicknameCheckBox');
 
       if (response.success) {
+        setNicknameCheckState(true);
         nicknameCheckBox?.classList.add('blue');
         nicknameCheckBox?.classList.remove('red');
-        return setNicknameCheck(`ⓘ ${response.message}`);
+        return setNicknameCheckString(`ⓘ ${response.message}`);
       } else if (response.success === false) {
+        setNicknameCheckState(false);
         nicknameCheckBox?.classList.add('red');
         nicknameCheckBox?.classList.remove('blue');
-        return setNicknameCheck(`ⓘ ${response.message}`);
+        return setNicknameCheckString(`ⓘ ${response.message}`);
       } else {
+        setNicknameCheckState(false);
         nicknameCheckBox?.classList.remove('red');
         nicknameCheckBox?.classList.remove('blue');
-        return setNicknameCheck('');
+        return setNicknameCheckString('');
       }
     } catch (error: any) {
       // 에러 처리
@@ -114,72 +128,144 @@ const MyPage = () => {
     }));
   };
 
-  const modifyUserInfo = () => {};
-  const deleteUserInfo = () => {};
+  const modifyUserInfo = async (event: any) => {
+    try {
+      event.preventDefault();
+
+      if (isKakao['isKakao']) {
+        if (!nicknameCheckState) {
+          alert('닉네임 중복을 확인해주세요');
+        } else {
+          const response = await modifyUser(formData, myId);
+          if (response.success) {
+            console.log('회원정보 수정 성공:', response);
+            alert('회원정보 수정 성공!');
+            navigate('/');
+          } else {
+            console.error('회원정보 수정 실패:', response);
+          }
+        }
+      } else {
+        if (!pwCheckState) {
+          alert('비밀번호를 확인해주세요');
+        } else if (!nicknameCheckState) {
+          alert('닉네임 중복을 확인해주세요');
+        } else {
+          const response = await modifyUser(formData, myId);
+          if (response.success) {
+            console.log('회원정보 수정 성공:', response);
+            alert('회원정보 수정 성공!');
+            navigate('/');
+          } else {
+            console.error('회원정보 수정 실패:', response);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('회원정보 수정 실패:', error);
+    }
+  };
+  const deleteUserInfo = async () => {
+    try {
+      if (isKakao['isKakao']) {
+        const response = await deleteUser(myId);
+        if (response.success) {
+          console.log('회원정보 삭제 성공:', response);
+          alert('회원정보 삭제 성공!');
+          navigate('/');
+        } else {
+          console.error('회원정보 삭제 실패:', response);
+        }
+      } else {
+        if (!pwCheckState) {
+          alert('비밀번호를 확인해주세요');
+        } else {
+          const response = await deleteUser(myId);
+          if (response.success) {
+            console.log('회원정보 삭제 성공:', response);
+            alert('회원정보 삭제 성공!');
+            navigate('/');
+          } else {
+            console.error('회원정보 삭제 실패:', response);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('회원정보 삭제 실패:', error);
+    }
+    removejwtCookie('jwtCookie');
+    removeisKakao('isKakao');
+    removekakaoToken('kakaoToken');
+  };
 
   return (
     <>
-      <div className="page-title">회원 정보</div>
-      <form name="register-form" method="post">
-        <input
-          name="user_id"
-          id="user_id"
-          placeholder="아이디"
-          value={formData.user_id}
-          className="input-box"
-          disabled
-        />
-        <input
-          type="password"
-          id="user_password"
-          name="user_password"
-          placeholder="현재 비밀번호"
-          ref={pwRef}
-          // value={formData.user_password}
-          className="input-box"
-          onChange={handleInputChange}
-          onKeyUp={passwordCheck}
-        />
-        <div className="pwCheckBox">{pwCheck}</div>
-        <br />
-        <input
-          type="password"
-          id="user_changepw"
-          name="user_changepw"
-          placeholder="변경 비밀번호"
-          className="input-box"
-          onChange={handleInputChange}
-        />
-        <input
-          id="user_nickname"
-          name="user_nickname"
-          placeholder="닉네임"
-          className="input-box"
-          value={formData.user_nickname}
-          onChange={handleInputChange}
-          onKeyUp={nicknameReCheck}
-          ref={nickRef}
-        />
-        <div className="nicknameCheckBox">{nicknameCheck}</div>
-
-        <input
-          name="user_email"
-          id="user_email"
-          placeholder="이메일"
-          className="input-box"
-          value={formData.user_email}
-          onChange={handleInputChange}
-        />
-        <br />
-        <button className="signinBtn" onClick={modifyUserInfo}>
-          회원정보 수정
-        </button>
-        <br />
-        <br />
-        <button className="signinBtn" onClick={deleteUserInfo}>
-          회원탈퇴
-        </button>
-      </form>
+      <div className="form-box">
+        <div className="page-title">회원 정보</div>
+        <form name="register-form" method="post">
+          아이디
+          <input
+            name="user_id"
+            id="user_id"
+            placeholder="아이디"
+            value={formData.user_id}
+            className="input-box"
+            disabled
+          />
+          현재 비밀번호
+          <input
+            type="password"
+            id="user_password"
+            name="user_password"
+            placeholder="현재 비밀번호"
+            ref={pwRef}
+            // value={formData.user_password}
+            className="input-box"
+            onChange={handleInputChange}
+            onKeyUp={passwordCheck}
+          />
+          <div className="pwCheckBox">{pwCheckString}</div>
+          변경 비밀번호
+          <input
+            type="password"
+            id="user_changepw"
+            name="user_changepw"
+            placeholder="변경 비밀번호"
+            className="input-box"
+            onChange={handleInputChange}
+          />
+          닉네임
+          <input
+            id="user_nickname"
+            name="user_nickname"
+            placeholder="닉네임"
+            className="input-box"
+            value={formData.user_nickname}
+            onChange={handleInputChange}
+            onKeyUp={nicknameReCheck}
+            ref={nickRef}
+          />
+          <div className="nicknameCheckBox">{nicknameCheckString}</div>
+          이메일
+          <input
+            name="user_email"
+            id="user_email"
+            placeholder="이메일"
+            className="input-box"
+            value={formData.user_email}
+            onChange={handleInputChange}
+          />
+          <br />
+          <button className="signinBtn" onClick={modifyUserInfo}>
+            회원정보 수정
+          </button>
+          <br />
+          <br />
+          <button className="signinBtn" onClick={deleteUserInfo}>
+            회원탈퇴
+          </button>
+        </form>
+      </div>
     </>
   );
 };
