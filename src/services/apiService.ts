@@ -255,6 +255,7 @@ export const GetWord = async (word: string) => {
   }
 };
 
+// 모의 투자
 export const sell = async (userData: any) => {
   try {
     const response = await axios.post(
@@ -290,6 +291,25 @@ export const showRecord = async (useData: any) => {
     throw new Error('예상치 못한 오류가 발생했습니다!');
   }
 };
+
+export const calProfitAndLoss = async (useData: any) => {
+  try{
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/virtual/profitandloss',
+      useData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  }catch(error){
+    throw new Error("P&L 전송 중 오류 발생");
+  }
+}
 
 // 카카오
 export const kakaoLogin = async (code: any) => {
