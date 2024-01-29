@@ -33,7 +33,7 @@ const MyPage = () => {
       navigate('/signin');
     }
     getUserInfo();
-  }); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
+  }, []); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
 
   const getUserInfo = async () => {
     try {
