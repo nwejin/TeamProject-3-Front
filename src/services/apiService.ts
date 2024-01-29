@@ -245,6 +245,42 @@ export const getCommunityRank = async () => {
   }
 };
 
+// 대댓글 작성
+export const postReply = async (replyData: any) => {
+  console.log('replyData >', replyData);
+  console.log('Sending POST request to /community/replyWrite');
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/replyWrite',
+      replyData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(process.env.REACT_APP_BACKSERVER + '/community/replyWrite');
+    throw new Error('예상치 못한 오류가 발생했습니다!(댓글 입력)');
+  }
+};
+
+// 대댓글 불러오기
+export const getReply = async (data: any) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/replyRead',
+      { params: { data } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error); // 에러 메시지를 콘솔에 출력
+    throw new Error('예상치 못한 오류가 발생했습니다! (댓글 불러오기)');
+  }
+};
+
 // 클릭한 단어의 설명 출력하기
 export const GetWord = async (word: string) => {
   console.log(word);
@@ -305,7 +341,7 @@ export const showRecord = async (useData: any) => {
 };
 
 export const calProfitAndLoss = async (useData: any) => {
-  try{
+  try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/virtual/profitandloss',
       useData,
@@ -318,10 +354,10 @@ export const calProfitAndLoss = async (useData: any) => {
     );
 
     return response.data;
-  }catch(error){
-    throw new Error("P&L 전송 중 오류 발생");
+  } catch (error) {
+    throw new Error('P&L 전송 중 오류 발생');
   }
-}
+};
 
 // 카카오
 export const kakaoLogin = async (code: any) => {
