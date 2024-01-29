@@ -5,7 +5,7 @@ import NewsList from "../../components/news/NewsList";
 import { Link, useParams, NavLink } from "react-router-dom";
 import '../../styles/NewsPage.scss'
 import Loading from "../../components/news/Loading";
-import "../../styles/StockGuide.scss"
+// import "../../styles/StockGuide.scss"
 
 function NewsPage() {
     const { group } = useParams();
@@ -111,7 +111,7 @@ function NewsPage() {
 
             <div className="page-title">뉴스룸</div>
                 <div className="newsNav">
-                    <ul>
+                    <ul className="newsLinks">
                         <li><NavLink to="/news/economy"
                         style={({ isActive }) => {
                             return {
@@ -135,7 +135,6 @@ function NewsPage() {
                         <li className="material-symbols-outlined" onClick={refresh}>cached</li>
                     </ul>
                 </div>
-	<div/>
         </div>
 
             {loading ? <Loading /> :
