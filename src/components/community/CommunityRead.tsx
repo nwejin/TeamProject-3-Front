@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import Comment from '../../components/community/Comment';
 import CommentWrite from '../../components/community/CommentWrite';
+import { addLike } from '../../services/apiService';
 
 function CommunityRead() {
   const location = useLocation();
@@ -53,6 +54,19 @@ function CommunityRead() {
     return subjectname;
   };
 
+  const plusLike = async () => {
+    try {
+      const like: Number = 1;
+      const postId = data._id;
+
+      const likeData = { like, postId };
+      const response = await addLike(likeData);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="postRead" key={data._id}>
       {/* 콘텐츠 박스*/}
@@ -94,18 +108,18 @@ function CommunityRead() {
         <div className="statusBox">
           <div>
             <span>
-              <button>
+              <button onClick={plusLike}>
                 <span className="material-symbols-outlined">favorite</span>
               </button>
-              <span>0</span>
+              <span>{data.like}</span>
             </span>
 
-            <span>
+            {/* <span>
               <button>
                 <span className="material-symbols-outlined">maps_ugc</span>
               </button>
               <span>0</span>
-            </span>
+            </span> */}
           </div>
           <div className="report">
             <span>

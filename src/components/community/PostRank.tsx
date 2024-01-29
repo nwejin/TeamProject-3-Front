@@ -10,7 +10,9 @@ function PostRank() {
           <span>인기글</span>
         </div>
         <div className="postListContent">
-          <ul>{/* <PostRankList></PostRankList> */}</ul>
+          <ul>
+            <PostRankList></PostRankList>
+          </ul>
         </div>
       </div>
     </>

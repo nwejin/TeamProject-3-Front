@@ -1,7 +1,12 @@
 import '../../styles/Community.scss';
 import React, { useState, useEffect } from 'react';
-import { getCommunityPosts, like } from '../../services/apiService';
+import {
+  getCommunityPosts,
+  addLike,
+  getComment,
+} from '../../services/apiService';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Community() {
   const [posts, setPosts] = useState([]);
@@ -20,15 +25,6 @@ function Community() {
     };
     fetchData();
   }, []);
-
-  const addLike = async () => {
-    try {
-      const likePlus = await like(1);
-      console.log(likePlus);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const [pagination, setPagination] = useState(1);
   const defaultPage = 5;
@@ -103,6 +99,21 @@ function Community() {
           return subjectname;
         };
 
+        // 좋아요 누르기
+        const plusLike = async () => {
+          try {
+            const like: Number = 1;
+            const postId = post._id;
+
+            const likeData = { like, postId };
+            const response = await addLike(likeData);
+            console.log(response);
+            window.location.reload();
+          } catch (err) {
+            console.log(err);
+          }
+        };
+
         return (
           <div className="post" key={post._id}>
             <div className="postContents">
@@ -140,12 +151,17 @@ function Community() {
                 <div>
                   <span>
                     {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
-                    <button onClick={addLike}>
-                      <span className="material-symbols-outlined">
+                    <button onClick={plusLike}>
+                      {/* <span
+                        className=
+                          
+                        'material-symbols-outlined'
+                      >
                         favorite
-                      </span>
+                      </span> */}
+                      <span>좋아요</span>
                     </button>
-                    <span>0</span>
+                    <span>{post.like}</span>
                   </span>
 
                   <span>

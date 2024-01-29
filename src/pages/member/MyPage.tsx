@@ -25,6 +25,7 @@ const MyPage = () => {
     user_changepw: '',
     user_nickname: '',
     user_email: '',
+    user_profile: '',
   });
 
   useEffect(() => {
@@ -54,6 +55,7 @@ const MyPage = () => {
         user_email: response.info.user_email,
         user_nickname: response.info.user_nickname,
         user_password: response.info.user_password,
+        user_profile: response.info.user_profile,
       }));
     } catch (error) {
       navigate('/');
@@ -223,6 +225,43 @@ const MyPage = () => {
     <>
       <div className="form-box">
         <div className="page-title">회원 정보</div>
+
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '70%',
+            alignItems: 'center',
+
+            // backgroundColor: 'pink',
+          }}
+        >
+          <img src={formData.user_profile} alt="" />
+          <div
+            style={{
+              display: 'flex',
+              width: '70%',
+              alignItems: 'center',
+            }}
+          >
+            <input
+              type="file"
+              name="profileIMG"
+              id="profileIMG"
+              style={{
+                border: 0,
+                borderRadius: 0,
+                width: 0,
+                height: 0,
+                padding: 0,
+              }}
+            />
+            <label htmlFor="profileIMG">
+              <span> 이미지 변경하기</span>
+              <span className="material-symbols-outlined">edit</span>
+            </label>
+          </div>
+        </div>
         <form name="register-form" method="post">
           아이디
           <input

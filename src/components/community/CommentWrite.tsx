@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { postComment } from '../../services/apiService';
+import { postComment, userInfo } from '../../services/apiService';
 
 function CommentWrite({ data }: { data: any }) {
   // 게시글 정보 불러오기
@@ -9,12 +9,6 @@ function CommentWrite({ data }: { data: any }) {
   // console.log(postId); // 게시글 id
   // 게시글 id
   console.log(data);
-
-  // 현재 로그인한 사용자 정보 (닉네임 불러오기)
-  // const [loginUserData, setLoginUserData] = useState({
-  //   userId: '',
-  //   userNickName: '',
-  // });
 
   // 댓글 작성 및 서버 전달
   const [commentData, setCommentData] = useState('');
@@ -41,6 +35,25 @@ function CommentWrite({ data }: { data: any }) {
     }
   };
 
+  const [loginUserData, setLoginUserData] = useState();
+
+  // 현재 로그인한 사용자 정보 (닉네임 불러오기)
+  useEffect(() => {
+    const tokenId = cookie[0].jwtCookie;
+    const getUserInfo = async () => {
+      try {
+        const response = await userInfo({ id: tokenId });
+        const nickname = response.info.user_nickname;
+        setLoginUserData(nickname);
+      } catch (error) {
+        console.log('사용자 정보 가져오기 에러', error);
+      }
+    };
+    getUserInfo();
+  }, []);
+
+  console.log(loginUserData);
+
   return (
     <div className="commentWriteBox">
       <div className="commentWriteInnerBox">
@@ -52,7 +65,7 @@ function CommentWrite({ data }: { data: any }) {
                 alt=""
               />
               <p style={{ fontWeight: '700' }}>
-                {/* {loginUserData.userNickName} */}
+                {loginUserData}
                 <span>님의 댓글</span>
               </p>
             </a>
