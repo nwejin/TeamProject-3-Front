@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { WordsProp } from "../../types/WordsProp"
 import "../../styles/NewsDetail.scss"
 import WordModal from '../../components/news/WordModal';
+import { useCookies } from "react-cookie";
+
 
 function NewsDetailPage() {
     const location = useLocation()
@@ -14,6 +16,9 @@ function NewsDetailPage() {
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
     const [modalWord, setModalWord] = useState<WordsProp | null>(null)
+    const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
+    const [isSaved, setIsSaved] = useState(false);
+
 
     const getWords = async () => {
         try{
@@ -154,13 +159,62 @@ function NewsDetailPage() {
         setModalWord(null);
     }
 
+    useEffect(() => {
+        const checkMyNews = async () => {
+            const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
+            // console.log(tokenId);
+            if(tokenId){
+                const checkNews = await axios.get(process.env.REACT_APP_BACKSERVER + "/news/checkMyNews",
+                {
+                    params: { data },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // 'Authorization': `Bearer ${tokenId}`,
+                    },
+                    withCredentials: true,
+                });
+                console.log(checkNews.data);
+                setIsSaved(checkNews.data.isSavedNews);
+            }
+        }
+        checkMyNews();
+    }, [cookies, data])
+
+
+
+
+    // 기사 저장 
+    const myNews = async () => {
+        const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
+        if(!tokenId){
+            alert('로그인 후 사용가능한 기능입니다.');
+        } else {
+            setIsSaved(!isSaved);
+            const saveMyNews = await axios.post(process.env.REACT_APP_BACKSERVER + "/news/saveMynews",{data},
+             {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+              }
+              )
+        }
+
+    }
+
     return (
         <>
-            <main>
+            <main className='outer-wrapper'>
+                <ul className='tool'>
+                    <li className='pen'>형광펜</li>
+                    <li className={`saveNews ${isSaved ? 'active' : ''}`} onClick={myNews}>저장</li>
+                </ul>
+                
                 <h1>{data.title}</h1>
-                <p>{data.date}</p>
-                <img src={data.bigimg} alt={data.title} />
-                <p style={{ whiteSpace: 'pre-line'}} className='detailContent'>{content}</p>
+                <p className='detailDate'>{data.date}</p>
+
+                <img className='detailImg' src={data.bigimg} alt={data.title} />
+                <p className='detailContent'>{content}</p>
                 <p>출처 : {data.url}</p>
 
             {/* 모달 */}

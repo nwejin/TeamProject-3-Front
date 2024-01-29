@@ -12,8 +12,8 @@ function NewsList({data}: NewsListProp) {
      <Link to={`/news/detail/${data._id}`} state={{data}}>
          <article>
             <div className="newsData">
-                <div className="dataCover">                
-                    <img className="dataImg" src={data.smallimg || process.env.PUBLIC_URL + "/loading.gif"} alt="no img" />
+                <div className="dataImgCover">                
+                <img className="dataImg" src={data.smallimg || process.env.PUBLIC_URL + "/loading.gif"} alt={data.title} />
                 </div>
 
                 <div className="dataTxt">
