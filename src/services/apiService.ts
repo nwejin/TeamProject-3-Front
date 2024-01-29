@@ -349,28 +349,30 @@ export const getKakaoId = async (token: String) => {
 };
 
 export const deleteKakao = async (kakaoToken: String) => {
-  axios
-    .post(process.env.REACT_APP_BACKSERVER + '/kakao/exit', {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: kakaoToken,
-    })
-    .then((res) => {
-      console.log(res.data);
-      console.log('카카오 회원탈퇴');
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    const rtn = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/kakao/exit',
+      { kakaoToken },
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    console.log(rtn.data);
+    console.log('카카오 회원탈퇴');
+    return rtn.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // 마이페이지
 export const userInfo = async (userData: any) => {
   try {
     const response = await axios.post(
-      process.env.REACT_APP_BACKSERVER + '/mypage/getMyInfo',
+      process.env.REACT_APP_BACKSERVER + '/mypage/getUserInfo',
       userData,
       {
         headers: {
@@ -449,13 +451,11 @@ export const modifyUser = async (userData: any, currentUserId: String) => {
 
 export const deleteUser = async (currentUserId: String) => {
   try {
+    console.log('일반 회원 탈퇴 요청', currentUserId);
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/deleteUserinfo',
-      currentUserId,
+      { currentUserId },
       {
-        headers: {
-          'Content-Type': 'application/json',
-        },
         withCredentials: true,
       }
     );

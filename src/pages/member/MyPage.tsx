@@ -1,8 +1,9 @@
 import { useCookies } from 'react-cookie';
 import './../../styles/Mypage.scss';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { redirect, useNavigate } from 'react-router';
 import {
+  deleteKakao,
   deleteUser,
   modifyUser,
   myNicknameChecker,
@@ -17,6 +18,7 @@ const MyPage = () => {
   const [isKakao, setisKakao, removeisKakao] = useCookies(['isKakao']);
   const navigate = useNavigate();
   const [myId, setMyId] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
   const [formData, setFormData] = React.useState({
     user_id: '',
     user_password: '',
@@ -33,6 +35,9 @@ const MyPage = () => {
       navigate('/signin');
     }
     getUserInfo();
+    if (isKakao['isKakao']) {
+      setIsDisabled(true);
+    }
   }, []); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
 
   const getUserInfo = async () => {
@@ -51,6 +56,7 @@ const MyPage = () => {
         user_password: response.info.user_password,
       }));
     } catch (error) {
+      navigate('/');
       console.log('사용자 정보 가져오기 에러', error);
     }
   };
@@ -89,7 +95,7 @@ const MyPage = () => {
 
   // 닉네임 중복 확인
   const [nicknameCheckString, setNicknameCheckString] = useState('');
-  const [nicknameCheckState, setNicknameCheckState] = useState(false);
+  const [nicknameCheckState, setNicknameCheckState] = useState(true);
   const nickRef = useRef<HTMLInputElement>(null);
   const nicknameReCheck = async (event: any) => {
     try {
@@ -140,7 +146,7 @@ const MyPage = () => {
           if (response.success) {
             console.log('회원정보 수정 성공:', response);
             alert('회원정보 수정 성공!');
-            navigate('/');
+            window.location.href = '/mypage';
           } else {
             console.error('회원정보 수정 실패:', response);
           }
@@ -155,7 +161,8 @@ const MyPage = () => {
           if (response.success) {
             console.log('회원정보 수정 성공:', response);
             alert('회원정보 수정 성공!');
-            navigate('/');
+            // navigate('/mypage');
+            window.location.href = '/mypage';
           } else {
             console.error('회원정보 수정 실패:', response);
           }
@@ -165,37 +172,51 @@ const MyPage = () => {
       console.error('회원정보 수정 실패:', error);
     }
   };
-  const deleteUserInfo = async () => {
+  const deleteUserInfo = async (event: any) => {
     try {
+      event.preventDefault();
+
       if (isKakao['isKakao']) {
-        const response = await deleteUser(myId);
-        if (response.success) {
-          console.log('회원정보 삭제 성공:', response);
-          alert('회원정보 삭제 성공!');
-          navigate('/');
+        if (window.confirm('탈퇴하시겠습니까?')) {
+          const response = await deleteKakao(kakaoToken['kakaoToken']);
+          const response2 = await deleteUser(myId);
+          if (response2.success && response.success) {
+            alert('회원정보 삭제 성공!');
+            removejwtCookie('jwtCookie');
+            removeisKakao('isKakao');
+            removekakaoToken('kakaoToken');
+            console.log('회원정보 삭제 성공:', response, response2);
+            navigate('/');
+          } else {
+            console.error('회원정보 삭제 실패:', response, response2);
+          }
         } else {
-          console.error('회원정보 삭제 실패:', response);
+          return;
         }
       } else {
         if (!pwCheckState) {
           alert('비밀번호를 확인해주세요');
         } else {
-          const response = await deleteUser(myId);
-          if (response.success) {
-            console.log('회원정보 삭제 성공:', response);
-            alert('회원정보 삭제 성공!');
-            navigate('/');
+          if (window.confirm('탈퇴하시겠습니까?')) {
+            console.log(myId);
+            const response = await deleteUser(myId);
+            if (response.success) {
+              console.log('회원정보 삭제 성공:', response);
+              alert('회원정보 삭제 성공!');
+              removejwtCookie('jwtCookie');
+              removeisKakao('isKakao');
+              navigate('/');
+            } else {
+              console.error('회원정보 삭제 실패:', response);
+            }
           } else {
-            console.error('회원정보 삭제 실패:', response);
+            return;
           }
         }
       }
     } catch (error) {
       console.error('회원정보 삭제 실패:', error);
     }
-    removejwtCookie('jwtCookie');
-    removeisKakao('isKakao');
-    removekakaoToken('kakaoToken');
   };
 
   return (
@@ -223,6 +244,7 @@ const MyPage = () => {
             className="input-box"
             onChange={handleInputChange}
             onKeyUp={passwordCheck}
+            disabled={isDisabled}
           />
           <div className="pwCheckBox">{pwCheckString}</div>
           변경 비밀번호
@@ -233,6 +255,7 @@ const MyPage = () => {
             placeholder="변경 비밀번호"
             className="input-box"
             onChange={handleInputChange}
+            disabled={isDisabled}
           />
           닉네임
           <input
