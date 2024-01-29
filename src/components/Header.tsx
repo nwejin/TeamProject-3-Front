@@ -60,7 +60,7 @@ const Header = () => {
   };
   return (
     <>
-      <div className="header">
+      <div className="header" id="top">
         <Link to="/">
           <img
             src={process.env.PUBLIC_URL + '/temp_logo.png'}
@@ -102,6 +102,16 @@ const Header = () => {
             <div className="Header-login-btn">로그인</div>
           </Link>
         )}
+      </div>
+      <div className="remote-btn">
+        <div className="fix-icon">
+          <span className="material-symbols-rounded">question_mark</span>
+        </div>
+        <a href="#top">
+          <div className="fix-icon">
+            <span className="material-symbols-rounded">vertical_align_top</span>
+          </div>
+        </a>
       </div>
     </>
   );

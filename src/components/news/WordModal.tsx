@@ -17,11 +17,11 @@ function WordModal({modalWord ,closeModal, modalPosition}: ModalProps) {
     const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
-        const saveCheck = async () => {
+        const checkMyWord = async () => {
             const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
             // console.log(tokenId);
             if(tokenId){
-                const checkMyWord = await axios.get(process.env.REACT_APP_BACKSERVER + "/news/checkMyWord",
+                const checkWord = await axios.get(process.env.REACT_APP_BACKSERVER + "/news/checkMyWord",
                 {
                     params: { modalWord },
                     headers: {
@@ -30,12 +30,12 @@ function WordModal({modalWord ,closeModal, modalPosition}: ModalProps) {
                     },
                     withCredentials: true,
                 });
-                console.log(checkMyWord.data);
-                setIsActive(checkMyWord.data.saved);
+                console.log(checkWord.data);
+                setIsActive(checkWord.data.isSavedWord);
             }
         }
-        // if(tokenId) {saveCheck();}
-        saveCheck();
+        // if(tokenId) {checkMyWord();}
+        checkMyWord();
     }, [cookies, modalWord])
 
     const myWord = async () => {
@@ -63,19 +63,12 @@ function WordModal({modalWord ,closeModal, modalPosition}: ModalProps) {
             }}
     >
         <div className='close-btn'>
-            {/* <button onClick={closeModal}> */}
-                    <span onClick={closeModal} className="material-symbols-outlined">close</span>
-            {/* </button> */}
+            <span onClick={closeModal} className="material-symbols-outlined">close</span>
         </div>
-        <span>
-            {modalWord.word}
-        </span>
-        {/* <span> */}
-            {/* <button className='myWord'> */}
-                <span onClick={myWord} className={`material-symbols-outlined heart ${isActive ? 'active' : ''}`}>heart_plus</span>
-            {/* </button> */}
-        {/* </span> */}
+        <span>{modalWord.word}</span>
+        <span onClick={myWord} className={`material-symbols-outlined heart ${isActive ? 'active' : ''}`}>heart_plus</span>
         <p>{modalWord.explanation}</p>
+        <br />
         <p className='defaultTxt'>사전 결과 자동 추출로 오류가 있을 수 있습니다.</p>
     </div>
     </> );

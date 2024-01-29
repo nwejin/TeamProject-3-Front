@@ -137,6 +137,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             step="10"
             list="tickmarks"
             onChange={dataChange}
+            onClick={dataChange}
             style={{ width: '87%' }}
           />
           <datalist id="tickmarks">
@@ -156,11 +157,11 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             type="text"
             name=""
             id=""
-            value={range}
-            placeholder="0%"
+            value={`${range}%`}
+            placeholder="50%"
             readOnly
             style={{
-              width: '13%',
+              width: '14%',
               border: 'none',
               textAlign: 'center',
             }}
@@ -173,7 +174,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
           매도
         </button>
         <button className="closeBtn" onClick={close}>
-          닫기
+          X
         </button>
       </div>
     </div>

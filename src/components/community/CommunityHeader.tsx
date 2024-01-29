@@ -7,7 +7,7 @@ function CommuniutyHeader() {
   const [openModal, setOpenModal] = useState<Boolean>(false);
 
   const cookie = useCookies(['jwtCookie']);
-  console.log(cookie[0].jwtCookie);
+  // console.log(cookie[0].jwtCookie);
   const navigate = useNavigate();
   const notLogin = () => {
     navigate('/signin');
@@ -17,7 +17,7 @@ function CommuniutyHeader() {
     if (cookie[0].jwtCookie) {
       setOpenModal(true);
     } else {
-      alert('로그인 후 이용 가능합니다.');
+      alert('로그인 후 게시글 작성 가능합니다.');
       notLogin();
     }
   };

@@ -1,27 +1,47 @@
 @import './Component.scss';
 
-// main {
-//     width: calc(100% - 20vw);
-//     margin: 0vw auto 5vw auto;
-// }
+.outer-wrapper {
+    .tool {
+        .pen {
+            // color: $color-gray-1;
+            border: 1px solid $color-gray-1;
+            width: 70px;
+            padding: 6px;
+            text-align: center;
+            border-radius: 50px 0 0 50px;
+            margin: 0;
+        }
+        .saveNews {
+            border-top: 1px solid $color-gray-1;
+            border-bottom: 1px solid $color-gray-1;
+            border-right: 1px solid $color-gray-1;
+            width: 70px;
+            padding: 6px;
+            text-align: center;
+            border-radius: 0 50px 50px 0;
 
-main {
-    // width: calc(100% - 20vw);
-    // margin: 0vw auto 5vw auto;
-    width: 70%;
-    margin: 0 auto 0 auto;
+            &.active{
+                color: $color-blue-1;
+            }
+        }
+    }
+
+
+    .detailDate {
+        color: grey;
+    }
+    .detailContent {
+        line-height: 1.8;
+        margin-top: 30px;
+        white-space: pre-line;
+    }
+    .highlight {
+        background-color: $color-blue-2;
+        cursor: pointer;
+    }
 }
 
 
-.detailContent {
-    line-height: 1.8;
-    margin-top: 30px;
-}
-
-.highlight {
-    background-color: $color-blue-2;
-    cursor: pointer;
-}
 
 .wordModal {
     position: absolute;
@@ -32,6 +52,7 @@ main {
     padding: 10px;
     // margin-bottom: 100px;
     .material-symbols-outlined {
+        cursor: pointer;
         &.heart {
             color: $color-blue-2;
             &.active {
