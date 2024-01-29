@@ -137,6 +137,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             step="10"
             list="tickmarks"
             onChange={dataChange}
+            onClick={dataChange}
             style={{ width: '87%' }}
           />
           <datalist id="tickmarks">
