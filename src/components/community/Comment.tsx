@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getComment } from '../../services/apiService';
+import CommentWrite from './CommentWrite';
+import { useCookies } from 'react-cookie';
 
 function Comment({ data }: any) {
   const postId = data._id;
-  // 댓글창 추가
-  // const [commentBox, setCommentBox] = useState(false);
-
-  // const addComment = () => {
-  //   console.log('대댓글 추가');
-  //   setCommentBox((prev) => !prev);
-  // };
 
   const [commentData, setCommentData] = useState([]);
-  console.log(commentData);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -27,8 +21,27 @@ function Comment({ data }: any) {
     fetchData();
   }, [postId]);
 
-  console.log(commentData);
   console.log(commentData.length);
+
+  // 댓글창 추가
+  // const [commentBox, setCommentBox] = useState(false);
+  const [openModal, setOpenModal] = useState<Boolean>(false);
+  const cookie = useCookies(['jwtCookie']);
+  // const uploadReComment = () => {
+  //   console.log('대댓글 추가');
+  //   setCommentBox((prev) => !prev);
+  // };
+
+  const showModal = () => {
+    if (cookie[0].jwtCookie) {
+      // setOpenModal(true);
+      console.log('대댓글 추가');
+      setOpenModal((prev) => !prev);
+    } else {
+      alert('로그인 후 댓글 작성 가능합니다.');
+    }
+  };
+  // 댓글 id를 가져와서 find 댓글 추가
 
   return (
     <>
@@ -98,7 +111,7 @@ function Comment({ data }: any) {
                 </span>
 
                 <span>
-                  <button>
+                  <button onClick={showModal}>
                     <span>댓글 달기</span>
                   </button>
                 </span>
@@ -114,6 +127,7 @@ function Comment({ data }: any) {
                 </span>
               </div>
             </div>
+            {openModal && <CommentWrite data={data} />}
           </div>
         );
       })}
