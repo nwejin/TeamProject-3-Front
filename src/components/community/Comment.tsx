@@ -69,7 +69,7 @@ function Comment({ data }: any) {
         };
 
         return (
-          <div className="commentInnerBox">
+          <div className="commentInnerBox" key={post._id}>
             {/* 유저 정보*/}
 
             <div className="userProfile">
