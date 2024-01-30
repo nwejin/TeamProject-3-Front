@@ -82,7 +82,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   };
 
   // 퍼센트 범위 표시
-  const [range, setRange] = useState();
+  const [range, setRange] = useState(50);
   const [calPerVal, setCalPerVal] = useState();
 
   const dataChange = (e) => {

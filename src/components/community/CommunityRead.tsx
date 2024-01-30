@@ -74,7 +74,9 @@ function CommunityRead() {
         <div className="userProfile">
           <div className="profile">
             <span>
+
               <img src={data.userId.user_profile} alt="" />
+
             </span>
             <p style={{ marginRight: '5px' }}>{data.userId.user_nickname}</p>
             <span style={{ fontSize: '10px' }}>•</span>

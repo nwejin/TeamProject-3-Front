@@ -36,16 +36,20 @@ function ReplyWrite({ data }: { data: any }) {
     }
   };
 
+
   const [userProfile, setuserProfile] = useState('');
   const [userNickname, setuserNickname] = useState('');
+
   // 현재 로그인한 사용자 정보 (닉네임 불러오기)
   useEffect(() => {
     const tokenId = cookie[0].jwtCookie;
     const getUserInfo = async () => {
       try {
         const response = await userInfo({ id: tokenId });
+
         setuserNickname(response.info.user_nickname);
         setuserProfile(response.info.user_profile);
+
       } catch (error) {
         console.log('사용자 정보 가져오기 에러', error);
       }
@@ -61,7 +65,9 @@ function ReplyWrite({ data }: { data: any }) {
         <div className="userProfile">
           <span>
             <a href="/">
+
               <img src={userProfile} alt="" />
+
               <p style={{ fontWeight: '700' }}>
                 {userNickname}
                 <span>님의 댓글</span>

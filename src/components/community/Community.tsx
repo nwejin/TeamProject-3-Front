@@ -50,7 +50,7 @@ function Community() {
       {/* 콘텐츠 박스*/}
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
-
+        console.log(post);
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
           // 분계산
@@ -117,6 +117,7 @@ function Community() {
         return (
           <div className="post" key={post._id}>
             <div className="postContents">
+
               <Link to={`/community/${post._id}`} state={{ post }}>
                 {/* 유저 정보*/}
                 <div className="userProfile">
@@ -130,6 +131,7 @@ function Community() {
                   <span>{formatTimeDifference(post.date)}</span>
                 </div>
               </Link>
+
               {/* 게시글 */}
 
               <div className="contentBox">

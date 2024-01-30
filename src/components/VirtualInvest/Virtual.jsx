@@ -6,6 +6,7 @@ import Candle from './Candle';
 import SellBtn from './SellOrder';
 import Order from './BuyOrder';
 import Detail from './showDetail';
+import MyResponsiveLine from './userChart';
 
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
@@ -153,6 +154,18 @@ const Virtual = () => {
         <Candle {...candleProps} />
       </div>
       <div className="invest-input">
+        <div className="status-Box">
+          <button onClick={showDetailModal} className="resetBtn">
+            <span>거래 내역 보기</span>
+            <span class="material-symbols-outlined">search</span>
+          </button>
+          {openDetailModal && (
+            <Detail close={closeDetailModal} response={detailData} />
+          )}
+
+          <ProfitAndLoss />
+        </div>
+
         <div className="currentCostBox">
           <p className="smallTitle">현재 가격</p>
           <p>
@@ -187,7 +200,11 @@ const Virtual = () => {
           </div>
           <div className="nextBtnBox">
             <button className="next Btn" onClick={nextTurn}>
-              다음턴으로 →
+              <span>다음턴으로</span>
+              <span>|</span>
+              <span>
+                {myturn} / {totalTurn}
+              </span>
             </button>
           </div>
         </div>
@@ -218,6 +235,7 @@ const Virtual = () => {
             <span>{numberWithCommas(formatted_prevInvest)}</span> $
           </p>
         </div>
+
         <button
           style={{ background: 'none', border: 'none' }}
           onClick={showDetailModal}
@@ -233,7 +251,9 @@ const Virtual = () => {
         </div>
 
         <ProfitAndLoss />
+
       </div>
+      <div></div>
     </div>
   );
 };
