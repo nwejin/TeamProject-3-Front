@@ -106,7 +106,7 @@ const MainPage = () => {
           {newsData.length >= 2 && (
             <div className="section2">
               {newsData.slice(0, 2).map((news) => (
-                <div className="main-news">
+                <div className="main-news" key={news.thumbnail}>
                   <img className="main-news-thumbnail" src={news.thumbnail} />
                   <div className="main-news-text">
                     <div className="main-news-title">{news.title}</div>
