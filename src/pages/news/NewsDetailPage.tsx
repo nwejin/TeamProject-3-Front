@@ -7,37 +7,43 @@ import WordModal from '../../components/news/WordModal';
 import { useCookies } from 'react-cookie';
 
 function NewsDetailPage() {
-  const location = useLocation();
-  const data = location.state.data;
-  const [content, setContent] = useState(data.content);
-  const [wordsList, setWordsList] = useState<string[]>([]);
-  const [wordsDb, setWordsDb] = useState([]);
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
-  const [modalWord, setModalWord] = useState<WordsProp | null>(null);
-  const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
-  const [isSaved, setIsSaved] = useState(false);
+    const location = useLocation()
+    const data = location.state.data;
+    const [content, setContent] = useState(data.content);
 
-  const getWords = async () => {
-    try {
-      // Db에서 단어 데이터 요청
-      const wordsArry = await axios.get(
-        process.env.REACT_APP_BACKSERVER + '/news/getWords'
-      );
-      const wordsData = wordsArry.data;
-      const newWordsList = wordsData.map((singleData: WordsProp) => {
-        return singleData.word;
-      });
-      // Db에서 받은 단어 데이터 중 word만 저장
-      setWordsList(newWordsList);
+    const [wordsList, setWordsList] = useState<string[]>([]);
+    const [wordsDb, setWordsDb] = useState([]);
 
-      // Db에서 받은 단어 데이터 전체 저장
-      setWordsDb(wordsData);
-      // setContent(highlightContent(data.content, newWordsList));
-      // setContent(highlightContent(content, wordsList));
-    } catch (error) {
-      console.error('Error fetching data from server:', error);
-    }
+    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
+    const [modalWord, setModalWord] = useState<WordsProp | null>(null)
+
+    const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
+    const [isSaved, setIsSaved] = useState<boolean>(false);
+
+    const [isDraggable, setIsDraggable] = useState<boolean>(false);
+    const [myHighlight, setMyHighlight] = useState<string[]|null>([]);
+
+
+
+    const getWords = async () => {
+        try{
+            // Db에서 단어 데이터 요청
+            const wordsArry = await axios.get(process.env.REACT_APP_BACKSERVER + "/news/getWords")
+            const wordsData = wordsArry.data
+            const newWordsList = wordsData.map((singleData: WordsProp) => {
+                return singleData.word 
+            });
+            // Db에서 받은 단어 데이터 중 word만 저장
+            setWordsList(newWordsList);
+
+            // Db에서 받은 단어 데이터 전체 저장
+            setWordsDb(wordsData);
+            // setContent(highlightContent(data.content, newWordsList));
+            // setContent(highlightContent(content, wordsList));
+        } catch(error) {
+            console.error("Error fetching data from server:", error);
+        }
   };
 
   useEffect(() => {
@@ -146,59 +152,69 @@ function NewsDetailPage() {
     checkMyNews();
   }, [cookies, data]);
 
-  // 기사 저장
-  const myNews = async () => {
-    const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
-    if (!tokenId) {
-      alert('로그인 후 사용가능한 기능입니다.');
-    } else {
-      setIsSaved(!isSaved);
-      const saveMyNews = await axios.post(
-        process.env.REACT_APP_BACKSERVER + '/news/saveMynews',
-        { data },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          withCredentials: true,
+
+    // 기사 저장 
+    const myNews = async () => {
+        const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
+        if(!tokenId){
+            alert('로그인 후 사용가능한 기능입니다.');
+        } else {
+            setIsSaved(!isSaved);
+            const saveMyNews = await axios.post(process.env.REACT_APP_BACKSERVER + "/news/saveMynews",{data},
+             {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+              }
+              )
         }
-      );
+
     }
-  };
 
-  return (
-    <>
-      <main className="outer-wrapper">
-        <ul className="tool">
-          <li className="pen">형광펜</li>
-          <li
-            className={`saveNews ${isSaved ? 'active' : ''}`}
-            onClick={myNews}
-          >
-            저장
-          </li>
-        </ul>
 
-        <h1>{data.title}</h1>
+    // 드래그 가능 여부
+    const draggable = () => {
+        setIsDraggable(!isDraggable)
+    }
 
-        <p className="detailDate">{data.date}</p>
+    // 드래그 : 직접 형광펜 기능
+    const dragText = (event:any) => {
+        if(isDraggable) {
 
-        <img className="detailImg" src={data.bigimg} alt={data.title} />
-        <h3>{data.subtitle}</h3>
-        <p className="detailContent">{content}</p>
-        <p>출처 : {data.url}</p>
 
-        {/* 모달 */}
-        {openModal && modalWord && (
-          <WordModal
-            modalWord={modalWord}
-            closeModal={closeModal}
-            modalPosition={modalPosition}
-          />
-        )}
-      </main>
-    </>
-  );
+        } else {
+            // 드래그 불가능 상태일 때는 드래그 이벤트 무시
+            event.preventDefault();
+          }
+    }
+
+
+    return (
+        <>
+            <main className='outer-wrapper'>
+                <ul className='tool'>
+                    <li className={`pen ${isDraggable ? 'active' : ''}`} onClick={draggable}>형광펜</li>
+                    <li className={`saveNews ${isSaved ? 'active' : ''}`} onClick={myNews}>저장</li>
+                </ul>
+                
+                <h1>{data.title}</h1>
+                <p className='detailDate'>{data.date}</p>
+
+                <img className='detailImg' src={data.bigimg} alt={data.title} />
+                <h3>{data.subtitle}</h3>
+              
+                <p className='detailContent'>{content}</p>
+                <p>출처 : {data.url}</p>
+
+            {/* 모달 */}
+                {openModal && modalWord && <WordModal modalWord={modalWord} closeModal={closeModal} modalPosition={modalPosition}/>}
+            </main>
+
+        </>
+    
+    );
+
 }
 
 export default NewsDetailPage;
