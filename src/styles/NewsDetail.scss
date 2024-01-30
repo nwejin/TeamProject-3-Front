@@ -10,6 +10,10 @@
             text-align: center;
             border-radius: 50px 0 0 50px;
             margin: 0;
+            
+            &.active{
+                color: $color-blue-1;
+            }
         }
         .saveNews {
             border-top: 1px solid $color-gray-1;

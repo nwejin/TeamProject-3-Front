@@ -11,13 +11,20 @@ function NewsDetailPage() {
     const location = useLocation()
     const data = location.state.data;
     const [content, setContent] = useState(data.content);
+
     const [wordsList, setWordsList] = useState<string[]>([]);
     const [wordsDb, setWordsDb] = useState([]);
+
     const [openModal, setOpenModal] = useState<boolean>(false);
     const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
     const [modalWord, setModalWord] = useState<WordsProp | null>(null)
+
     const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
-    const [isSaved, setIsSaved] = useState(false);
+    const [isSaved, setIsSaved] = useState<boolean>(false);
+
+    const [isDraggable, setIsDraggable] = useState<boolean>(false);
+    const [myHighlight, setMyHighlight] = useState<string[]|null>([]);
+
 
 
     const getWords = async () => {
@@ -127,8 +134,6 @@ function NewsDetailPage() {
     }, [cookies, data])
 
 
-
-
     // 기사 저장 
     const myNews = async () => {
         const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
@@ -148,11 +153,29 @@ function NewsDetailPage() {
 
     }
 
+
+    // 드래그 가능 여부
+    const draggable = () => {
+        setIsDraggable(!isDraggable)
+    }
+
+    // 드래그 : 직접 형광펜 기능
+    const dragText = (event:any) => {
+        if(isDraggable) {
+
+
+        } else {
+            // 드래그 불가능 상태일 때는 드래그 이벤트 무시
+            event.preventDefault();
+          }
+    }
+
+
     return (
         <>
             <main className='outer-wrapper'>
                 <ul className='tool'>
-                    <li className='pen'>형광펜</li>
+                    <li className={`pen ${isDraggable ? 'active' : ''}`} onClick={draggable}>형광펜</li>
                     <li className={`saveNews ${isSaved ? 'active' : ''}`} onClick={myNews}>저장</li>
                 </ul>
                 
