@@ -214,14 +214,13 @@ export const getComment = async (postId: any) => {
 };
 
 // 좋아요
-export const like = async (like: any) => {
+export const addLike = async (likeData: any) => {
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/community/like',
-      like,
+      likeData,
       {
         headers: {
-          // 'Content-Type': 'multipart/form-data',
           'Content-Type': 'application/json',
         },
         withCredentials: true,
@@ -230,6 +229,55 @@ export const like = async (like: any) => {
     return response.data;
   } catch (error) {
     throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+// 좋아요 순위로 5개 가져오기
+export const getCommunityRank = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/rank'
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error); // 에러 메시지를 콘솔에 출력
+    throw new Error('예상치 못한 오류가 발생했습니다! (게시글 불러오기)');
+  }
+};
+
+// 대댓글 작성
+export const postReply = async (replyData: any) => {
+  console.log('replyData >', replyData);
+  console.log('Sending POST request to /community/replyWrite');
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/replyWrite',
+      replyData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(process.env.REACT_APP_BACKSERVER + '/community/replyWrite');
+    throw new Error('예상치 못한 오류가 발생했습니다!(댓글 입력)');
+  }
+};
+
+// 대댓글 불러오기
+export const getReply = async (data: any) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/replyRead',
+      { params: { data } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error); // 에러 메시지를 콘솔에 출력
+    throw new Error('예상치 못한 오류가 발생했습니다! (댓글 불러오기)');
   }
 };
 
@@ -255,6 +303,7 @@ export const GetWord = async (word: string) => {
   }
 };
 
+// 모의 투자
 export const sell = async (userData: any) => {
   try {
     const response = await axios.post(
@@ -288,6 +337,25 @@ export const showRecord = async (useData: any) => {
     return response.data;
   } catch (error) {
     throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const calProfitAndLoss = async (useData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/virtual/profitandloss',
+      useData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error('P&L 전송 중 오류 발생');
   }
 };
 

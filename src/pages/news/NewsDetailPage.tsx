@@ -51,60 +51,6 @@ function NewsDetailPage() {
     }
   }, [data.content, wordsList]);
 
-  /*
-    // 중복 단어 모두 하이라이트
-    const highlightContent = (content: string, wordsList: string[]) => {
-        const regex = new RegExp(`(${wordsList.join('|')})`, 'gi');
-        // console.log(regex);
-        return content.split(regex).map((word, index) =>
-            regex.test(word) ? <span key={index} className="highlight">{word}</span> : word
-        );
-    };
-    */
-
-  /*
-    // 중복 단어 한 번만 하이라이트
-    const highlightContent = (content: string, wordsList: string[]) => {
-        const regex = new RegExp(`(${wordsList.join('|')})`, 'gi');
-        let highlightedWords: Set<string> = new Set();
-    
-
-        const clickWords = (e : any) => {
-            // console.log(e.target.innerText)
-            alert(e.target.innerText)            
-            }
-
-        return content.split(regex).map((word, index) => {
-            if (regex.test(word) && !highlightedWords.has(word)) {
-                highlightedWords.add(word);
-                return <span key={index} className="highlight" onClick={clickWords}>{word}</span>;
-            } else {
-                return word;
-            }
-        });
-    };
-    
-        const highlightContent = (content: string, wordsList: string[]) => {
-        // 길이를 기준으로 내림차순으로 단어 정렬
-        const sortedWordsList = wordsList.sort((a, b) => b.length - a.length);
-        const regex = new RegExp(`(${sortedWordsList.join('|')})`, 'gi');
-        let highlightedWords: Set<string> = new Set();
-    
-        const clickWords = (e: any) => {
-            alert(e.target.innerText);
-        };
-    
-        return content.split(regex).map((word, index) => {
-            if (regex.test(word) && !highlightedWords.has(word)) {
-                highlightedWords.add(word);
-                return <span key={index} className="highlight" onClick={clickWords}>{word}</span>;
-            } else {
-                return word;
-            }
-        });
-    };
-    */
-
   // Db에 있는 단어 하이라이트
   const highlightContent = (content: string, wordsList: string[]) => {
     const sortedWordsList = wordsList.sort((a, b) => b.length - a.length);

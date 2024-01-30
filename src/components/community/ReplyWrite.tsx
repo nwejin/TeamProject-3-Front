@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { postComment, userInfo } from '../../services/apiService';
+import { postReply, userInfo } from '../../services/apiService';
 
-function CommentWrite({ data }: { data: any }) {
+function ReplyWrite({ data }: { data: any }) {
   // 게시글 정보 불러오기
-  // console.log('data', data);
-  const postId = data._id;
-  // console.log(postId); // 게시글 id
+  console.log('data', data);
   // 게시글 id
-  console.log(data);
+  //   console.log('대댓글', data);
 
   // 댓글 작성 및 서버 전달
   const [commentData, setCommentData] = useState('');
+  //   console.log('data', data);
+  //   console.log(commentData);
+
   const commentChange = (e: any) => {
     const value = e.target.value;
     setCommentData(value);
@@ -23,11 +24,11 @@ function CommentWrite({ data }: { data: any }) {
         alert('로그인 후 댓글 작성이 가능합니다!');
         return;
       }
-      const commentPostData = {
-        postId: postId,
+      const replyData = {
+        commentId: data,
         content: commentData,
       };
-      const response = await postComment(commentPostData);
+      const response = await postReply(replyData);
       console.log(response);
       window.location.reload();
     } catch (err) {
@@ -52,7 +53,7 @@ function CommentWrite({ data }: { data: any }) {
     getUserInfo();
   }, []);
 
-  console.log(loginUserData);
+  //   console.log(loginUserData);
 
   return (
     <div className="commentWriteBox">
@@ -86,4 +87,4 @@ function CommentWrite({ data }: { data: any }) {
   );
 }
 
-export default CommentWrite;
+export default ReplyWrite;

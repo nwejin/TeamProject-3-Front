@@ -13,7 +13,7 @@ function NewsList({data}: NewsListProp) {
          <article>
             <div className="newsData">
                 <div className="dataImgCover">                
-                <img className="dataImg" src={data.smallimg || process.env.PUBLIC_URL + "/loading.gif"} alt={data.title} />
+                <img className="dataImg" src={data.smallimg || process.env.PUBLIC_URL + "/Group 51.png"} alt={data.title} />
                 </div>
 
                 <div className="dataTxt">
