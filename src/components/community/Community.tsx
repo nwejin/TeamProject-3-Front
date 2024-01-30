@@ -50,7 +50,7 @@ function Community() {
       {/* 콘텐츠 박스*/}
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
-
+        console.log(post);
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
           // 분계산
@@ -120,10 +120,7 @@ function Community() {
               {/* 유저 정보*/}
               <div className="userProfile">
                 <span>
-                  <img
-                    src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
-                    alt="기본 이미지"
-                  />
+                  <img src={post.img} alt="기본 이미지" />
                 </span>
                 <p style={{ marginRight: '5px' }}>{post.userNickName}</p>
                 <span style={{ fontSize: '10px' }}>•</span>

@@ -7,6 +7,7 @@ p {
   display: flex;
   //   justify-content: flex-start;
   justify-content: space-between;
+  // position: relative;
   .invest-chart {
     width: 70%;
   }
@@ -19,7 +20,7 @@ p {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     // border-radius: 10px;
     border: 1px solid rgb(204, 204, 204);
     .currentCostBox {
@@ -39,6 +40,7 @@ p {
     // 매수, 매도 다음 버튼
     .btn-wapper {
       // background-color: pink;
+
       width: 90%;
       height: 15%;
       display: flex;
@@ -56,18 +58,18 @@ p {
       }
       .tradingBtnBox {
         // background-color: green;
-        width: 85%;
+        width: 90%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         .buy {
           background-color: red;
           color: white;
-          width: 40%;
+          width: 45%;
         }
         .sell {
           background-color: blue;
           color: white;
-          width: 40%;
+          width: 45%;
         }
       }
       .nextBtnBox {
@@ -75,9 +77,12 @@ p {
         display: flex;
         justify-content: center;
         .Btn {
-          width: 80%;
+          width: 95%;
           background-color: #333;
-          color: white;
+          span {
+            color: white;
+            margin: 0 0.5rem;
+          }
         }
       }
     }
@@ -92,9 +97,10 @@ p {
     flex-direction: column;
     // justify-content: center;
     align-items: center;
+    left: 5%;
     width: 90%;
-    height: 58%;
-    top: 18%;
+    height: 53%;
+    top: 25%;
     // border-radius: 10px;
     border: 1px solid rgb(204, 204, 204);
     .buy-inputBox {
@@ -135,8 +141,9 @@ p {
   // justify-content: center;
   align-items: center;
   width: 90%;
-  height: 58%;
-  top: 18%;
+  height: 53%;
+  left: 5%;
+  top: 25%;
   // border-radius: 10px;
   border: 1px solid rgb(204, 204, 204);
   .sell-inputBox {
@@ -273,9 +280,10 @@ p {
   flex-direction: column;
   // justify-content: center;
   align-items: center;
-  width: 90%;
-  height: 39%;
-  top: 56%;
+  left: -315%;
+  top: 0%;
+  width: 410%;
+  height: 100%;
   // border-radius: 10px;
   border: 1px solid rgb(204, 204, 204);
   .closeBtn {
@@ -283,6 +291,24 @@ p {
     border: none;
     span {
       font-size: 18px;
+    }
+  }
+}
+
+.status-Box {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  .resetBtn {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    width: fit-content;
+    span {
+      font-size: 16px;
+      color: gray;
     }
   }
 }

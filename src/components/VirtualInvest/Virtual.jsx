@@ -6,6 +6,7 @@ import Candle from './Candle';
 import SellBtn from './SellOrder';
 import Order from './BuyOrder';
 import Detail from './showDetail';
+import MyResponsiveLine from './userChart';
 
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
@@ -13,7 +14,7 @@ import { showRecord } from '../../services/apiService';
 import ProfitAndLoss from './ProfitAndLoss';
 
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
-let totalTurn = 180;   //턴 표기를 위한 변수 (const index랑 같아야함)
+let totalTurn = 180; //턴 표기를 위한 변수 (const index랑 같아야함)
 
 const numberWithCommas = (numberString) => {
   if (typeof numberString === 'number') {
@@ -35,7 +36,7 @@ const Virtual = () => {
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const [formatted_account, setFormatted] = useState(numberWithCommas(account));
   const [formatted_prevInvest, setFormattedInvest] = useState(prevInvest);
-  const [myturn, setMyturn] = useState(0);    //현재까지 진행된 턴 계산
+  const [myturn, setMyturn] = useState(0); //현재까지 진행된 턴 계산
 
   const cookie = useCookies(['jwtCookie']);
 
@@ -119,7 +120,13 @@ const Virtual = () => {
         const response = await showRecord();
         if (response) {
           const { profit, win, loss, profitArray } = response; //db 데이터 받아오기
-          console.log('profit, win, loss, ProfitAndLoss', profit, win, loss, profitArray);
+          console.log(
+            'profit, win, loss, ProfitAndLoss',
+            profit,
+            win,
+            loss,
+            profitArray
+          );
           setDetailData({ profit, win, loss, profitArray });
         }
       }
@@ -141,6 +148,18 @@ const Virtual = () => {
         <Candle {...candleProps} />
       </div>
       <div className="invest-input">
+        <div className="status-Box">
+          <button onClick={showDetailModal} className="resetBtn">
+            <span>거래 내역 보기</span>
+            <span class="material-symbols-outlined">search</span>
+          </button>
+          {openDetailModal && (
+            <Detail close={closeDetailModal} response={detailData} />
+          )}
+
+          <ProfitAndLoss />
+        </div>
+
         <div className="currentCostBox">
           <p className="smallTitle">현재 가격</p>
           <p>
@@ -175,7 +194,11 @@ const Virtual = () => {
           </div>
           <div className="nextBtnBox">
             <button className="next Btn" onClick={nextTurn}>
-              다음턴으로 →
+              <span>다음턴으로</span>
+              <span>|</span>
+              <span>
+                {myturn} / {totalTurn}
+              </span>
             </button>
           </div>
         </div>
@@ -206,20 +229,8 @@ const Virtual = () => {
             <span>{numberWithCommas(formatted_prevInvest)}</span> $
           </p>
         </div>
-        <button
-          style={{ background: 'none', border: 'none' }}
-          onClick={showDetailModal}
-        >
-          거래 내역 보기
-        </button>
-        {openDetailModal && (
-          <Detail close={closeDetailModal} response={detailData} />
-        )}
-
-        <div>{myturn} / {totalTurn}</div>
-
-        <ProfitAndLoss/>
       </div>
+      <div></div>
     </div>
   );
 };
