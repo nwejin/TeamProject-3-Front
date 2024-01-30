@@ -206,6 +206,8 @@ function NewsDetailPage() {
               
                 <p className='detailContent'>{content}</p>
                 <p>출처 : {data.url}</p>
+                
+                
 
             {/* 모달 */}
                 {openModal && modalWord && <WordModal modalWord={modalWord} closeModal={closeModal} modalPosition={modalPosition}/>}
