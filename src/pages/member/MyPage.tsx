@@ -25,6 +25,7 @@ const MyPage = () => {
     user_changepw: '',
     user_nickname: '',
     user_email: '',
+    user_profile: '',
   });
 
   useEffect(() => {
@@ -54,6 +55,7 @@ const MyPage = () => {
         user_email: response.info.user_email,
         user_nickname: response.info.user_nickname,
         user_password: response.info.user_password,
+        user_profile: response.info.user_profile,
       }));
     } catch (error) {
       navigate('/');
@@ -127,12 +129,36 @@ const MyPage = () => {
   };
 
   const handleInputChange = (e: any) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
+
+    // 회원 프로필 관련
+    if (name === 'profileIMG' && files && files.length > 0) {
+      const file = files[0];
+      // 파일 읽어오기
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // 미리보기 이미지를 업데이트
+        const previewImage = document.getElementById(
+          'showIMG'
+        ) as HTMLImageElement;
+        if (previewImage) {
+          previewImage.src = reader.result as string;
+        }
+      };
+
+      // 파일을 Data URL로 읽어옴
+      reader.readAsDataURL(file);
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
+
+  // 이미지 변경
+
+  // 읽기 동작이 성공적으로 완료되었을 때 실행되는 이벤트 핸들러
 
   const modifyUserInfo = async (event: any) => {
     try {
@@ -223,7 +249,53 @@ const MyPage = () => {
     <>
       <div className="form-box">
         <div className="page-title">회원 정보</div>
+
         <form name="register-form" method="post">
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '70%',
+              alignItems: 'center',
+            }}
+          >
+            <img
+              src={formData.user_profile}
+              alt=""
+              id="showIMG"
+              style={{
+                width: '100px',
+                height: '100px',
+                objectFit: 'cover',
+                borderRadius: '50%',
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                width: '70%',
+                alignItems: 'center',
+              }}
+            >
+              <input
+                type="file"
+                name="profileIMG"
+                id="profileIMG"
+                style={{
+                  border: 0,
+                  borderRadius: 0,
+                  width: 0,
+                  height: 0,
+                  padding: 0,
+                }}
+                onChange={handleInputChange}
+              />
+              <label htmlFor="profileIMG">
+                <span> 이미지 변경하기</span>
+                <span className="material-symbols-outlined">edit</span>
+              </label>
+            </div>
+          </div>
           아이디
           <input
             name="user_id"

@@ -1,44 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { getComment } from '../../services/apiService';
-import ReplyWrite from './ReplyWrite';
+import { getReply } from '../../services/apiService';
 import { useCookies } from 'react-cookie';
-import ReplyComment from './ReplyComment';
+import ReplyWrite from './ReplyWrite';
 
-function Comment({ data }: { data: any }) {
-  const postId = data._id;
+function ReplyComment({ data }: any) {
+  //   const postId = data._id;
+  console.log('data', data); // 게시글 id
+  const [replyData, setReplyData] = useState([]);
 
-  const [commentData, setCommentData] = useState([]);
-
-  // 댓글 가져오기
+  // 대댓글 가져오기
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
     const fetchData = async () => {
       try {
-        const comment = await getComment(postId);
-        setCommentData(comment);
+        const commentId = await getReply(data);
+        setReplyData(commentId);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [postId]);
+  }, [data]);
 
-  console.log(commentData.length);
-  console.log(commentData);
+  console.log(replyData);
 
   // 댓글창 추가
+  const [openReply, setOpenReply] = useState<any>();
 
-  const [commentId, setCommentId] = useState<any>();
-
+  // const [openModal, setOpenModal] = useState<Boolean>(false);
   const cookie = useCookies(['jwtCookie']);
 
-  const [openReply, setOpenReply] = useState<string | null>(null);
   const showModal = (commentId: string) => {
     if (cookie[0].jwtCookie) {
-      setCommentId((prevCommentId: any) => prevCommentId || commentId);
-      setOpenReply((prevOpenReply) =>
-        prevOpenReply === commentId ? null : commentId
-      );
+      setOpenReply(commentId);
+      console.log(commentId);
     } else {
       alert('로그인 후 댓글 작성 가능합니다.');
     }
@@ -46,11 +41,9 @@ function Comment({ data }: { data: any }) {
 
   return (
     <>
-      <div className="countComment">
-        <span>댓글</span> <span>{commentData.length}</span>
-      </div>
+      <div className="countComment"></div>
       {/* 댓글표시 */}
-      {commentData.map((post: any) => {
+      {replyData.map((post: any) => {
         const formatTimeDifference = (dateString: any) => {
           // 분계산
           const postDate = new Date(dateString);
@@ -83,8 +76,13 @@ function Comment({ data }: { data: any }) {
         };
 
         return (
-          <div className="commentInnerBox" key={post._id}>
+          <div
+            className="commentInnerBox"
+            key={post._id}
+            style={{ backgroundColor: '#eeeeee' }}
+          >
             {/* 유저 정보*/}
+
             <div className="userProfile">
               <div className="profile">
                 <span>
@@ -127,9 +125,7 @@ function Comment({ data }: { data: any }) {
                 </span>
               </div>
             </div>
-            <ReplyComment data={post._id} openReply={openReply} />
-            {/* {commentId && <ReplyWrite data={commentId} />} */}
-            {openReply === post._id && <ReplyWrite data={commentId} />}
+            {openReply === post._id && <ReplyWrite data={data} />}
           </div>
         );
       })}
@@ -137,4 +133,4 @@ function Comment({ data }: { data: any }) {
   );
 }
 
-export default Comment;
+export default ReplyComment;
