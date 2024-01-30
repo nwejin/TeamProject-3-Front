@@ -6,7 +6,6 @@ import { addLike } from '../../services/apiService';
 function CommunityRead() {
   const location = useLocation();
   const data = location.state.post;
-  // console.log(data._id);
 
   const formatTimeDifference = (dateString: any) => {
     const postDate = new Date(dateString);
@@ -75,12 +74,9 @@ function CommunityRead() {
         <div className="userProfile">
           <div className="profile">
             <span>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/ae/Chelsea_FC_Logo.svg/1200px-Chelsea_FC_Logo.svg.png"
-                alt=""
-              />
+              <img src={data.userId.user_profile} alt="" />
             </span>
-            <p style={{ marginRight: '5px' }}>{data.userNickName}</p>
+            <p style={{ marginRight: '5px' }}>{data.userId.user_nickname}</p>
             <span style={{ fontSize: '10px' }}>•</span>
             <span>{formatTimeDifference(data.date)}</span>
           </div>
