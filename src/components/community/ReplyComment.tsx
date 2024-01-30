@@ -86,12 +86,11 @@ function ReplyComment({ data }: any) {
             <div className="userProfile">
               <div className="profile">
                 <span>
-                  <img
-                    src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
-                    alt=""
-                  />
+                  <img src={post.userId.user_profile} alt="" />
                 </span>
-                <p style={{ marginRight: '5px' }}>{post.userNickName}</p>
+                <p style={{ marginRight: '5px' }}>
+                  {post.userId.user_nickname}
+                </p>
                 <span style={{ fontSize: '10px' }}>•</span>
                 <span>{formatTimeDifference(post.date)}</span>
               </div>
@@ -109,9 +108,9 @@ function ReplyComment({ data }: any) {
                 </span>
 
                 <span>
-                  <button onClick={() => showModal(post._id)}>
+                  {/* <button onClick={() => showModal(post._id)}>
                     <span>댓글 달기</span>
-                  </button>
+                  </button> */}
                 </span>
               </div>
               <div className="report">
