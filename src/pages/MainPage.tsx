@@ -17,6 +17,7 @@ const MainPage = () => {
       image: '',
       title: '',
       content: '',
+      like: 0,
     },
   ]);
 
@@ -29,6 +30,7 @@ const MainPage = () => {
     getNews();
     getBoard();
   }, []);
+  const [translate, setTranslate] = useState(0);
 
   useEffect(() => {
     console.log(newsData);
@@ -40,7 +42,8 @@ const MainPage = () => {
     const data = response.news;
     if (response.success) {
       const updateNews = data.map((news: any) => ({
-        thumbnail: news.smallimg || process.env.PUBLIC_URL + 'graph.png',
+        thumbnail:
+          news.smallimg || process.env.PUBLIC_URL + 'board-default.png',
         title: news.title,
         content: news.content,
       }));
@@ -67,9 +70,10 @@ const MainPage = () => {
     const data = response.board;
     if (response.success) {
       const updateBoard = data.map((boards: any) => ({
-        image: boards.image || process.env.PUBLIC_URL + 'graph.png',
+        image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
         title: boards.title,
         content: boards.content,
+        like: boards.like,
       }));
       // console.log(updateNews);
       const boardArray = updateBoard;
@@ -78,13 +82,29 @@ const MainPage = () => {
     } else {
       const boardArray = [
         {
-          image: 'default-image',
+          image: process.env.PUBLIC_URL + 'board-default.png',
           title: '등록된 게시글이 없습니다.',
           content: '',
+          like: 0,
         },
       ];
       setBoardData(boardArray);
     }
+  };
+
+  const move = (str: string) => {
+    if (str === 'left') {
+      if (translate === 0) {
+        return;
+      }
+      setTranslate((prev) => prev + 67);
+    } else if (str === 'right') {
+      if (translate === -201) {
+        return;
+      }
+      setTranslate((prev) => prev - 67);
+    }
+    console.log(translate);
   };
 
   return (
@@ -110,6 +130,8 @@ const MainPage = () => {
                   <img className="main-news-thumbnail" src={news.thumbnail} />
                   <div className="main-news-text">
                     <div className="main-news-title">{news.title}</div>
+                    <div className="main-news-point point-latest">최신</div>
+                    <div className="main-news-point point-news">뉴스</div>
                     <div className="main-news-content">{news.content}</div>
                   </div>
                 </div>
@@ -125,11 +147,27 @@ const MainPage = () => {
             <TrandingCryptoWidget />
           </div>
         </div>
-        <div className="thumb-title">개미의 시선</div>
-        <div className="inner-wrapper">
-          <div className="main-community">
-            <div className="section5">
-              <Slider boardData={boardData} />
+      </div>
+      <div className="point-section">
+        <div className="outer-wrapper">
+          <div className="thumb-title">개미의 시선</div>
+          <div className="inner-wrapper">
+            <div className="main-community">
+              <div
+                className="section5"
+                style={{ transform: `translate(${translate}vw)` }}
+              >
+                <Slider boardData={boardData} />
+              </div>
+            </div>
+          </div>
+          <div className="slider-btn-group">
+            <div className="slider-btn-left" onClick={() => move('left')}>
+              <span className="material-symbols-rounded">chevron_left</span>
+            </div>
+
+            <div className="slider-btn-right" onClick={() => move('right')}>
+              <span className="material-symbols-rounded">chevron_right</span>
             </div>
           </div>
         </div>
