@@ -502,6 +502,7 @@ export const mainBoards = async () => {
 
 export const wordBook = async (userData: any) => {
   try {
+    // console.log(userData);
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/news/likedWords',
       userData,
@@ -512,6 +513,28 @@ export const wordBook = async (userData: any) => {
         withCredentials: true,
       }
     );
+    // console.log(response);
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+export const deleteWord = async (userData: any) => {
+  try {
+    // console.log(userData);
+    // console.log(typeof userData);
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/news/deleteWords',
+      userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    // console.log(response);
     return response.data;
   } catch (error) {
     throw new Error('예상치 못한 오류가 발생했습니다!');

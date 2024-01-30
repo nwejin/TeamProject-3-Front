@@ -20,6 +20,7 @@ import axios from 'axios';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 import WordBookPage from './pages/member/WordBookPage';
+import ErrorPage from './pages/ErrorPage';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -69,6 +70,7 @@ function App() {
           <Route path="/wordBook" element={<WordBookPage />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
+          <Route path="/error" element={<ErrorPage />} />
 
           {/* 커뮤니티 */}
           <Route path="/community" element={<CommunityMain />} />
@@ -78,8 +80,6 @@ function App() {
           {/* <Route path="/virtual" element={<Virtual />} /> */}
         </Routes>
       </BrowserRouter>
-      {/* <ExampleComponent></ExampleComponent> */}
-      {/* <div className="class">{serverData}</div> */}
       <div>{serverData}</div>
     </div>
   );
