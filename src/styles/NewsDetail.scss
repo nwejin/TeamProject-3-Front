@@ -10,7 +10,7 @@
             text-align: center;
             border-radius: 50px 0 0 50px;
             margin: 0;
-            
+
             &.active{
                 color: $color-blue-1;
             }
@@ -36,8 +36,8 @@
     }
     .detailContent {
         line-height: 1.8;
-        margin-top: 30px;
-        white-space: pre-line;
+        // margin-top: 30px;
+        white-space: pre-wrap;
     }
     .highlight {
         background-color: $color-blue-2;
@@ -55,15 +55,20 @@
     max-width: 500px;
     padding: 10px;
     // margin-bottom: 100px;
+
     .material-symbols-outlined {
         cursor: pointer;
+        font-variation-settings: "FILL" 1;
         &.heart {
             color: $color-blue-2;
+            // font-variation-settings: 
             &.active {
                 color: $color-blue-1;
+                
             }
         }
     }
+
         
     .defaultTxt {
     color:gray;
@@ -72,3 +77,11 @@
 }
 
 
+
+// .material-symbols-outlined {
+//   font-variation-settings:
+// //   'FILL' 1,
+//   'wght' 200,
+//   'GRAD' 0,
+//   'opsz' 24
+// }
