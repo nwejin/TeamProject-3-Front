@@ -88,9 +88,13 @@ function Comment({ data }: { data: any }) {
             <div className="userProfile">
               <div className="profile">
                 <span>
-                  <img src={post.userImg} alt="" />
+
+                  <img src={post.userId.user_profile} alt="" />
+
                 </span>
-                <p style={{ marginRight: '5px' }}>{post.userNickName}</p>
+                <p style={{ marginRight: '5px' }}>
+                  {post.userId.user_nickname}
+                </p>
                 <span style={{ fontSize: '10px' }}>•</span>
                 <span>{formatTimeDifference(post.date)}</span>
               </div>

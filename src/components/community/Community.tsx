@@ -117,17 +117,23 @@ function Community() {
         return (
           <div className="post" key={post._id}>
             <div className="postContents">
-              {/* 유저 정보*/}
-              <div className="userProfile">
-                <span>
-                  <img src={post.img} alt="기본 이미지" />
-                </span>
-                <p style={{ marginRight: '5px' }}>{post.userNickName}</p>
-                <span style={{ fontSize: '10px' }}>•</span>
-                <span>{formatTimeDifference(post.date)}</span>
-              </div>
+
+              <Link to={`/community/${post._id}`} state={{ post }}>
+                {/* 유저 정보*/}
+                <div className="userProfile">
+                  <span>
+                    <img src={post.userId.user_profile} alt="기본 이미지" />
+                  </span>
+                  <p style={{ marginRight: '5px' }}>
+                    {post.userId.user_nickname}
+                  </p>
+                  <span style={{ fontSize: '10px' }}>•</span>
+                  <span>{formatTimeDifference(post.date)}</span>
+                </div>
+              </Link>
 
               {/* 게시글 */}
+
               <div className="contentBox">
                 <div className="textContent">
                   <Link to={`/community/${post._id}`} state={{ post }}>

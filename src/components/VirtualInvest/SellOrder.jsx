@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';

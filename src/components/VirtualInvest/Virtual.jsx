@@ -1,7 +1,7 @@
 // App.js
 import '../../styles/Virtual.scss';
 import React, { useState, useEffect } from 'react';
-import { getConvertData } from './BybitAPI';
+import { getConvertData, volumeArr } from './BybitAPI';
 import Candle from './Candle';
 import SellBtn from './SellOrder';
 import Order from './BuyOrder';
@@ -30,6 +30,7 @@ const numberWithCommas = (numberString) => {
 const Virtual = () => {
   const [index, setIndex] = useState(180); //시작 캔들 개수
   const [data, setData] = useState([]); //api로 가져온 데이터
+  const [volume, setVolume] = useState([]); // api로 가져온 볼륨데이터
   const [currentCost, setCurrentCost] = useState(); //현재 가격
   const [prevInvest, setPrevInvest] = useState(0); // 이전 투자금액 -> profit 계산에 사용
 
@@ -45,7 +46,9 @@ const Virtual = () => {
     const fetchData = async () => {
       try {
         const result = await getConvertData(); // 데이터가 로딩될 때까지 대기
+        const resVol = await volumeArr;
         setData(result.slice(index, yearofDay));
+        setVolume(resVol.slice(index, yearofDay));
         setCurrentCost(data[data.length - 1].close);
       } catch (error) {
         // console.error('Error fetching data:', error);
@@ -73,7 +76,9 @@ const Virtual = () => {
   const nextTurn = async () => {
     setIndex(index - 1);
     const newData = data.slice(index, yearofDay);
+    const newVol = data.slice(index, yearofDay);
     setData(newData);
+    setVolume(newVol);
     setMyturn(myturn + 1);
   };
 
@@ -86,6 +91,7 @@ const Virtual = () => {
       areaTopColor: '#2962FF',
       areaBottomColor: 'rgba(41, 98, 255, 0.28)',
     },
+    volumeArr: volume.sort((a, b) => new Date(a.time) - new Date(b.time)),
   };
 
   // 모달창
@@ -229,6 +235,23 @@ const Virtual = () => {
             <span>{numberWithCommas(formatted_prevInvest)}</span> $
           </p>
         </div>
+
+        <button
+          style={{ background: 'none', border: 'none' }}
+          onClick={showDetailModal}
+        >
+          거래 내역 보기
+        </button>
+        {openDetailModal && (
+          <Detail close={closeDetailModal} response={detailData} />
+        )}
+
+        <div>
+          {myturn} / {totalTurn}
+        </div>
+
+        <ProfitAndLoss />
+
       </div>
       <div></div>
     </div>

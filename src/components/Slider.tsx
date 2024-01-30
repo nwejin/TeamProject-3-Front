@@ -1,8 +1,4 @@
 import React from 'react';
-// import SlickSlider from 'react-slick'; // 변경된 부분
-// import '../styles/Slider.scss'; // 상대 경로 사용
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
 
 const Slider = ({ boardData }: any) => {
   return (
@@ -12,6 +8,16 @@ const Slider = ({ boardData }: any) => {
           <img className="main-board-image" src={board.image} />
           <div className="main-board-title">{board.title}</div>
           <div className="main-board-content">{board.content}</div>
+          <div className="main-board-info">
+            <div className="main-board-comment">
+              <span className="material-symbols-rounded">comment</span>
+              <div className="main-icon">{board.like}</div>
+            </div>
+            <div className="main-board-like">
+              <span className="material-symbols-rounded">favorite</span>
+              <div className="main-icon">{board.like}</div>
+            </div>
+          </div>
         </div>
       ))}
     </>
