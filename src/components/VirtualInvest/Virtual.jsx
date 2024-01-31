@@ -14,6 +14,8 @@ import { showRecord } from '../../services/apiService';
 import ProfitAndLoss from './ProfitAndLoss';
 import SelectSymbol from './SelectSymbol';
 
+import { userInfo } from '../../services/apiService';
+
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
 let totalTurn = 180; //턴 표기를 위한 변수 (const index랑 같아야함)
 let initialAccount = 3000000; //초기 금액
@@ -162,6 +164,22 @@ const Virtual = () => {
   const stock = useSelector((state) => state.stock); //보유주식 수
   const purchasePrice = useSelector((state) => state.purchasePrice); //보유주식 평단가
 
+  const [userNickname, setuserNickname] = useState('');
+  const jwtCookie = useCookies(['jwtCookie']);
+  useEffect(() => {
+    const tokenId = jwtCookie['jwtCookie'];
+    // console.log('tokenId', tokenId);
+    const getUserInfo = async () => {
+      try {
+        const response = await userInfo({ id: tokenId });
+        setuserNickname(response.info.user_nickname);
+      } catch (error) {
+        console.log('사용자 정보 가져오기 에러', error);
+      }
+    };
+    getUserInfo();
+  }, []);
+
   return (
     <div className="invest-wrapper">
       <div className="invest-chart">
@@ -174,7 +192,11 @@ const Virtual = () => {
             <span class="material-symbols-outlined">search</span>
           </button>
           {openDetailModal && (
-            <Detail close={closeDetailModal} response={detailData} />
+            <Detail
+              close={closeDetailModal}
+              response={detailData}
+              user={userNickname}
+            />
           )}
 
           <ProfitAndLoss />
