@@ -128,9 +128,9 @@ function Comment({ data }: { data: any }) {
                 </span>
               </div>
             </div>
+            {openReply === post._id && <ReplyWrite data={commentId} />}
             <ReplyComment data={post._id} openReply={openReply} />
             {/* {commentId && <ReplyWrite data={commentId} />} */}
-            {openReply === post._id && <ReplyWrite data={commentId} />}
           </div>
         );
       })}
