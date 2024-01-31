@@ -12,9 +12,11 @@ import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { showRecord } from '../../services/apiService';
 import ProfitAndLoss from './ProfitAndLoss';
+import SelectSymbol from './SelectSymbol';
 
 let yearofDay = 365; //bybit api 데이터는 시간이 역순이므로 slice도 역순으로 해야함
 let totalTurn = 180; //턴 표기를 위한 변수 (const index랑 같아야함)
+let initialAccount = 3000000; //초기 금액
 
 const numberWithCommas = (numberString) => {
   if (typeof numberString === 'number') {
@@ -32,20 +34,24 @@ const Virtual = () => {
   const [data, setData] = useState([]); //api로 가져온 데이터
   const [volume, setVolume] = useState([]); // api로 가져온 볼륨데이터
   const [currentCost, setCurrentCost] = useState(); //현재 가격
+  const [currentProfit, setCurrentProfit] = useState(); //현재 이익
   const [prevInvest, setPrevInvest] = useState(0); // 이전 투자금액 -> profit 계산에 사용
 
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const [formatted_account, setFormatted] = useState(numberWithCommas(account));
-  const [formatted_prevInvest, setFormattedInvest] = useState(prevInvest);
+  //const [formatted_prevInvest, setFormattedInvest] = useState(prevInvest);
   const [myturn, setMyturn] = useState(0); //현재까지 진행된 턴 계산
 
   const cookie = useCookies(['jwtCookie']);
+
+  //아래는 투자종목 다양화
+  const [symbol, setSymbol] = useState('BTCUSDT');
 
   // 다음턴 버튼 클릭 시, bybit api 통신
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await getConvertData(); // 데이터가 로딩될 때까지 대기
+        const result = await getConvertData(symbol); // 데이터가 로딩될 때까지 대기
         const resVol = await volumeArr;
         setData(result.slice(index, yearofDay));
         setVolume(resVol.slice(index, yearofDay));
@@ -61,8 +67,15 @@ const Virtual = () => {
   // account 값이 변경될 때마다 formatted_account도 갱신
   useEffect(() => {
     setFormatted(numberWithCommas(account));
-    setFormattedInvest(numberWithCommas(prevInvest));
-  }, [account, prevInvest]);
+
+    let per = (Math.abs(account - initialAccount) / initialAccount) * 100; //
+    per = per.toFixed(2);
+
+    const str =
+      account >= initialAccount ? '+' + String(per) : '-' + String(per); //pro가 음수일 경우 - 부호를 달 필요 없음
+
+    setCurrentProfit(str);
+  }, [account, prevInvest, currentProfit]);
 
   // 초기 부터 currentValue 설정
   useEffect(() => {
@@ -92,6 +105,7 @@ const Virtual = () => {
       areaBottomColor: 'rgba(41, 98, 255, 0.28)',
     },
     volumeArr: volume.sort((a, b) => new Date(a.time) - new Date(b.time)),
+    symbolName: symbol,
   };
 
   // 모달창
@@ -223,16 +237,16 @@ const Virtual = () => {
           </div>
         </div>
         <div className="totalMoney">
-          <p className="smallTitle">잔액</p>
+          <p className="smallTitle">잔액 ({currentProfit} %)</p>
           <p>
             <span>{formatted_account}</span> $
           </p>
         </div>
 
         <div className="investMoney">
-          <p className="smallTitle">현재 투자금액</p>
+          <p className="smallTitle">보유자산</p>
           <p>
-            <span>{numberWithCommas(formatted_prevInvest)}</span> $
+            <span>{numberWithCommas(purchasePrice * stock)}</span> $
           </p>
         </div>
 
@@ -251,7 +265,7 @@ const Virtual = () => {
         </div>
 
         <ProfitAndLoss />
-
+        <SelectSymbol symbol={symbol} setSymbol={setSymbol} />
       </div>
       <div></div>
     </div>
