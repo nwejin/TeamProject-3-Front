@@ -112,7 +112,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="판매할 주식 수를 입력하세요"
             onChange={(e) => setSellOrder(e.target.value)}
             value={sellOrder}
-            style={{ width: '83%' }}
+            style={{ width: '83%', border: '1px solid #d9dadb' }}
           />
           <input
             type="text"

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import MyResponsiveLine from './UserChart';
+import MyResponsiveLine from './userChart';
 import MyResponsivePie from './WinRate';
 
 interface props {
@@ -35,7 +35,9 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
       <div className="innerContent">
         <div className="historyBox">
           <div className="profitBox">
-            <div style={{ fontSize: '14px', color: 'gray' }}>현재 순 이익</div>
+            <div style={{ fontSize: '14px', color: '#808080' }}>
+              현재 순 이익
+            </div>
             <div>
               <div
                 className={profit > 0 ? 'profitSurplus' : 'profitDeficit'}
@@ -52,17 +54,16 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
             <div
               style={{
                 fontSize: '14px',
-                color: 'gray',
+                color: '#808080',
                 width: '100%',
                 textAlign: 'center',
               }}
             >
               win rate: {rate}%
             </div>
-
           </div>
           <div className="winRateBox">
-            <div style={{ fontSize: '14px', color: 'gray' }}> 승률 </div>
+            <div style={{ fontSize: '14px', color: '#808080' }}> 승률 </div>
             <div
               style={{
                 width: '80%',
@@ -81,7 +82,7 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
                 <div
                   style={{
                     fontSize: '12px',
-                    color: 'gray',
+                    color: '#808080',
                     width: '100%',
                     textAlign: 'center',
                   }}

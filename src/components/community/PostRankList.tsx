@@ -70,15 +70,13 @@ function PostRankList() {
         return (
           <li key={post._id}>
             <Link to={`/community/${post._id}`} state={{ post }}>
-              <div>
+              <div style={{ width: '80%' }}>
                 <div className="category">
                   <span>{getSubject()}</span>
                 </div>
                 <div className="listTitle">
-                  {' '}
                   {post.title}
                   <span style={{ color: 'lightgray', fontSize: '12px' }}>
-                    {' '}
                     ({formatTimeDifference(post.date)})
                   </span>
                 </div>

@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { kakaoLogout } from '../services/apiService';
+import { kakaoLogout, userInfo } from '../services/apiService';
 
 const Header = () => {
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
@@ -58,6 +58,33 @@ const Header = () => {
   const redirectMain = () => {
     window.location.href = '/';
   };
+
+  const [userInfos, setUserInfos] = useState({
+    userId: '',
+    userNickName: '',
+    userProfile: '',
+  });
+  useEffect(() => {
+    const tokenId = jwtCookie['jwtCookie'];
+    // console.log('tokenId', tokenId);
+    const getUserInfo = async () => {
+      try {
+        const response = await userInfo({ id: tokenId });
+        console.log(response);
+        setUserInfos({
+          userId: response.info.user_id,
+          userNickName: response.info.user_nickname,
+          userProfile: response.info.user_profile,
+        });
+      } catch (error) {
+        console.log('사용자 정보 가져오기 에러', error);
+      }
+    };
+    getUserInfo();
+  }, []);
+
+  console.log(userInfos.userId);
+
   return (
     <>
       <div className="header" id="top">
@@ -82,11 +109,24 @@ const Header = () => {
         {isLogin === true && (
           <>
             <div className="Header-mypage-btn" onClick={mypageToggle}>
-              <span className="material-symbols-rounded">person</span>
+              <span>
+                <img
+                  src={userInfos.userProfile}
+                  alt=""
+                  style={{
+                    position: 'relative',
+                    top: '0',
+                    transform: 'none',
+                    borderRadius: '50%',
+                  }}
+                />
+              </span>
             </div>
             {isToggle === true && (
               <div className="Header-mypage">
-                <div>아이디(닉네임)</div>
+                <div>
+                  {userInfos.userId} ( {userInfos.userNickName} )
+                </div>
                 <Link to="/mypage">
                   <div>마이페이지</div>
                 </Link>

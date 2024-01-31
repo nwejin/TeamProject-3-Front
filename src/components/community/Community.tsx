@@ -46,6 +46,7 @@ function Community() {
     setPagination(pageNumber);
   };
 
+  const [isActive, setIsActive] = useState(false);
   return (
     <>
       {/* 콘텐츠 박스*/}
@@ -109,6 +110,7 @@ function Community() {
             const likeData = { like, postId };
             const response = await addLike(likeData);
             console.log(response);
+            setIsActive(!isActive);
             window.location.reload();
           } catch (err) {
             console.log(err);
@@ -154,14 +156,15 @@ function Community() {
                 <div>
                   <span>
                     {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
-                    <button onClick={plusLike}>
-                      {/* <span
-                        className=
-                          
-                        'material-symbols-outlined'
+                    <button>
+                      <span
+                        onClick={plusLike}
+                        className={`material-symbols-outlined heart ${
+                          isActive ? 'active' : ''
+                        }`}
                       >
-                        favorite
-                      </span> */}
+                        heart_plus
+                      </span>
                       <span>좋아요</span>
                     </button>
                     <span>{post.like}</span>
