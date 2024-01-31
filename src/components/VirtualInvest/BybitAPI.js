@@ -9,11 +9,11 @@ const client = new RestClientV5({
 
 let convertData = []; // 초기에 빈 배열로 선언
 
-const fetchData = async () => {
+const fetchData = async (symbol) => {
   try {
     const response = await client.getKline({
       category: 'inverse',
-      symbol: 'BTCUSDT',
+      symbol: symbol,
       interval: 'D',
       start: 1640995200000,
       end: 1672531199000,
@@ -30,7 +30,7 @@ const fetchData = async () => {
       volumeArr.push({
         time,
         value: volume,
-        color: '#ABBAFF',
+        color: '#ABBAFF', //볼륨 색상변경
       });
 
       convertData.push({

@@ -1,6 +1,7 @@
 // Candle.js
 
 import { createChart, ColorType, PriceScaleMode } from 'lightweight-charts';
+import { symbol } from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 
 export const Candle = (props) => {
@@ -13,7 +14,7 @@ export const Candle = (props) => {
       areaTopColor = '#2962FF',
       areaBottomColor = 'rgba(41, 98, 255, 0.28)',
     } = {},
-    symbolName = 'BTCUSDT', // 심볼 이름
+    symbolName = symbol, // 심볼 이름
     volumeArr,
   } = props;
 
@@ -205,7 +206,7 @@ export const Candle = (props) => {
       chart.unsubscribeCrosshairMove(updateLegend);
       chart.remove();
     };
-  }, [data, backgroundColor, textColor]);
+  }, [data, backgroundColor, textColor, symbolName]);
 
   return (
     <div style={{ position: 'relative', zIndex: 0 }}>
