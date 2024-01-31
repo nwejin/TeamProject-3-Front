@@ -312,6 +312,98 @@ const Virtual = () => {
           )}
           <ProfitAndLoss />
         </div>
+
+
+        <div className="currentCostBox">
+          <p className="smallTitle">현재 가격</p>
+          <p>
+            <span>{currentCost}</span> $
+          </p>
+        </div>
+        <div className="btn-wapper">
+          <div className="tradingBtnBox">
+            <button className="buy Btn" onClick={showBuyModal}>
+              매수
+            </button>
+            {openBuyModal && (
+              <Order
+                currentVal={currentCost}
+                prevInvest={prevInvest}
+                updatePrevInvest={updatePrevInvest}
+                close={closeBuyModal}
+              />
+            )}
+
+            <button className="sell Btn" onClick={showSellModal}>
+              매도
+            </button>
+            {openSellModal && (
+              <SellBtn
+                currentVal={currentCost}
+                prevInvest={prevInvest}
+                updatePrevInvest={updatePrevInvest}
+                close={closeSellModal}
+              />
+            )}
+          </div>
+          <div className="nextBtnBox">
+            <button className="next Btn" onClick={nextTurn}>
+              <span>다음턴으로</span>
+              <span>|</span>
+              <span>
+                {myturn} / {totalTurn}
+              </span>
+            </button>
+          </div>
+        </div>
+        <div className="currentStock">
+          <div>
+            <p className="smallTitle">내 주식 현황</p>
+            <p>
+              <span>{stock}</span> 주
+            </p>
+          </div>
+          <div>
+            <p className="smallTitle"> 평단가</p>
+            <p>
+              <span>{Number(purchasePrice).toFixed(3)}</span> $
+            </p>
+          </div>
+        </div>
+        <div className="totalMoney">
+          <p className="smallTitle">잔액 ({currentProfit} %)</p>
+          <p>
+            <span>{formatted_account}</span> $
+          </p>
+        </div>
+
+        <div className="investMoney">
+          <p className="smallTitle">보유자산</p>
+          <p>
+            <span>
+              {numberWithCommas(Number(purchasePrice).toFixed(3) * stock)}
+            </span>{' '}
+            $
+          </p>
+        </div>
+
+        <button
+          style={{ background: 'none', border: 'none' }}
+          onClick={showDetailModal}
+        >
+          거래 내역 보기
+        </button>
+        {openDetailModal && (
+          <Detail close={closeDetailModal} response={detailData} />
+        )}
+
+        <div>
+          {myturn} / {totalTurn}
+        </div>
+
+        <ProfitAndLoss />
+        <SelectSymbol symbol={symbol} setSymbol={setSymbol} />
+
       </div>
     </div>
   );

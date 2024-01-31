@@ -11,7 +11,7 @@ const MyResponsiveLine = ({ data }: any) => {
       color: 'blue',
       data: profitArray.map((value: any, index: any) => ({
         x: `${index + 1} 회`,
-        y: value !== null ? value : 0,
+        y: value !== null ? value.toFixed(2) : 0,
       })),
     },
   ];

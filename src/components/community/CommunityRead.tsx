@@ -1,15 +1,25 @@
-import { useLocation } from 'react-router-dom';
+import { redirect, useLocation } from 'react-router-dom';
 import Comment from '../../components/community/Comment';
 import CommentWrite from '../../components/community/CommentWrite';
-import { addLike, userInfo } from '../../services/apiService';
+import {
+  addLike,
+  deleteCommunity,
+  modifyCommunity,
+  updatePost,
+  userInfo,
+} from '../../services/apiService';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import AddPost from '../../pages/community/AddPost';
+import ModifyPost from '../../pages/community/ModifyPost';
 
+// 커뮤니티 글 상세 페이지
 function CommunityRead() {
   const location = useLocation();
-  const data = location.state.post;
+  const postData = location.state.post;
   const [disabledAttr, setdisabledAttr] = useState({ display: 'none' });
   const [jwtCookie] = useCookies(['jwtCookie']);
+
 
   const [isToggle, setIsToggle] = useState(false);
   const modifyToggle = () => {
@@ -25,18 +35,37 @@ function CommunityRead() {
     setButton();
   }, []);
 
+
   const setButton = async () => {
     try {
       const tokenId = jwtCookie['jwtCookie'];
       const response = await userInfo({ id: tokenId });
       console.log(response.info.user_id);
-      if (response.info.user_nickname === data.userId.user_nickname) {
+      if (response.info.user_nickname === postData.userId.user_nickname) {
         setdisabledAttr({ display: 'block' });
       }
     } catch (error) {
       console.log('사용자 정보 가져오기 에러', error);
     }
   };
+
+  const updateContent = async (id: string) => {
+    try {
+      const result = await updatePost(postData._id);
+      // console.log('변경 후 데이터', result);
+      postData.title = result.title;
+      postData.content = result.content;
+      postData.subject = result.subject;
+    } catch (error) {
+      console.log('게시물 가져오기 실패');
+    }
+  };
+
+  useEffect(() => {
+    setButton();
+    updateContent(postData._id);
+    console.log('변경 후 postData', postData);
+  }, []);
 
   const formatTimeDifference = (dateString: any) => {
     const postDate = new Date(dateString);
@@ -70,7 +99,7 @@ function CommunityRead() {
 
   // 카테고리 분류
   const getSubject = () => {
-    const subject = data.subject;
+    const subject = postData.subject;
     let subjectname;
     if (subject === 'free') {
       subjectname = '자유';
@@ -87,7 +116,7 @@ function CommunityRead() {
   const plusLike = async () => {
     try {
       const like: Number = 1;
-      const postId = data._id;
+      const postId = postData._id;
 
       const likeData = { like, postId };
       const response = await addLike(likeData);
@@ -97,23 +126,55 @@ function CommunityRead() {
     }
   };
 
+  // 글 수정 모달
+  const [openModal, setOpenModal] = useState<Boolean>(false);
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+  const showModal = () => {
+    setOpenModal(true);
+  };
+
+  const deleteContent = async () => {
+    try {
+      const result = await deleteCommunity(postData._id);
+      console.log('글 삭제 성공', result);
+      window.location.href = '/community';
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="postRead" key={data._id}>
+    <div className="postRead" key={postData._id}>
       {/* 콘텐츠 박스*/}
       <div className="postContents">
         {/* 유저 정보*/}
         <div className="userProfile">
           <div className="profile">
             <span>
-              <img src={data.userId.user_profile} alt="" />
+              <img src={postData.userId.user_profile} alt="" />
             </span>
-            <p style={{ marginRight: '5px' }}>{data.userId.user_nickname}</p>
+            <p style={{ marginRight: '5px' }}>
+              {postData.userId.user_nickname}
+            </p>
             <span style={{ fontSize: '10px' }}>•</span>
-            <span>{formatTimeDifference(data.date)}</span>
+            <span>{formatTimeDifference(postData.date)}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <button style={disabledAttr}>수정</button>
-            <button style={disabledAttr}>삭제</button>
+            <button style={disabledAttr} onClick={showModal}>
+              수정
+            </button>
+            {openModal && (
+              <ModifyPost
+                open={openModal}
+                close={closeModal}
+                postData={postData}
+              />
+            )}
+            <button style={disabledAttr} onClick={deleteContent}>
+              삭제
+            </button>
             <span className="category">{getSubject()}</span>
             <button className="moreInfos" onClick={modifyToggle}>
               <span className="material-symbols-outlined">more_vert</span>
@@ -130,13 +191,13 @@ function CommunityRead() {
         {/* 게시글 */}
         <div className="contentBox">
           <div className="textContent">
-            <p className="title">{data.title}</p>
-            <p className="text">{data.content}</p>
+            <p className="title">{postData.title}</p>
+            <p className="text">{postData.content}</p>
           </div>
         </div>
 
         <div className="readImgBox">
-          <img src={data.image} alt="" />
+          <img src={postData.image} alt="" />
         </div>
 
         {/* 아이콘 리스트 */}
@@ -146,7 +207,7 @@ function CommunityRead() {
               <button onClick={plusLike}>
                 <span className="material-symbols-outlined">favorite</span>
               </button>
-              <span>{data.like}</span>
+              <span>{postData.like}</span>
             </span>
 
             {/* <span>
@@ -170,8 +231,8 @@ function CommunityRead() {
       </div>
 
       <div className="commentBox">
-        <Comment data={data} />
-        <CommentWrite data={data} />
+        <Comment data={postData} />
+        <CommentWrite data={postData} />
       </div>
     </div>
   );

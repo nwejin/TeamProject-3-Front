@@ -31,6 +31,7 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
           <span className="material-symbols-outlined">close</span>
         </button>
       </div>
+
       <div className="innerContent">
         <div className="historyBox">
           <div className="profitBox">
@@ -58,6 +59,7 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
             >
               win rate: {rate}%
             </div>
+
           </div>
           <div className="winRateBox">
             <div style={{ fontSize: '14px', color: 'gray' }}> 승률 </div>

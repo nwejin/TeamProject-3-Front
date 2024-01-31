@@ -3,6 +3,7 @@ import AddPost from '../../pages/community/AddPost';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
+// 커뮤니티 페이지 헤더(글 작성 포함)
 function CommuniutyHeader() {
   const [openModal, setOpenModal] = useState<Boolean>(false);
 

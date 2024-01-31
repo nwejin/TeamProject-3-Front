@@ -281,6 +281,58 @@ export const getReply = async (data: any) => {
   }
 };
 
+// 커뮤니티 글 수정
+export const modifyCommunity = async (postData: any) => {
+  try {
+    console.log('게시글 정보', postData);
+
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/modify',
+      postData,
+      {
+        headers: {
+          // form-data 전송
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error); // 에러 메시지를 콘솔에 출력
+    throw new Error('예상치 못한 오류가 발생했습니다! (커뮤니티 글 수정)');
+  }
+};
+
+// 커뮤니티 글 삭제
+export const deleteCommunity = async (communityId: String) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/delete',
+      { communityId }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error); // 에러 메시지를 콘솔에 출력
+    throw new Error('예상치 못한 오류가 발생했습니다! (커뮤니티 글 수정)');
+  }
+};
+
+// 커뮤니티 글 수정 후 수정내용 업데이트
+export const updatePost = async (postid: String) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/update',
+      { params: { postid } }
+    );
+    console.log('수정 내용 불러오기', response.data);
+
+    return response.data;
+  } catch (error) {
+    console.log('수정 내용 업데이트 실패');
+  }
+};
+
 // 클릭한 단어의 설명 출력하기
 export const GetWord = async (word: string) => {
   console.log(word);
