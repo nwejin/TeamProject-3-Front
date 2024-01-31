@@ -3,6 +3,7 @@ import { kakaoLogin, mainBoards, mainNews } from '../services/apiService';
 import Slider from '../components/Slider';
 import TrandingMiniWidget from '../components/stockGuide/TrandingMiniWidget';
 import TrandingCryptoWidget from '../components/stockGuide/TrandingCryptoWidget';
+import { Link } from 'react-router-dom';
 
 const MainPage = () => {
   const [newsData, setNewsData] = React.useState([
@@ -17,6 +18,8 @@ const MainPage = () => {
       image: '',
       title: '',
       content: '',
+      writer: '',
+      date: '',
       like: 0,
     },
   ]);
@@ -48,10 +51,10 @@ const MainPage = () => {
         content: news.content,
       }));
       console.log(updateNews);
-      const newsArray = updateNews;
-      console.log(newsArray);
+      // const newsArray = updateNews;
+      // console.log(newsArray);
 
-      setNewsData(newsArray);
+      setNewsData(updateNews);
       console.log(newsData);
     } else {
       const newsArray = [
@@ -68,16 +71,19 @@ const MainPage = () => {
   const getBoard = async () => {
     const response = await mainBoards();
     const data = response.board;
+    console.log(data);
     if (response.success) {
       const updateBoard = data.map((boards: any) => ({
         image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
         title: boards.title,
         content: boards.content,
+        writer: boards.userNickName,
+        date: (boards.date as string).split('T')[0],
         like: boards.like,
       }));
       // console.log(updateNews);
-      const boardArray = updateBoard;
-      setBoardData(boardArray);
+      // const boardArray = updateBoard;
+      setBoardData(updateBoard);
       console.log(boardData);
     } else {
       const boardArray = [
@@ -85,6 +91,8 @@ const MainPage = () => {
           image: process.env.PUBLIC_URL + 'board-default.png',
           title: '등록된 게시글이 없습니다.',
           content: '',
+          writer: '',
+          date: '',
           like: 0,
         },
       ];
@@ -119,9 +127,11 @@ const MainPage = () => {
               <br />
               당신을 위해
             </div>
-            <img src={process.env.PUBLIC_URL + 'graph.png'} />
+            <img src={process.env.PUBLIC_URL + 'finance.jpg'} />
             <br />
-            <button>개미운동 시작하기</button>
+            <Link to="/signin">
+              <button>개미운동 시작하기</button>
+            </Link>
           </div>
           {newsData.length >= 2 && (
             <div className="section2">

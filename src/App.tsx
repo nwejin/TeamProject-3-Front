@@ -21,6 +21,9 @@ import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 import WordBookPage from './pages/member/WordBookPage';
 import ErrorPage from './pages/ErrorPage';
+import Virtual from './components/VirtualInvest/Virtual';
+import StockVirtualPage from './pages/stockGuide/StockVirtualPage';
+import StockRatePage from './pages/stockGuide/StockRatePage';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -70,6 +73,7 @@ function App() {
           <Route path="/wordBook" element={<WordBookPage />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
+          <Route path="/stockRate" element={<StockRatePage />} />
           <Route path="/error" element={<ErrorPage />} />
 
           {/* 커뮤니티 */}
@@ -78,6 +82,7 @@ function App() {
           <Route path="/community/:id" element={<CommunityReadPage />} />
 
           {/* <Route path="/virtual" element={<Virtual />} /> */}
+          <Route path="/virtual" element={<StockVirtualPage />} />
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>
