@@ -20,6 +20,22 @@ function CommunityRead() {
   const [disabledAttr, setdisabledAttr] = useState({ display: 'none' });
   const [jwtCookie] = useCookies(['jwtCookie']);
 
+
+  const [isToggle, setIsToggle] = useState(false);
+  const modifyToggle = () => {
+    setIsToggle((prevIsToggle) => !prevIsToggle);
+    if (isToggle) {
+      setIsToggle(false);
+    } else {
+      setIsToggle(true);
+    }
+  };
+
+  useEffect(() => {
+    setButton();
+  }, []);
+
+
   const setButton = async () => {
     try {
       const tokenId = jwtCookie['jwtCookie'];
@@ -160,8 +176,14 @@ function CommunityRead() {
               삭제
             </button>
             <span className="category">{getSubject()}</span>
-            <button className="moreInfos">
+            <button className="moreInfos" onClick={modifyToggle}>
               <span className="material-symbols-outlined">more_vert</span>
+              {isToggle === true && (
+                <div className="modifyToggle">
+                  <button>수정하기</button>
+                  <button>삭제하기</button>
+                </div>
+              )}
             </button>
           </div>
         </div>

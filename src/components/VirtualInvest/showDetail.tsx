@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
-import MyResponsiveLine from './userChart';
+import MyResponsiveLine from './UserChart';
+import MyResponsivePie from './WinRate';
 
 interface props {
   open: Boolean;
@@ -15,20 +16,12 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
   // console.log(profit);
   // console.log(win);
   // console.log(loss);
+  const rate = (win / (win + loss)) * 100;
+  console.log(rate);
 
   return (
     <div className="detail-wrapper">
-      <div
-        style={{
-          // backgroundColor: 'pink',
-          display: 'flex',
-          width: '80%',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          height: '5%',
-          margin: '1rem 0',
-        }}
-      >
+      <div className="deatail-profile">
         <div>
           <p>
             {user} <span>님의 거래 정보</span>
@@ -38,55 +31,70 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
           <span className="material-symbols-outlined">close</span>
         </button>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '90%',
-          height: '80%',
-        }}
-      >
-        <div style={{ width: '80%', height: '100%' }}>
+
+      <div className="innerContent">
+        <div className="historyBox">
+          <div className="profitBox">
+            <div style={{ fontSize: '14px', color: 'gray' }}>현재 순 이익</div>
+            <div>
+              <div
+                className={profit > 0 ? 'profitSurplus' : 'profitDeficit'}
+                style={{
+                  width: '100%',
+                  textAlign: 'center',
+                }}
+              >
+                <span>{profit > 0 ? '+' : '-'} </span>
+                <span style={{ fontSize: '22px' }}>{profit}</span>
+                <span style={{ color: '#333' }}> USD</span>
+              </div>
+            </div>
+            <div
+              style={{
+                fontSize: '14px',
+                color: 'gray',
+                width: '100%',
+                textAlign: 'center',
+              }}
+            >
+              win rate: {rate}%
+            </div>
+
+          </div>
+          <div className="winRateBox">
+            <div style={{ fontSize: '14px', color: 'gray' }}> 승률 </div>
+            <div
+              style={{
+                width: '80%',
+                height: '70%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-evenly',
+                margin: 'auto',
+              }}
+            >
+              <div style={{ width: '20%', height: '100%' }}>
+                <MyResponsivePie data={response} />
+              </div>
+              <div>
+                <p>{rate}%</p>
+                <div
+                  style={{
+                    fontSize: '12px',
+                    color: 'gray',
+                    width: '100%',
+                    textAlign: 'center',
+                  }}
+                >
+                  {win} <span>승</span> / {loss} <span>패</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style={{ width: '100%', height: '80%' }}>
           <MyResponsiveLine data={profitArray} />
         </div>
-        <div
-          style={{
-            width: '18%',
-            display: 'flex',
-            flexDirection: 'column',
-            height: '50%',
-            // backgroundColor: 'pink',
-            justifyContent: 'space-around',
-          }}
-        >
-          <div
-            style={{
-              borderBottom: '1px solid gray',
-              paddingBottom: '0.5rem',
-            }}
-          >
-            <p style={{ color: 'gray' }}>현재 순 이익</p>
-            <p style={{ fontSize: '18px' }}>
-              {Number(profit).toFixed(2)}
-              <span> $</span>
-            </p>
-          </div>
-          <div
-            style={{ borderBottom: '1px solid gray', paddingBottom: '0.5rem' }}
-          >
-            <p style={{ color: 'gray' }}>승리 수</p>
-            <p style={{ fontSize: '18px' }}>{win}</p>
-          </div>
-          <div
-            style={{ borderBottom: '1px solid gray', paddingBottom: '0.5rem' }}
-          >
-            <p style={{ color: 'gray' }}>패배 수</p>
-            <p style={{ fontSize: '18px' }}>{loss}</p>
-          </div>
-
-          {/* <p>{profitArray}</p> */}
-        </div>
-        {/* <MyResponsiveLine data={profitArray} /> */}
       </div>
     </div>
   );

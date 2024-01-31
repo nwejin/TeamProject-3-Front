@@ -27,9 +27,7 @@ const ProfitAndLoss = () => {
   return (
     <>
       <button onClick={handleResetClick} className="resetBtn">
-        <span>초기화</span>
-
-        <span className="material-symbols-outlined">cached</span>
+        <span className="material-symbols-outlined"> 초기화cached</span>
       </button>
     </>
   );
