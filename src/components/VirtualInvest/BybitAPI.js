@@ -11,6 +11,7 @@ let convertData = []; // 초기에 빈 배열로 선언
 
 const fetchData = async (symbol) => {
   try {
+    convertData = []; // 초기에 빈 배열로 선언
     const response = await client.getKline({
       category: 'inverse',
       symbol: symbol,

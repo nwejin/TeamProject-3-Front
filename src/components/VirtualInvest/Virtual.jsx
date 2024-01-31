@@ -41,19 +41,34 @@ const Virtual = () => {
 
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const [formatted_account, setFormatted] = useState(numberWithCommas(account));
-  //const [formatted_prevInvest, setFormattedInvest] = useState(prevInvest);
   const [myturn, setMyturn] = useState(0); //현재까지 진행된 턴 계산
 
   const cookie = useCookies(['jwtCookie']);
 
   //아래는 투자종목 다양화
-  const [symbol, setSymbol] = useState('BTCUSDT');
+  const [symbol, setSymbol] = useState(() => {
+    const storedSymbol = localStorage.getItem('selectedSymbol');
+    return storedSymbol || 'BTCUSDT'; // localStorage에 값이 없으면 'BTCUSDT'를 기본값으로 사용
+  });
+
+  // 페이지가 로드될 때 localStorage에서 값 가져오기
+  useEffect(() => {
+    const storedSymbol = localStorage.getItem('selectedSymbol');
+    if (!storedSymbol) {
+      // localStorage에 selectedSymbol이 없다면 기본값 'BTCUSDT'를 추가
+      localStorage.setItem('selectedSymbol', 'BTCUSDT');
+      setSymbol('BTCUSDT');
+    } else {
+      setSymbol(storedSymbol);
+    }
+  }, [setSymbol]);
 
   // 다음턴 버튼 클릭 시, bybit api 통신
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await getConvertData(symbol); // 데이터가 로딩될 때까지 대기
+        console.log('cccc> ', result);
         const resVol = await volumeArr;
         setData(result.slice(index, yearofDay));
         setVolume(resVol.slice(index, yearofDay));
@@ -268,7 +283,10 @@ const Virtual = () => {
         <div className="investMoney">
           <p className="smallTitle">보유자산</p>
           <p>
-            <span>{numberWithCommas(purchasePrice * stock)}</span> $
+            <span>
+              {numberWithCommas(Number(purchasePrice).toFixed(3) * stock)}
+            </span>{' '}
+            $
           </p>
         </div>
 
