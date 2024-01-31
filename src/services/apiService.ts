@@ -500,13 +500,30 @@ export const myPwChecker = async (userData: any, currentUserId: String) => {
 
 export const modifyUser = async (userData: any, currentUserId: String) => {
   console.log(userData);
+  console.log(userData.user_id);
+  console.log(currentUserId);
+  console.log(userData.user_profile);
   try {
+    const userFormData = new FormData();
+
+    userFormData.append('user_id', userData.user_id);
+    userFormData.append('user_password', userData.user_password);
+    userFormData.append('user_changepw', userData.user_changepw);
+    userFormData.append('user_nickname', userData.user_nickname);
+    userFormData.append('user_email', userData.user_email);
+
+    if (userData.user_profile) {
+      userFormData.append('user_profile', userData.user_profile);
+    }
+
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/modifyUserInfo',
-      { userData, currentUserId },
+      userFormData,
+      // userFormData,
       {
         headers: {
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
         withCredentials: true,
       }

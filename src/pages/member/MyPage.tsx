@@ -130,9 +130,11 @@ const MyPage = () => {
 
   const handleInputChange = (e: any) => {
     const { name, value, files } = e.target;
+    console.log(name);
+    console.log(value);
 
     // 회원 프로필 관련
-    if (name === 'profileIMG' && files && files.length > 0) {
+    if (name === 'user_profile' && files && files.length > 0) {
       const file = files[0];
       // 파일 읽어오기
       const reader = new FileReader();
@@ -152,7 +154,7 @@ const MyPage = () => {
 
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: name === 'user_profile' ? files[0] : value,
     }));
   };
 
@@ -247,16 +249,25 @@ const MyPage = () => {
 
   return (
     <>
-      <div className="form-box">
+      <div
+        className="form-box"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}
+      >
         <div className="page-title">회원 정보</div>
 
         <form name="register-form" method="post">
           <div
+            className="userImgBox"
             style={{
               display: 'flex',
               flexDirection: 'column',
               width: '70%',
               alignItems: 'center',
+              margin: 'auto',
             }}
           >
             <img
@@ -279,8 +290,8 @@ const MyPage = () => {
             >
               <input
                 type="file"
-                name="profileIMG"
-                id="profileIMG"
+                name="user_profile"
+                id="user_profile"
                 style={{
                   border: 0,
                   borderRadius: 0,
@@ -288,77 +299,86 @@ const MyPage = () => {
                   height: 0,
                   padding: 0,
                 }}
+                disabled={isDisabled}
                 onChange={handleInputChange}
               />
-              <label htmlFor="profileIMG">
+              <label htmlFor="user_profile">
                 <span> 이미지 변경하기</span>
-                <span className="material-symbols-outlined">edit</span>
+                <span
+                  className="material-symbols-outlined"
+                  style={{ fontSize: '14px' }}
+                >
+                  edit
+                </span>
               </label>
             </div>
           </div>
-          아이디
-          <input
-            name="user_id"
-            id="user_id"
-            placeholder="아이디"
-            value={formData.user_id}
-            className="input-box"
-            disabled
-          />
-          현재 비밀번호
-          <input
-            type="password"
-            id="user_password"
-            name="user_password"
-            placeholder="현재 비밀번호"
-            ref={pwRef}
-            // value={formData.user_password}
-            className="input-box"
-            onChange={handleInputChange}
-            onKeyUp={passwordCheck}
-            disabled={isDisabled}
-          />
-          <div className="pwCheckBox">{pwCheckString}</div>
-          변경 비밀번호
-          <input
-            type="password"
-            id="user_changepw"
-            name="user_changepw"
-            placeholder="변경 비밀번호"
-            className="input-box"
-            onChange={handleInputChange}
-            disabled={isDisabled}
-          />
-          닉네임
-          <input
-            id="user_nickname"
-            name="user_nickname"
-            placeholder="닉네임"
-            className="input-box"
-            value={formData.user_nickname}
-            onChange={handleInputChange}
-            onKeyUp={nicknameReCheck}
-            ref={nickRef}
-          />
-          <div className="nicknameCheckBox">{nicknameCheckString}</div>
-          이메일
-          <input
-            name="user_email"
-            id="user_email"
-            placeholder="이메일"
-            className="input-box"
-            value={formData.user_email}
-            onChange={handleInputChange}
-          />
-          <br />
-          <button className="signinBtn" onClick={modifyUserInfo}>
-            회원정보 수정
-          </button>
-          <br />
-          <br />
-          <button className="signinBtn" onClick={deleteUserInfo}>
-            회원탈퇴
-          </button>
+
+          <div>
+            아이디
+            <input
+              name="user_id"
+              id="user_id"
+              placeholder="아이디"
+              value={formData.user_id}
+              className="input-box"
+              disabled
+            />
+            현재 비밀번호
+            <input
+              type="password"
+              id="user_password"
+              name="user_password"
+              placeholder="현재 비밀번호"
+              ref={pwRef}
+              // value={formData.user_password}
+              className="input-box"
+              onChange={handleInputChange}
+              onKeyUp={passwordCheck}
+              disabled={isDisabled}
+            />
+            <div className="pwCheckBox">{pwCheckString}</div>
+            변경 비밀번호
+            <input
+              type="password"
+              id="user_changepw"
+              name="user_changepw"
+              placeholder="변경 비밀번호"
+              className="input-box"
+              onChange={handleInputChange}
+              disabled={isDisabled}
+            />
+            닉네임
+            <input
+              id="user_nickname"
+              name="user_nickname"
+              placeholder="닉네임"
+              className="input-box"
+              value={formData.user_nickname}
+              onChange={handleInputChange}
+              onKeyUp={nicknameReCheck}
+              ref={nickRef}
+            />
+            <div className="nicknameCheckBox">{nicknameCheckString}</div>
+            이메일
+            <input
+              name="user_email"
+              id="user_email"
+              placeholder="이메일"
+              className="input-box"
+              value={formData.user_email}
+              onChange={handleInputChange}
+            />
+            <br />
+            <button className="signinBtn" onClick={modifyUserInfo}>
+              회원정보 수정
+            </button>
+            <br />
+            <br />
+            <button className="signinBtn" onClick={deleteUserInfo}>
+              회원탈퇴
+            </button>
+          </div>
         </form>
       </div>
     </>
