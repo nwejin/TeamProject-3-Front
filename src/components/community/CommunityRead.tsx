@@ -1,11 +1,32 @@
 import { useLocation } from 'react-router-dom';
 import Comment from '../../components/community/Comment';
 import CommentWrite from '../../components/community/CommentWrite';
-import { addLike } from '../../services/apiService';
+import { addLike, userInfo } from '../../services/apiService';
+import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 function CommunityRead() {
   const location = useLocation();
   const data = location.state.post;
+  const [disabledAttr, setdisabledAttr] = useState({ display: 'none' });
+  const [jwtCookie] = useCookies(['jwtCookie']);
+
+  useEffect(() => {
+    setButton();
+  }, []);
+
+  const setButton = async () => {
+    try {
+      const tokenId = jwtCookie['jwtCookie'];
+      const response = await userInfo({ id: tokenId });
+      console.log(response.info.user_id);
+      if (response.info.user_nickname === data.userId.user_nickname) {
+        setdisabledAttr({ display: 'block' });
+      }
+    } catch (error) {
+      console.log('사용자 정보 가져오기 에러', error);
+    }
+  };
 
   const formatTimeDifference = (dateString: any) => {
     const postDate = new Date(dateString);
@@ -74,15 +95,15 @@ function CommunityRead() {
         <div className="userProfile">
           <div className="profile">
             <span>
-
               <img src={data.userId.user_profile} alt="" />
-
             </span>
             <p style={{ marginRight: '5px' }}>{data.userId.user_nickname}</p>
             <span style={{ fontSize: '10px' }}>•</span>
             <span>{formatTimeDifference(data.date)}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button style={disabledAttr}>수정</button>
+            <button style={disabledAttr}>삭제</button>
             <span className="category">{getSubject()}</span>
             <button className="moreInfos">
               <span className="material-symbols-outlined">more_vert</span>
