@@ -1,3 +1,5 @@
+@import './Component.scss';
+
 p {
   margin: 0;
   padding: 0;
@@ -19,9 +21,9 @@ p {
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     // border-radius: 10px;
-    border: 1px solid rgb(204, 204, 204);
+
     .currentCostBox {
       // background-color: pink;
       width: 90%;
@@ -32,7 +34,7 @@ p {
       justify-content: space-around;
       // border-bottom: 1px solid rgb(204, 204, 204);
       span {
-        font-size: 24px;
+        font-size: 30px;
         font-weight: 700;
       }
     }
@@ -279,25 +281,97 @@ p {
   flex-direction: column;
   // justify-content: center;
   align-items: center;
-  left: -315%;
+  left: -320%;
   top: 0%;
-  width: 415%;
+  width: 420%;
   height: 110%;
   // border-radius: 10px;
   border: 1px solid rgb(204, 204, 204);
-  .closeBtn {
-    background: none;
-    border: none;
-    span {
+  .deatail-profile {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0 1rem 0;
+    p {
       font-size: 18px;
+    }
+    .closeBtn {
+      background: none;
+      border: none;
+      span {
+        font-size: 24px;
+      }
+      span:hover {
+        color: $color-blue-1;
+      }
+    }
+  }
+  .innerContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    .historyBox {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      height: 15%;
+      // background-color: pink;
+      justify-content: space-evenly;
+      align-items: center;
+      .profitBox {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        justify-content: space-between;
+        .profitSurplus {
+          color: blue;
+          span {
+            color: blue;
+          }
+        }
+        .profitDeficit {
+          color: red;
+        }
+      }
+      .winRateBox {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
     }
   }
 }
 
+.symbol-Box {
+  width: 90%;
+  // background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  label {
+    color: gray;
+  }
+  select {
+    width: 60%;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
 .status-Box {
-  width: 70%;
+  width: 100%;
+  height: 5%;
   display: flex;
   justify-content: space-between;
+  // background-color: blue;
   .resetBtn {
     text-align: center;
     display: flex;
@@ -306,8 +380,14 @@ p {
     border: none;
     width: fit-content;
     span {
-      font-size: 16px;
+      font-size: 17px;
       color: gray;
+      text-align: center;
+      line-height: 17px;
+      // background-color: pink;
+    }
+    span:hover {
+      color: $color-blue-1;
     }
   }
 }

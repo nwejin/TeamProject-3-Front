@@ -6,7 +6,7 @@ import Candle from './Candle';
 import SellBtn from './SellOrder';
 import Order from './BuyOrder';
 import Detail from './showDetail';
-import MyResponsiveLine from './userChart';
+import MyResponsiveLine from './UserChart';
 
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
@@ -200,11 +200,108 @@ const Virtual = () => {
       <div className="invest-chart">
         <Candle {...candleProps} />
       </div>
+
       <div className="invest-input">
+        <div
+          style={{
+            width: '100%',
+            height: '7%',
+            display: 'flex',
+            justifyContent: 'center',
+            border: '1px solid rgb(204, 204, 204)',
+          }}
+        >
+          <SelectSymbol symbol={symbol} setSymbol={setSymbol} />
+        </div>
+        <div
+          style={{
+            height: '85%',
+            width: '100%',
+            border: '1px solid rgb(204, 204, 204)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+          }}
+        >
+          <div className="currentCostBox">
+            <p className="smallTitle">현재 가격</p>
+            <p>
+              <span>{currentCost}</span> $
+            </p>
+          </div>
+          <div className="btn-wapper">
+            <div className="tradingBtnBox">
+              <button className="buy Btn" onClick={showBuyModal}>
+                매수
+              </button>
+              {openBuyModal && (
+                <Order
+                  currentVal={currentCost}
+                  prevInvest={prevInvest}
+                  updatePrevInvest={updatePrevInvest}
+                  close={closeBuyModal}
+                />
+              )}
+
+              <button className="sell Btn" onClick={showSellModal}>
+                매도
+              </button>
+              {openSellModal && (
+                <SellBtn
+                  currentVal={currentCost}
+                  prevInvest={prevInvest}
+                  updatePrevInvest={updatePrevInvest}
+                  close={closeSellModal}
+                />
+              )}
+            </div>
+            <div className="nextBtnBox">
+              <button className="next Btn" onClick={nextTurn}>
+                <span>다음턴으로</span>
+                <span>|</span>
+                <span>
+                  {myturn} / {totalTurn}
+                </span>
+              </button>
+            </div>
+          </div>
+          <div className="currentStock">
+            <div>
+              <p className="smallTitle">내 주식 현황</p>
+              <p>
+                <span>{stock}</span> 주
+              </p>
+            </div>
+            <div>
+              <p className="smallTitle"> 평단가</p>
+              <p>
+                <span>{purchasePrice}</span> $
+              </p>
+            </div>
+          </div>
+          <div className="totalMoney">
+            <p className="smallTitle">잔액 ({currentProfit} %)</p>
+            <p>
+              <span>{formatted_account}</span> $
+            </p>
+          </div>
+
+          <div className="investMoney">
+            <p className="smallTitle">보유자산</p>
+            <p>
+              <span>
+                {numberWithCommas(Number(purchasePrice).toFixed(3) * stock)}
+              </span>{' '}
+              $
+            </p>
+          </div>
+        </div>
         <div className="status-Box">
           <button onClick={showDetailModal} className="resetBtn">
-            <span>거래 내역 보기</span>
-            <span class="material-symbols-outlined">search</span>
+            <p>
+              <span class="material-symbols-outlined"> 내역보기search</span>
+            </p>
           </button>
           {openDetailModal && (
             <Detail
@@ -213,101 +310,9 @@ const Virtual = () => {
               user={userNickname}
             />
           )}
-
           <ProfitAndLoss />
         </div>
-
-        <div className="currentCostBox">
-          <p className="smallTitle">현재 가격</p>
-          <p>
-            <span>{currentCost}</span> $
-          </p>
-        </div>
-        <div className="btn-wapper">
-          <div className="tradingBtnBox">
-            <button className="buy Btn" onClick={showBuyModal}>
-              매수
-            </button>
-            {openBuyModal && (
-              <Order
-                currentVal={currentCost}
-                prevInvest={prevInvest}
-                updatePrevInvest={updatePrevInvest}
-                close={closeBuyModal}
-              />
-            )}
-
-            <button className="sell Btn" onClick={showSellModal}>
-              매도
-            </button>
-            {openSellModal && (
-              <SellBtn
-                currentVal={currentCost}
-                prevInvest={prevInvest}
-                updatePrevInvest={updatePrevInvest}
-                close={closeSellModal}
-              />
-            )}
-          </div>
-          <div className="nextBtnBox">
-            <button className="next Btn" onClick={nextTurn}>
-              <span>다음턴으로</span>
-              <span>|</span>
-              <span>
-                {myturn} / {totalTurn}
-              </span>
-            </button>
-          </div>
-        </div>
-        <div className="currentStock">
-          <div>
-            <p className="smallTitle">내 주식 현황</p>
-            <p>
-              <span>{stock}</span> 주
-            </p>
-          </div>
-          <div>
-            <p className="smallTitle"> 평단가</p>
-            <p>
-              <span>{purchasePrice}</span> $
-            </p>
-          </div>
-        </div>
-        <div className="totalMoney">
-          <p className="smallTitle">잔액 ({currentProfit} %)</p>
-          <p>
-            <span>{formatted_account}</span> $
-          </p>
-        </div>
-
-        <div className="investMoney">
-          <p className="smallTitle">보유자산</p>
-          <p>
-            <span>
-              {numberWithCommas(Number(purchasePrice).toFixed(3) * stock)}
-            </span>{' '}
-            $
-          </p>
-        </div>
-
-        <button
-          style={{ background: 'none', border: 'none' }}
-          onClick={showDetailModal}
-        >
-          거래 내역 보기
-        </button>
-        {openDetailModal && (
-          <Detail close={closeDetailModal} response={detailData} />
-        )}
-
-        <div>
-          {myturn} / {totalTurn}
-        </div>
-
-        <ProfitAndLoss />
-        <SelectSymbol symbol={symbol} setSymbol={setSymbol} />
       </div>
-      <div></div>
     </div>
   );
 };

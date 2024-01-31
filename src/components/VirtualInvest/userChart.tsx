@@ -20,7 +20,7 @@ const MyResponsiveLine = ({ data }: any) => {
     <>
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+        margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',
@@ -35,7 +35,7 @@ const MyResponsiveLine = ({ data }: any) => {
           tickPadding: 5,
           tickRotation: 0,
           legend: '게임 횟수',
-          legendOffset: 36,
+          legendOffset: 40,
           legendPosition: 'middle',
         }}
         axisLeft={{
@@ -62,7 +62,7 @@ const MyResponsiveLine = ({ data }: any) => {
             anchor: 'top',
             direction: 'row',
             justify: false,
-            translateX: -200,
+            translateX: 0,
             translateY: -30,
             itemsSpacing: 0,
             itemDirection: 'left-to-right',
