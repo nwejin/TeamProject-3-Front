@@ -67,7 +67,7 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
           >
             <p style={{ color: 'gray' }}>현재 순 이익</p>
             <p style={{ fontSize: '18px' }}>
-              {profit}
+              {Number(profit).toFixed(2)}
               <span> $</span>
             </p>
           </div>

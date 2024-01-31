@@ -14,13 +14,13 @@ const StockRate = () => {
             <li>주식</li>
           </Link>
           <Link to="/stockRate">
-            <li className="selected-blue">환율</li>
+            <li className="selected-blue">기업정보</li>
           </Link>
           <Link to="/virtual">
             <li>모의 투자</li>
           </Link>
         </ul>
-        환율
+        기업정보
       </div>
     </>
   );

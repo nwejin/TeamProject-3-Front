@@ -24,6 +24,7 @@ const SelectSymbol = ({ setSymbol }) => {
         <option value="ETHUSD">ETHUSD</option>
         <option value="XRPUSDT">XRPUSDT</option>
         <option value="MATICUSDT">MATICUSDT</option>
+        <option value="AXSUSDT">AXSUSDT</option>
       </select>
     </div>
   );
