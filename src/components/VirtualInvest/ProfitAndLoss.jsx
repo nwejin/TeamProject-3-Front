@@ -6,12 +6,16 @@ const ProfitAndLoss = () => {
   const initializeAccount = 3000000;
   const currentAccount = useSelector((state) => state.account);
 
+  // const profit = currentAccount - initializeAccount;
+  // console.log(profit);
+
   const handleResetClick = async () => {
     try {
+      const profit = currentAccount - initializeAccount;
       // Axios를 사용하여 서버에 요청 보내기
-      const resetResponse = await calProfitAndLoss({
-        profit: currentAccount - initializeAccount,
-      });
+      const resetResponse = await calProfitAndLoss({ profit });
+
+      console.log(resetResponse);
       if (resetResponse) {
         window.location.reload(); //새로고침이 안댐
       }
@@ -21,9 +25,13 @@ const ProfitAndLoss = () => {
   };
 
   return (
-    <div>
-      <button onClick={handleResetClick}>초기화</button>
-    </div>
+    <>
+      <button onClick={handleResetClick} className="resetBtn">
+        <span>초기화</span>
+
+        <span className="material-symbols-outlined">cached</span>
+      </button>
+    </>
   );
 };
 

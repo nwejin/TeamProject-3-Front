@@ -36,7 +36,9 @@ function ReplyWrite({ data }: { data: any }) {
     }
   };
 
-  const [loginUserData, setLoginUserData] = useState();
+
+  const [userProfile, setuserProfile] = useState('');
+  const [userNickname, setuserNickname] = useState('');
 
   // 현재 로그인한 사용자 정보 (닉네임 불러오기)
   useEffect(() => {
@@ -44,8 +46,10 @@ function ReplyWrite({ data }: { data: any }) {
     const getUserInfo = async () => {
       try {
         const response = await userInfo({ id: tokenId });
-        const nickname = response.info.user_nickname;
-        setLoginUserData(nickname);
+
+        setuserNickname(response.info.user_nickname);
+        setuserProfile(response.info.user_profile);
+
       } catch (error) {
         console.log('사용자 정보 가져오기 에러', error);
       }
@@ -61,12 +65,11 @@ function ReplyWrite({ data }: { data: any }) {
         <div className="userProfile">
           <span>
             <a href="/">
-              <img
-                src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
-                alt=""
-              />
+
+              <img src={userProfile} alt="" />
+
               <p style={{ fontWeight: '700' }}>
-                {loginUserData}
+                {userNickname}
                 <span>님의 댓글</span>
               </p>
             </a>

@@ -50,7 +50,7 @@ function Community() {
       {/* 콘텐츠 박스*/}
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
-
+        console.log(post);
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
           // 분계산
@@ -115,69 +115,71 @@ function Community() {
         };
 
         return (
-          <Link to={`/community/${post._id}`} state={{ post }}>
-            <div className="post" key={post._id}>
-              <div className="postContents">
+          <div className="post" key={post._id}>
+            <div className="postContents">
+
+              <Link to={`/community/${post._id}`} state={{ post }}>
                 {/* 유저 정보*/}
                 <div className="userProfile">
                   <span>
-                    <img
-                      src="https://teamproject-3-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%B5%E1%84%87%E1%85%A9%E1%86%AB+%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF.png"
-                      alt="기본 이미지"
-                    />
+                    <img src={post.userId.user_profile} alt="기본 이미지" />
                   </span>
-                  <p style={{ marginRight: '5px' }}>{post.userNickName}</p>
+                  <p style={{ marginRight: '5px' }}>
+                    {post.userId.user_nickname}
+                  </p>
                   <span style={{ fontSize: '10px' }}>•</span>
                   <span>{formatTimeDifference(post.date)}</span>
                 </div>
+              </Link>
 
-                {/* 게시글 */}
+              {/* 게시글 */}
 
-                <div className="contentBox">
-                  <div className="textContent">
+              <div className="contentBox">
+                <div className="textContent">
+                  <Link to={`/community/${post._id}`} state={{ post }}>
                     <p className="title">{post.title}</p>
                     <p className="text">{post.content}</p>
-                  </div>
-
-                  <div className="imgBox">
-                    <Link to={`/community/${post._id}`} state={{ post }}>
-                      <img src={post.image} alt="" />
-                    </Link>
-                  </div>
+                  </Link>
                 </div>
 
-                {/* 아이콘 리스트 */}
-                <div className="statusBox">
-                  <div>
-                    <span>
-                      {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
-                      <button onClick={plusLike}>
-                        {/* <span
+                <div className="imgBox">
+                  <Link to={`/community/${post._id}`} state={{ post }}>
+                    <img src={post.image} alt="" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* 아이콘 리스트 */}
+              <div className="statusBox">
+                <div>
+                  <span>
+                    {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
+                    <button onClick={plusLike}>
+                      {/* <span
                         className=
                           
                         'material-symbols-outlined'
                       >
                         favorite
                       </span> */}
-                        <span>좋아요</span>
-                      </button>
-                      <span>{post.like}</span>
-                    </span>
+                      <span>좋아요</span>
+                    </button>
+                    <span>{post.like}</span>
+                  </span>
 
-                    <span>
-                      <button>
-                        <span className="material-symbols-outlined">
-                          maps_ugc
-                        </span>
-                      </button>
-                      <span>0</span>
-                    </span>
-                  </div>
-                  <span className="category">{getSubject()}</span>
+                  <span>
+                    <button>
+                      <span className="material-symbols-outlined">
+                        maps_ugc
+                      </span>
+                    </button>
+                    <span>0</span>
+                  </span>
                 </div>
+                <span className="category">{getSubject()}</span>
               </div>
             </div>
-          </Link>
+          </div>
         );
       })}
 

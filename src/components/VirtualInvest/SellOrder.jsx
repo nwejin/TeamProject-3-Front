@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -83,7 +82,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   };
 
   // 퍼센트 범위 표시
-  const [range, setRange] = useState();
+  const [range, setRange] = useState(50);
   const [calPerVal, setCalPerVal] = useState();
 
   const dataChange = (e) => {
@@ -113,7 +112,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="판매할 주식 수를 입력하세요"
             onChange={(e) => setSellOrder(e.target.value)}
             value={sellOrder}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
           />
           <input
             type="text"
@@ -122,7 +121,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="주"
             readOnly
             style={{
-              width: '13%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
@@ -138,7 +137,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             list="tickmarks"
             onChange={dataChange}
             onClick={dataChange}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
           />
           <datalist id="tickmarks">
             <option value="0"></option>
@@ -161,7 +160,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="50%"
             readOnly
             style={{
-              width: '14%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
@@ -174,7 +173,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
           매도
         </button>
         <button className="closeBtn" onClick={close}>
-          X
+          닫기
         </button>
       </div>
     </div>

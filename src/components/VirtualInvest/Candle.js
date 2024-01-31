@@ -1,6 +1,7 @@
 // Candle.js
 
 import { createChart, ColorType, PriceScaleMode } from 'lightweight-charts';
+import { symbol } from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 
 export const Candle = (props) => {
@@ -13,7 +14,8 @@ export const Candle = (props) => {
       areaTopColor = '#2962FF',
       areaBottomColor = 'rgba(41, 98, 255, 0.28)',
     } = {},
-    symbolName = 'BTCUSDT', // 심볼 이름
+    symbolName = symbol, // 심볼 이름
+    volumeArr,
   } = props;
 
   const chartContainerRef = useRef();
@@ -38,13 +40,58 @@ export const Candle = (props) => {
 
     chart.timeScale().fitContent();
 
+    // ////////////////////////
+    // volume
+    const areaSeries = chart.addAreaSeries({
+      topColor: '#009EFA',
+      bottomColor: 'rgba(41, 98, 255, 0.28)',
+      lineColor: '#009EFA',
+      lineWidth: 2,
+    });
+    areaSeries.priceScale().applyOptions({
+      scaleMargins: {
+        // 캔들 탑, 바텀 위치 조정
+        top: 0.2,
+        bottom: 0.2,
+      },
+    });
+
+    const volumeSeries = chart.addHistogramSeries({
+      color: '#009EFA',
+      priceFormat: {
+        type: 'volume',
+      },
+      priceScaleId: '',
+      scaleMargins: {
+        top: 0.5,
+        bottom: 0,
+      },
+    });
+    volumeSeries.priceScale().applyOptions({
+      scaleMargins: {
+        top: 0.75, // 캔들과 볼륨의 간격
+        bottom: 0,
+      },
+    });
+
+    const volumeData = volumeArr.map((item) => {
+      return {
+        time: item.time,
+        value: Number(item.value),
+        color: item.color,
+      };
+    });
+    if (volumeData) {
+      volumeSeries.setData(volumeData);
+    }
+
     //////////////////////////////
     // 이동평균선 지표 추가(이평)
 
     const movingAverages = [
       { length: 7, color: '#F3C5FF' },
       { length: 14, color: '#FFC75F' },
-      { length: 21, color: '#00C9A7' },
+      { length: 20, color: '#00C9A7' },
       { length: 128, color: '#008CCA' },
     ];
 
@@ -159,7 +206,7 @@ export const Candle = (props) => {
       chart.unsubscribeCrosshairMove(updateLegend);
       chart.remove();
     };
-  }, [data, backgroundColor, textColor]);
+  }, [data, backgroundColor, textColor, symbolName]);
 
   return (
     <div style={{ position: 'relative', zIndex: 0 }}>

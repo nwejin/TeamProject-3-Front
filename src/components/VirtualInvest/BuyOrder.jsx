@@ -27,7 +27,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
 
       // 주문 총 금액이 잔고보다 많을 때만 적용
       if (account - cal >= 0) {
-        console.log("buyorder", buyOrder)
+        console.log('buyorder', buyOrder);
         dispatch({ type: 'SET_ACCOUNT', payload: account - cal });
         const newStock = Number(stock) + Number(buyOrder);
 
@@ -63,7 +63,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
 
   // 퍼센트 범위 표시
   useEffect(() => {});
-  const [range, setRange] = useState();
+  const [range, setRange] = useState(50);
   const [calPerVal, setCalPerVal] = useState();
   const dataChange = (e) => {
     const perValue = e.target.value;
@@ -99,7 +99,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             type="text"
             placeholder="구매할 주식 수를 입력하세요"
             onChange={(e) => setBuyOrder(e.target.value)}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
             value={calPerVal}
           />
           <input
@@ -109,7 +109,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="주"
             readOnly
             style={{
-              width: '13%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
@@ -128,7 +128,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             list="tickmarks"
             onChange={dataChange}
             onClick={dataChange}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
           />
           <datalist id="tickmarks">
             <option value="0"></option>
@@ -151,7 +151,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="50%"
             readOnly
             style={{
-              width: '14%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
