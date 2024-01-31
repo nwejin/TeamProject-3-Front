@@ -14,13 +14,12 @@ p {
 
   .invest-input {
     position: relative;
-    // background-color: pink;
     margin-left: 2vw;
     width: 24%;
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     // border-radius: 10px;
     border: 1px solid rgb(204, 204, 204);
     .currentCostBox {
@@ -99,7 +98,7 @@ p {
     align-items: center;
     left: 5%;
     width: 90%;
-    height: 53%;
+    height: 55%;
     top: 25%;
     // border-radius: 10px;
     border: 1px solid rgb(204, 204, 204);
@@ -141,7 +140,7 @@ p {
   // justify-content: center;
   align-items: center;
   width: 90%;
-  height: 53%;
+  height: 55%;
   left: 5%;
   top: 25%;
   // border-radius: 10px;

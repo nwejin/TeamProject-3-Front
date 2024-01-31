@@ -112,7 +112,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="판매할 주식 수를 입력하세요"
             onChange={(e) => setSellOrder(e.target.value)}
             value={sellOrder}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
           />
           <input
             type="text"
@@ -121,7 +121,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="주"
             readOnly
             style={{
-              width: '13%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
@@ -137,7 +137,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             list="tickmarks"
             onChange={dataChange}
             onClick={dataChange}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
           />
           <datalist id="tickmarks">
             <option value="0"></option>
@@ -160,7 +160,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="50%"
             readOnly
             style={{
-              width: '14%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
@@ -173,7 +173,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
           매도
         </button>
         <button className="closeBtn" onClick={close}>
-          X
+          닫기
         </button>
       </div>
     </div>

@@ -99,7 +99,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             type="text"
             placeholder="구매할 주식 수를 입력하세요"
             onChange={(e) => setBuyOrder(e.target.value)}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
             value={calPerVal}
           />
           <input
@@ -109,7 +109,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="주"
             readOnly
             style={{
-              width: '13%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
@@ -128,7 +128,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             list="tickmarks"
             onChange={dataChange}
             onClick={dataChange}
-            style={{ width: '87%' }}
+            style={{ width: '83%' }}
           />
           <datalist id="tickmarks">
             <option value="0"></option>
@@ -151,7 +151,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             placeholder="50%"
             readOnly
             style={{
-              width: '14%',
+              width: '17%',
               border: 'none',
               textAlign: 'center',
             }}
