@@ -99,7 +99,10 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
             type="text"
             placeholder="구매할 주식 수를 입력하세요"
             onChange={(e) => setBuyOrder(e.target.value)}
-            style={{ width: '83%' }}
+            style={{
+              width: '83%',
+              border: '1px solid #d9dadb',
+            }}
             value={calPerVal}
           />
           <input
@@ -158,13 +161,6 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
           />
         </div>
       </div>
-      {/* <div style={{ marginTop: '50px' }}>
-        <p>내 주식 현황: {stock} 주</p>
-        <p>평단가: {purchasePrice}</p>
-      </div>
-      <div style={{ display: 'inline-block' }}>
-        <p>잔액: {account} $ </p>
-      </div> */}
       <div className="btn-wrapper">
         <button className="orderBtn" type="button" onClick={CalculatorOrder}>
           매수

@@ -1,7 +1,7 @@
 // 변수로 색 지정
 
-$color-blue-1: #0056F3;
-$color-blue-2: #DCE5F5;
+$color-blue-1: #0056f3;
+$color-blue-2: #dce5f5;
 $color-blue-3: #f0f3fa;
 $color-blue-4: #e6f1ff;
 $color-blue-5: blue;
@@ -15,44 +15,45 @@ $color-red-3: #faf0f0;
 
 $color-gray: #ececec;
 $color-gray-1: #d9dadb;
+$color-gray-2: #808080;
 $color-white: #ffffff;
 $color-black: #333;
 
 $rarius: 50px;
 
-
 @font-face {
-    font-family: 'Pretendard';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-style: normal;
 }
 
-.App{
-    margin:0;
-    padding:0;
+.App {
+  margin: 0;
+  padding: 0;
 }
 
 * {
-    font-family:'Pretendard';
-    color:$color-black;
+  font-family: 'Pretendard';
+  color: $color-black;
 }
 
-a{
-    text-decoration: none;
-    color:$color-black;
+a {
+  text-decoration: none;
+  color: $color-black;
 }
 
-body{
-    margin:0;
-    padding:0;
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .class {
-    border-radius: $rarius;
-    background-color: $color-blue-1;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    line-height: 100px;
+  border-radius: $rarius;
+  background-color: $color-blue-1;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
 }

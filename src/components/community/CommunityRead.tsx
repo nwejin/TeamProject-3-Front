@@ -20,7 +20,6 @@ function CommunityRead() {
   const [disabledAttr, setdisabledAttr] = useState({ display: 'none' });
   const [jwtCookie] = useCookies(['jwtCookie']);
 
-
   const [isToggle, setIsToggle] = useState(false);
   const modifyToggle = () => {
     setIsToggle((prevIsToggle) => !prevIsToggle);
@@ -34,7 +33,6 @@ function CommunityRead() {
   useEffect(() => {
     setButton();
   }, []);
-
 
   const setButton = async () => {
     try {
@@ -161,7 +159,12 @@ function CommunityRead() {
             <span style={{ fontSize: '10px' }}>•</span>
             <span>{formatTimeDifference(postData.date)}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
             <button style={disabledAttr} onClick={showModal}>
               수정
             </button>
@@ -178,12 +181,7 @@ function CommunityRead() {
             <span className="category">{getSubject()}</span>
             <button className="moreInfos" onClick={modifyToggle}>
               <span className="material-symbols-outlined">more_vert</span>
-              {isToggle === true && (
-                <div className="modifyToggle">
-                  <button>수정하기</button>
-                  <button>삭제하기</button>
-                </div>
-              )}
+              {isToggle === true && <div className="modifyToggle"></div>}
             </button>
           </div>
         </div>

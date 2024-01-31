@@ -24,15 +24,29 @@ p {
     justify-content: space-between;
     // border-radius: 10px;
 
+    .selectSymbolBox {
+      width: 100%;
+      height: 7%;
+      display: flex;
+      justify-content: center;
+      border: 1px solid $color-gray-1;
+    }
+    .mainContentBox {
+      height: 85%;
+      width: 100%;
+      border: 1px solid $color-gray-1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
     .currentCostBox {
-      // background-color: pink;
       width: 90%;
       height: 15%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      // border-bottom: 1px solid rgb(204, 204, 204);
       span {
         font-size: 30px;
         font-weight: 700;
@@ -40,36 +54,31 @@ p {
     }
     // 매수, 매도 다음 버튼
     .btn-wapper {
-      // background-color: pink;
-
       width: 90%;
       height: 15%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      // border-bottom: 1px solid rgb(204, 204, 204);
       margin-top: 0.5rem;
       .Btn {
         font-size: 18px;
-        // background: none;
         border: none;
         padding: 2px 8px;
         border-radius: 5px;
       }
       .tradingBtnBox {
-        // background-color: green;
         width: 90%;
         display: flex;
         justify-content: space-between;
         .buy {
-          background-color: red;
-          color: white;
+          background-color: $color-red-1;
+          color: $color-white;
           width: 45%;
         }
         .sell {
-          background-color: blue;
-          color: white;
+          background-color: $color-blue-1;
+          color: $color-white;
           width: 45%;
         }
       }
@@ -79,9 +88,9 @@ p {
         justify-content: center;
         .Btn {
           width: 95%;
-          background-color: #333;
+          background-color: $color-black;
           span {
-            color: white;
+            color: $color-white;
             margin: 0 0.5rem;
           }
         }
@@ -94,16 +103,14 @@ p {
     flex-direction: column;
     align-items: center;
     position: absolute;
-    background-color: white;
+    background-color: $color-white;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
     left: 5%;
     width: 90%;
-    height: 55%;
+    height: 52%;
     top: 25%;
-    // border-radius: 10px;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid $color-gray-1;
     .buy-inputBox {
       width: 100%;
       height: 40%;
@@ -113,7 +120,7 @@ p {
 
       label {
         font-size: 14px;
-        color: rgb(204, 204, 204);
+        color: $color-gray-2;
       }
       input {
         width: 80%;
@@ -126,7 +133,7 @@ p {
       margin: 2rem 0 1rem;
 
       span {
-        color: red;
+        color: $color-red-1;
       }
     }
   }
@@ -137,16 +144,14 @@ p {
   flex-direction: column;
   align-items: center;
   position: absolute;
-  background-color: white;
+  background-color: $color-white;
   flex-direction: column;
-  // justify-content: center;
   align-items: center;
   width: 90%;
-  height: 55%;
+  height: 52%;
   left: 5%;
   top: 25%;
-  // border-radius: 10px;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid $color-gray-1;
   .sell-inputBox {
     width: 100%;
     height: 40%;
@@ -156,7 +161,7 @@ p {
 
     label {
       font-size: 14px;
-      color: rgb(204, 204, 204);
+      color: $color-gray-2;
     }
     input {
       width: 80%;
@@ -186,20 +191,21 @@ p {
     font-size: 18px;
   }
   .orderBtn {
-    background-color: red;
-    color: white;
+    background-color: $color-red-1;
+    color: $color-white;
     border: none;
     border-radius: 5px;
   }
   .sellBtn {
-    background-color: blue;
-    color: white;
+    background-color: $color-blue-1;
+    color: $color-white;
     border: none;
     border-radius: 5px;
   }
   .closeBtn {
-    background-color: grey;
-    color: white;
+    background-color: $color-black;
+    color: $color-white;
+
     border: none;
     border-radius: 5px;
   }
@@ -207,12 +213,10 @@ p {
 
 .currentStock {
   display: flex;
-  // background-color: pink;
   width: 85%;
   justify-content: space-around;
-  margin-top: 1rem;
+
   height: 15%;
-  // border-top: 1px solid rgb(204, 204, 204);
   div {
     display: flex;
     flex-direction: column;
@@ -222,7 +226,7 @@ p {
     justify-content: center;
     justify-content: space-around;
     // border-radius: 5px;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid $color-gray-1;
     span {
       font-size: 20px;
       font-weight: 700;
@@ -231,11 +235,11 @@ p {
 }
 .totalMoney {
   // border-radius: 5px;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid $color-gray-1;
   width: 81%;
   height: 15%;
   text-align: center;
-  margin-top: 1rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -249,11 +253,11 @@ p {
 
 .investMoney {
   // border-radius: 5px;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid $color-gray-1;
   width: 81%;
   height: 15%;
   text-align: center;
-  margin-top: 1rem;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -262,14 +266,14 @@ p {
   span {
     font-size: 20px;
     font-weight: 700;
-    color: blue;
+    color: $color-blue-1;
   }
 }
 
 // 소제목
 .smallTitle {
   font-size: 14px;
-  color: grey;
+  color: $color-gray-2;
 }
 
 .detail-wrapper {
@@ -328,13 +332,16 @@ p {
         // align-items: center;
         justify-content: space-between;
         .profitSurplus {
-          color: blue;
+          color: $color-blue-1;
           span {
-            color: blue;
+            color: $color-blue-1;
           }
         }
         .profitDeficit {
-          color: red;
+          color: $color-red-1;
+          span {
+            color: $color-red-1;
+          }
         }
       }
       .winRateBox {
@@ -351,12 +358,11 @@ p {
 
 .symbol-Box {
   width: 90%;
-  // background-color: pink;
   display: flex;
   align-items: center;
   justify-content: space-between;
   label {
-    color: gray;
+    color: $color-gray-2;
   }
   select {
     width: 60%;
@@ -371,7 +377,6 @@ p {
   height: 5%;
   display: flex;
   justify-content: space-between;
-  // background-color: blue;
   .resetBtn {
     text-align: center;
     display: flex;
@@ -381,10 +386,9 @@ p {
     width: fit-content;
     span {
       font-size: 17px;
-      color: gray;
+      color: $color-gray-2;
       text-align: center;
       line-height: 17px;
-      // background-color: pink;
     }
     span:hover {
       color: $color-blue-1;

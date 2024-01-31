@@ -29,24 +29,23 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgb(204, 204, 204);
+  border-bottom: 1px solid $color-gray-1;
   //   background-color: pink;
   button {
     // border: 1px solid blue;
     border-radius: 5px;
     width: 100px;
     height: 30px;
-    background-color: rgb(52, 52, 236);
+    background-color: $color-blue-1;
     border: none;
     font-size: 16px;
-    color: white;
+    color: $color-white;
   }
 }
 
 .communityContentBox {
   width: 100%;
   display: flex;
-  // background-color: blue;
   margin-top: 1rem;
   justify-content: space-between;
 }
@@ -59,18 +58,16 @@ button {
   display: flex;
   justify-content: center;
   border-radius: 10px;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid $color-gray-1;
   align-items: space-around;
   margin-bottom: 1rem;
 
   //   게시글 내용
   .postContents {
     width: 90%;
-    // height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    // background-color: rgb(204, 204, 204);
   }
   //  (1) 유저 정보
   .userProfile {
@@ -79,8 +76,6 @@ button {
     justify-content: space-between;
     width: fit-content;
     height: 30px;
-    // background-color: pink;
-    // background-color: red;
     a {
       display: flex;
       align-items: center;
@@ -93,8 +88,7 @@ button {
     }
     span {
       margin-right: 5px;
-      // background-color: pink;
-      color: gray;
+      color: $color-gray-2;
     }
   }
   //   (2) 게시글 정보
@@ -103,7 +97,6 @@ button {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    // background-color: red;
     .textContent {
       width: 80%;
       .title {
@@ -113,7 +106,6 @@ button {
         font-size: 18px;
         font-weight: 700;
         width: 70%;
-        // background-color: blue;
       }
       .text {
         overflow: hidden;
@@ -122,7 +114,6 @@ button {
         -webkit-line-clamp: 2;
         white-space: normal;
         line-height: 1.4;
-        // background-color: blue;
         width: 90%;
       }
     }
@@ -159,7 +150,7 @@ button {
       }
     }
     .category {
-      border: 1px solid rgb(204, 204, 204);
+      border: 1px solid $color-gray-1;
       background-color: none;
       padding: 2px 6px;
       font-size: 14px;
@@ -175,32 +166,30 @@ button {
   //   background-color: red;
 }
 .rankingBox {
-  //   background-color: pink;
   width: 28%;
   input {
     width: 100%;
     height: 50px;
     border-radius: 5px;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid $color-gray-1;
     font-size: 18px;
     font-weight: 700;
   }
   .postListBox {
     width: 100%;
-    height: 400px;
+    height: 40%;
     margin-top: 10%;
     border-radius: 5px;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid $color-gray-1;
   }
   .postListTitle {
     width: 100%;
-    // background-color: pink;
     margin-top: 0.5rem;
     padding: 0.5em;
     span {
       font-weight: 700;
       font-size: 18px;
-      color: rgb(63, 63, 255);
+      color: $color-blue-1;
     }
   }
   .postListContent {
@@ -209,14 +198,13 @@ button {
       padding: 0.7em 0.5rem;
       margin: 0;
       li:hover {
-        // background-color: rgb(204, 204, 204);
         filter: opacity(0.7);
       }
       li {
         margin-top: 0.5rem;
         width: 100%;
         height: 50px;
-        border-bottom: 1px solid rgb(204, 204, 204);
+        border-bottom: 1px solid $color-gray-1;
         a {
           display: flex;
           justify-content: space-between;
@@ -229,16 +217,13 @@ button {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            width: 140px;
-            // background-color: pink;
+            width: 100%;
           }
           .listComment {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 40px;
             font-size: 14px;
-            // background-color: pink;
             .material-symbols-outlined {
               font-size: 18px;
             }
@@ -264,7 +249,6 @@ button {
     .postContents {
       width: 90%;
       display: flex;
-      // background-color: pink;
       margin-bottom: 1rem;
       flex-direction: column;
       justify-content: space-evenly;
@@ -290,10 +274,10 @@ button {
         }
         span {
           margin-right: 5px;
-          color: gray;
+          color: $color-gray-2;
         }
         .category {
-          border: 1px solid rgb(204, 204, 204);
+          border: 1px solid $color-gray-1;
           background-color: none;
           padding: 4px 8px;
           border-radius: 5px;
@@ -305,7 +289,6 @@ button {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        // background-color: pink;
         margin-top: 1rem;
         .textContent {
           width: 90%;
@@ -316,7 +299,7 @@ button {
           }
           .text {
             margin-top: 1rem;
-            color: gray;
+            color: $color-gray-2;
             white-space: normal;
             line-height: 1.4;
           }
@@ -363,30 +346,24 @@ button {
   margin: 1rem 0 0.5rem 0;
   padding-bottom: 1rem;
   width: 90%;
-  // border-bottom: 1px solid rgb(204, 204, 204);
 }
 
 // 댓글창 부분
 .commentBox {
   width: 100%;
-  // height: 50vh;
-  border-top: 1px solid rgb(204, 204, 204);
-  // background-color: #f3f2f2;
-  // justify-content: center;
+  border-top: 1px solid $color-gray-1;
   display: flex;
   flex-direction: column;
   align-items: center;
   .commentInnerBox {
     width: 90%;
-    // max-height: 30%;
-    // height: 30%;
-    // background-color: pink;
+
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     margin: 1rem 0;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgb(204, 204, 204);
+    border-bottom: 1px solid $color-gray-1;
     .userProfile {
       width: 100%;
       display: flex;
@@ -426,8 +403,6 @@ button {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      // background-color: red;
-
       height: 30px;
       span {
         font-size: 16px;
@@ -453,7 +428,7 @@ button {
 .commentWriteBox {
   width: 90%;
   border-radius: 10px;
-  border: 1px solid rgb(204, 204, 204);
+  border: 1px solid $color-gray-1;
   display: flex;
   justify-content: center;
   margin-top: 1rem;
@@ -486,14 +461,14 @@ button {
     button {
       border: 0;
       outline: 0;
-      background: blue;
-      color: white;
+      background: $color-blue-1;
+      color: $color-white;
       border-radius: 5px;
       padding: 0.5rem;
     }
   }
   textarea {
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid $color-gray-1;
     text-align: left;
     resize: none;
     width: 100%;
@@ -513,9 +488,9 @@ button {
   .modalBox {
     position: absolute;
     // width: 100vh;
-    width: 50%;
+    width: 60%;
     height: 70%;
-    background-color: white;
+    background-color: $color-white;
     border-radius: 20px;
     z-index: 100;
     top: 50%;
@@ -543,17 +518,17 @@ button {
     label {
       font-size: 18px;
       font-weight: 700;
-      // color: pink;
+
       margin-bottom: 0.5rem;
     }
     select,
     input {
       height: 2rem;
-      border: 1px solid rgb(204, 204, 204);
+      border: 1px solid $color-gray-1;
       border-radius: 5px;
     }
     textarea {
-      border: 1px solid rgb(204, 204, 204);
+      border: 1px solid $color-gray-1;
       border-radius: 5px;
     }
   }
@@ -565,12 +540,8 @@ button {
   padding: 0;
   background: none;
   span {
-    color: black;
+    color: $color-black;
   }
-}
-
-.fillred {
-  color: red;
 }
 
 .modifyToggle {
@@ -588,5 +559,17 @@ button {
   z-index: 100;
   button {
     height: 50%;
+  }
+}
+
+.material-symbols-outlined {
+  cursor: pointer;
+  font-variation-settings: 'FILL' 1;
+  &.heart {
+    // color: $color-blue-2;
+    // font-variation-settings:
+    &.active {
+      color: $color-blue-1;
+    }
   }
 }
