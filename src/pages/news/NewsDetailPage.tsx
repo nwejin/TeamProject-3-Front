@@ -175,13 +175,38 @@ function NewsDetailPage() {
 
     // 드래그 가능 여부
     const draggable = () => {
+        // const tokenId = cookies['jwtCookie'];
+        // if(!tokenId) {
+        //     alert('로그인 후 사용가능한 기능입니다.');
+        // } else {
+        //     setIsDraggable(!isDraggable);
+        // }
         setIsDraggable(!isDraggable)
     }
 
     // 드래그 : 직접 형광펜 기능
     const dragText = (event:any) => {
         if(isDraggable) {
+            // event.preventDefault();
+            const selection = window.getSelection();
+            const selectedText = selection?.toString() || '';
+            console.log('selection >', selection);
+            console.log('selectedText >', selectedText);
 
+            if (selection && selectedText) {
+                const range = selection.getRangeAt(0);
+    
+                // 추출된 내용
+                const extractedContents = range.extractContents();
+    
+                // 새로운 span 요소 생성
+                const span = document.createElement('span');
+                span.style.backgroundColor = 'yellow'; // 원하는 백그라운드 컬러로 변경
+                span.appendChild(extractedContents);
+    
+                // 추출된 내용 대신에 span 태그를 삽입
+                range.insertNode(span);
+            }
 
         } else {
             // 드래그 불가능 상태일 때는 드래그 이벤트 무시
@@ -204,7 +229,9 @@ function NewsDetailPage() {
                 <img className='detailImg' src={data.bigimg} alt={data.title} />
                 <h3>{data.subtitle}</h3>
               
-                <p className='detailContent'>{content}</p>
+                <p className='detailContent' 
+                onMouseUp={dragText}
+                >{content}</p>
                 <p>출처 : {data.url}</p>
                 
                 
