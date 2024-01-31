@@ -11,36 +11,38 @@
     justify-content: flex-start;
     // border:1px solid black;
     .section1 {
-      background-color: $color-blue-2;
+      // background-color: $color-blue-2;
       // border: 1px solid black;
       position: relative;
-      height: 23vw;
+      height: 23.2vw;
       width: 34%;
       margin-right: 1vw;
       margin-bottom: 1vw;
       div {
         margin: 1.5vw 0 0 1.5vw;
         font-size: 24px;
-        font-weight: 600;
-        line-height: 1.3;
+        line-height: 30px;
+        position: absolute;
+        color: white;
       }
       img {
         width: 100%;
-        position: absolute;
-        top: 35%;
+        height: 100%;
+        // position: absolute;
+        // top: 35%;
         // transform: translateY(-50%);
       }
       button {
         position: absolute;
         bottom: 1.5vw;
         right: 1.5vw;
-        color: $color-blue-1;
-        background-color: $color-white;
+        color: #0056f3;
+        background-color: #ffffff;
         border-radius: 30px;
         border: none;
-        height: 32px;
-        width: 130px;
-        line-height: 32px;
+        height: 36px;
+        width: 140px;
+        line-height: 36px;
       }
     }
     .section2 {
@@ -114,7 +116,7 @@
     }
     .section4 {
       width: 39%;
-      border: 1px solid black;
+      border: 1px solid $color-gray-1;
       height: 25vw;
     }
   }
@@ -134,18 +136,26 @@
       .main-board {
         display: inline-block;
         // float: left;
-        width: 26vw;
+        width: 25vw;
         height: 100%;
-        margin-right: 1vw;
+        // margin-right: 1vw;
+        padding: 1vw;
+        &:hover {
+          background-color: $color-blue-3;
+        }
         .main-board-image {
           width: 100%;
           height: 60%;
           margin-bottom: 1vw;
         }
         .main-board-title {
-          border: 1px solid black;
-          height: 10%;
-          margin-bottom: 0.5vw;
+          height: 8%;
+          // margin-bottom: 0.5vw;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          line-height: 16px;
+          font-weight: bold;
         }
         .main-board-content {
           height: calc(30% - 2vw);
@@ -154,31 +164,56 @@
         }
         .main-board-info {
           width: 100%;
-          height: 3vw;
+          height: 2.4vw;
           position: relative;
           bottom: 2vw;
           right: 0;
           z-index: 100;
           text-align: right;
-          .main-board-comment,
-          .main-board-like {
-            display: inline-block;
-            width: 50px;
-            height: 30px;
-            line-height: 30px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 5px;
-            span {
-            }
-            .main-icon {
+          .main-board-info-flex {
+            .main-board-comment,
+            .main-board-like {
               display: inline-block;
+              padding: 2px 10px;
+              height: 34px;
+              line-height: 30px;
+              margin: 0 auto;
+              text-align: center;
+              span {
+                transform: translate(0, 3px);
+              }
+              .material-symbols-rounded {
+                font-variation-settings:
+              //   'FILL' 1,
+                  'wght' 200, 'GRAD' 0, 'opsz' 24;
+              }
+              .main-icon {
+                display: inline-block;
+                transform: translate(0px, -4px);
+                margin-left: 4px;
+              }
             }
-          }
-          .main-board-comment {
-          }
-          .main-board-like {
-            background-color: red;
+
+            .main-board-like {
+              border: 1px solid #cecece;
+              border-radius: 5px;
+              margin-left: 8px;
+            }
+            .main-board-writer {
+              display: inline-block;
+              height: 34px;
+              margin: 0 auto;
+              text-align: left;
+              position: absolute;
+              left: 0vw;
+              .main-board-nickname {
+                font-size: 14px;
+              }
+              .main-board-date {
+                font-size: 14px;
+                color: gray;
+              }
+            }
           }
         }
       }
@@ -213,9 +248,15 @@
   }
 }
 .thumb-title {
-  margin: 4vw 0 1vw 0;
+  margin-bottom: 1vw;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .point-section {
-  background-color: $color-blue-3;
+  background-color: #f0f3fa;
+  height: 35vw;
+  display: flex;
+  margin-top: 4vw;
+  align-items: center;
 }
