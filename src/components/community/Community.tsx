@@ -8,6 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
+// 커뮤니티 목록 페이지
 function Community() {
   const [posts, setPosts] = useState([]);
   // db에서 데이터 불러오기위해 useState
@@ -117,7 +118,6 @@ function Community() {
         return (
           <div className="post" key={post._id}>
             <div className="postContents">
-
               <Link to={`/community/${post._id}`} state={{ post }}>
                 {/* 유저 정보*/}
                 <div className="userProfile">
