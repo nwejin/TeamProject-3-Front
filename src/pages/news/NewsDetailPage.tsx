@@ -189,11 +189,11 @@ function NewsDetailPage() {
         if(isDraggable) {
             // event.preventDefault();
             const selection = window.getSelection();
-            const selectedText = selection?.toString() || '';
+            const selectedTxt = selection?.toString() || '';
             console.log('selection >', selection);
-            console.log('selectedText >', selectedText);
+            console.log('selectedText >', selectedTxt);
 
-            if (selection && selectedText) {
+            if (selection && selectedTxt) {
                 const range = selection.getRangeAt(0);
     
                 // 추출된 내용
@@ -209,10 +209,8 @@ function NewsDetailPage() {
 
                 const saveMyHighlight = axios.post(process.env.REACT_APP_BACKSERVER + "/news/myHighlight",{
                     //텍스트랑 뉴스아이디 보내야
-                //     data:{
-                //     seletedTxt: selectedText,
-                //     news_id: data._id
-                // }
+                    selectedTxt,
+                    news_id: data._id
             },
                 {
                     headers: {
