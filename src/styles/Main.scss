@@ -213,8 +213,13 @@
               text-align: left;
               position: absolute;
               left: 0vw;
+
               .main-board-nickname {
                 font-size: 14px;
+                width: 12vw;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
               }
               .main-board-date {
                 font-size: 14px;
