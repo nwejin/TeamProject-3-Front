@@ -13,8 +13,8 @@ const MarketData: React.FC = () => {
       'https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js';
 
     script.innerHTML = JSON.stringify({
-      width: 770,
-      height: 450,
+      width: '100%',
+      height: '800px',
       symbolsGroups: [
         {
           name: '지수',
@@ -49,7 +49,7 @@ const MarketData: React.FC = () => {
       ],
       showSymbolLogo: true,
       isTransparent: false,
-      colorTheme: 'dark',
+      colorTheme: 'white',
       locale: 'kr',
     });
 

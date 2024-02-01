@@ -36,7 +36,6 @@ function ReplyWrite({ data }: { data: any }) {
     }
   };
 
-
   const [userProfile, setuserProfile] = useState('');
   const [userNickname, setuserNickname] = useState('');
 
@@ -49,7 +48,6 @@ function ReplyWrite({ data }: { data: any }) {
 
         setuserNickname(response.info.user_nickname);
         setuserProfile(response.info.user_profile);
-
       } catch (error) {
         console.log('사용자 정보 가져오기 에러', error);
       }
@@ -60,12 +58,11 @@ function ReplyWrite({ data }: { data: any }) {
   //   console.log(loginUserData);
 
   return (
-    <div className="commentWriteBox">
+    <div className="commentWriteBox" style={{ marginLeft: '10%' }}>
       <div className="commentWriteInnerBox">
         <div className="userProfile">
           <span>
             <a href="/">
-
               <img src={userProfile} alt="" />
 
               <p style={{ fontWeight: '700' }}>
