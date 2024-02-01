@@ -10,7 +10,6 @@ import TradeModify from '../../components/stockGuide/TradeModify';
 import { Link } from 'react-router-dom';
 
 const StockGuidePage = () => {
-
   const [explain, setExplain] = useState('');
   const [trade, setTrade] = useState('buy');
 
@@ -209,7 +208,6 @@ const StockGuidePage = () => {
             </div>
           </div>
         </div>
-
       </div>
     </>
   );

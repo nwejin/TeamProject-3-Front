@@ -275,7 +275,7 @@ const Virtual = () => {
             <div>
               <p className="smallTitle"> 평단가</p>
               <p>
-                <span>{purchasePrice}</span> $
+                <span>{Number(purchasePrice).toFixed(2)}</span> $
               </p>
             </div>
           </div>
