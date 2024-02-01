@@ -208,6 +208,7 @@ function NewsDetailPage() {
                 range.insertNode(span);
 
                 const saveMyHighlight = axios.post(process.env.REACT_APP_BACKSERVER + "/news/myHighlight",{
+                    //텍스트랑 뉴스아이디 보내야
                 //     data:{
                 //     seletedTxt: selectedText,
                 //     news_id: data._id
