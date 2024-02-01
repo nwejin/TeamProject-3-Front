@@ -411,6 +411,26 @@ export const calProfitAndLoss = async (useData: any) => {
   }
 };
 
+// 모의투자 랭킹보기
+export const showRank = async (useData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/virtual/showRank',
+      useData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error('모의투자 랭킹보기 실패!');
+  }
+};
+
 // 카카오
 export const kakaoLogin = async (code: any) => {
   axios
