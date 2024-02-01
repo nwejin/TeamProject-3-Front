@@ -77,7 +77,7 @@ const MainPage = () => {
         image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
         title: boards.title,
         content: boards.content,
-        writer: boards.userNickName,
+        writer: boards.userId.user_nickname + '님',
         date: (boards.date as string).split('T')[0],
         like: boards.like,
       }));
