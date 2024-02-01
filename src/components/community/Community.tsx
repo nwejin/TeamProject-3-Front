@@ -139,7 +139,12 @@ function Community() {
               <div className="contentBox">
                 <div className="textContent">
                   <Link to={`/community/${post._id}`} state={{ post }}>
-                    <p className="title">{post.title}</p>
+                    <p
+                      className="title"
+                      onClick={() => console.log('포스트임', post)}
+                    >
+                      {post.title}
+                    </p>
                     <p className="text">{post.content}</p>
                   </Link>
                 </div>

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { kakaoLogin, mainBoards, mainNews } from '../services/apiService';
 import Slider from '../components/Slider';
 import TrandingMiniWidget from '../components/stockGuide/TrandingMiniWidget';
 import TrandingCryptoWidget from '../components/stockGuide/TrandingCryptoWidget';
 import { Link } from 'react-router-dom';
+import { NewsProp } from '../types/NewsProp';
+import { CommunityProp } from '../types/CommunityProp';
 
 const MainPage = () => {
   const [newsData, setNewsData] = React.useState([
@@ -11,6 +13,7 @@ const MainPage = () => {
       thumbnail: '',
       title: '',
       content: '',
+      id: '',
     },
   ]);
   const [boardData, setBoardData] = React.useState([
@@ -21,8 +24,13 @@ const MainPage = () => {
       writer: '',
       date: '',
       like: 0,
+      id: '',
     },
   ]);
+
+  const [newslist, setNewslist] = useState<NewsProp[]>([]);
+  const [boardlist, setBoardlist] = useState<CommunityProp[]>([]);
+  const textContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const params = new URL(document.location.toString()).searchParams;
@@ -40,15 +48,29 @@ const MainPage = () => {
     console.log(boardData);
   }, [newsData, boardData]);
 
+  useEffect(() => {
+    const textContainer = textContainerRef.current;
+    const maxHeight = 100; // 필요에 따라 조절
+
+    if (textContainer && textContainer.scrollHeight > maxHeight) {
+      while (textContainer.scrollHeight > maxHeight) {
+        textContainer.textContent =
+          textContainer.textContent?.replace(/\W*\s(\S)*$/, '...') || '';
+      }
+    }
+  }, []);
+
   const getNews = async () => {
     const response = await mainNews();
     const data = response.news;
+    setNewslist(data);
     if (response.success) {
       const updateNews = data.map((news: any) => ({
         thumbnail:
           news.smallimg || process.env.PUBLIC_URL + 'board-default.png',
         title: news.title,
         content: news.content,
+        id: data._id,
       }));
       console.log(updateNews);
       // const newsArray = updateNews;
@@ -62,6 +84,7 @@ const MainPage = () => {
           thumbnail: 'default-image',
           title: '등록된 뉴스가 없습니다.',
           content: '',
+          id: '',
         },
       ];
       setNewsData(newsArray);
@@ -71,7 +94,8 @@ const MainPage = () => {
   const getBoard = async () => {
     const response = await mainBoards();
     const data = response.board;
-    console.log(data);
+    setBoardlist(data);
+    console.log('hihihiddddddd', data);
     if (response.success) {
       const updateBoard = data.map((boards: any) => ({
         image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
@@ -80,6 +104,7 @@ const MainPage = () => {
         writer: boards.userId.user_nickname + '님',
         date: (boards.date as string).split('T')[0],
         like: boards.like,
+        id: boards._id,
       }));
       // console.log(updateNews);
       // const boardArray = updateBoard;
@@ -94,6 +119,7 @@ const MainPage = () => {
           writer: '',
           date: '',
           like: 0,
+          id: '',
         },
       ];
       setBoardData(boardArray);
@@ -135,16 +161,23 @@ const MainPage = () => {
           </div>
           {newsData.length >= 2 && (
             <div className="section2">
-              {newsData.slice(0, 2).map((news) => (
-                <div className="main-news" key={news.thumbnail}>
-                  <img className="main-news-thumbnail" src={news.thumbnail} />
-                  <div className="main-news-text">
-                    <div className="main-news-title">{news.title}</div>
-                    <div className="main-news-point point-latest">최신</div>
-                    <div className="main-news-point point-news">뉴스</div>
-                    <div className="main-news-content">{news.content}</div>
+              {newsData.slice(0, 2).map((news, idx) => (
+                <Link
+                  to={`/news/detail/${newslist[idx]._id}`}
+                  state={{ data: newslist[idx] }}
+                >
+                  <div className="main-news" key={news.id}>
+                    <img className="main-news-thumbnail" src={news.thumbnail} />
+                    <div className="main-news-text">
+                      <div className="main-news-title">{news.title}</div>
+                      <div className="main-news-point point-latest">최신</div>
+                      <div className="main-news-point point-news">뉴스</div>
+                      <div className="main-news-content" ref={textContainerRef}>
+                        {news.content}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
@@ -167,7 +200,7 @@ const MainPage = () => {
                 className="section5"
                 style={{ transform: `translate(${translate}vw)` }}
               >
-                <Slider boardData={boardData} />
+                <Slider boardlist={boardlist} boardData={boardData} />
               </div>
             </div>
           </div>
