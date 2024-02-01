@@ -11,13 +11,16 @@ interface props {
 
 const showDetail = ({ response, close, user }: props): ReactElement => {
   const { profit, win, loss, profitArray } = response;
-  console.log(profitArray);
+  // console.log(profitArray);
   // console.log(response);
   // console.log(profit);
   // console.log(win);
   // console.log(loss);
-  const rate = (win / (win + loss)) * 100;
-  console.log(rate);
+  const rate = ((win / (win + loss)) * 100).toFixed(2);
+  // console.log(rate);
+  const totalGame = win + loss;
+
+  const profitLimit = Number(profit).toFixed(2);
 
   return (
     <div className="detail-wrapper">
@@ -33,51 +36,38 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
       </div>
 
       <div className="innerContent">
+        <div style={{ width: '100%', height: '100%' }}>
+          <MyResponsiveLine data={profitArray} />
+        </div>
+
+        {/* 콘텐츠 */}
         <div className="historyBox">
           <div className="profitBox">
-            <div style={{ fontSize: '14px', color: '#808080' }}>
-              현재 순 이익
-            </div>
+            <div className="subTitle">현재 순 이익</div>
             <div>
-              <div
-                className={profit > 0 ? 'profitSurplus' : 'profitDeficit'}
-                style={{
-                  width: '100%',
-                  textAlign: 'center',
-                }}
-              >
+              <div className={profit > 0 ? 'profitSurplus' : 'profitDeficit'}>
                 <span>{profit > 0 ? '+' : '-'} </span>
-                <span style={{ fontSize: '22px' }}>{profit}</span>
-                <span style={{ color: '#333' }}> USD</span>
+                <span style={{ fontSize: '22px' }}>{profitLimit}</span>
+                <span style={{ color: '#333' }}> $</span>
               </div>
             </div>
-            <div
-              style={{
-                fontSize: '14px',
-                color: '#808080',
-                width: '100%',
-                textAlign: 'center',
-              }}
-            >
-              win rate: {rate}%
-            </div>
           </div>
-          <div className="winRateBox">
-            <div style={{ fontSize: '14px', color: '#808080' }}> 승률 </div>
+          <div className="profitBox">
+            <div className="subTitle"> 승률 </div>
             <div
               style={{
-                width: '80%',
-                height: '70%',
+                width: '70%',
+                height: '60%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-evenly',
                 margin: 'auto',
               }}
             >
-              <div style={{ width: '20%', height: '100%' }}>
+              <div style={{ width: '30%', height: '80%' }}>
                 <MyResponsivePie data={response} />
               </div>
-              <div>
+              <div style={{ fontSize: '18px' }}>
                 <p>{rate}%</p>
                 <div
                   style={{
@@ -92,9 +82,31 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
               </div>
             </div>
           </div>
-        </div>
-        <div style={{ width: '100%', height: '80%' }}>
-          <MyResponsiveLine data={profitArray} />
+
+          <div className="profitBox">
+            <div className="subTitle">전체 게임 수</div>
+            <div>
+              <div
+                style={{
+                  width: '100%',
+                  textAlign: 'center',
+                }}
+              >
+                <span style={{ fontSize: '22px' }}>{totalGame}</span>
+                <span>게임</span>
+              </div>
+            </div>
+            <div
+              style={{
+                fontSize: '14px',
+                color: '#808080',
+                width: '100%',
+                textAlign: 'center',
+              }}
+            >
+              win rate: {rate}%
+            </div>
+          </div>
         </div>
       </div>
     </div>

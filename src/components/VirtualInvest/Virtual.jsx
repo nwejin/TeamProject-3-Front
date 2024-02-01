@@ -202,6 +202,21 @@ const Virtual = () => {
       </div>
 
       <div className="invest-input">
+        <div className="status-Box">
+          <button onClick={showDetailModal} className="resetBtn">
+            <p>
+              <span class="material-symbols-outlined"> 기록보기search</span>
+            </p>
+          </button>
+          {openDetailModal && (
+            <Detail
+              close={closeDetailModal}
+              response={detailData}
+              user={userNickname}
+            />
+          )}
+          <ProfitAndLoss />
+        </div>
         <div className="selectSymbolBox">
           <SelectSymbol symbol={symbol} setSymbol={setSymbol} />
         </div>
@@ -240,11 +255,13 @@ const Virtual = () => {
             </div>
             <div className="nextBtnBox">
               <button className="next Btn" onClick={nextTurn}>
-                <span>다음턴으로</span>
-                <span>|</span>
-                <span>
+                <p>
+                  다음<span class="material-symbols-outlined">skip_next</span>
+                </p>
+
+                <p>
                   {myturn} / {totalTurn}
-                </span>
+                </p>
               </button>
             </div>
           </div>
@@ -274,25 +291,10 @@ const Virtual = () => {
             <p>
               <span>
                 {numberWithCommas(Number(purchasePrice).toFixed(3) * stock)}
-              </span>{' '}
+              </span>
               $
             </p>
           </div>
-        </div>
-        <div className="status-Box">
-          <button onClick={showDetailModal} className="resetBtn">
-            <p>
-              <span class="material-symbols-outlined"> 내역보기search</span>
-            </p>
-          </button>
-          {openDetailModal && (
-            <Detail
-              close={closeDetailModal}
-              response={detailData}
-              user={userNickname}
-            />
-          )}
-          <ProfitAndLoss />
         </div>
       </div>
     </div>

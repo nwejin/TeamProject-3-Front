@@ -15,13 +15,17 @@ const MyResponsivePie = ({ data }: any) => {
       id: 'loss',
       label: 'loss',
       value: loss,
+      color: 'rgba(38, 166, 154, 1)',
     },
     {
       id: 'win',
       label: 'win',
       value: win,
+      color: 'rgba(255, 78, 66, 1)',
     },
   ];
+  const color = 'rgba(38, 166, 154, 1)';
+
   return (
     <ResponsivePie
       data={winRate}
@@ -29,11 +33,13 @@ const MyResponsivePie = ({ data }: any) => {
       startAngle={-180}
       innerRadius={0.5}
       activeOuterRadiusOffset={8}
-      colors={{ scheme: 'blues' }}
+      // colors={{ scheme: 'blues' }}
+      // colors={'rgba(38, 166, 154, 1)'}
+      colors={color}
       borderWidth={1}
       borderColor={{
         from: 'color',
-        modifiers: [['darker', 0.2]],
+        modifiers: [['darker', 0]],
       }}
       enableArcLinkLabels={false}
       arcLinkLabelsTextColor="#333333"
