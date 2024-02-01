@@ -74,7 +74,8 @@ const Header = () => {
         setUserInfos({
           userId: response.info.user_id,
           userNickName: response.info.user_nickname,
-          userProfile: response.info.user_profile,
+          userProfile:
+            response.info.user_profile || process.env.PUBLIC_URL + 'mypage.png',
         });
       } catch (error) {
         console.log('사용자 정보 가져오기 에러', error);
@@ -90,6 +91,7 @@ const Header = () => {
       <div className="header" id="top">
         <Link to="/">
           <img
+            className="main-logo"
             src={process.env.PUBLIC_URL + '/temp_logo.png'}
             alt="Logo"
             onClick={redirectMain}
@@ -109,29 +111,30 @@ const Header = () => {
         {isLogin === true && (
           <>
             <div className="Header-mypage-btn" onClick={mypageToggle}>
-              <span>
-                <img
-                  src={userInfos.userProfile}
-                  alt=""
-                  style={{
-                    position: 'relative',
-                    top: '0',
-                    transform: 'none',
-                    borderRadius: '50%',
-                  }}
-                />
-              </span>
+              <img
+                className="mypage-profile"
+                src={userInfos.userProfile}
+                alt=""
+                style={{}}
+              />
             </div>
             {isToggle === true && (
               <div className="Header-mypage">
-                <div>
-                  {userInfos.userId} ( {userInfos.userNickName} )
+                <div className="Header-nickname">
+                  {userInfos.userNickName}&nbsp;님의 투자 여정을 응원합니다!
                 </div>
-                <Link to="/mypage">
-                  <div>마이페이지</div>
+                <Link to="/wordBook">
+                  <div>단어장</div>
                 </Link>
                 <div className="logout-btn" onClick={handleLogout}>
                   로그아웃
+                </div>
+                <div className="Header-user">
+                  <Link to="/mypage">
+                    <div className="Header-user-update">회원정보수정</div>
+                  </Link>
+                  &nbsp;&nbsp;·&nbsp;&nbsp;
+                  <div className="Header-user-delete">회원탈퇴</div>
                 </div>
               </div>
             )}
