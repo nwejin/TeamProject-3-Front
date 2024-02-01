@@ -168,12 +168,36 @@ button {
 .rankingBox {
   width: 28%;
   input {
-    width: 100%;
+    width: 70%;
     height: 50px;
-    border-radius: 5px;
+    border-radius: 5px 0px 0px 5px;
     border: 1px solid $color-gray-1;
     font-size: 18px;
     font-weight: 700;
+    padding: 15px;
+  }
+  .searchBox {
+    display: flex; // Use flexbox to make children elements appear in a row
+    align-items: center; // Align items vertically in the center
+    justify-content: space-between; // Add space between the input and button
+
+    form {
+      display: flex; // Use flexbox for the form as well
+      width: 100%; // Take up 100% width of the container
+
+      input {
+        flex: 1; // Allow the input to grow and take up remaining space
+        // margin-right: 10px; // Add some space between the input and button
+      }
+
+      button {
+        background-color: white;
+        border: 1px solid $color-gray-1;
+        height: 50px;
+        width: 50px;
+        flex-shrink: 0; // Prevent the button from shrinking
+      }
+    }
   }
   .postListBox {
     width: 100%;
