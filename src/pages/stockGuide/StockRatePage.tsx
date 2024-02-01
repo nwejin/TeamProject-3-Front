@@ -6,13 +6,25 @@ import Ticker from '../../components/CompanyInfo/Ticker';
 import FundamentalData from '../../components/CompanyInfo/FundamentalData';
 import CompanyProfile from '../../components/CompanyInfo/CompanyProfile';
 
+import './../../styles/StockRate.scss';
+import './../../styles/StockGuide.scss';
+import SearchCompany from '../../components/CompanyInfo/SearchCompany';
+
 const StockRate = () => {
   const [searchSymbol, setSearchSymbol] = useState('');
+  const [postSymbol, setPostSymbol] = useState('');
+  const [reLoad, setReLoad] = useState(true);
 
-  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const selectCompany = (e: any) => {
     const target = e.target.value;
+    // console.log(target);
     setSearchSymbol(target);
   };
+
+  // const Search = (e: any) => {
+  //   setReLoad(!reLoad);
+  //   setPostSymbol(searchSymbol);
+  // };
 
   return (
     <>
@@ -23,20 +35,71 @@ const StockRate = () => {
             <li>주식</li>
           </Link>
           <Link to="/stockRate">
-            <li className="selected-blue">기업정보</li>
+            <li className="selected-blue">기업 정보</li>
           </Link>
           <Link to="/virtual">
             <li>모의 투자</li>
           </Link>
         </ul>
-      </div>
+        <div
+          style={{
+            // backgroundColor: 'pink',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div className="searchBox">
+            <select name="" id="" onChange={selectCompany} value={searchSymbol}>
+              <option value="APPL">애플 (APPL)</option>
+              <option value="TSLA">테슬라 (TSLA)</option>
+              <option value="AMZN">아마존 (AMZN)</option>
+              <option value="MSFT">마이크로소프트 (MSFT)</option>
+              <option value="INTC">인텔 (INTC)</option>
+              <option value="NVDA">엔비디아 (NVDA)</option>
+              <option value="GOOGL">알파벳 (GOOGL)</option>
+              <option value="META">메타 (META)</option>
+              <option value="NFLX">넷플릭스 (NFLX)</option>
+              <option value="ORCL">오라클 (ORCL)</option>
+            </select>
+            {/* <button onClick={Search}>기업 정보 조회하기</button> */}
+          </div>
+          <div
+            style={{
+              // backgroundColor: 'blue',
+              display: 'flex',
+              height: '800px',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div>
+              <div>
+                <MarketData />
+              </div>
+              <div>
+                <Ticker />
+              </div>
+            </div>
+            <div className="flip">
+              <div className="card">
+                <div className="front">
+                  <FundamentalData search={searchSymbol} />
+                  {/* {reLoad ? (
+                    <FundamentalData search={searchSymbol} />
+                  ) : (
+                    <FundamentalData search={''} />
+                  )} */}
+                </div>
 
-      <input placeholder="주식 입력" onChange={handleInput} />
-      <button>제출</button>
-      <MarketData />
-      <Ticker />
-      {/* <FundamentalData search={searchSymbol} /> */}
-      <CompanyProfile search={searchSymbol} />
+                <div className="back">
+                  <CompanyProfile search={searchSymbol} />
+                </div>
+              </div>
+            </div>
+            {/*  */}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

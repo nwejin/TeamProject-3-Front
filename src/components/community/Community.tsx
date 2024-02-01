@@ -7,6 +7,7 @@ import {
 } from '../../services/apiService';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 // 커뮤니티 목록 페이지
 function Community() {
@@ -49,6 +50,7 @@ function Community() {
   const [isActive, setIsActive] = useState(false);
 
   const [commentData, setCommentData] = useState([]);
+  const cookie = useCookies(['jwtCookie']);
 
   return (
     <>
@@ -108,14 +110,18 @@ function Community() {
         // 좋아요 누르기
         const plusLike = async () => {
           try {
-            const like: Number = 1;
-            const postId = post._id;
+            if (cookie[0].jwtCookie) {
+              const like: Number = 1;
+              const postId = post._id;
 
-            const likeData = { like, postId };
-            const response = await addLike(likeData);
-            console.log(response);
-            setIsActive(!isActive);
-            window.location.reload();
+              const likeData = { like, postId };
+              const response = await addLike(likeData);
+              console.log(response);
+              setIsActive(!isActive);
+              window.location.reload();
+            } else {
+              alert('로그인 후 좋아요 가능합니다!');
+            }
           } catch (err) {
             console.log(err);
           }
@@ -195,14 +201,22 @@ function Community() {
         );
       })}
 
-      <div>
+      <div className="paginationBox" style={{}}>
+        {/* <span className="material-symbols-outlined">chevron_left</span> */}
         {Array.from({ length: Math.ceil(posts.length / defaultPage) }).map(
           (_, index) => (
-            <button key={index} onClick={() => paginate(index + 1)}>
-              {index + 1}
+            <button
+              key={index}
+              onClick={() => paginate(index + 1)}
+              className={`paginationBtn ${
+                pagination === index + 1 ? 'active' : ''
+              }`}
+            >
+              <span>{index + 1}</span>
             </button>
           )
         )}
+        {/* <span className="material-symbols-outlined">chevron_right</span> */}
       </div>
     </>
   );

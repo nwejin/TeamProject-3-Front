@@ -1,12 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // CompanyProfile 컴포넌트에서 props 타입 정의
 interface CompanyProfileProps {
-    search: string;
-  }
+  search: string;
+}
 
-  const CompanyProfile: React.FC<CompanyProfileProps> = (props) =>{
+const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
   const container = useRef<HTMLDivElement>(null);
+  // const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
+
+  // const search = props.search;
+  // // console.log(search);
+  // console.log(search);
+
+  const search = props.search;
+  console.log(search);
+  const symbol = `NASDAQ:${search}`;
+  console.log(symbol);
+
+  // useEffect(() => {
+  //   // search 값이 변경될 때마다 symbol 업데이트
+  //   setSymbol(`NASDAQ:${search}`);
+  // }, [search]);
 
   useEffect(() => {
     // Create script element
@@ -16,11 +31,11 @@ interface CompanyProfileProps {
     script.src =
       'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
     script.innerHTML = JSON.stringify({
-      width: 480,
-      height: 650,
+      width: '100%',
+      height: '100%',
       isTransparent: false,
-      colorTheme: 'dark',
-      symbol: 'NASDAQ:AAPL',
+      colorTheme: 'white',
+      symbol: symbol,
       locale: 'kr',
     });
 

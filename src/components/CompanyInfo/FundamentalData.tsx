@@ -4,14 +4,24 @@ interface FundamentalDataProps {
   search: string;
 }
 
-const FundamentalData: React.FC<FundamentalDataProps> = ({ search }) => {
+const FundamentalData: React.FC<FundamentalDataProps> = (props) => {
   const container = useRef<HTMLDivElement>(null);
-  const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
+  // const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
 
-  useEffect(() => {
-    // search 값이 변경될 때마다 symbol 업데이트
-    setSymbol(search);
-  }, [search]);
+  // TSLA
+  // AAPL
+  const search = props.search;
+  console.log(search);
+  const symbol = `NASDAQ:${search}`;
+  console.log(symbol);
+
+  // console.log(symbol);
+
+  // useEffect(() => {
+  //   const search = props.search;
+  //   // search 값이 변경될 때마다 symbol 업데이트
+  //   setSymbol(`NASDAQ:${search}`);
+  // }, [props.search]);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -23,8 +33,8 @@ const FundamentalData: React.FC<FundamentalDataProps> = ({ search }) => {
       isTransparent: false,
       largeChartUrl: '',
       displayMode: 'regular',
-      width: 480,
-      height: 830,
+      width: '100%',
+      height: '100%',
       colorTheme: 'dark',
       symbol: symbol, // 동적으로 변경된 symbol 사용
       locale: 'kr',

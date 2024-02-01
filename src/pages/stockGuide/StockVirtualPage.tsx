@@ -14,7 +14,7 @@ const StockVirtualPage = () => {
             <li>주식</li>
           </Link>
           <Link to="/stockRate">
-            <li>환율</li>
+            <li>기업 정보</li>
           </Link>
           <Link to="/virtual">
             <li className="selected-blue">모의 투자</li>

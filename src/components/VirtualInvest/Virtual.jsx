@@ -149,11 +149,10 @@ const Virtual = () => {
   // detail 컴포넌트에 데이터 넘겨주기
   const [detailData, setDetailData] = useState({});
   const showDetailModal = async () => {
-    setOpenDetailModal(true);
-
     // 모달 클릭 시 이벤트 -> axios 요청필요 -> apiService에서 가져오기 ('/virtual/record')
     try {
       if (cookie[0].jwtCookie) {
+        setOpenDetailModal(true);
         const response = await showRecord();
         if (response) {
           const { profit, win, loss, profitArray } = response; //db 데이터 받아오기
@@ -166,6 +165,8 @@ const Virtual = () => {
           );
           setDetailData({ profit, win, loss, profitArray });
         }
+      } else {
+        alert('로그인 후 기록 확인이 가능합니다.');
       }
     } catch (error) {
       console.log(error);
