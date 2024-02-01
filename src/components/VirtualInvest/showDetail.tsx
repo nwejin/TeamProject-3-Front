@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import MyResponsiveLine from './userChart';
 import MyResponsivePie from './WinRate';
+import { showRank } from '../../services/apiService';
 
 interface props {
   open: Boolean;
@@ -11,16 +12,19 @@ interface props {
 
 const showDetail = ({ response, close, user }: props): ReactElement => {
   const { profit, win, loss, profitArray } = response;
-  // console.log(profitArray);
-  // console.log(response);
-  // console.log(profit);
-  // console.log(win);
-  // console.log(loss);
   const rate = ((win / (win + loss)) * 100).toFixed(2);
-  // console.log(rate);
   const totalGame = win + loss;
 
   const profitLimit = Number(profit).toFixed(2);
+
+  const showRanking = async () => {
+    try {
+      const response = await showRank({});
+      if (response) {
+        console.log('show rank response 전송성공');
+      }
+    } catch (error) {}
+  };
 
   return (
     <div className="detail-wrapper">
@@ -84,7 +88,7 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
           </div>
 
           <div className="profitBox">
-            <div className="subTitle">전체 게임 수</div>
+            <div className="subTitle">랭킹 보기</div>
             <div>
               <div
                 style={{
@@ -109,6 +113,9 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
           </div>
         </div>
       </div>
+
+      <button onClick={showRanking}>제출</button>
+      <div></div>
     </div>
   );
 };
