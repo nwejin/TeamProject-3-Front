@@ -206,6 +206,19 @@ function NewsDetailPage() {
     
                 // 추출된 내용 대신에 span 태그를 삽입
                 range.insertNode(span);
+
+                const saveMyHighlight = axios.post(process.env.REACT_APP_BACKSERVER + "/news/myHighlight",{
+                //     data:{
+                //     seletedTxt: selectedText,
+                //     news_id: data._id
+                // }
+            },
+                {
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    withCredentials: true,
+                  })
             }
 
         } else {
