@@ -25,11 +25,6 @@ const MainPage = () => {
   ]);
 
   useEffect(() => {
-    const params = new URL(document.location.toString()).searchParams;
-    const code = params.get('code');
-    if (code) {
-      kakaoLogin(code);
-    }
     getNews();
     getBoard();
   }, []);
