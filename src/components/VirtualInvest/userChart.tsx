@@ -20,7 +20,7 @@ const MyResponsiveLine = ({ data }: any) => {
     <>
       <ResponsiveLine
         data={chartData}
-        margin={{ top: 50, right: 50, bottom: 50, left: 70 }}
+        margin={{ top: 80, right: 50, bottom: 50, left: 50 }}
         xScale={{ type: 'point' }}
         yScale={{
           type: 'linear',

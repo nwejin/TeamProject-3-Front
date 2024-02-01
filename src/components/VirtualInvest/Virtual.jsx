@@ -8,6 +8,7 @@ import Order from './BuyOrder';
 import Detail from './showDetail';
 import MyResponsiveLine from './userChart';
 
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { showRecord } from '../../services/apiService';
@@ -44,6 +45,10 @@ const Virtual = () => {
   const [myturn, setMyturn] = useState(0); //현재까지 진행된 턴 계산
 
   const cookie = useCookies(['jwtCookie']);
+  const navigate = useNavigate(); //페이지 이동
+  const notLogin = () => {
+    navigate('/signin');
+  };
 
   //아래는 투자종목 다양화
   const [symbol, setSymbol] = useState(() => {
@@ -152,8 +157,8 @@ const Virtual = () => {
     setOpenDetailModal(true);
 
     // 모달 클릭 시 이벤트 -> axios 요청필요 -> apiService에서 가져오기 ('/virtual/record')
-    try {
-      if (cookie[0].jwtCookie) {
+    if (cookie[0].jwtCookie) {
+      try {
         const response = await showRecord();
         if (response) {
           const { profit, win, loss, profitArray } = response; //db 데이터 받아오기
@@ -166,9 +171,12 @@ const Virtual = () => {
           );
           setDetailData({ profit, win, loss, profitArray });
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      alert('로그인이 필요함');
+      notLogin();
     }
   };
 
@@ -202,6 +210,21 @@ const Virtual = () => {
       </div>
 
       <div className="invest-input">
+        <div className="status-Box">
+          <button onClick={showDetailModal} className="resetBtn">
+            <p>
+              <span class="material-symbols-outlined"> 기록보기search</span>
+            </p>
+          </button>
+          {openDetailModal && (
+            <Detail
+              close={closeDetailModal}
+              response={detailData}
+              user={userNickname}
+            />
+          )}
+          <ProfitAndLoss />
+        </div>
         <div className="selectSymbolBox">
           <SelectSymbol symbol={symbol} setSymbol={setSymbol} />
         </div>
@@ -240,11 +263,13 @@ const Virtual = () => {
             </div>
             <div className="nextBtnBox">
               <button className="next Btn" onClick={nextTurn}>
-                <span>다음턴으로</span>
-                <span>|</span>
-                <span>
+                <p>
+                  다음<span class="material-symbols-outlined">skip_next</span>
+                </p>
+
+                <p>
                   {myturn} / {totalTurn}
-                </span>
+                </p>
               </button>
             </div>
           </div>
@@ -274,25 +299,10 @@ const Virtual = () => {
             <p>
               <span>
                 {numberWithCommas(Number(purchasePrice).toFixed(3) * stock)}
-              </span>{' '}
+              </span>
               $
             </p>
           </div>
-        </div>
-        <div className="status-Box">
-          <button onClick={showDetailModal} className="resetBtn">
-            <p>
-              <span className="material-symbols-outlined"> 내역보기search</span>
-            </p>
-          </button>
-          {openDetailModal && (
-            <Detail
-              close={closeDetailModal}
-              response={detailData}
-              user={userNickname}
-            />
-          )}
-          <ProfitAndLoss />
         </div>
       </div>
     </div>
