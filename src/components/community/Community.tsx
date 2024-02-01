@@ -4,6 +4,7 @@ import {
   getCommunityPosts,
   addLike,
   getComment,
+  getReply,
 } from '../../services/apiService';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -50,12 +51,46 @@ function Community() {
 
   const [commentData, setCommentData] = useState([]);
 
+  const [commentCount, setCommentCount] = useState<number | null>(null);
+  const fetchDataForPost = async (post: any) => {
+    console.log(post._id);
+
+    const commentArray = await getComment(post._id);
+    console.log(commentArray);
+
+    const replyCommentArray = await getReply(post._id);
+    console.log(replyCommentArray);
+
+    const commentCount = commentArray.length;
+    const replyCount = replyCommentArray.length;
+    const totalCommentCount = commentCount + replyCount;
+
+    // console.log('댓글 수', totalCommentCount);
+
+    // 필요한 데이터를 가공하여 반환
+    return totalCommentCount;
+  };
+  const renderPost = async (post: any) => {
+    const commentsCount = await fetchDataForPost(post);
+    console.log('댓글 수', commentsCount);
+
+    const commentsCountElement = document.getElementById(
+      `commentsCount_${post._id}`
+    );
+    if (commentsCountElement) {
+      commentsCountElement.innerText = commentsCount.toString();
+    } else {
+      console.error(`Element with id 'commentsCount_${post._id}' not found.`);
+    }
+  };
+
   return (
     <>
       {/* 콘텐츠 박스*/}
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
         console.log(post._id);
+        renderPost(post);
 
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
@@ -185,7 +220,9 @@ function Community() {
                         maps_ugc
                       </span>
                     </button>
-                    <span>0</span>
+                    <span id={`commentsCount_${post._id}`}>
+                      댓글 수: 로딩 중...
+                    </span>
                   </span>
                 </div>
                 <span className="category">{getSubject()}</span>

@@ -151,7 +151,7 @@ const MainPage = () => {
             <img src={process.env.PUBLIC_URL + 'finance.jpg'} />
             <br />
             <Link to="/signin">
-              <button>개미운동 시작하기</button>
+              <button key="signin-button">개미운동 시작하기</button>
             </Link>
           </div>
           {newsData.length >= 2 && (
@@ -160,8 +160,9 @@ const MainPage = () => {
                 <Link
                   to={`/news/detail/${newslist[idx]._id}`}
                   state={{ data: newslist[idx] }}
+                  key={idx}
                 >
-                  <div className="main-news" key={news.id}>
+                  <div className="main-news" key={idx}>
                     <img className="main-news-thumbnail" src={news.thumbnail} />
                     <div className="main-news-text">
                       <div className="main-news-title">{news.title}</div>
