@@ -11,7 +11,7 @@ const Slider = ({ boardData }: any) => {
           <div className="main-board-info">
             <div className="main-board-info-flex">
               <div className="main-board-writer">
-                <div className="main-board-nickname">{board.writer}님</div>
+                <div className="main-board-nickname">{board.writer}</div>
                 <div className="main-board-date">{board.date}</div>
               </div>
               <div className="main-board-comment">

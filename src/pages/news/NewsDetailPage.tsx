@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { WordsProp } from '../../types/WordsProp';
@@ -6,44 +6,46 @@ import '../../styles/NewsDetail.scss';
 import WordModal from '../../components/news/WordModal';
 import { useCookies } from 'react-cookie';
 
-function NewsDetailPage() {
-    const location = useLocation()
-    const data = location.state.data;
-    const [content, setContent] = useState(data.content);
+const NewsDetailPage = () => {
+  const location = useLocation();
+  const data = location.state.data;
+  const [content, setContent] = useState(data.content);
 
-    const [wordsList, setWordsList] = useState<string[]>([]);
-    const [wordsDb, setWordsDb] = useState([]);
+  const [wordsList, setWordsList] = useState<string[]>([]);
+  const [wordsDb, setWordsDb] = useState([]);
 
-    const [openModal, setOpenModal] = useState<boolean>(false);
-    const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
-    const [modalWord, setModalWord] = useState<WordsProp | null>(null)
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
+  const [modalWord, setModalWord] = useState<WordsProp | null>(null);
 
-    const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
-    const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
 
-    const [isDraggable, setIsDraggable] = useState<boolean>(false);
-    const [myHighlight, setMyHighlight] = useState<string[]|null>([]);
+  const [isDraggable, setIsDraggable] = useState<boolean>(false);
+  const [myHighlight, setMyHighlight] = useState<string[] | null>([]);
 
+  const navigate = useNavigate();
 
+  const getWords = async () => {
+    try {
+      // Db에서 단어 데이터 요청
+      const wordsArry = await axios.get(
+        process.env.REACT_APP_BACKSERVER + '/news/getWords'
+      );
+      const wordsData = wordsArry.data;
+      const newWordsList = wordsData.map((singleData: WordsProp) => {
+        return singleData.word;
+      });
+      // Db에서 받은 단어 데이터 중 word만 저장
+      setWordsList(newWordsList);
 
-    const getWords = async () => {
-        try{
-            // Db에서 단어 데이터 요청
-            const wordsArry = await axios.get(process.env.REACT_APP_BACKSERVER + "/news/getWords")
-            const wordsData = wordsArry.data
-            const newWordsList = wordsData.map((singleData: WordsProp) => {
-                return singleData.word 
-            });
-            // Db에서 받은 단어 데이터 중 word만 저장
-            setWordsList(newWordsList);
-
-            // Db에서 받은 단어 데이터 전체 저장
-            setWordsDb(wordsData);
-            // setContent(highlightContent(data.content, newWordsList));
-            // setContent(highlightContent(content, wordsList));
-        } catch(error) {
-            console.error("Error fetching data from server:", error);
-        }
+      // Db에서 받은 단어 데이터 전체 저장
+      setWordsDb(wordsData);
+      // setContent(highlightContent(data.content, newWordsList));
+      // setContent(highlightContent(content, wordsList));
+    } catch (error) {
+      console.error('Error fetching data from server:', error);
+    }
   };
 
   useEffect(() => {
@@ -152,37 +154,37 @@ function NewsDetailPage() {
     checkMyNews();
   }, [cookies, data]);
 
-
-    // 기사 저장 
-    const myNews = async () => {
-        const tokenId = cookies['jwtCookie'];  // 대괄호를 사용하여 속성에 액세스합니다.
-        if(!tokenId){
-            alert('로그인 후 사용가능한 기능입니다.');
-        } else {
-            setIsSaved(!isSaved);
-            const saveMyNews = await axios.post(process.env.REACT_APP_BACKSERVER + "/news/saveMynews",{data},
-             {
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-              }
-              )
+  // 기사 저장
+  const myNews = async () => {
+    const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
+    if (!tokenId) {
+      alert('로그인 후 사용가능한 기능입니다.');
+    } else {
+      setIsSaved(!isSaved);
+      const saveMyNews = await axios.post(
+        process.env.REACT_APP_BACKSERVER + '/news/saveMynews',
+        { data },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
         }
-
+      );
     }
+  };
 
+  // 드래그 가능 여부
+  const draggable = () => {
+    // const tokenId = cookies['jwtCookie'];
+    // if(!tokenId) {
+    //     alert('로그인 후 사용가능한 기능입니다.');
+    // } else {
+    //     setIsDraggable(!isDraggable);
+    // }
+    setIsDraggable(!isDraggable);
+  };
 
-    // 드래그 가능 여부
-    const draggable = () => {
-        // const tokenId = cookies['jwtCookie'];
-        // if(!tokenId) {
-        //     alert('로그인 후 사용가능한 기능입니다.');
-        // } else {
-        //     setIsDraggable(!isDraggable);
-        // }
-        setIsDraggable(!isDraggable)
-    }
 
     // 드래그 : 직접 형광펜 기능
     const dragText = (event:any) => {
@@ -222,42 +224,71 @@ function NewsDetailPage() {
                   })
             }
 
-        } else {
-            // 드래그 불가능 상태일 때는 드래그 이벤트 무시
-            event.preventDefault();
-          }
+        // 추출된 내용
+        const extractedContents = range.extractContents();
+
+        // 새로운 span 요소 생성
+        const span = document.createElement('span');
+        span.style.backgroundColor = 'yellow'; // 원하는 백그라운드 컬러로 변경
+        span.appendChild(extractedContents);
+
+        // 추출된 내용 대신에 span 태그를 삽입
+        range.insertNode(span);
+      }
+    } else {
+      // 드래그 불가능 상태일 때는 드래그 이벤트 무시
+      event.preventDefault();
     }
+  };
 
+  return (
+    <>
+      <main className="outer-wrapper">
+        <div className="detailWrapper">
+          <div className="tool">
+            <div className="goBackBtn" onClick={() => navigate(-1)}>
+              <span className="material-symbols-rounded">
+                arrow_back_ios_new
+              </span>
+            </div>
 
-    return (
-        <>
-            <main className='outer-wrapper'>
-                <ul className='tool'>
-                    <li className={`pen ${isDraggable ? 'active' : ''}`} onClick={draggable}>형광펜</li>
-                    <li className={`saveNews ${isSaved ? 'active' : ''}`} onClick={myNews}>저장</li>
-                </ul>
-                
-                <h1>{data.title}</h1>
-                <p className='detailDate'>{data.date}</p>
+            <div
+              className={`pen ${isDraggable ? 'active' : ''}`}
+              onClick={draggable}
+            >
+              형광펜
+            </div>
+            <div
+              className={`saveNews ${isSaved ? 'active' : ''}`}
+              onClick={myNews}
+            >
+              저장
+            </div>
+          </div>
 
-                <img className='detailImg' src={data.bigimg} alt={data.title} />
-                <h3>{data.subtitle}</h3>
-              
-                <p className='detailContent' 
-                onMouseUp={dragText}
-                >{content}</p>
-                <p>출처 : {data.url}</p>
-                
-                
+          <h1>{data.title}</h1>
+          <p className="detailDate">{data.date}</p>
 
-            {/* 모달 */}
-                {openModal && modalWord && <WordModal modalWord={modalWord} closeModal={closeModal} modalPosition={modalPosition}/>}
-            </main>
+          <img className="detailImg" src={data.bigimg} alt={data.title} />
+          <h3>{data.subtitle}</h3>
 
-        </>
-    
-    );
+          <p className="detailContent" onMouseUp={dragText}>
+            {content}
+          </p>
+          <p>출처 : {data.url}</p>
+        </div>
 
-}
+        {/* 모달 */}
+        {openModal && modalWord && (
+          <WordModal
+            modalWord={modalWord}
+            closeModal={closeModal}
+            modalPosition={modalPosition}
+          />
+        )}
+      </main>
+    </>
+  );
+};
 
 export default NewsDetailPage;
