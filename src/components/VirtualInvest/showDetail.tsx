@@ -1,6 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import MyResponsiveLine from './userChart';
 import MyResponsivePie from './WinRate';
+import { showRank } from '../../services/apiService';
+import { useCookies } from 'react-cookie';
 
 interface props {
   open: Boolean;
@@ -9,18 +11,30 @@ interface props {
   user: any;
 }
 
-const showDetail = ({ response, close, user }: props): ReactElement => {
+const ShowDetail = ({ response, close, user }: props): ReactElement => {
   const { profit, win, loss, profitArray } = response;
-  // console.log(profitArray);
-  // console.log(response);
-  // console.log(profit);
-  // console.log(win);
-  // console.log(loss);
   const rate = ((win / (win + loss)) * 100).toFixed(2);
-  // console.log(rate);
   const totalGame = win + loss;
 
   const profitLimit = Number(profit).toFixed(2);
+
+  useEffect(() => {
+    const showRanking = async () => {
+      try {
+        const response = await showRank({});
+        if (response) {
+          console.log('show rank response 전송 성공');
+          console.log('res ', response);
+          // 여기에서 response를 처리하거나 다른 작업을 수행할 수 있습니다.
+        }
+      } catch (error) {
+        console.error('API 호출 에러:', error);
+      }
+    };
+
+    // fetchData 함수를 호출하여 데이터를 가져오도록 설정
+    showRanking();
+  }, []); // 빈 의존성 배열은 컴포넌트가 마운트될 때 한 번만 실행
 
   return (
     <div className="detail-wrapper">
@@ -84,7 +98,7 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
           </div>
 
           <div className="profitBox">
-            <div className="subTitle">전체 게임 수</div>
+            <div className="subTitle">랭킹 보기</div>
             <div>
               <div
                 style={{
@@ -109,8 +123,11 @@ const showDetail = ({ response, close, user }: props): ReactElement => {
           </div>
         </div>
       </div>
+
+      <button>제출</button>
+      <div></div>
     </div>
   );
 };
 
-export default showDetail;
+export default ShowDetail;

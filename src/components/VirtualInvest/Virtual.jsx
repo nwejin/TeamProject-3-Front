@@ -8,6 +8,7 @@ import Order from './BuyOrder';
 import Detail from './showDetail';
 import MyResponsiveLine from './userChart';
 
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { showRecord } from '../../services/apiService';
@@ -44,6 +45,10 @@ const Virtual = () => {
   const [myturn, setMyturn] = useState(0); //현재까지 진행된 턴 계산
 
   const cookie = useCookies(['jwtCookie']);
+  const navigate = useNavigate(); //페이지 이동
+  const notLogin = () => {
+    navigate('/signin');
+  };
 
   //아래는 투자종목 다양화
   const [symbol, setSymbol] = useState(() => {
@@ -150,9 +155,10 @@ const Virtual = () => {
   const [detailData, setDetailData] = useState({});
   const showDetailModal = async () => {
     // 모달 클릭 시 이벤트 -> axios 요청필요 -> apiService에서 가져오기 ('/virtual/record')
-    try {
-      if (cookie[0].jwtCookie) {
-        setOpenDetailModal(true);
+
+    if (cookie[0].jwtCookie) {
+      try {
+
         const response = await showRecord();
         if (response) {
           const { profit, win, loss, profitArray } = response; //db 데이터 받아오기
@@ -165,11 +171,14 @@ const Virtual = () => {
           );
           setDetailData({ profit, win, loss, profitArray });
         }
-      } else {
-        alert('로그인 후 기록 확인이 가능합니다.');
+
+      } catch (error) {
+        console.log(error);
+
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      alert('로그인이 필요함');
+      notLogin();
     }
   };
 

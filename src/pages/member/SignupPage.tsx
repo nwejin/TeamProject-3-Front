@@ -20,13 +20,17 @@ const SignupPage = () => {
     user_email: '',
   });
 
-  const [pwCheck, setPwCheck] = useState('');
   const [idCheck, setIdCheck] = useState('');
+  const [pwValiCheck, setValiPwCheck] = useState('');
+  const [pwCheck, setPwCheck] = useState('');
   const [nicknameCheck, setNicknameCheck] = useState('');
+  const [emailCheck, setEmailCheck] = useState('');
 
-  const pwRef = useRef<HTMLInputElement>(null);
   const idRef = useRef<HTMLInputElement>(null);
+  const pwRef = useRef<HTMLInputElement>(null);
+  const pwReRef = useRef<HTMLInputElement>(null);
   const nickRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -35,7 +39,29 @@ const SignupPage = () => {
       [name]: value,
     }));
   };
-
+  const signupValidate = (inputType: string) => {
+    if (inputType === 'id') {
+      if (formData.user_id.length < 4) {
+        console.log(formData.user_id.length);
+        return false;
+      }
+    }
+    if (inputType === 'pw') {
+      if (formData.user_password.length < 8) {
+        return false;
+      }
+    }
+    if (inputType === 'nickname') {
+      if (formData.user_nickname.length < 4) {
+        return false;
+      }
+    }
+    if (inputType === 'email') {
+      if (!formData.user_email.includes('@')) {
+        return false;
+      }
+    }
+  };
   const idReCheck = async (event: any) => {
     try {
       event.preventDefault();
@@ -45,19 +71,74 @@ const SignupPage = () => {
       const idCheckBox = document.querySelector('.idCheckBox');
 
       // 서버에서의 응답에 따라 처리
-      if (response.success) {
+      if (formData.user_id === '') {
+        idCheckBox?.classList.remove('red');
+        idCheckBox?.classList.remove('blue');
+        return setIdCheck('');
+      } else if (signupValidate('id') === false) {
+        idCheckBox?.classList.add('red');
+        idCheckBox?.classList.remove('blue');
+        return setIdCheck(`ⓘ 아이디는 최소 4자리 이상입니다.`);
+      } else if (response.success && !signupValidate('id') === true) {
         idCheckBox?.classList.add('blue');
         idCheckBox?.classList.remove('red');
         console.log(response);
-        return setIdCheck(`ⓘ ${response.message}`);
+        return setIdCheck(`ⓘ 사용가능한 아이디입니다.`);
       } else if (response.success === false) {
         idCheckBox?.classList.add('red');
         idCheckBox?.classList.remove('blue');
-        return setIdCheck(`ⓘ ${response.message}`);
+        return setIdCheck(`ⓘ 중복되는 아이디가 있습니다.`);
       } else {
         idCheckBox?.classList.remove('red');
         idCheckBox?.classList.remove('blue');
         return setIdCheck('');
+      }
+    } catch (error: any) {
+      // 에러 처리
+      console.error('아이디 유효성 검사 실패:', error.message);
+    }
+  };
+
+  const pwasswordValiCheck = async (event: any) => {
+    try {
+      event.preventDefault();
+      const pwCheckbox = document.querySelector('.pwCheckBox');
+
+      if (formData.user_password === '') {
+        pwCheckbox?.classList.remove('red');
+        pwCheckbox?.classList.remove('blue');
+        return setValiPwCheck('');
+      } else if (signupValidate('pw') === false) {
+        pwCheckbox?.classList.add('red');
+        pwCheckbox?.classList.remove('blue');
+        return setValiPwCheck(`ⓘ 비밀번호는 최소 8자리 이상입니다.`);
+      } else {
+        pwCheckbox?.classList.remove('red');
+        pwCheckbox?.classList.remove('blue');
+        return setValiPwCheck('');
+      }
+    } catch (error: any) {
+      // 에러 처리
+      console.error('아이디 유효성 검사 실패:', error.message);
+    }
+  };
+  const emailReCheck = async (event: any) => {
+    try {
+      event.preventDefault();
+      const emailBox = document.querySelector('.emailCheckBox');
+
+      if (formData.user_email === '') {
+        emailBox?.classList.remove('red');
+        emailBox?.classList.remove('blue');
+        return setEmailCheck('');
+      } else if (signupValidate('email') === false) {
+        emailBox?.classList.add('red');
+        emailBox?.classList.remove('blue');
+        return setEmailCheck(`ⓘ 이메일은 @를 포함해야 합니다.`);
+      } else {
+        emailBox?.classList.remove('red');
+        emailBox?.classList.remove('blue');
+        return setEmailCheck('');
       }
     } catch (error: any) {
       // 에러 처리
@@ -71,10 +152,19 @@ const SignupPage = () => {
       const response = await nicknameChecker(formData);
       console.log(response);
       const nicknameCheckBox = document.querySelector('.nicknameCheckBox');
-
-      if (response.success) {
+      console.log('ddddd', formData.user_nickname.trim());
+      if (formData.user_nickname.trim() === '') {
+        nicknameCheckBox?.classList.remove('red');
+        nicknameCheckBox?.classList.remove('blue');
+        return setNicknameCheck('');
+      } else if (signupValidate('nickname') === false) {
+        nicknameCheckBox?.classList.add('red');
+        nicknameCheckBox?.classList.remove('blue');
+        return setNicknameCheck(`ⓘ 닉네임은 최소 4자리 이상입니다.`);
+      } else if (response.success && !signupValidate('nickname') === true) {
         nicknameCheckBox?.classList.add('blue');
         nicknameCheckBox?.classList.remove('red');
+        console.log(response);
         return setNicknameCheck(`ⓘ ${response.message}`);
       } else if (response.success === false) {
         nicknameCheckBox?.classList.add('red');
@@ -92,7 +182,7 @@ const SignupPage = () => {
   };
 
   const passwordReCheck = (e: any) => {
-    const pwCheckBox = document.querySelector('.pwCheckBox');
+    const pwCheckBox = document.querySelector('.pwReCheckBox');
     if (
       formData.user_password === formData.user_pwCheck &&
       formData.user_password !== ''
@@ -120,11 +210,31 @@ const SignupPage = () => {
       if (idCheck.includes('중복')) {
         alert('중복되는 아이디입니다.');
         idRef.current?.focus();
+      } else if (idCheck.includes('최소') || formData.user_id.trim() === '') {
+        alert('아이디는 최소 4글자 이상입니다.');
+        idRef.current?.focus();
+      } else if (
+        pwValiCheck.includes('최소') ||
+        formData.user_password.trim() === ''
+      ) {
+        alert('비밀번호는 최소 8글자 이상입니다.');
       } else if (pwCheck.includes('일치')) {
         alert('비밀번호가 일치하지 않습니다.');
         pwRef.current?.focus();
       } else if (nicknameCheck.includes('중복')) {
         alert('중복되는 닉네임입니다.');
+        nickRef.current?.focus();
+      } else if (
+        nicknameCheck.includes('글자') ||
+        formData.user_nickname.trim() === ''
+      ) {
+        alert('닉네임은 최소 4글자 이상입니다.');
+        nickRef.current?.focus();
+      } else if (
+        emailCheck.includes('@') ||
+        formData.user_email.trim() === ''
+      ) {
+        alert('이메일은 @를 포함해야합니다.');
         nickRef.current?.focus();
       } else {
         const response = await register(formData);
@@ -157,7 +267,11 @@ const SignupPage = () => {
             placeholder="아이디 (최소 4자리 이상)"
             className="input-box"
             onChange={handleInputChange}
-            onKeyUp={idReCheck}
+            onKeyUp={(e) => {
+              idReCheck(e);
+              // signupValidate();
+            }}
+            // onBlur={signupValidate}
             ref={idRef}
           />
           <div className="idCheckBox">{idCheck}</div>
@@ -167,9 +281,11 @@ const SignupPage = () => {
             name="user_password"
             placeholder="비밀번호 (최소 8자리 이상)"
             className="input-box"
+            ref={pwRef}
             onChange={handleInputChange}
+            onKeyUp={pwasswordValiCheck}
           />
-          <br />
+          <div className="pwCheckBox">{pwValiCheck}</div>
           <input
             type="password"
             id="user_pwCheck"
@@ -178,9 +294,9 @@ const SignupPage = () => {
             className="input-box"
             onChange={handleInputChange}
             onBlur={passwordReCheck}
-            ref={pwRef}
+            ref={pwReRef}
           />
-          <div className="pwCheckBox">{pwCheck}</div>
+          <div className="pwReCheckBox">{pwCheck}</div>
           <input
             id="user_nickname"
             name="user_nickname"
@@ -197,9 +313,12 @@ const SignupPage = () => {
             id="user_email"
             placeholder="이메일 (@ 포함한 주소 입력)"
             className="input-box"
+            ref={emailRef}
+            onKeyUp={emailReCheck}
             onChange={handleInputChange}
           />
-          <br />
+          <div className="emailCheckBox">{emailCheck}</div>
+          {/* <br /> */}
           <button className="signinBtn" onClick={handleRegister}>
             회원가입
           </button>

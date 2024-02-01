@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { kakaoLogout, userInfo } from '../services/apiService';
+import { kakaoLogin, kakaoLogout, userInfo } from '../services/apiService';
+import { UserData } from './../types/types';
 
 const Header = () => {
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
@@ -13,15 +14,47 @@ const Header = () => {
   const [isToggle, setIsToggle] = useState(false);
   const location = useLocation();
 
+  const [userInfos, setUserInfos] = useState({
+    userId: '',
+    userNickName: '',
+    userProfile: '',
+  });
+
   useEffect(() => {
-    const tokenId = jwtCookie['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
-    console.log(tokenId);
-    if (tokenId) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [jwtCookie]); // 빈 배열을 전달하여 마운트 및 언마운트 시에만 실행
+    const handleKakaoLogin = async () => {
+      try {
+        const params = new URL(document.location.toString()).searchParams;
+        const code = params.get('code');
+
+        if (code) {
+          console.log('카카오 로그인 요청');
+          await kakaoLogin(code);
+        }
+
+        const tokenId = jwtCookie['jwtCookie'];
+        console.log('tokenId', tokenId);
+
+        if (tokenId) {
+          setIsLogin(true);
+
+          const response = await userInfo({ id: tokenId });
+          console.log('사용자 정보', response.info);
+          setUserInfos({
+            userId: response.info.user_id,
+            userNickName: response.info.user_nickname,
+            userProfile: response.info.user_profile,
+          });
+          console.log('사용자 정보 폼', userInfos);
+        } else {
+          setIsLogin(false);
+        }
+      } catch (error) {
+        console.log('카카오 로그인 또는 사용자 정보 가져오기 에러', error);
+      }
+    };
+
+    handleKakaoLogin();
+  }, []);
 
   const mypageToggle = () => {
     setIsToggle((prevIsToggle) => !prevIsToggle);
@@ -59,11 +92,7 @@ const Header = () => {
     window.location.href = '/';
   };
 
-  const [userInfos, setUserInfos] = useState({
-    userId: '',
-    userNickName: '',
-    userProfile: '',
-  });
+
   useEffect(() => {
     const tokenId = jwtCookie['jwtCookie'];
     // console.log('tokenId', tokenId);
@@ -74,7 +103,8 @@ const Header = () => {
         setUserInfos({
           userId: response.info.user_id,
           userNickName: response.info.user_nickname,
-          userProfile: response.info.user_profile,
+          userProfile:
+            response.info.user_profile || process.env.PUBLIC_URL + 'mypage.png',
         });
       } catch (error) {
         console.log('사용자 정보 가져오기 에러', error);
@@ -90,6 +120,7 @@ const Header = () => {
       <div className="header" id="top">
         <Link to="/">
           <img
+            className="main-logo"
             src={process.env.PUBLIC_URL + '/temp_logo.png'}
             alt="Logo"
             onClick={redirectMain}
@@ -109,31 +140,31 @@ const Header = () => {
         {isLogin === true && (
           <>
             <div className="Header-mypage-btn" onClick={mypageToggle}>
-              <span>
-                <img
-                  src={userInfos.userProfile}
-                  alt=""
-                  style={{
-                    position: 'relative',
-                    top: '0',
-                    transform: 'none',
-                    borderRadius: '50%',
-                    width: '100%',
-                    height: '100%',
-                  }}
-                />
-              </span>
+              <img
+                className="mypage-profile"
+                src={userInfos.userProfile}
+                alt=""
+                style={{}}
+              />
+
             </div>
             {isToggle === true && (
               <div className="Header-mypage">
-                <div>
-                  {userInfos.userId} ( {userInfos.userNickName} )
+                <div className="Header-nickname">
+                  {userInfos.userNickName}&nbsp;님의 투자 여정을 응원합니다!
                 </div>
-                <Link to="/mypage">
-                  <div>마이페이지</div>
+                <Link to="/wordBook">
+                  <div>단어장</div>
                 </Link>
                 <div className="logout-btn" onClick={handleLogout}>
                   로그아웃
+                </div>
+                <div className="Header-user">
+                  <Link to="/mypage">
+                    <div className="Header-user-update">회원정보수정</div>
+                  </Link>
+                  &nbsp;&nbsp;·&nbsp;&nbsp;
+                  <div className="Header-user-delete">회원탈퇴</div>
                 </div>
               </div>
             )}
