@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import PostRank from '../../components/community/PostRank';
 import '../../styles/Community.scss';
 import Community from '../../components/community/Community';
@@ -14,7 +14,7 @@ function CommunityMain(): ReactElement {
           <PostRank />
         </div>
         <div className="postBox">
-          <Community></Community>
+          <Community />
         </div>
       </div>
     </div>

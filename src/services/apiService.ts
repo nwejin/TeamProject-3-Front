@@ -177,6 +177,20 @@ export const getCommunityPosts = async () => {
   }
 };
 
+// 커뮤니티 게시글 검색
+export const searchPost = async (searchWord: string) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/search',
+      { params: { searchWord } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (게시글 검색)');
+  }
+};
+
 // 댓글 서버로 보내기
 export const postComment = async (commentData: any) => {
   console.log('commentData >', commentData);
