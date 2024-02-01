@@ -47,12 +47,16 @@ function Community() {
   };
 
   const [isActive, setIsActive] = useState(false);
+
+  const [commentData, setCommentData] = useState([]);
+
   return (
     <>
       {/* 콘텐츠 박스*/}
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
-        console.log(post);
+        console.log(post._id);
+
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
           // 분계산
@@ -139,7 +143,12 @@ function Community() {
               <div className="contentBox">
                 <div className="textContent">
                   <Link to={`/community/${post._id}`} state={{ post }}>
-                    <p className="title">{post.title}</p>
+                    <p
+                      className="title"
+                      onClick={() => console.log('포스트임', post)}
+                    >
+                      {post.title}
+                    </p>
                     <p className="text">{post.content}</p>
                   </Link>
                 </div>
