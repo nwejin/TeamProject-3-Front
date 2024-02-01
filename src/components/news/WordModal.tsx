@@ -63,7 +63,7 @@ function WordModal({modalWord ,closeModal, modalPosition}: ModalProps) {
             }}
     >
         <div className='close-btn'>
-            <span onClick={closeModal} className="material-symbols-outlined">close</span>
+            <span onClick={closeModal} className="material-symbols-outlined close">close</span>
         </div>
         <span>{modalWord.word}</span>
         <span onClick={myWord} className={`material-symbols-outlined heart ${isActive ? 'active' : ''}`}>heart_plus</span>

@@ -95,6 +95,10 @@
   padding: 10px;
   // margin-bottom: 100px;
 
+  .close-btn {
+    text-align: right;
+  }
+
   .material-symbols-outlined {
     cursor: pointer;
     font-variation-settings: 'FILL' 1;
@@ -111,7 +115,6 @@
     color: gray;
   }
 }
-
 // .material-symbols-outlined {
 //   font-variation-settings:
 // //   'FILL' 1,
