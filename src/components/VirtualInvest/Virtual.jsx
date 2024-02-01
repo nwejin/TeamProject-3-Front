@@ -282,7 +282,7 @@ const Virtual = () => {
         <div className="status-Box">
           <button onClick={showDetailModal} className="resetBtn">
             <p>
-              <span class="material-symbols-outlined"> 내역보기search</span>
+              <span className="material-symbols-outlined"> 내역보기search</span>
             </p>
           </button>
           {openDetailModal && (
