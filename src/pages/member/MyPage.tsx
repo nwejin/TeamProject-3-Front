@@ -214,7 +214,7 @@ const MyPage = () => {
             removeisKakao('isKakao');
             removekakaoToken('kakaoToken');
             console.log('회원정보 삭제 성공:', response, response2);
-            navigate('/');
+            window.location.href = '/';
           } else {
             console.error('회원정보 삭제 실패:', response, response2);
           }
@@ -233,7 +233,7 @@ const MyPage = () => {
               alert('회원정보 삭제 성공!');
               removejwtCookie('jwtCookie');
               removeisKakao('isKakao');
-              navigate('/');
+              window.location.href = '/';
             } else {
               console.error('회원정보 삭제 실패:', response);
             }

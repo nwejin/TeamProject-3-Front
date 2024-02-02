@@ -21,7 +21,13 @@ const Header = () => {
   });
 
   useEffect(() => {
-    const handleKakaoLogin = async () => {
+    console.log('로그인 시 실행');
+    setUserInfos({
+      userId: '',
+      userNickName: '',
+      userProfile: '',
+    });
+    const getUserInfo = async () => {
       try {
         const params = new URL(document.location.toString()).searchParams;
         const code = params.get('code');
@@ -36,13 +42,14 @@ const Header = () => {
 
         if (tokenId) {
           setIsLogin(true);
-
           const response = await userInfo({ id: tokenId });
           console.log('사용자 정보', response.info);
           setUserInfos({
             userId: response.info.user_id,
             userNickName: response.info.user_nickname,
-            userProfile: response.info.user_profile,
+            userProfile:
+              response.info.user_profile ||
+              process.env.PUBLIC_URL + 'mypage.png',
           });
           console.log('사용자 정보 폼', userInfos);
         } else {
@@ -52,9 +59,8 @@ const Header = () => {
         console.log('카카오 로그인 또는 사용자 정보 가져오기 에러', error);
       }
     };
-
-    handleKakaoLogin();
-  }, []);
+    getUserInfo();
+  }, [jwtCookie['jwtCookie']]);
 
   const mypageToggle = () => {
     setIsToggle((prevIsToggle) => !prevIsToggle);
@@ -70,6 +76,11 @@ const Header = () => {
   }, [location.pathname]);
 
   const handleLogout = async () => {
+    setUserInfos({
+      userId: '',
+      userNickName: '',
+      userProfile: '',
+    });
     console.log(kakaoToken['kakaoToken']);
     console.log(process.env.REACT_APP_API_HOST);
     if (isKakao) {
@@ -83,35 +94,36 @@ const Header = () => {
     }
     removejwtCookie('jwtCookie');
     removeisKakao('isKakao');
+
     alert('로그아웃 되었습니다.');
     setIsToggle(false);
-    window.location.href = '/';
   };
 
   const redirectMain = () => {
     window.location.href = '/';
   };
 
+  // useEffect(() => {
+  //   console.log('페이지 로딩시 실행');
 
-  useEffect(() => {
-    const tokenId = jwtCookie['jwtCookie'];
-    // console.log('tokenId', tokenId);
-    const getUserInfo = async () => {
-      try {
-        const response = await userInfo({ id: tokenId });
-        console.log(response);
-        setUserInfos({
-          userId: response.info.user_id,
-          userNickName: response.info.user_nickname,
-          userProfile:
-            response.info.user_profile || process.env.PUBLIC_URL + 'mypage.png',
-        });
-      } catch (error) {
-        console.log('사용자 정보 가져오기 에러', error);
-      }
-    };
-    getUserInfo();
-  }, []);
+  //   const tokenId = jwtCookie['jwtCookie'];
+  //   // console.log('tokenId', tokenId);
+  //   const getUserInfo = async () => {
+  //     try {
+  //       const response = await userInfo({ id: tokenId });
+  //       console.log(response);
+  //       setUserInfos({
+  //         userId: response.info.user_id,
+  //         userNickName: response.info.user_nickname,
+  //         userProfile:
+  //           response.info.user_profile || process.env.PUBLIC_URL + 'mypage.png',
+  //       });
+  //     } catch (error) {
+  //       console.log('사용자 정보 가져오기 에러', error);
+  //     }
+  //   };
+  //   getUserInfo();
+  // }, []);
 
   console.log(userInfos.userId);
 
@@ -146,7 +158,6 @@ const Header = () => {
                 alt=""
                 style={{}}
               />
-
             </div>
             {isToggle === true && (
               <div className="Header-mypage">
