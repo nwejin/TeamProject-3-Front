@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import MyResponsiveLine from './userChart';
 import MyResponsivePie from './WinRate';
 import { showRank } from '../../services/apiService';
@@ -18,23 +18,27 @@ const ShowDetail = ({ response, close, user }: props): ReactElement => {
 
   const profitLimit = Number(profit).toFixed(2);
 
+  const [userRank, setUserRank] = useState([]);
+
   useEffect(() => {
     const showRanking = async () => {
       try {
         const response = await showRank({});
         if (response) {
           console.log('show rank response 전송 성공');
-          console.log('res ', response);
+          console.log('res ', response); // 순위
           // 여기에서 response를 처리하거나 다른 작업을 수행할 수 있습니다.
         }
       } catch (error) {
         console.error('API 호출 에러:', error);
       }
     };
-
     // fetchData 함수를 호출하여 데이터를 가져오도록 설정
+    setUserRank(response);
     showRanking();
   }, []); // 빈 의존성 배열은 컴포넌트가 마운트될 때 한 번만 실행
+
+  console.log(userRank);
 
   return (
     <div className="detail-wrapper">

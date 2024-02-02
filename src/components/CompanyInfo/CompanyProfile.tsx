@@ -7,7 +7,7 @@ interface CompanyProfileProps {
 
 const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
   const container = useRef<HTMLDivElement>(null);
-  // const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
+  const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
 
   // const search = props.search;
   // // console.log(search);
@@ -15,13 +15,13 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
 
   const search = props.search;
   console.log(search);
-  const symbol = `NASDAQ:${search}`;
-  console.log(symbol);
+  // const symbol = `NASDAQ:${search}`;
+  // console.log(symbol);
 
-  // useEffect(() => {
-  //   // search 값이 변경될 때마다 symbol 업데이트
-  //   setSymbol(`NASDAQ:${search}`);
-  // }, [search]);
+  useEffect(() => {
+    // search 값이 변경될 때마다 symbol 업데이트
+    setSymbol(`NASDAQ:${search}`);
+  }, [search]);
 
   useEffect(() => {
     // Create script element

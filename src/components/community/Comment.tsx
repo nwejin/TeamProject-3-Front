@@ -88,9 +88,7 @@ function Comment({ data }: { data: any }) {
             <div className="userProfile">
               <div className="profile">
                 <span>
-
                   <img src={post.userId.user_profile} alt="" />
-
                 </span>
                 <p style={{ marginRight: '5px' }}>
                   {post.userId.user_nickname}
