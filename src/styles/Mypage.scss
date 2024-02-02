@@ -1,19 +1,38 @@
 @import './Component.scss';
 
 .mypage-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  .mypage-navbar {
-    width: 20%;
-    margin-right: 1vw;
-    height: 30vw;
-    border: 1px solid black;
+  // profile-img
+  // display: flex;
+  // justify-content: flex-start;
+  form {
+    display: flex;
+    justify-content: center;
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+    }
+    .img-edit-btn {
+      .profile-input {
+        border: 0;
+        border-radius: 0;
+        width: 0;
+        height: 0;
+        padding: 0;
+      }
+    }
   }
-  .mypage-contents {
-    width: 78%;
-    height: 30vw;
-    border: 1px solid black;
-  }
+  // .profile-img {
+  //   width: 20%;
+  //   margin-right: 1vw;
+  //   height: 30vw;
+  //   border: 1px solid black;
+  // }
+  // .mypage-contents {
+  //   width: 78%;
+  //   height: 30vw;
+  //   border: 1px solid black;
+  // }
 }
 .yellow {
   margin-bottom: 10px;

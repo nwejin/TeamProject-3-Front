@@ -121,16 +121,13 @@ const NewsDetailPage = () => {
     });
   };
 
-  // useEffect(()=>{
-  //     console.log(modalWords)
-  // }, [modalWords])
-
   // 모달 닫기 버튼 함수
   const closeModal = () => {
     setOpenModal(false);
     setModalWord(null);
   };
 
+  // 기사 저장 유무
   useEffect(() => {
     const checkMyNews = async () => {
       const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
@@ -176,12 +173,12 @@ const NewsDetailPage = () => {
 
   // 드래그 가능 여부
   const draggable = () => {
-    // const tokenId = cookies['jwtCookie'];
-    // if(!tokenId) {
-    //     alert('로그인 후 사용가능한 기능입니다.');
-    // } else {
-    //     setIsDraggable(!isDraggable);
-    // }
+    const tokenId = cookies['jwtCookie'];
+    if(!tokenId) {
+        alert('로그인 후 사용가능한 기능입니다.');
+    } else {
+        setIsDraggable(!isDraggable);
+    }
     setIsDraggable(!isDraggable);
   };
 
@@ -226,6 +223,29 @@ const NewsDetailPage = () => {
       event.preventDefault();
     }
   };
+
+  
+  // 형광펜 텍스트 받아오기
+  useEffect(() => {
+    const myHighlights = async () => {
+      const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
+      if(tokenId) {
+        const highlightTxt = await axios.get(
+          process.env.REACT_APP_BACKSERVER + '/news/sendMyHighlight',
+          {
+            params: { news_id : data._id},
+            headers: {
+              'Content-Type': 'application/json',
+              // 'Authorization': `Bearer ${tokenId}`,
+            },
+            withCredentials: true,
+          }
+        );
+        console.log(highlightTxt.data.word);
+      }
+    };
+    myHighlights();
+  }, [cookies])
 
   return (
     <>

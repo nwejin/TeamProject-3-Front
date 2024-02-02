@@ -12,14 +12,21 @@ function TradingViewWidget() {
     script.innerHTML = JSON.stringify({
       symbols: [
         ['Apple', 'AAPL|1D'],
-        ['Google', 'GOOGL|1D'],
+        ['Tesla', 'TSLA|1D'],
+        ['Amazon', 'AMZN|1D'],
         ['Microsoft', 'MSFT|1D'],
+        ['Intel', 'INTC|1D'],
+        ['Nvidia', 'NVDA|1D'],
+        ['Google', 'GOOGL|1D'],
+        ['Meta', 'META|1D'],
+        ['Netflix', 'NFLX|1D'],
+        ['Oracle', 'ORCL|1D'],
       ],
       chartOnly: false,
-      width: 1000,
-      height: 500,
+      width: '100%',
+      height: '110%',
       locale: 'kr',
-      colorTheme: 'dark',
+      colorTheme: 'white',
       autosize: false,
       showVolume: false,
       showMA: false,
@@ -32,7 +39,7 @@ function TradingViewWidget() {
         '-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif',
       fontSize: '10',
       noTimeScale: false,
-      valuesTracking: '1',
+      valuesTracking: '1  ',
       changeMode: 'price-and-percent',
       chartType: 'area',
       maLineColor: '#2962FF',
@@ -42,6 +49,7 @@ function TradingViewWidget() {
       lineType: 0,
       dateRanges: ['1d|1', '1m|30', '3m|60', '12m|1D', '60m|1W', 'all|1M'],
     });
+    console.log(Symbol);
 
     if (container.current) {
       container.current.appendChild(script);

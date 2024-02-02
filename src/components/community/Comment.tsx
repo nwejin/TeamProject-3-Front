@@ -88,9 +88,7 @@ function Comment({ data }: { data: any }) {
             <div className="userProfile">
               <div className="profile">
                 <span>
-
                   <img src={post.userId.user_profile} alt="" />
-
                 </span>
                 <p style={{ marginRight: '5px' }}>
                   {post.userId.user_nickname}
@@ -106,9 +104,9 @@ function Comment({ data }: { data: any }) {
             <div className="statusBox">
               <div>
                 <span>
-                  <button>
+                  {/* <button>
                     <span className="material-symbols-outlined">favorite</span>
-                  </button>
+                  </button> */}
                 </span>
 
                 <span>

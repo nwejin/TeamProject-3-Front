@@ -54,19 +54,24 @@ function Community() {
 
   const [commentCount, setCommentCount] = useState<number | null>(null);
   const fetchDataForPost = async (post: any) => {
-    console.log(post._id);
+    // console.log(post._id);
 
     const commentArray = await getComment(post._id);
-    console.log(commentArray);
+    // console.log('commentArray', commentArray);
 
-    const replyCommentArray = await getReply(post._id);
-    console.log(replyCommentArray);
+    let replyCommentSum = 0;
+    for (const comment of commentArray) {
+      const replyComment = await getReply(comment._id);
+      // console.log('댓글 별 대댓글', replyComment);
+
+      // console.log('댓글 별 대댓글 수', replyComment.length);
+      replyCommentSum += replyComment.length;
+    }
 
     const commentCount = commentArray.length;
-    const replyCount = replyCommentArray.length;
-    const totalCommentCount = commentCount + replyCount;
+    const totalCommentCount = commentCount + replyCommentSum;
 
-    console.log('댓글 수', totalCommentCount);
+    console.log('총 댓글 수', totalCommentCount);
 
     // 필요한 데이터를 가공하여 반환
     return totalCommentCount;
@@ -74,7 +79,6 @@ function Community() {
 
   const renderPost = async (post: any) => {
     const commentsCount = await fetchDataForPost(post);
-    console.log('댓글 수', commentsCount);
 
     const commentsCountElement = document.getElementById(
       `commentsCount_${post._id}`

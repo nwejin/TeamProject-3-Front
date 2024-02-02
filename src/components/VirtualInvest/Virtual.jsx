@@ -154,7 +154,6 @@ const Virtual = () => {
   const [detailData, setDetailData] = useState({});
   const showDetailModal = async () => {
     setOpenDetailModal(true);
-
     // 모달 클릭 시 이벤트 -> axios 요청필요 -> apiService에서 가져오기 ('/virtual/record')
     if (cookie[0].jwtCookie) {
       try {
@@ -262,8 +261,8 @@ const Virtual = () => {
             </div>
             <div className="nextBtnBox">
               <button className="next Btn" onClick={nextTurn}>
-                <p>
-                  다음<span class="material-symbols-outlined">skip_next</span>
+                <p style={{}}>
+                  <span class="material-symbols-outlined">skip_next</span>
                 </p>
 
                 <p>

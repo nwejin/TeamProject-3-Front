@@ -9,6 +9,7 @@ p {
   display: flex;
   //   justify-content: flex-start;
   justify-content: space-between;
+  margin-bottom: 6vw;
   // position: relative;
   .invest-chart {
     width: 70%;
@@ -311,17 +312,9 @@ p {
   .deatail-profile {
     display: flex;
     width: 95%;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    margin: 0.5rem 0 1rem 0;
-    p {
-      font-size: 20px;
-      font-weight: 700;
-      span {
-        font-size: 18px;
-        color: $color-gray-2;
-      }
-    }
+    margin: 0.5rem 0 0.5rem 0;
     .closeBtn {
       background: none;
       border: none;
@@ -330,6 +323,20 @@ p {
       }
       span:hover {
         color: $color-blue-1;
+      }
+    }
+  }
+  .detail-title {
+    // background-color: pink;
+    display: flex;
+    width: 90%;
+    justify-content: flex-start;
+    p {
+      font-size: 20px;
+      font-weight: 700;
+      span {
+        font-size: 18px;
+        color: $color-gray-2;
       }
     }
   }
@@ -391,7 +398,7 @@ p {
     color: $color-gray-2;
   }
   select {
-    width: 60%;
+    width: 50%;
     border: none;
     font-size: 18px;
     font-weight: 700;
@@ -428,6 +435,26 @@ p {
       align-items: center;
     }
     span:hover {
+      color: $color-blue-1;
+    }
+  }
+}
+
+.rankModalBtn {
+  font-size: 14px;
+  width: fit-content;
+  padding: 0.5rem 0.2rem;
+  margin: auto;
+  margin-top: 1rem;
+  text-align: center;
+  position: relative;
+  border: 1px solid $color-gray-1;
+  span {
+    color: $color-gray-2;
+  }
+  &.active {
+    border: 1px solid $color-blue-1;
+    span {
       color: $color-blue-1;
     }
   }
