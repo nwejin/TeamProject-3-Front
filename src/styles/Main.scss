@@ -80,6 +80,8 @@
             font-weight: 600;
             text-overflow: ellipsis;
             height: 20px;
+            overflow: hidden;
+            white-space: nowrap;
           }
           .main-news-point {
             padding: 3px 5px;
@@ -98,11 +100,11 @@
             color: $color-blue-1;
           }
           .main-news-content {
-            // height: calc(100% - 3vw);
-            height: calc(100% - 57px);
+            height: calc(100% - 55px);
             overflow: hidden;
-            font-size: 14px;
-            line-height: 23px;
+            font-size: 0.9vw;
+            line-height: 26px;
+            margin-top: 0.5vw;
           }
         }
       }

@@ -121,8 +121,8 @@ const Header = () => {
     };
     getUserInfo();
   }, []);
-
   console.log(userInfos.userId);
+  console.log(userInfos.userNickName);
 
   return (
     <>
@@ -186,9 +186,9 @@ const Header = () => {
       </div>
       {isHelpToggle === true && <div className="help-box"></div>}
       <div className="remote-btn">
-        <div className="fix-icon" onClick={helpToggle}>
+        {/* <div className="fix-icon" onClick={helpToggle}>
           <span className="material-symbols-rounded">question_mark</span>
-        </div>
+        </div> */}
         <a href="#top">
           <div className="fix-icon">
             <span className="material-symbols-rounded">vertical_align_top</span>
