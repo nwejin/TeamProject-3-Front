@@ -7,7 +7,7 @@ interface CompanyProfileProps {
 
 const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
   const container = useRef<HTMLDivElement>(null);
-  const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
+  // const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
 
   // const search = props.search;
   // // console.log(search);
@@ -15,13 +15,14 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
 
   const search = props.search;
   console.log(search);
-  // const symbol = `NASDAQ:${search}`;
-  // console.log(symbol);
+  const symbol = `NASDAQ:${search}`;
+  console.log(symbol);
 
-  useEffect(() => {
-    // search 값이 변경될 때마다 symbol 업데이트
-    setSymbol(`NASDAQ:${search}`);
-  }, [search]);
+  // useEffect(() => {
+  //   const search = props.search;
+  //   // search 값이 변경될 때마다 symbol 업데이트
+  //   setSymbol(`NASDAQ:${search}`);
+  // }, [props.search]);
 
   useEffect(() => {
     // Create script element
@@ -35,7 +36,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
       height: '100%',
       isTransparent: false,
       colorTheme: 'white',
-      symbol: symbol,
+      symbol: `NASDAQ:${search}`,
       locale: 'kr',
     });
 
@@ -53,7 +54,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
         container.current.innerHTML = '';
       }
     };
-  }, []); // Empty dependency array ensures useEffect runs only once
+  }, [symbol]); // Empty dependency array ensures useEffect runs only once
 
   return (
     <div className="tradingview-widget-container" ref={container}>

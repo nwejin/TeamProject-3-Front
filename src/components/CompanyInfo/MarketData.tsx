@@ -14,7 +14,7 @@ const MarketData: React.FC = () => {
 
     script.innerHTML = JSON.stringify({
       width: '100%',
-      height: '800px',
+      height: '100%',
       symbolsGroups: [
         {
           name: '지수',
@@ -68,7 +68,11 @@ const MarketData: React.FC = () => {
   return (
     <div>
       {/* 고유한 식별자를 가진 컨테이너 */}
-      <div id={containerId} className="tradingview-widget-container">
+      <div
+        id={containerId}
+        className="tradingview-widget-container"
+        style={{ marginTop: '0.5rem' }}
+      >
         <div className="tradingview-widget-container__widget"></div>
         <div className="tradingview-widget-copyright">
           <a

@@ -262,8 +262,8 @@ const Virtual = () => {
             </div>
             <div className="nextBtnBox">
               <button className="next Btn" onClick={nextTurn}>
-                <p>
-                  다음<span class="material-symbols-outlined">skip_next</span>
+                <p style={{}}>
+                  <span class="material-symbols-outlined">skip_next</span>
                 </p>
 
                 <p>

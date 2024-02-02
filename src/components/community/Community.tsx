@@ -146,7 +146,7 @@ function Community() {
         const plusLike = async () => {
           try {
             if (cookie[0].jwtCookie) {
-              const like = isActive ? -1 : 1; // isActive 로 -1 +1
+              const like = 1; // isActive 로 -1 +1
               const postId = post._id;
 
               const likeData = { like, postId };
@@ -154,11 +154,11 @@ function Community() {
               console.log(response);
 
               // 좋아요 토글
-              setIsActive(!isActive);
+              // setIsActive(!isActive);
 
-              // 좋아요 수 업데이트
-              post.like += like;
-              setPosts([...posts]);
+              // // 좋아요 수 업데이트
+              // // post.like += like;
+              // setPosts([...posts]);
             } else {
               alert('로그인 후 좋아요 가능합니다!');
             }
