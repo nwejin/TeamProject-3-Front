@@ -73,7 +73,6 @@ const Virtual = () => {
     const fetchData = async () => {
       try {
         const result = await getConvertData(symbol); // 데이터가 로딩될 때까지 대기
-        console.log('cccc> ', result);
         const resVol = await volumeArr;
         setData(result.slice(index, yearofDay));
         setVolume(resVol.slice(index, yearofDay));

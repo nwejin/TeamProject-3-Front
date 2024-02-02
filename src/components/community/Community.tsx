@@ -12,7 +12,7 @@ import { useCookies } from 'react-cookie';
 
 // 커뮤니티 목록 페이지
 function Community() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any[]>([]);
   // db에서 데이터 불러오기위해 useState
   console.log('post', posts);
 
@@ -79,7 +79,6 @@ function Community() {
 
   const renderPost = async (post: any) => {
     const commentsCount = await fetchDataForPost(post);
-    // console.log('댓글 수', commentsCount);
 
     const commentsCountElement = document.getElementById(
       `commentsCount_${post._id}`
@@ -148,22 +147,23 @@ function Community() {
         };
 
         // 좋아요 누르기
-        const plusLike = async () => {
+        const plusLike = async (postId: string) => {
           try {
             if (cookie[0].jwtCookie) {
-              const like = 1; // isActive 로 -1 +1
-              const postId = post._id;
+              const postIndex = posts.findIndex((post) => post._id === postId);
+              if (postIndex !== -1) {
+                const updatedPosts = [...posts];
+                const like = updatedPosts[postIndex].isActive ? -1 : 1;
+                const likeData = { like, postId };
 
-              const likeData = { like, postId };
-              const response = await addLike(likeData);
-              console.log(response);
+                const response = await addLike(likeData);
+                console.log('response toggle', response);
 
-              // 좋아요 토글
-              // setIsActive(!isActive);
-
-              // // 좋아요 수 업데이트
-              // // post.like += like;
-              // setPosts([...posts]);
+                // 해당 포스트의 좋아요 토글
+                updatedPosts[postIndex].isActive =
+                  !updatedPosts[postIndex].isActive;
+                setPosts(updatedPosts);
+              }
             } else {
               alert('로그인 후 좋아요 가능합니다!');
             }
@@ -218,9 +218,9 @@ function Community() {
                     {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
                     <button>
                       <span
-                        onClick={plusLike}
+                        onClick={() => plusLike(post._id)}
                         className={`material-symbols-outlined heart ${
-                          isActive ? 'active' : ''
+                          post.isActive ? 'active' : ''
                         }`}
                       >
                         heart_plus
