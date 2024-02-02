@@ -41,7 +41,7 @@ const StockGuidePage = () => {
   return (
     <>
       <div className="outer-wrapper">
-        <div className="page-title guide-title">
+        <div className="guide-title">
           주식 길잡이{' '}
           {isToggle === true && (
             <div className="guide-help-box">
@@ -74,7 +74,16 @@ const StockGuidePage = () => {
             </div>
             {/* <div className="graph-x" onClick={()=>handleClick('x')}></div> */}
 
-            <div className="stock-explain">{explain}</div>
+            <div className="stock-explain">
+              {' '}
+              {explain.includes('캔들') && (
+                <img
+                  style={{ width: '200px', float: 'left', marginRight: '20px' }}
+                  src={process.env.PUBLIC_URL + 'candle-chart.png'}
+                />
+              )}
+              {explain}
+            </div>
           </div>
           <div className="trade-control">
             <div className="stock-info">
