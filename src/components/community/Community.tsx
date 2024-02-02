@@ -50,7 +50,6 @@ function Community() {
 
   const [isActive, setIsActive] = useState(false);
 
-  const [commentData, setCommentData] = useState([]);
   const cookie = useCookies(['jwtCookie']);
 
   const [commentCount, setCommentCount] = useState<number | null>(null);
@@ -67,11 +66,12 @@ function Community() {
     const replyCount = replyCommentArray.length;
     const totalCommentCount = commentCount + replyCount;
 
-    // console.log('댓글 수', totalCommentCount);
+    console.log('댓글 수', totalCommentCount);
 
     // 필요한 데이터를 가공하여 반환
     return totalCommentCount;
   };
+
   const renderPost = async (post: any) => {
     const commentsCount = await fetchDataForPost(post);
     console.log('댓글 수', commentsCount);
@@ -146,14 +146,19 @@ function Community() {
         const plusLike = async () => {
           try {
             if (cookie[0].jwtCookie) {
-              const like: Number = 1;
+              const like = isActive ? -1 : 1; // isActive 로 -1 +1
               const postId = post._id;
 
               const likeData = { like, postId };
               const response = await addLike(likeData);
               console.log(response);
+
+              // 좋아요 토글
               setIsActive(!isActive);
-              window.location.reload();
+
+              // 좋아요 수 업데이트
+              post.like += like;
+              setPosts([...posts]);
             } else {
               alert('로그인 후 좋아요 가능합니다!');
             }

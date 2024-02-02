@@ -35,7 +35,7 @@ const FundamentalData: React.FC<FundamentalDataProps> = (props) => {
       displayMode: 'regular',
       width: '100%',
       height: '100%',
-      colorTheme: 'dark',
+      colorTheme: 'white',
       symbol: symbol, // 동적으로 변경된 symbol 사용
       locale: 'kr',
     });
