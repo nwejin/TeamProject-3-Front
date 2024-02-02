@@ -39,8 +39,8 @@ const MainPage = () => {
   const [translate, setTranslate] = useState(0);
 
   useEffect(() => {
-    console.log(newsData);
-    console.log(boardData);
+    // console.log(newsData);
+    // console.log(boardData);
   }, [newsData, boardData]);
 
   useEffect(() => {
@@ -67,12 +67,12 @@ const MainPage = () => {
         content: news.content,
         id: data._id,
       }));
-      console.log(updateNews);
+      // console.log(updateNews);
       // const newsArray = updateNews;
       // console.log(newsArray);
 
       setNewsData(updateNews);
-      console.log(newsData);
+      // console.log(newsData);
     } else {
       const newsArray = [
         {
@@ -90,11 +90,11 @@ const MainPage = () => {
     const response = await mainBoards();
     const data = response.board;
     setBoardlist(data);
-    console.log('hihihiddddddd', data);
-    console.log(data[0].userId.user_nickname);
+    // console.log('hihihiddddddd', data);
+    // console.log(dsata[0].userId.user_nickname);
     if (response.success) {
       const updateBoard = data.map((boards: any) => {
-        console.log('boards:', boards);
+        // console.log('boards:', boards);
         return {
           image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
           title: boards.title,
@@ -108,7 +108,7 @@ const MainPage = () => {
       // console.log(updateNews);
       // const boardArray = updateBoard;
       setBoardData(updateBoard);
-      console.log(boardData);
+      // console.log(boardData);
     } else {
       const boardArray = [
         {

@@ -200,52 +200,52 @@ const MyPage = () => {
       console.error('회원정보 수정 실패:', error);
     }
   };
-  const deleteUserInfo = async (event: any) => {
-    try {
-      event.preventDefault();
+  // const deleteUserInfo = async (event: any) => {
+  //   try {
+  //     event.preventDefault();
 
-      if (isKakao['isKakao']) {
-        if (window.confirm('탈퇴하시겠습니까?')) {
-          const response = await deleteKakao(kakaoToken['kakaoToken']);
-          const response2 = await deleteUser(myId);
-          if (response2.success && response.success) {
-            alert('회원정보 삭제 성공!');
-            removejwtCookie('jwtCookie');
-            removeisKakao('isKakao');
-            removekakaoToken('kakaoToken');
-            console.log('회원정보 삭제 성공:', response, response2);
-            window.location.href = '/';
-          } else {
-            console.error('회원정보 삭제 실패:', response, response2);
-          }
-        } else {
-          return;
-        }
-      } else {
-        if (!pwCheckState) {
-          alert('비밀번호를 확인해주세요');
-        } else {
-          if (window.confirm('탈퇴하시겠습니까?')) {
-            console.log(myId);
-            const response = await deleteUser(myId);
-            if (response.success) {
-              console.log('회원정보 삭제 성공:', response);
-              alert('회원정보 삭제 성공!');
-              removejwtCookie('jwtCookie');
-              removeisKakao('isKakao');
-              window.location.href = '/';
-            } else {
-              console.error('회원정보 삭제 실패:', response);
-            }
-          } else {
-            return;
-          }
-        }
-      }
-    } catch (error) {
-      console.error('회원정보 삭제 실패:', error);
-    }
-  };
+  //     if (isKakao['isKakao']) {
+  //       if (window.confirm('탈퇴하시겠습니까?')) {
+  //         const response = await deleteKakao(kakaoToken['kakaoToken']);
+  //         const response2 = await deleteUser(myId);
+  //         if (response2.success && response.success) {
+  //           alert('회원정보 삭제 성공!');
+  //           removejwtCookie('jwtCookie');
+  //           removeisKakao('isKakao');
+  //           removekakaoToken('kakaoToken');
+  //           console.log('회원정보 삭제 성공:', response, response2);
+  //           window.location.href = '/';
+  //         } else {
+  //           console.error('회원정보 삭제 실패:', response, response2);
+  //         }
+  //       } else {
+  //         return;
+  //       }
+  //     } else {
+  //       if (!pwCheckState) {
+  //         alert('비밀번호를 확인해주세요');
+  //       } else {
+  //         if (window.confirm('탈퇴하시겠습니까?')) {
+  //           console.log(myId);
+  //           const response = await deleteUser(myId);
+  //           if (response.success) {
+  //             console.log('회원정보 삭제 성공:', response);
+  //             alert('회원정보 삭제 성공!');
+  //             removejwtCookie('jwtCookie');
+  //             removeisKakao('isKakao');
+  //             window.location.href = '/';
+  //           } else {
+  //             console.error('회원정보 삭제 실패:', response);
+  //           }
+  //         } else {
+  //           return;
+  //         }
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('회원정보 삭제 실패:', error);
+  //   }
+  // };
 
   return (
     <>
