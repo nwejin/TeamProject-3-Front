@@ -11,7 +11,7 @@ import './../../styles/StockGuide.scss';
 import SearchCompany from '../../components/CompanyInfo/SearchCompany';
 
 const StockRate = () => {
-  const [searchSymbol, setSearchSymbol] = useState('');
+  const [searchSymbol, setSearchSymbol] = useState('APPL');
   const [postSymbol, setPostSymbol] = useState('');
   const [reLoad, setReLoad] = useState(true);
 
@@ -69,21 +69,26 @@ const StockRate = () => {
               display: 'flex',
               height: '800px',
               flexDirection: 'row',
-              justifyContent: 'space-between',
             }}
           >
-            <div>
-              <div>
-                <MarketData />
-              </div>
-              <div>
+            <div style={{ width: '60%', height: '100%' }}>
+              <div
+                style={{
+                  width: '100%',
+                  height: '50%',
+                }}
+              >
                 <Ticker />
+                <FundamentalData search={searchSymbol} />
+                <CompanyProfile search={searchSymbol} />
               </div>
+
+              {/* <MarketData /> */}
             </div>
             <div className="flip">
               <div className="card">
                 <div className="front">
-                  <FundamentalData search={searchSymbol} />
+                  {/* <FundamentalData search={searchSymbol} /> */}
                   {/* {reLoad ? (
                     <FundamentalData search={searchSymbol} />
                   ) : (
@@ -91,7 +96,7 @@ const StockRate = () => {
                   )} */}
                 </div>
                 <div className="back">
-                  <CompanyProfile search={searchSymbol} />
+                  {/* <CompanyProfile search={searchSymbol} /> */}
                 </div>
               </div>
             </div>
