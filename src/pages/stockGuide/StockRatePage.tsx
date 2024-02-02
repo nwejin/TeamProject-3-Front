@@ -50,7 +50,7 @@ const StockRate = () => {
         >
           <div className="searchBox">
             <select name="" id="" onChange={selectCompany} value={searchSymbol}>
-              <option value="APPL">애플 (APPL)</option>
+              <option value="AAPL">애플 (APPL)</option>
               <option value="TSLA">테슬라 (TSLA)</option>
               <option value="AMZN">아마존 (AMZN)</option>
               <option value="MSFT">마이크로소프트 (MSFT)</option>
@@ -90,7 +90,6 @@ const StockRate = () => {
                     <FundamentalData search={''} />
                   )} */}
                 </div>
-
                 <div className="back">
                   <CompanyProfile search={searchSymbol} />
                 </div>
