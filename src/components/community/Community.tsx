@@ -4,13 +4,15 @@ import {
   getCommunityPosts,
   addLike,
   getComment,
+  getReply,
 } from '../../services/apiService';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 // 커뮤니티 목록 페이지
 function Community() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any[]>([]);
   // db에서 데이터 불러오기위해 useState
   console.log('post', posts);
 
@@ -48,7 +50,41 @@ function Community() {
 
   const [isActive, setIsActive] = useState(false);
 
-  const [commentData, setCommentData] = useState([]);
+  const cookie = useCookies(['jwtCookie']);
+
+  const [commentCount, setCommentCount] = useState<number | null>(null);
+  const fetchDataForPost = async (post: any) => {
+    console.log(post._id);
+
+    const commentArray = await getComment(post._id);
+    console.log(commentArray);
+
+    const replyCommentArray = await getReply(post._id);
+    console.log(replyCommentArray);
+
+    const commentCount = commentArray.length;
+    const replyCount = replyCommentArray.length;
+    const totalCommentCount = commentCount + replyCount;
+
+    console.log('댓글 수', totalCommentCount);
+
+    // 필요한 데이터를 가공하여 반환
+    return totalCommentCount;
+  };
+
+  const renderPost = async (post: any) => {
+    const commentsCount = await fetchDataForPost(post);
+    console.log('댓글 수', commentsCount);
+
+    const commentsCountElement = document.getElementById(
+      `commentsCount_${post._id}`
+    );
+    if (commentsCountElement) {
+      commentsCountElement.innerText = commentsCount.toString();
+    } else {
+      console.error(`Element with id 'commentsCount_${post._id}' not found.`);
+    }
+  };
 
   return (
     <>
@@ -56,6 +92,7 @@ function Community() {
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
         console.log(post._id);
+        renderPost(post);
 
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
@@ -106,16 +143,26 @@ function Community() {
         };
 
         // 좋아요 누르기
-        const plusLike = async () => {
+        const plusLike = async (postId: string) => {
           try {
-            const like: Number = 1;
-            const postId = post._id;
+            if (cookie[0].jwtCookie) {
+              const postIndex = posts.findIndex((post) => post._id === postId);
+              if (postIndex !== -1) {
+                const updatedPosts = [...posts];
+                const like = updatedPosts[postIndex].isActive ? -1 : 1;
+                const likeData = { like, postId };
 
-            const likeData = { like, postId };
-            const response = await addLike(likeData);
-            console.log(response);
-            setIsActive(!isActive);
-            window.location.reload();
+                const response = await addLike(likeData);
+                console.log('response toggle', response);
+
+                // 해당 포스트의 좋아요 토글
+                updatedPosts[postIndex].isActive =
+                  !updatedPosts[postIndex].isActive;
+                setPosts(updatedPosts);
+              }
+            } else {
+              alert('로그인 후 좋아요 가능합니다!');
+            }
           } catch (err) {
             console.log(err);
           }
@@ -167,9 +214,9 @@ function Community() {
                     {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
                     <button>
                       <span
-                        onClick={plusLike}
+                        onClick={() => plusLike(post._id)}
                         className={`material-symbols-outlined heart ${
-                          isActive ? 'active' : ''
+                          post.isActive ? 'active' : ''
                         }`}
                       >
                         heart_plus
@@ -185,7 +232,9 @@ function Community() {
                         maps_ugc
                       </span>
                     </button>
-                    <span>0</span>
+                    <span id={`commentsCount_${post._id}`}>
+                      댓글 수: 로딩 중...
+                    </span>
                   </span>
                 </div>
                 <span className="category">{getSubject()}</span>
@@ -195,14 +244,22 @@ function Community() {
         );
       })}
 
-      <div>
+      <div className="paginationBox" style={{}}>
+        {/* <span className="material-symbols-outlined">chevron_left</span> */}
         {Array.from({ length: Math.ceil(posts.length / defaultPage) }).map(
           (_, index) => (
-            <button key={index} onClick={() => paginate(index + 1)}>
-              {index + 1}
+            <button
+              key={index}
+              onClick={() => paginate(index + 1)}
+              className={`paginationBtn ${
+                pagination === index + 1 ? 'active' : ''
+              }`}
+            >
+              <span>{index + 1}</span>
             </button>
           )
         )}
+        {/* <span className="material-symbols-outlined">chevron_right</span> */}
       </div>
     </>
   );
