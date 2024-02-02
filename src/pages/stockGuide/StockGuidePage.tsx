@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TrandingViewWidget from '../../components/stockGuide/TrandingViewWidget';
 import './../../styles/StockGuide.scss';
 import Virtual from '../../components/VirtualInvest/Virtual';
@@ -7,11 +7,13 @@ import TradeOrder from '../../components/stockGuide/TradeOrder';
 import TradeBuy from '../../components/stockGuide/TradeBuy';
 import TradeSell from '../../components/stockGuide/TradeSell';
 import TradeModify from '../../components/stockGuide/TradeModify';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const StockGuidePage = () => {
-  const [explain, setExplain] = useState('');
+  const [isToggle, setIsToggle] = useState(false);
+  const [explain, setExplain] = useState('뜻을 확인하려면 단어를 선택하세요.');
   const [trade, setTrade] = useState('buy');
+  const location = useLocation();
 
   const handleClick = async (word: string) => {
     try {
@@ -23,11 +25,36 @@ const StockGuidePage = () => {
       console.error('DB에 없는 단어입니다.');
     }
   };
+  const toggleClick = () => {
+    setIsToggle((prevIsToggle) => !prevIsToggle);
+    if (isToggle) {
+      setIsToggle(false);
+    } else {
+      setIsToggle(true);
+    }
+  };
+
+  useEffect(() => {
+    setIsToggle(false);
+  }, [location.pathname]);
 
   return (
     <>
       <div className="outer-wrapper">
-        <div className="page-title">주식 길잡이</div>
+        <div className="guide-title">
+          주식 길잡이{' '}
+          {isToggle === true && (
+            <div className="guide-help-box">
+              증권사 어플과 유사한 호가창이에요. 궁금한 단어를 클릭하면 뜻이
+              나와요!
+              <br />
+              (현재 보이는 호가창은 1월 25일 오후 12시 40분 기준입니다.)
+            </div>
+          )}
+          <div className="guide-icon" onClick={toggleClick}>
+            <span className="material-symbols-rounded">question_mark</span>
+          </div>
+        </div>
         <ul>
           <Link to="/stockGuide">
             <li className="selected-blue">주식</li>
@@ -48,36 +75,22 @@ const StockGuidePage = () => {
             {/* <div className="graph-x" onClick={()=>handleClick('x')}></div> */}
 
             <div className="stock-explain">
-              {/* <div className="graph-btn"> */}
-              <div>
-                <div className="graph-btn" onClick={() => handleClick('bar')}>
-                  <img
-                    src={process.env.PUBLIC_URL + 'bar-graph.png'}
-                    alt="kakao login"
-                  />
-                  막대 그래프
-                </div>
-                <div
-                  className="graph-btn"
-                  onClick={() => handleClick('candle')}
-                >
-                  <img
-                    src={process.env.PUBLIC_URL + 'candle-graph.png'}
-                    alt="kakao login"
-                  />
-                  캔들 그래프
-                </div>
-              </div>
-              {/* </div> */}
+              {' '}
+              {explain.includes('캔들') && (
+                <img
+                  style={{ width: '200px', float: 'left', marginRight: '20px' }}
+                  src={process.env.PUBLIC_URL + 'candle-chart.png'}
+                />
+              )}
               {explain}
             </div>
           </div>
           <div className="trade-control">
-            <div className="company" onClick={() => handleClick('company')}>
-              삼성전자
-            </div>
             <div className="stock-info">
               <div className="market">
+                <div className="company" onClick={() => handleClick('company')}>
+                  삼성전자
+                </div>
                 <div
                   className="market-price"
                   onClick={() => handleClick('stock Price')}
@@ -91,7 +104,32 @@ const StockGuidePage = () => {
                   ▼ 100(0.14%)
                 </div>
               </div>
+
               <div className="volume">
+                <div className="graph-btn">
+                  <span onClick={() => handleClick('bar')}>
+                    <img
+                      className="bar-graph-btn"
+                      src={process.env.PUBLIC_URL + 'bar.png'}
+                    />
+                  </span>
+                  &ensp;&ensp;
+                  <span onClick={() => handleClick('candle')}>
+                    <img
+                      className="candle-graph-btn"
+                      src={process.env.PUBLIC_URL + 'candle.png'}
+                    />
+                  </span>
+                </div>
+                <div className="price-group">
+                  <span onClick={() => handleClick('opening_price')}>시</span>
+                  &ensp;|&ensp;
+                  <span onClick={() => handleClick('high_price')}>고</span>
+                  &ensp;|&ensp;
+                  <span onClick={() => handleClick('final_price')}>종</span>
+                  &ensp;|&ensp;
+                  <span onClick={() => handleClick('low_price')}>저</span>
+                </div>
                 <div
                   className="total-volume"
                   onClick={() => handleClick('cumulative_volume')}

@@ -12,6 +12,7 @@ const Header = () => {
   const [isKakao, setisKakao, removeisKakao] = useCookies(['isKakao']);
   const [isLogin, setIsLogin] = useState(false);
   const [isToggle, setIsToggle] = useState(false);
+  const [isHelpToggle, setIstHelpToggle] = useState(false);
   const location = useLocation();
 
   const [userInfos, setUserInfos] = useState({
@@ -70,8 +71,17 @@ const Header = () => {
       setIsToggle(true);
     }
   };
+  const helpToggle = () => {
+    setIstHelpToggle((prevIsToggle) => !prevIsToggle);
+    if (isHelpToggle) {
+      setIstHelpToggle(false);
+    } else {
+      setIstHelpToggle(true);
+    }
+  };
 
   useEffect(() => {
+    setIstHelpToggle(false);
     setIsToggle(false);
   }, [location.pathname]);
 
@@ -126,6 +136,7 @@ const Header = () => {
   // }, []);
 
   console.log(userInfos.userId);
+  console.log(userInfos.userNickName);
 
   return (
     <>
@@ -187,10 +198,11 @@ const Header = () => {
           </Link>
         )}
       </div>
+      {isHelpToggle === true && <div className="help-box"></div>}
       <div className="remote-btn">
-        <div className="fix-icon">
+        {/* <div className="fix-icon" onClick={helpToggle}>
           <span className="material-symbols-rounded">question_mark</span>
-        </div>
+        </div> */}
         <a href="#top">
           <div className="fix-icon">
             <span className="material-symbols-rounded">vertical_align_top</span>

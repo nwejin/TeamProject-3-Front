@@ -249,56 +249,23 @@ const MyPage = () => {
 
   return (
     <>
-      <div
-        className="form-box"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <div className="page-title">회원 정보</div>
+      <div className="mypage-wrapper ">
+        <div className="page-title">회원 정보 수정</div>
 
         <form name="register-form" method="post">
-          <div
-            className="userImgBox"
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '70%',
-              alignItems: 'center',
-              margin: 'auto',
-            }}
-          >
+          <div className="userImgBox">
             <img
+              className="profile-img"
               src={formData.user_profile}
               alt=""
               id="showIMG"
-              style={{
-                width: '100px',
-                height: '100px',
-                objectFit: 'cover',
-                borderRadius: '50%',
-              }}
             />
-            <div
-              style={{
-                display: 'flex',
-                width: '70%',
-                alignItems: 'center',
-              }}
-            >
+            <div className="img-edit-btn">
               <input
+                className="profile-input"
                 type="file"
                 name="user_profile"
                 id="user_profile"
-                style={{
-                  border: 0,
-                  borderRadius: 0,
-                  width: 0,
-                  height: 0,
-                  padding: 0,
-                }}
                 disabled={isDisabled}
                 onChange={handleInputChange}
               />
@@ -315,69 +282,77 @@ const MyPage = () => {
           </div>
 
           <div>
-            아이디
+            <div className="input-label">아이디</div>
             <input
               name="user_id"
               id="user_id"
               placeholder="아이디"
               value={formData.user_id}
-              className="input-box"
+              // className="input-box"
               disabled
             />
-            현재 비밀번호
-            <input
-              type="password"
-              id="user_password"
-              name="user_password"
-              placeholder="현재 비밀번호"
-              ref={pwRef}
-              // value={formData.user_password}
-              className="input-box"
-              onChange={handleInputChange}
-              onKeyUp={passwordCheck}
-              disabled={isDisabled}
-            />
+            <br />
+            <div style={{ display: 'inline-block' }}>
+              <div className="input-label">현재 비밀번호</div>
+              <input
+                type="password"
+                id="user_password"
+                name="user_password"
+                placeholder="현재 비밀번호"
+                ref={pwRef}
+                // value={formData.user_password}
+                // className="input-box"
+                onChange={handleInputChange}
+                onKeyUp={passwordCheck}
+                disabled={isDisabled}
+              />
+            </div>
+            <div style={{ display: 'inline-block' }}>
+              <div className="input-label">변경 비밀번호</div>
+              <input
+                type="password"
+                id="user_changepw"
+                name="user_changepw"
+                placeholder="변경 비밀번호"
+                // className="input-box"
+                onChange={handleInputChange}
+                disabled={isDisabled}
+              />
+            </div>
             <div className="pwCheckBox">{pwCheckString}</div>
-            변경 비밀번호
-            <input
-              type="password"
-              id="user_changepw"
-              name="user_changepw"
-              placeholder="변경 비밀번호"
-              className="input-box"
-              onChange={handleInputChange}
-              disabled={isDisabled}
-            />
-            닉네임
+            <div className="input-label">닉네임</div>
             <input
               id="user_nickname"
               name="user_nickname"
               placeholder="닉네임"
-              className="input-box"
+              // className="input-box"
               value={formData.user_nickname}
               onChange={handleInputChange}
               onKeyUp={nicknameReCheck}
               ref={nickRef}
             />
             <div className="nicknameCheckBox">{nicknameCheckString}</div>
-            이메일
+            <div className="input-label">이메일</div>
             <input
               name="user_email"
               id="user_email"
               placeholder="이메일"
-              className="input-box"
+              // className="input-box"
               value={formData.user_email}
               onChange={handleInputChange}
             />
+            <button className="signinBtn" onClick={modifyUserInfo}>
+              취소
+            </button>
             <br />
             <button className="signinBtn" onClick={modifyUserInfo}>
-              회원정보 수정
+              수정
             </button>
             <br />
-            <br />
-            <button className="signinBtn" onClick={deleteUserInfo}>
+
+            {/* <button className="signinBtn" onClick={deleteUserInfo}>
               회원탈퇴
-            </button>
+            </button> */}
           </div>
         </form>
       </div>
