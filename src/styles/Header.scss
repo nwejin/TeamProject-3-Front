@@ -62,8 +62,8 @@ body {
       border-radius: 20px;
       background-color: white;
       border: 1px solid $color-gray-1;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       top: 50%;
       right: 15vw;
       transform: translateY(-50%);
@@ -127,6 +127,16 @@ body {
     }
   }
 }
+.help-box {
+  position: fixed;
+  z-index: 100;
+  bottom: 40px;
+  right: 110px;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  box-shadow: 1.5px 1.5px 1.5px 1.5px #afafafde;
+}
 .remote-btn {
   position: fixed;
   bottom: 30px;
@@ -142,6 +152,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     .material-symbols-rounded {
       font-variation-settings:
