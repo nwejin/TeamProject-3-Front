@@ -150,9 +150,9 @@ const SignupPage = () => {
     try {
       event.preventDefault();
       const response = await nicknameChecker(formData);
-      console.log(response);
+      // console.log(response);
       const nicknameCheckBox = document.querySelector('.nicknameCheckBox');
-      console.log('ddddd', formData.user_nickname.trim());
+      // console.log('ddddd', formData.user_nickname.trim());
       if (formData.user_nickname.trim() === '') {
         nicknameCheckBox?.classList.remove('red');
         nicknameCheckBox?.classList.remove('blue');

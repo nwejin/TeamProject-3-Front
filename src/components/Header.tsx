@@ -1,7 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { kakaoLogin, kakaoLogout, userInfo } from '../services/apiService';
+import {
+  deleteKakao,
+  deleteUser,
+  kakaoLogin,
+  kakaoLogout,
+  userInfo,
+} from '../services/apiService';
 import { UserData } from './../types/types';
 
 const Header = () => {
@@ -20,9 +26,11 @@ const Header = () => {
     userNickName: '',
     userProfile: '',
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('로그인 시 실행');
+    console.log('useEffect 실행');
+
     setUserInfos({
       userId: '',
       userNickName: '',
@@ -34,17 +42,18 @@ const Header = () => {
         const code = params.get('code');
 
         if (code) {
-          console.log('카카오 로그인 요청');
+          // console.log('카카오 로그인 요청');
           await kakaoLogin(code);
+          navigate('/');
         }
 
         const tokenId = jwtCookie['jwtCookie'];
-        console.log('tokenId', tokenId);
+        // console.log('tokenId', tokenId);
 
         if (tokenId) {
           setIsLogin(true);
           const response = await userInfo({ id: tokenId });
-          console.log('사용자 정보', response.info);
+          // console.log('사용자 정보', response.info);
           setUserInfos({
             userId: response.info.user_id,
             userNickName: response.info.user_nickname,
@@ -52,7 +61,6 @@ const Header = () => {
               response.info.user_profile ||
               process.env.PUBLIC_URL + 'mypage.png',
           });
-          console.log('사용자 정보 폼', userInfos);
         } else {
           setIsLogin(false);
         }
@@ -91,9 +99,8 @@ const Header = () => {
       userNickName: '',
       userProfile: '',
     });
-    console.log(kakaoToken['kakaoToken']);
-    console.log(process.env.REACT_APP_API_HOST);
-    if (isKakao) {
+    // console.log(kakaoToken['kakaoToken']);
+    if (kakaoToken['kakaoToken']) {
       const uri = process.env.REACT_APP_API_HOST + '/v1/user/logout';
       const param = null;
       const header = {
@@ -113,30 +120,32 @@ const Header = () => {
     window.location.href = '/';
   };
 
-  // useEffect(() => {
-  //   console.log('페이지 로딩시 실행');
+  const deleteUserInfo = async (event: any) => {
+    try {
+      event.preventDefault();
 
-  //   const tokenId = jwtCookie['jwtCookie'];
-  //   // console.log('tokenId', tokenId);
-  //   const getUserInfo = async () => {
-  //     try {
-  //       const response = await userInfo({ id: tokenId });
-  //       console.log(response);
-  //       setUserInfos({
-  //         userId: response.info.user_id,
-  //         userNickName: response.info.user_nickname,
-  //         userProfile:
-  //           response.info.user_profile || process.env.PUBLIC_URL + 'mypage.png',
-  //       });
-  //     } catch (error) {
-  //       console.log('사용자 정보 가져오기 에러', error);
-  //     }
-  //   };
-  //   getUserInfo();
-  // }, []);
-
-  console.log(userInfos.userId);
-  console.log(userInfos.userNickName);
+      if (window.confirm('탈퇴하시겠습니까?')) {
+        if (kakaoToken['kakaoToken']) {
+          await deleteKakao(kakaoToken['kakaoToken']);
+          removekakaoToken('kakaoToken');
+        }
+        const response = await deleteUser(userInfos.userId);
+        if (response.success) {
+          alert('회원정보 삭제 성공');
+          removejwtCookie('jwtCookie');
+          removeisKakao('isKakao');
+          console.log('회원정보 삭제 성공');
+          window.location.href = '/';
+        } else {
+          console.error('회원정보 삭제 실패');
+        }
+      } else {
+        return;
+      }
+    } catch (error) {
+      console.error('회원정보 삭제 실패:', error);
+    }
+  };
 
   return (
     <>
@@ -186,7 +195,9 @@ const Header = () => {
                     <div className="Header-user-update">회원정보수정</div>
                   </Link>
                   &nbsp;&nbsp;·&nbsp;&nbsp;
-                  <div className="Header-user-delete">회원탈퇴</div>
+                  <div className="Header-user-delete" onClick={deleteUserInfo}>
+                    회원탈퇴
+                  </div>
                 </div>
               </div>
             )}
@@ -201,8 +212,8 @@ const Header = () => {
       {isHelpToggle === true && <div className="help-box"></div>}
       <div className="remote-btn">
         {/* <div className="fix-icon" onClick={helpToggle}>
-          <span className="material-symbols-rounded">question_mark</span>
-        </div> */}
+            <span className="material-symbols-rounded">question_mark</span>
+          </div> */}
         <a href="#top">
           <div className="fix-icon">
             <span className="material-symbols-rounded">vertical_align_top</span>

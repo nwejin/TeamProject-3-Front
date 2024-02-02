@@ -24,7 +24,7 @@ export const register = async (userData: any) => {
 // 로그인
 export const login = async (userData: any) => {
   console.log(userData);
-  console.log(process.env.REACT_APP_BACKSERVER);
+  // console.log(process.env.REACT_APP_BACKSERVER);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/login',
