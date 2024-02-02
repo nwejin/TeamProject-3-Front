@@ -3,10 +3,11 @@
 .outer-wrapper {
   .guide-title {
     font-size: 24px;
-    margin: 3vw 0 1vw 0;
+    margin: 2vw 0 1vw 0;
     display: flex;
     justify-content: space-between;
     position: relative;
+    height: 24px;
 
     .guide-help-box {
       position: absolute;
@@ -111,6 +112,7 @@
         overflow-x: hidden;
         overflow-y: scroll;
         line-height: 30px;
+        margin-bottom: 6vw;
       }
     }
     .trade-control {
