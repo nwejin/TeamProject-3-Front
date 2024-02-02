@@ -102,9 +102,9 @@ function ReplyComment({ data }: any) {
             <div className="statusBox">
               <div>
                 <span>
-                  <button>
+                  {/* <button>
                     <span className="material-symbols-outlined">favorite</span>
-                  </button>
+                  </button> */}
                 </span>
 
                 <span>
