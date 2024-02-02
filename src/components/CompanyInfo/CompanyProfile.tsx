@@ -9,20 +9,18 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
   const container = useRef<HTMLDivElement>(null);
   // const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
 
-  // const search = props.search;
-  // // console.log(search);
-  // console.log(search);
 
   const search = props.search;
-  console.log(search);
+  // console.log(search);
+
   const symbol = `NASDAQ:${search}`;
   console.log(symbol);
 
   // useEffect(() => {
-  //   const search = props.search;
+
   //   // search 값이 변경될 때마다 symbol 업데이트
   //   setSymbol(`NASDAQ:${search}`);
-  // }, [props.search]);
+  // }, [search]);
 
   useEffect(() => {
     // Create script element
@@ -62,7 +60,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
       <div className="tradingview-widget-copyright">
         <a
           href="https://kr.tradingview.com/"
-          rel="noopener nofollow"
+          rel="noopener nofollow noreferrer"
           target="_blank"
         >
           <span className="blue-text">트레이딩뷰에서 모든 시장 추적</span>
