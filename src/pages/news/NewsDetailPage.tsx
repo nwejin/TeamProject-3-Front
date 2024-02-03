@@ -359,6 +359,7 @@ const NewsDetailPage = () => {
           </p>
           <br />
           <p>출처 : {data.url}</p>
+          <br />
         </div>
 
         {/* 모달 */}
