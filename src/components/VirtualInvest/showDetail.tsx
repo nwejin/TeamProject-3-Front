@@ -20,8 +20,9 @@ const ShowDetail = ({ response, close, user }: props): ReactElement => {
   const profitLimit = Number(profit).toFixed(2);
 
   const [userRank, setUserRank] = useState<
-    Array<{ userid: string; profit: number; win: number }>
+    Array<{ userid: string; profit: number; win: number; profile: string }>
   >([]);
+  console.log('userRank', userRank);
 
   useEffect(() => {
     const showRanking = async () => {
@@ -45,7 +46,7 @@ const ShowDetail = ({ response, close, user }: props): ReactElement => {
   console.log('rank', userRank);
   const total = userRank.length;
   console.log(total);
-  console.log(user); // 사용자
+  console.log('user>', user); // 사용자
   // const rank = userRank.indexOf(user, 0);
 
   // const selectRank = userRank.filter((userid) => userid === user);
