@@ -83,7 +83,7 @@ function App() {
       const axiosError = error as AxiosError;
       if (axiosError.response) {
         // 여기에서 axiosError.response를 사용할 수 있습니다.
-        console.log(axiosError.response.status);
+        // console.log(axiosError.response.status);
         const err = axiosError.response.status;
         if (err === 200) {
           return;
@@ -98,7 +98,6 @@ function App() {
       console.log(error);
     }
   };
-
 
   return (
     <div className="App">
@@ -116,7 +115,7 @@ function App() {
           <Route path="/kakao/callback" element={<MainPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/wordBook" element={<WordBookPage />} />
-          <Route path='/savedNews' element={<SavedNews />} />
+          <Route path="/savedNews" element={<SavedNews />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
           <Route path="/stockRate" element={<StockRatePage />} />
