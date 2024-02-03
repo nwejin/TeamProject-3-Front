@@ -88,7 +88,7 @@ const RankModal = ({ data }) => {
                       borderRadius: '50%',
                     }}
                   >
-                    <img src={data.profile} alt="" />
+                    <img className="userImg" src={data.profile} alt="" />
                   </div>
                   <p style={{ fontSize: '14px', marginRight: '0.5rem' }}>
                     {data.userid}

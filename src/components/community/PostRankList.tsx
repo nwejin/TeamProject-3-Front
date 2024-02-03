@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function PostRankList() {
   const [posts, setPosts] = useState([]);
-  // console.log(posts);
+  console.log('랭크', posts);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
