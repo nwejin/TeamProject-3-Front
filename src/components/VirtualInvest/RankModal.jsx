@@ -4,6 +4,8 @@ const RankModal = ({ data }) => {
   //   console.log(data);
   const [rank, setRank] = useState([]);
 
+  console.log('rank', rank);
+
   useEffect(() => {
     try {
       setRank(data);
@@ -86,7 +88,7 @@ const RankModal = ({ data }) => {
                       borderRadius: '50%',
                     }}
                   >
-                    <img src="" alt="" />
+                    <img src={data.profile} alt="" />
                   </div>
                   <p style={{ fontSize: '14px', marginRight: '0.5rem' }}>
                     {data.userid}
