@@ -1,0 +1,21 @@
+@import './Component.scss';
+
+.adminUserBox {
+  background-color: pink;
+  display: flex;
+  height: 5vh;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  .userBox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  img {
+    width: 5%;
+
+    border-radius: 50%;
+  }
+}
