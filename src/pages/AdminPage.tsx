@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { adminGetUser, deleteKakao, deleteUser } from '../services/apiService';
 import { useNavigate } from 'react-router';
+import '../styles/Admin.scss';
+
 interface User {
   _id: string;
   user_id: string;
@@ -56,6 +58,7 @@ const AdminPage = () => {
   //     console.error('회원정보 삭제 실패:', error);
   //   }
   // };
+
   const [posts, setPosts] = useState<User[]>([]);
   // db에서 데이터 불러오기위해 useState
   console.log('post', posts);
@@ -73,6 +76,25 @@ const AdminPage = () => {
     fetchData();
   }, []);
 
+  const [pagination, setPagination] = useState(1);
+  const defaultPage = 10;
+
+  // 마지막 페이지 (1*5)
+  const lastPage = pagination * defaultPage;
+  console.log('lastPage', lastPage);
+  // 첫 페이지 ((1*5)- 5)
+  const firstPage = lastPage - defaultPage;
+  console.log('firstPage', firstPage);
+  // 현재 페이지 데이터 나누기
+  const currentPage = posts.slice(firstPage, lastPage);
+
+  // console.log('currentPage', currentPage);
+
+  // 페이지 번호대로 클릭하면 스테이트 값 업데이트
+  const paginate = (pageNumber: any) => {
+    setPagination(pageNumber);
+  };
+
   return (
     <>
       <div className="outer-wrapper">
@@ -87,43 +109,46 @@ const AdminPage = () => {
         </ul>
         <div className="getAllUser">
           <h2>유저 정보</h2>
-          <ul>
-            {posts.map((user) => {
+          <div>
+            {currentPage.map((user) => {
               console.log(user);
+
               return (
-                <div
-                  style={{
-                    // backgroundColor: 'pink',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <div
-                    key={user._id}
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      width: '80%',
-                      //   backgroundColor: 'blue',
-                    }}
-                  >
-                    <p>ID: {user.user_id}</p>
-                    <p>Nickname: {user.user_nickname}</p>
-                    <p>Email: {user.user_email}</p>
-                    <p>카카오 로그인{user.isKakao}</p>
-                    <img
-                      src={user.user_profile}
-                      alt=""
-                      style={{ width: '5%' }}
-                    />
+                <div className="adminUserBox">
+                  <img src={user.user_profile} alt="" />
+                  <div key={user._id} className="userBox">
+                    <div>
+                      <p>ID: {user.user_id}</p>
+                      <p>Email: {user.user_email}</p>
+                    </div>
+                    <div>
+                      <p>Nickname: {user.user_nickname}</p>
+                    </div>
+                    <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
                     <button>삭제하기</button>
                   </div>
                 </div>
               );
             })}
-          </ul>
+
+            <div className="paginationBox" style={{}}>
+              {/* <span className="material-symbols-outlined">chevron_left</span> */}
+              {Array.from({
+                length: Math.ceil(posts.length / defaultPage),
+              }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => paginate(index + 1)}
+                  className={`paginationBtn ${
+                    pagination === index + 1 ? 'active' : ''
+                  }`}
+                >
+                  <span>{index + 1}</span>
+                </button>
+              ))}
+              {/* <span className="material-symbols-outlined">chevron_right</span> */}
+            </div>
+          </div>
         </div>
       </div>
     </>

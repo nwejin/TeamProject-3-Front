@@ -12,11 +12,13 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import AddPost from '../../pages/community/AddPost';
 import ModifyPost from '../../pages/community/ModifyPost';
+import { report } from 'process';
 
 // 커뮤니티 글 상세 페이지
 function CommunityRead() {
   const location = useLocation();
   const postData = location.state.post;
+  console.log(postData);
   const [disabledAttr, setdisabledAttr] = useState({ display: 'none' });
   const [jwtCookie] = useCookies(['jwtCookie']);
 
@@ -123,6 +125,43 @@ function CommunityRead() {
       console.log(err);
     }
   };
+  const cookie = useCookies(['jwtCookie']);
+  // const plusLike = async (postId: string) => {
+  //   try {
+  //     if (cookie[0].jwtCookie) {
+  //       const postIndex = posts.findIndex((post) => post._id === postId);
+  //       if (postIndex !== -1) {
+  //         const updatedPosts = [...posts];
+  //         const like = updatedPosts[postIndex].isActive ? -1 : 1;
+  //         const likeData = { like, postId };
+
+  //         const response = await addLike(likeData);
+  //         console.log('response toggle', response);
+
+  //         // 좋아요 토글
+  //         updatedPosts[postIndex].isActive = !updatedPosts[postIndex].isActive;
+
+  //         // 좋아요 수 대신 likedUser 배열의 길이로 업데이트
+  //         updatedPosts[postIndex].likedUser = response.likedUser;
+
+  //         const res = await userInfo({ id: cookie[0].jwtCookie }); //지금 로그인한 아이디 오브젝트
+
+  //         // post에서 하나씩 글 가져와서 likedUser 배열 안에 res가 있다면 좋아요를 누른 하트를 출력해야함
+  //         posts.map((item) => {
+  //           if (item.likedUser.includes(res.info._id)) {
+  //             console.log('include', item); //여기 부분 파란하트로 채워주세요
+  //           }
+  //         });
+
+  //         setPosts([...updatedPosts]); // 새로운 상태 객체로 업데이트
+  //       }
+  //     } else {
+  //       alert('로그인 후 좋아요 가능합니다!');
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   // 글 수정 모달
   const [openModal, setOpenModal] = useState<Boolean>(false);
@@ -141,6 +180,10 @@ function CommunityRead() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const report = async () => {
+    console.log('신고 완료!');
   };
 
   return (
@@ -202,9 +245,9 @@ function CommunityRead() {
         <div className="statusBox">
           <div>
             <span>
-              <button onClick={plusLike}>
+              {/* <button onClick={() => plusLike(postData._id)}>
                 <span className="material-symbols-outlined">favorite</span>
-              </button>
+              </button> */}
               <span>{postData.like}</span>
             </span>
 
@@ -217,7 +260,7 @@ function CommunityRead() {
           </div>
           <div className="report">
             <span>
-              <button>
+              <button onClick={report}>
                 <span className="material-symbols-outlined">
                   notification_important
                 </span>

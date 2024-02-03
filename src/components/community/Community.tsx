@@ -145,6 +145,7 @@ function Community() {
           try {
             if (cookie[0].jwtCookie) {
               const postIndex = posts.findIndex((post) => post._id === postId);
+
               if (postIndex !== -1) {
                 const updatedPosts = [...posts];
                 const like = updatedPosts[postIndex].isActive ? -1 : 1;

@@ -59,16 +59,6 @@ function PostRank() {
           <div className="searchModal">
             {searchData.length > 0 ? (
               searchData.map((post: any) => (
-                // <ul key={post._id}>
-                //   <li>
-                //     <Link to={`/community/${post._id}`} state={{ post }}>
-                //       <div style={{ width: '80%' }}>
-                //         <div className="listTitle">{post.title}</div>
-                //       </div>
-                //     </Link>
-                //   </li>
-                // </ul>
-
                 <div className="post" key={post._id}>
                   <div className="postContents">
                     <Link to={`/community/${post._id}`} state={{ post }}>
@@ -138,6 +128,9 @@ function PostRank() {
             ) : (
               <div className="notFoundPost">
                 <p>검색 결과가 없습니다.</p>
+                <p style={{ fontSize: '18px', color: '#808080' }}>
+                  다른 검색어를 입력해주세요.
+                </p>
               </div>
             )}
           </div>
