@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCrown } from '@fortawesome/free-solid-svg-icons';
 
 const RankModal = ({ data }) => {
   //   console.log(data);
@@ -29,146 +31,81 @@ const RankModal = ({ data }) => {
         bottom: '20%',
         position: 'absolute',
         zIndex: '100',
-        border: '1px solid #d9dadb',
+        // border: '1px solid #d9dadb',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
       }}
       className="userRankBox"
     >
-      <div style={{ margin: '0.5rem auto', color: '#0056f3' }}>top 5 랭킹</div>
-      <div style={{ display: 'flex' }}>
+      <h3 style={{ margin: '0.3rem auto', color: '#0056f3' }}>Top 3 랭킹</h3>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '90%',
+          alignItems: 'center',
+          justifyContent: 'space-evenly',
+        }}
+      >
         {rank.slice(0, 3).map((data, index) => {
           const myRank =
             rank.findIndex((rank) => rank.userid === data.userid) + 1;
           console.log(myRank);
 
+          const iconClass = `crown num${myRank}`;
+          const RankClass = `ranking number${myRank}`;
+          const userImg = `userImg${myRank}`;
+          const userRank = `nickName${myRank}`;
           const profit = data.profit.toFixed(2);
 
           return (
             <div
               style={{
-                textAlign: 'center',
-                backgroundColor: 'blue',
-                width: '100%',
                 display: 'flex',
-                flexDirection: 'row',
+                justifyContent: 'center',
+                width: '95%',
+                height: '30%',
+                alignItems: 'center',
+                // border: '1px solid #d9dadb',
+                boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 5px',
               }}
             >
               <div
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
+                  width: '90%',
                   height: '100%',
-                  //   backgroundColor: 'black',
+                  position: 'relative',
+                  textAlign: 'left',
+                  display: 'flex',
+                  flexDirection: '',
                   alignItems: 'center',
+                  justifyContent: 'space-around',
                 }}
               >
-                <div
-                  style={{
-                    width: '85%',
-                    height: '100%',
-                    backgroundColor: 'red',
-                    textAlign: 'left',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                  }}
-                >
-                  <p style={{ fontSize: '14px', marginRight: '0.5rem' }}>
-                    {myRank}.{' '}
-                  </p>
-                  <div
-                    style={{
-                      backgroundColor: 'gray',
-                      width: '50%',
-                      height: '50%',
-                      borderRadius: '50%',
-                    }}
-                  >
-                    <img className="userImg" src={data.profile} alt="" />
-                  </div>
-                  <p style={{ fontSize: '14px', marginRight: '0.5rem' }}>
-                    {data.userid}
-                  </p>
-                  {/* <p style={{ fontSize: '12px', color: '#808080' }}>
-                  {' '}
-                  누적 수익 {profit} $
-                </p> */}
+                <FontAwesomeIcon
+                  icon={faCrown}
+                  className={iconClass}
+                  size="2x"
+                />
+                <div className={RankClass}>No. {myRank}</div>
+
+                <div className={userImg}>
+                  <img src={data.profile} alt="" />
                 </div>
-                {/* <div style={{ width: '15%' }}>
-                  <p style={{ fontSize: '10px' }}> {data.win}승 </p>
-                </div> */}
+
+                <div className="userInfo">
+                  <p className={userRank}>{data.userid}</p>
+                  <span style={{ fontSize: '14px' }}>누적 수익 {profit} $</span>
+                  <span style={{ fontSize: '12px', color: '#808080' }}>
+                    {data.win}승{' '}
+                  </span>
+                </div>
               </div>
             </div>
           );
         })}
       </div>
-      {rank.slice(3, 5).map((data, index) => {
-        const myRank =
-          rank.findIndex((rank) => rank.userid === data.userid) + 1;
-        console.log(myRank);
-
-        const profit = data.profit.toFixed(2);
-
-        return (
-          <ul style={{ width: '100%', margin: 0 }}>
-            <li
-              style={{
-                width: 'fit-content',
-                display: 'inline-block',
-                cursor: 'pointer',
-                textAlign: 'center',
-                padding: 0,
-                marginRight: 0,
-                backgroundColor: 'white',
-                // marginLeft: '2.5%',
-                width: '100%',
-                borderBottom: '1px solid #d9dadb',
-                paddingBottom: '0.3rem',
-                backgroundColor: 'blue',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  width: '100%',
-                  //   backgroundColor: 'pink',
-                  alignItems: 'center',
-                }}
-              >
-                <div
-                  style={{
-                    width: '85%',
-                    // backgroundColor: 'red',
-                    textAlign: 'left',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                  }}
-                >
-                  <p style={{ fontSize: '14px', marginRight: '0.5rem' }}>
-                    {myRank}.{' '}
-                  </p>
-                  <p style={{ fontSize: '14px', marginRight: '0.5rem' }}>
-                    {data.userid}
-                  </p>
-                  <p style={{ fontSize: '12px', color: '#808080' }}>
-                    {' '}
-                    누적 수익 {profit} $
-                  </p>
-                </div>
-                {/* <div style={{ width: '15%' }}>
-                  <p style={{ fontSize: '10px' }}> {data.win}승 </p>
-                </div> */}
-              </div>
-            </li>
-          </ul>
-        );
-      })}
     </div>
   );
 };
