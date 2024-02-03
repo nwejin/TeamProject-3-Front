@@ -39,7 +39,7 @@ const ProfitAndLoss = () => {
   return (
     <>
       <button onClick={handleResetClick} className="resetBtn">
-        <span class="material-symbols-outlined">저장하기data_saver_on</span>
+        <span className="material-symbols-outlined">저장하기data_saver_on</span>
       </button>
     </>
   );

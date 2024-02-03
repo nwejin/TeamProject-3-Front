@@ -36,8 +36,8 @@ const Virtual = () => {
   const [index, setIndex] = useState(180); //시작 캔들 개수
   const [data, setData] = useState([]); //api로 가져온 데이터
   const [volume, setVolume] = useState([]); // api로 가져온 볼륨데이터
-  const [currentCost, setCurrentCost] = useState(); //현재 가격
-  const [currentProfit, setCurrentProfit] = useState(); //현재 이익
+  const [currentCost, setCurrentCost] = useState(0); //현재 가격
+  const [currentProfit, setCurrentProfit] = useState(0); //현재 이익
   const [prevInvest, setPrevInvest] = useState(0); // 이전 투자금액 -> profit 계산에 사용
 
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
@@ -73,7 +73,6 @@ const Virtual = () => {
     const fetchData = async () => {
       try {
         const result = await getConvertData(symbol); // 데이터가 로딩될 때까지 대기
-        console.log('cccc> ', result);
         const resVol = await volumeArr;
         setData(result.slice(index, yearofDay));
         setVolume(resVol.slice(index, yearofDay));
@@ -212,7 +211,7 @@ const Virtual = () => {
         <div className="status-Box">
           <button onClick={showDetailModal} className="resetBtn">
             <p>
-              <span class="material-symbols-outlined"> 기록보기search</span>
+              <span className="material-symbols-outlined"> 기록보기search</span>
             </p>
           </button>
           {openDetailModal && (
@@ -263,7 +262,7 @@ const Virtual = () => {
             <div className="nextBtnBox">
               <button className="next Btn" onClick={nextTurn}>
                 <p style={{}}>
-                  <span class="material-symbols-outlined">skip_next</span>
+                  <span className="material-symbols-outlined">skip_next</span>
                 </p>
 
                 <p>

@@ -71,6 +71,7 @@ const MainPage = () => {
           id: news._id,
         };
       });
+
       // console.log(updateNews);
       // const newsArray = updateNews;
       // console.log(newsArray);
@@ -95,7 +96,6 @@ const MainPage = () => {
     const data = response.board;
     setBoardlist(data);
     // console.log('hihihiddddddd', data);
-    // console.log(data[0].userId.user_nickname);
     if (response.success) {
       const updateBoard = data.map((boards: any) => {
         // console.log('boards:', boards);
@@ -112,7 +112,7 @@ const MainPage = () => {
       // console.log(updateNews);
       // const boardArray = updateBoard;
       setBoardData(updateBoard);
-      console.log(boardData);
+      // console.log(boardData);
     } else {
       const boardArray = [
         {

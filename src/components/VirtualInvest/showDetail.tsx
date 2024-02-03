@@ -6,7 +6,7 @@ import { showRank } from '../../services/apiService';
 import { useCookies } from 'react-cookie';
 
 interface props {
-  open: Boolean;
+  open: boolean;
   close: () => void;
   response: any;
   user: any;

@@ -58,7 +58,7 @@ const SigninPage = () => {
         console.log('로그인 성공:', response);
         alert('로그인 성공!');
         navigate('/');
-        window.location.reload();
+        // window.location.reload();
       } else {
         console.error('로그인 실패:', response);
         alert(response.message);

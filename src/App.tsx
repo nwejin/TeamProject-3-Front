@@ -25,6 +25,10 @@ import ServerError from './pages/error/500Page';
 import Virtual from './components/VirtualInvest/Virtual';
 import StockVirtualPage from './pages/stockGuide/StockVirtualPage';
 import StockRatePage from './pages/stockGuide/StockRatePage';
+import AdminPage from './pages/AdminPage';
+import CommunityManage from './pages/admin/CommunityManage';
+
+import SavedNews from './pages/member/SavedNews';
 
 function App() {
   const [serverData, setServerData] = useState('');
@@ -94,15 +98,7 @@ function App() {
       console.log(error);
     }
   };
-  // if (error) {
-  //   if (error.response && error.response.status === 404) {
-  //     // 404 에러가 발생한 경우 404 페이지로 리다이렉션
-  //     return <Navigate to="/404" />;
-  //   } else {
-  //     // 다른 모든 에러는 500 서버 에러 페이지로 리다이렉션
-  //     return <Navigate to="/500" />;
-  //   }
-  // }
+
 
   return (
     <div className="App">
@@ -120,6 +116,7 @@ function App() {
           <Route path="/kakao/callback" element={<MainPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/wordBook" element={<WordBookPage />} />
+          <Route path='/savedNews' element={<SavedNews />} />
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
           <Route path="/stockRate" element={<StockRatePage />} />
@@ -137,6 +134,9 @@ function App() {
 
           {/* 500 서버 에러 페이지 */}
           {errorNum === 500 && <Route path="*" element={<ServerError />} />}
+
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/communityManage" element={<CommunityManage />} />
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>

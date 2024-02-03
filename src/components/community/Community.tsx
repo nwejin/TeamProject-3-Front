@@ -5,6 +5,7 @@ import {
   addLike,
   getComment,
   getReply,
+  userInfo,
 } from '../../services/apiService';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -12,7 +13,7 @@ import { useCookies } from 'react-cookie';
 
 // 커뮤니티 목록 페이지
 function Community() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any[]>([]);
   // db에서 데이터 불러오기위해 useState
   console.log('post', posts);
 
@@ -54,24 +55,17 @@ function Community() {
 
   const [commentCount, setCommentCount] = useState<number | null>(null);
   const fetchDataForPost = async (post: any) => {
-    // console.log(post._id);
-
     const commentArray = await getComment(post._id);
-    // console.log('commentArray', commentArray);
 
     let replyCommentSum = 0;
+
     for (const comment of commentArray) {
       const replyComment = await getReply(comment._id);
-      // console.log('댓글 별 대댓글', replyComment);
-
-      // console.log('댓글 별 대댓글 수', replyComment.length);
       replyCommentSum += replyComment.length;
     }
 
     const commentCount = commentArray.length;
     const totalCommentCount = commentCount + replyCommentSum;
-
-    console.log('총 댓글 수', totalCommentCount);
 
     // 필요한 데이터를 가공하여 반환
     return totalCommentCount;
@@ -79,7 +73,6 @@ function Community() {
 
   const renderPost = async (post: any) => {
     const commentsCount = await fetchDataForPost(post);
-    // console.log('댓글 수', commentsCount);
 
     const commentsCountElement = document.getElementById(
       `commentsCount_${post._id}`
@@ -148,22 +141,36 @@ function Community() {
         };
 
         // 좋아요 누르기
-        const plusLike = async () => {
+        const plusLike = async (postId: string) => {
           try {
             if (cookie[0].jwtCookie) {
-              const like = 1; // isActive 로 -1 +1
-              const postId = post._id;
+              const postIndex = posts.findIndex((post) => post._id === postId);
+              if (postIndex !== -1) {
+                const updatedPosts = [...posts];
+                const like = updatedPosts[postIndex].isActive ? -1 : 1;
+                const likeData = { like, postId };
 
-              const likeData = { like, postId };
-              const response = await addLike(likeData);
-              console.log(response);
+                const response = await addLike(likeData);
+                console.log('response toggle', response);
 
-              // 좋아요 토글
-              // setIsActive(!isActive);
+                // 좋아요 토글
+                updatedPosts[postIndex].isActive =
+                  !updatedPosts[postIndex].isActive;
 
-              // // 좋아요 수 업데이트
-              // // post.like += like;
-              // setPosts([...posts]);
+                // 좋아요 수 대신 likedUser 배열의 길이로 업데이트
+                updatedPosts[postIndex].likedUser = response.likedUser;
+
+                const res = await userInfo({ id: cookie[0].jwtCookie }); //지금 로그인한 아이디 오브젝트
+
+                // post에서 하나씩 글 가져와서 likedUser 배열 안에 res가 있다면 좋아요를 누른 하트를 출력해야함
+                posts.map((item) => {
+                  if (item.likedUser.includes(res.info._id)) {
+                    console.log('include', item); //여기 부분 파란하트로 채워주세요
+                  }
+                });
+
+                setPosts([...updatedPosts]); // 새로운 상태 객체로 업데이트
+              }
             } else {
               alert('로그인 후 좋아요 가능합니다!');
             }
@@ -218,16 +225,16 @@ function Community() {
                     {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
                     <button>
                       <span
-                        onClick={plusLike}
+                        onClick={() => plusLike(post._id)}
                         className={`material-symbols-outlined heart ${
-                          isActive ? 'active' : ''
+                          post.isActive ? 'active' : ''
                         }`}
                       >
                         heart_plus
                       </span>
                       <span>좋아요</span>
                     </button>
-                    <span>{post.like}</span>
+                    <span>{post.likedUser.length}</span>
                   </span>
 
                   <span>
