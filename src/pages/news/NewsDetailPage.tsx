@@ -58,13 +58,13 @@ const NewsDetailPage = () => {
               withCredentials: true,
             }
           );
-          // const available = res.data.available;
-          // console.log(available)
-          // if (available) {
-          //   setMyHighlight(res.data.highlight.word);
-          // }
+          const available = res.data.available;
+          console.log(available)
+          if (available) {
+            setMyHighlight(res.data.highlight.word);
+          }
           // console.log(res.data.highlight.word);
-          setMyHighlight(res.data.highlight.word);
+          // setMyHighlight(res.data.highlight.word);
         }
       } catch (error) {
         console.error(error);
@@ -331,7 +331,7 @@ const NewsDetailPage = () => {
             {/* {content} */}
           </p>
           <br />
-          <p>출처 : {data.url}</p>
+          <p className='detailSrc'>출처 : {data.url}</p>
           <br />
         </div>
 
