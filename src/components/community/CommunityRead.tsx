@@ -182,9 +182,14 @@ function CommunityRead() {
     }
   };
 
-  const report = async () => {
-    console.log('신고 완료!');
+  const reportPost = async () => {
+    try {
+      console.log('신고 완료!');
+    } catch (err) {
+      console.log(err);
+    }
   };
+  console.log(postData);
 
   return (
     <div className="postRead" key={postData._id}>
@@ -260,7 +265,7 @@ function CommunityRead() {
           </div>
           <div className="report">
             <span>
-              <button onClick={report}>
+              <button onClick={reportPost}>
                 <span className="material-symbols-outlined">
                   notification_important
                 </span>
