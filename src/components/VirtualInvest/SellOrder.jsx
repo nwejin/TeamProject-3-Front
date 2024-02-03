@@ -19,7 +19,7 @@ const SellBtn = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   };
 
   const SellBtnClick = async () => {
-    //jwtCookie 체크
+    //jwtCookie 체크 햇어용
     if (cookie[0].jwtCookie) {
       if (stock >= sellOrder) {
         const cal = currentVal * sellOrder; //주문 총 금액
