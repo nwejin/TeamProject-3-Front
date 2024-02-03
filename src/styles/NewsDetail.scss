@@ -16,6 +16,7 @@
       margin: 3vw 0 0 0;
       padding: 0;
       text-align: right;
+      cursor: pointer;
       .goBackBtn {
         position: absolute;
         left: 0;
@@ -84,6 +85,10 @@
     background-color: $color-blue-2;
     cursor: pointer;
   }
+  .myHighlight {
+    background-color: lemonchiffon;
+    cursor: pointer;
+  }
 }
 
 .wordModal {
@@ -105,6 +110,7 @@
     &.heart {
       color: $color-blue-2;
       // font-variation-settings:
+      margin: 0 5px 0 5px;
       &.active {
         color: $color-blue-1;
       }
@@ -122,3 +128,9 @@
 //   'GRAD' 0,
 //   'opsz' 24
 // }
+
+.delete {
+  position: absolute;
+  background-color: white;
+  border: 1px solid $color-gray;
+}

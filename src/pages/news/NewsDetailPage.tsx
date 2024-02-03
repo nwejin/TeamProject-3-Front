@@ -12,7 +12,7 @@ const NewsDetailPage = () => {
   const [content, setContent] = useState(data.content);
 
   const [wordsList, setWordsList] = useState<string[]>([]);
-  const [wordsDb, setWordsDb] = useState([]);
+  const [wordsDb, setWordsDb] = useState<WordsProp[]>([]);
 
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
@@ -22,84 +22,145 @@ const NewsDetailPage = () => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const [isDraggable, setIsDraggable] = useState<boolean>(false);
-  const [myHighlight, setMyHighlight] = useState<string[] | null>([]);
+  const [myHighlight, setMyHighlight] = useState<string[]>([]);
+  const [highlightTxt, setHighlightTxt] = useState<string>();
 
   const navigate = useNavigate();
 
-  const getWords = async () => {
-    try {
-      // Db에서 단어 데이터 요청
-      const wordsArry = await axios.get(
-        process.env.REACT_APP_BACKSERVER + '/news/getWords'
-      );
-      const wordsData = wordsArry.data;
-      const newWordsList = wordsData.map((singleData: WordsProp) => {
-        return singleData.word;
-      });
-      // Db에서 받은 단어 데이터 중 word만 저장
-      setWordsList(newWordsList);
+  useEffect(() => {
+    // 시사경제용어 데이터 가져오기
+    const getWordsDb = async () => {
+      try {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKSERVER + '/news/getWordsDb'
+        );
+        const wordsData = res.data;
+        const getWordsList = wordsData.map((data: WordsProp) => data.word);
+        setWordsList(getWordsList);
+        setWordsDb(wordsData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-      // Db에서 받은 단어 데이터 전체 저장
-      setWordsDb(wordsData);
-      // setContent(highlightContent(data.content, newWordsList));
-      // setContent(highlightContent(content, wordsList));
-    } catch (error) {
-      console.error('Error fetching data from server:', error);
+    // 형광펜 했던 텍스트 가져오기
+    const getHighlight = async () => {
+      try {
+        const tokenId = cookies['jwtCookie'];
+        if (tokenId) {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKSERVER + '/news/getHighlight',
+            {
+              params: { news_id: data._id },
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              withCredentials: true,
+            }
+          );
+          // const available = res.data.available;
+          // console.log(available)
+          // if (available) {
+          //   setMyHighlight(res.data.highlight.word);
+          // }
+          // console.log(res.data.highlight.word);
+          setMyHighlight(res.data.highlight.word);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const tokenId = cookies['jwtCookie'];
+    if (tokenId) {
+      getHighlight();
+    }
+    getWordsDb();
+  }, [cookies, data._id]);
+
+  // 시사경제용어 형광펜 클릭
+  const handleWordClick = async (
+    word: string,
+    positon: { top: number; left: number }
+  ) => {
+    // 클릭한 단어의 위치 저장
+    setModalPosition(positon);
+
+    // 클릭한 단어와 관련된 데이터를 가져오고 필요에 따라 처리
+    const wordData = wordsDb.find(
+      (singleData: WordsProp) => singleData.word === word
+    );
+
+    if (wordData) {
+      // console.log('클릭한 단어에 대한 데이터:', wordData);
+
+      // 모달에서 보여줄 단어 저장
+      setModalWord(wordData);
+      // 모달 열기
+      setOpenModal(true);
+    } else {
+      console.error('클릭한 단어에 대한 데이터를 찾을 수 없습니다.');
     }
   };
 
-  useEffect(() => {
-    getWords();
-  }, []);
+  // 모달 닫기 버튼 함수
+  const closeModal = () => {
+    setOpenModal(false);
+    setModalWord(null);
+  };
 
-  useEffect(() => {
-    // wordsList가 업데이트되면 content를 하이라이트 처리
-    if (wordsList.length > 0 && data.content) {
-      setContent(highlightContent(data.content, wordsList));
+  // 형광펜 삭제
+  const highlightClick = async (word: string) => {
+    try {
+      // 클릭한 단어와 관련된 데이터를 가져오고 필요에 따라 처리
+      const hData = myHighlight.find((h) => h === word);
+      const res = await axios.post(
+        process.env.REACT_APP_BACKSERVER + '/news/deleteHighlight',
+        {
+          news_id: data._id,
+          highlightTxt: hData,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        }
+      );
+      console.log('--------',res);
+      if(res.data.success) {
+        alert('형광펜이 삭제되었습니다!')
+      } else {
+        alert('형광펜 삭제 실패: 관리자에게 문의하세요')
+      }
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
     }
-  }, [data.content, wordsList]);
+  };
 
-  // Db에 있는 단어 하이라이트
-  const highlightContent = (content: string, wordsList: string[]) => {
+  // 형광펜 표시
+  const highlightContent = (
+    content: string,
+    wordsList: string[],
+    myHighlight: string[]
+  ) => {
     const sortedWordsList = wordsList.sort((a, b) => b.length - a.length);
+    const allWords = [...sortedWordsList, ...myHighlight];
     const regex = new RegExp(
-      `(${sortedWordsList
+      `(${allWords
         .map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
         .join('|')})`,
       'g'
     );
-
-    let highlightedWords: Set<string> = new Set();
-
-    // 하이라이트 된 단어 클릭
-    const handleWordClick = async (
-      word: string,
-      positon: { top: number; left: number }
-    ) => {
-      // 클릭한 단어의 위치 저장
-      setModalPosition(positon);
-
-      // 클릭한 단어와 관련된 데이터를 가져오고 필요에 따라 처리
-      const wordData = wordsDb.find(
-        (singleData: WordsProp) => singleData.word === word
-      );
-      // console.log('word >',word);
-      // console.log('wordsDb', wordsDb)
-
-      if (wordData) {
-        // console.log('클릭한 단어에 대한 데이터:', wordData);
-
-        // 모달에서 보여줄 단어 저장
-        setModalWord(wordData);
-        // 모달 열기
-        setOpenModal(true);
-      } else {
-        console.error('클릭한 단어에 대한 데이터를 찾을 수 없습니다.');
-      }
-    };
+    const highlightedWords: Set<string> = new Set();
 
     return content.split(regex).map((word, index) => {
-      if (regex.test(word) && !highlightedWords.has(word)) {
+      const isWordsListHighlighted =
+        regex.test(word) && !myHighlight.includes(word);
+      const isMyHighlightHighlighted = myHighlight.includes(word);
+
+      if (isWordsListHighlighted && !highlightedWords.has(word)) {
         highlightedWords.add(word);
         return (
           <span
@@ -115,16 +176,22 @@ const NewsDetailPage = () => {
             {word}
           </span>
         );
+      } else if (isMyHighlightHighlighted && !highlightedWords.has(word)) {
+        highlightedWords.add(word);
+        return (
+          <span
+            key={index}
+            className="myHighlight"
+            // style={{ backgroundColor: 'yellow' }}
+            onClick={(e) => highlightClick(word)}
+          >
+            {word}
+          </span>
+        );
       } else {
-        return word;
+        return <span key={index}>{word}</span>;
       }
     });
-  };
-
-  // 모달 닫기 버튼 함수
-  const closeModal = () => {
-    setOpenModal(false);
-    setModalWord(null);
   };
 
   // 기사 저장 유무
@@ -199,7 +266,7 @@ const NewsDetailPage = () => {
 
         // 새로운 span 요소 생성
         const span = document.createElement('span');
-        span.style.backgroundColor = 'yellow'; // 원하는 백그라운드 컬러로 변경
+        span.style.backgroundColor = 'lemonchiffon'; // 원하는 백그라운드 컬러로 변경
         span.appendChild(extractedContents);
 
         // 추출된 내용 대신에 span 태그를 삽입
@@ -208,9 +275,8 @@ const NewsDetailPage = () => {
         const saveMyHighlight = axios.post(
           process.env.REACT_APP_BACKSERVER + '/news/myHighlight',
           {
-            //텍스트랑 뉴스아이디 보내야
-            selectedTxt,
             news_id: data._id,
+            selectedTxt,
           },
           {
             headers: {
@@ -219,34 +285,14 @@ const NewsDetailPage = () => {
             withCredentials: true,
           }
         );
+        window.location.reload();
+
       }
     } else {
       // 드래그 불가능 상태일 때는 드래그 이벤트 무시
       event.preventDefault();
     }
   };
-
-  // 형광펜 텍스트 받아오기
-  useEffect(() => {
-    const myHighlights = async () => {
-      const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
-      if (tokenId) {
-        const highlightTxt = await axios.get(
-          process.env.REACT_APP_BACKSERVER + '/news/sendMyHighlight',
-          {
-            params: { news_id: data._id },
-            headers: {
-              'Content-Type': 'application/json',
-              // 'Authorization': `Bearer ${tokenId}`,
-            },
-            withCredentials: true,
-          }
-        );
-        console.log(highlightTxt.data.word);
-      }
-    };
-    myHighlights();
-  }, [cookies]);
 
   return (
     <>
@@ -280,7 +326,8 @@ const NewsDetailPage = () => {
           <h3>{data.subtitle}</h3>
 
           <p className="detailContent" onMouseUp={dragText}>
-            {content}
+            {wordsList.length > 0 ? highlightContent(data.content, wordsList, myHighlight) : data.content}
+            {/* {content} */}
           </p>
           <br />
           <p>출처 : {data.url}</p>
