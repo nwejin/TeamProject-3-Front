@@ -30,6 +30,7 @@ const ShowDetail = ({ response, close, user }: props): ReactElement => {
         if (response) {
           console.log('show rank response 전송 성공');
           console.log('res ', response.rank); // 순위
+          console.log('prfo', response.rank[0].profile);
           // 여기에서 response를 처리하거나 다른 작업을 수행할 수 있습니다.
           setUserRank(response.rank);
         }
