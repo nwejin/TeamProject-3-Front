@@ -11,7 +11,7 @@ import './../../styles/StockGuide.scss';
 import SearchCompany from '../../components/CompanyInfo/SearchCompany';
 
 const StockRate = () => {
-  const [searchSymbol, setSearchSymbol] = useState('APPL');
+  const [searchSymbol, setSearchSymbol] = useState('NASDAQ:AAPL');
   const [postSymbol, setPostSymbol] = useState('');
   const [reLoad, setReLoad] = useState(true);
 
@@ -50,16 +50,16 @@ const StockRate = () => {
         >
           <div className="searchBox">
             <select name="" id="" onChange={selectCompany} value={searchSymbol}>
-              <option value="AAPL">애플 (APPL)</option>
-              <option value="TSLA">테슬라 (TSLA)</option>
-              <option value="AMZN">아마존 (AMZN)</option>
-              <option value="MSFT">마이크로소프트 (MSFT)</option>
-              <option value="INTC">인텔 (INTC)</option>
-              <option value="NVDA">엔비디아 (NVDA)</option>
-              <option value="GOOGL">알파벳 (GOOGL)</option>
-              <option value="META">메타 (META)</option>
-              <option value="NFLX">넷플릭스 (NFLX)</option>
-              <option value="ORCL">오라클 (ORCL)</option>
+              <option value="NASDAQ:AAPL">애플 (APPL)</option>
+              <option value="NASDAQ:TSLA">테슬라 (TSLA)</option>
+              <option value="NASDAQ:AMZN">아마존 (AMZN)</option>
+              <option value="NASDAQ:MSFT">마이크로소프트 (MSFT)</option>
+              <option value="NASDAQ:INTC">인텔 (INTC)</option>
+              <option value="NASDAQ:NVDA">엔비디아 (NVDA)</option>
+              <option value="NASDAQ:GOOGL">알파벳 (GOOGL)</option>
+              <option value="NASDAQ:META">메타 (META)</option>
+              <option value="NASDAQ:NFLX">넷플릭스 (NFLX)</option>
+              <option value="NYSE:ORCL">오라클 (ORCL)</option>
             </select>
             {/* <button onClick={Search}>기업 정보 조회하기</button> */}
           </div>
@@ -79,26 +79,19 @@ const StockRate = () => {
                 }}
               >
                 <Ticker />
-                <FundamentalData search={searchSymbol} />
+              </div>
+              <div
+                style={{
+                  width: '100%',
+                  height: '50%',
+                }}
+              >
                 <CompanyProfile search={searchSymbol} />
               </div>
-
               {/* <MarketData /> */}
             </div>
             <div className="flip">
-              <div className="card">
-                <div className="front">
-                  {/* <FundamentalData search={searchSymbol} /> */}
-                  {/* {reLoad ? (
-                    <FundamentalData search={searchSymbol} />
-                  ) : (
-                    <FundamentalData search={''} />
-                  )} */}
-                </div>
-                <div className="back">
-                  {/* <CompanyProfile search={searchSymbol} /> */}
-                </div>
-              </div>
+              <FundamentalData search={searchSymbol} />
             </div>
             {/*  */}
           </div>

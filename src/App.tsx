@@ -24,6 +24,8 @@ import ErrorPage from './pages/ErrorPage';
 import Virtual from './components/VirtualInvest/Virtual';
 import StockVirtualPage from './pages/stockGuide/StockVirtualPage';
 import StockRatePage from './pages/stockGuide/StockRatePage';
+import AdminPage from './pages/AdminPage';
+import CommunityManage from './pages/admin/CommunityManage';
 
 // import ExampleComponent from "./components/ExampleComponent";
 
@@ -83,6 +85,9 @@ function App() {
 
           {/* <Route path="/virtual" element={<Virtual />} /> */}
           <Route path="/virtual" element={<StockVirtualPage />} />
+
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/communityManage" element={<CommunityManage />} />
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>

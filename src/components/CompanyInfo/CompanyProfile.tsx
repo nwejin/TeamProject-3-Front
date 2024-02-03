@@ -9,11 +9,10 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
   const container = useRef<HTMLDivElement>(null);
   // const [symbol, setSymbol] = useState('NASDAQ:AAPL'); // 기본값 설정
 
-
   const search = props.search;
   // console.log(search);
 
-  const symbol = `NASDAQ:${search}`;
+  const symbol = search;
   console.log(symbol);
 
   // useEffect(() => {
@@ -34,7 +33,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
       height: '100%',
       isTransparent: false,
       colorTheme: 'white',
-      symbol: `NASDAQ:${search}`,
+      symbol: search,
       locale: 'kr',
     });
 

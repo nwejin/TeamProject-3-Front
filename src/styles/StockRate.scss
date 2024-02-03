@@ -16,39 +16,47 @@
   transform-style: preserve-3d;
 }
 
-.front,
-.back {
-  position: absolute;
-  width: 100%;
-  height: 800px;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-}
+// .front,
+// .back {
+//   position: absolute;
+//   width: 100%;
+//   height: 800px;
+//   backface-visibility: hidden;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   color: #fff;
+// }
 
 // .front {
 //   background: tomato;
 // }
 
-.back {
-  //   background: royalblue;
-  transform: rotateY(180deg);
-}
+// .back {
+//   //   background: royalblue;
+//   transform: rotateY(180deg);
+// }
 
-.flip:hover .card {
-  transform: rotateY(180deg);
-}
+// .flip:hover .card {
+//   transform: rotateY(180deg);
+// }
 
 .searchBox {
   //   background-color: red;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1rem;
-  input {
-    height: 30px;
-    width: 300px;
+  width: 100%;
+  // background-color: blue;
+  select {
+    height: 100%;
+    width: 15%;
+    border: none;
+    // background-color: pink;
+    font-weight: 24px;
+    option {
+      font-weight: 24px;
+    }
   }
   button {
     border-radius: 5px;

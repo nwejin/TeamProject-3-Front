@@ -12,7 +12,7 @@ const FundamentalData: React.FC<FundamentalDataProps> = (props) => {
   // AAPL
   const search = props.search;
   console.log(search);
-  const symbol = `NASDAQ:${search}`;
+  const symbol = search;
   console.log(symbol);
 
   // console.log(symbol);
@@ -36,7 +36,7 @@ const FundamentalData: React.FC<FundamentalDataProps> = (props) => {
       width: '100%',
       height: '100%',
       colorTheme: 'white',
-      symbol: `NASDAQ:${search}`, // 동적으로 변경된 symbol 사용
+      symbol: search, // 동적으로 변경된 symbol 사용
       locale: 'kr',
     });
 
