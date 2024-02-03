@@ -127,11 +127,11 @@ const NewsDetailPage = () => {
           withCredentials: true,
         }
       );
-      console.log('--------',res);
-      if(res.data.success) {
-        alert('형광펜이 삭제되었습니다!')
+      console.log('--------', res);
+      if (res.data.success) {
+        alert('형광펜이 삭제되었습니다!');
       } else {
-        alert('형광펜 삭제 실패: 관리자에게 문의하세요')
+        alert('형광펜 삭제 실패: 관리자에게 문의하세요');
       }
       window.location.reload();
     } catch (error) {
@@ -266,7 +266,6 @@ const NewsDetailPage = () => {
 
         // 새로운 span 요소 생성
         const span = document.createElement('span');
-
         span.style.backgroundColor = 'lemonchiffon'; // 원하는 백그라운드 컬러로 변경
         span.appendChild(extractedContents);
 
@@ -276,9 +275,8 @@ const NewsDetailPage = () => {
         const saveMyHighlight = axios.post(
           process.env.REACT_APP_BACKSERVER + '/news/myHighlight',
           {
-
             news_id: data._id,
-
+            selectedTxt,
           },
           {
             headers: {
@@ -287,40 +285,13 @@ const NewsDetailPage = () => {
             withCredentials: true,
           }
         );
-
         window.location.reload();
-
-
       }
     } else {
       // 드래그 불가능 상태일 때는 드래그 이벤트 무시
       event.preventDefault();
     }
   };
-
-
-  // 형광펜 텍스트 받아오기
-  // useEffect(() => {
-  //   const myHighlights = async () => {
-  //     const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
-  //     if(tokenId) {
-  //       const highlightTxt = await axios.get(
-  //         process.env.REACT_APP_BACKSERVER + '/news/sendMyHighlight',
-  //         {
-  //           params: { news_id : data._id},
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //             // 'Authorization': `Bearer ${tokenId}`,
-  //           },
-  //           withCredentials: true,
-  //         }
-  //       );
-  //       console.log(highlightTxt.data.word);
-  //     }
-  //   };
-  //   myHighlights();
-  // }, [cookies])
-
 
   return (
     <>
@@ -354,7 +325,9 @@ const NewsDetailPage = () => {
           <h3>{data.subtitle}</h3>
 
           <p className="detailContent" onMouseUp={dragText}>
-            {wordsList.length > 0 ? highlightContent(data.content, wordsList, myHighlight) : data.content}
+            {wordsList.length > 0
+              ? highlightContent(data.content, wordsList, myHighlight)
+              : data.content}
             {/* {content} */}
           </p>
           <br />
