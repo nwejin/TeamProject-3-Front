@@ -250,9 +250,8 @@ const MyPage = () => {
   return (
     <>
       <div className="mypage-wrapper ">
-        <div className="page-title">회원 정보 수정</div>
-
         <form name="register-form" method="post">
+          <div className="mypage-title">회원 정보 수정</div>
           <div className="userImgBox">
             <img
               className="profile-img"
@@ -288,11 +287,11 @@ const MyPage = () => {
               id="user_id"
               placeholder="아이디"
               value={formData.user_id}
-              // className="input-box"
+              className="input-box"
               disabled
             />
             <br />
-            <div style={{ display: 'inline-block' }}>
+            <div>
               <div className="input-label">현재 비밀번호</div>
               <input
                 type="password"
@@ -301,31 +300,32 @@ const MyPage = () => {
                 placeholder="현재 비밀번호"
                 ref={pwRef}
                 // value={formData.user_password}
-                // className="input-box"
+                className="input-box"
                 onChange={handleInputChange}
                 onKeyUp={passwordCheck}
                 disabled={isDisabled}
               />
             </div>
-            <div style={{ display: 'inline-block' }}>
+            <div className="pwCheckBox">{pwCheckString}</div>
+            <div>
               <div className="input-label">변경 비밀번호</div>
               <input
                 type="password"
                 id="user_changepw"
                 name="user_changepw"
                 placeholder="변경 비밀번호"
-                // className="input-box"
+                className="input-box"
                 onChange={handleInputChange}
                 disabled={isDisabled}
               />
             </div>
-            <div className="pwCheckBox">{pwCheckString}</div>
+
             <div className="input-label">닉네임</div>
             <input
               id="user_nickname"
               name="user_nickname"
               placeholder="닉네임"
-              // className="input-box"
+              className="input-box"
               value={formData.user_nickname}
               onChange={handleInputChange}
               onKeyUp={nicknameReCheck}
@@ -337,17 +337,19 @@ const MyPage = () => {
               name="user_email"
               id="user_email"
               placeholder="이메일"
-              // className="input-box"
+              className="input-box"
               value={formData.user_email}
               onChange={handleInputChange}
             />
-            <button className="signinBtn" onClick={modifyUserInfo}>
-              취소
-            </button>
             <br />
-            <button className="signinBtn" onClick={modifyUserInfo}>
-              수정
-            </button>
+            <div style={{ width: '100%' }}>
+              <button className="resetBtn" onClick={modifyUserInfo}>
+                취소
+              </button>
+              <button className="modifyBtn" onClick={modifyUserInfo}>
+                수정
+              </button>
+            </div>
             <br />
 
             {/* <button className="signinBtn" onClick={deleteUserInfo}>

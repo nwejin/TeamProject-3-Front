@@ -16,22 +16,24 @@ import NewsDetailPage from './pages/news/NewsDetailPage';
 
 import CommunityMain from './pages/community/CommunityMain';
 import CommunityReadPage from './pages/community/CommunityReadPage';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 import WordBookPage from './pages/member/WordBookPage';
-import ErrorPage from './pages/ErrorPage';
+import NotFound from './pages/error/404Page';
+import ServerError from './pages/error/500Page';
 import Virtual from './components/VirtualInvest/Virtual';
 import StockVirtualPage from './pages/stockGuide/StockVirtualPage';
 import StockRatePage from './pages/stockGuide/StockRatePage';
 
-// import ExampleComponent from "./components/ExampleComponent";
-
 function App() {
   const [serverData, setServerData] = useState('');
+  const [errorNum, setErrorNum] = useState(0);
+
   useEffect(() => {
     // React 컴포넌트가 마운트될 때 한 번 실행
     fetchDataFromServer();
+    notFoundError();
   }, []);
 
   const fetchDataFromServer = async () => {
@@ -55,6 +57,53 @@ function App() {
     }
   };
 
+  const notFoundError = async () => {
+    try {
+      console.log(window.location.pathname);
+      const currentPath = 'http://localhost:3000' + window.location.pathname;
+      const response = await axios.get(currentPath, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response);
+      if (response.status === 200) {
+        return;
+      } else if (response.status === 500) {
+        setErrorNum(500);
+      } else {
+        setErrorNum(404);
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        // 여기에서 axiosError.response를 사용할 수 있습니다.
+        console.log(axiosError.response.status);
+        const err = axiosError.response.status;
+        if (err === 200) {
+          return;
+        } else if (err === 500) {
+          setErrorNum(500);
+          // window.location.href = '/500';
+        } else {
+          setErrorNum(404);
+          // window.location.href = '/404';
+        }
+      }
+      console.log(error);
+    }
+  };
+  // if (error) {
+  //   if (error.response && error.response.status === 404) {
+  //     // 404 에러가 발생한 경우 404 페이지로 리다이렉션
+  //     return <Navigate to="/404" />;
+  //   } else {
+  //     // 다른 모든 에러는 500 서버 에러 페이지로 리다이렉션
+  //     return <Navigate to="/500" />;
+  //   }
+  // }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -74,7 +123,6 @@ function App() {
 
           <Route path="/stockGuide" element={<StockGuidePage />} />
           <Route path="/stockRate" element={<StockRatePage />} />
-          <Route path="/error" element={<ErrorPage />} />
 
           {/* 커뮤니티 */}
           <Route path="/community" element={<CommunityMain />} />
@@ -83,6 +131,12 @@ function App() {
 
           {/* <Route path="/virtual" element={<Virtual />} /> */}
           <Route path="/virtual" element={<StockVirtualPage />} />
+
+          {/* 404 에러 페이지 */}
+          {errorNum === 404 && <Route path="*" element={<NotFound />} />}
+
+          {/* 500 서버 에러 페이지 */}
+          {errorNum === 500 && <Route path="*" element={<ServerError />} />}
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>

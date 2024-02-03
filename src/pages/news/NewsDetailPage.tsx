@@ -174,78 +174,79 @@ const NewsDetailPage = () => {
   // 드래그 가능 여부
   const draggable = () => {
     const tokenId = cookies['jwtCookie'];
-    if(!tokenId) {
-        alert('로그인 후 사용가능한 기능입니다.');
+    if (!tokenId) {
+      alert('로그인 후 사용가능한 기능입니다.');
     } else {
-        setIsDraggable(!isDraggable);
+      setIsDraggable(!isDraggable);
     }
     setIsDraggable(!isDraggable);
   };
 
-    // 드래그 : 직접 형광펜 기능
-    const dragText = (event:any) => {
-        if(isDraggable) {
-            // event.preventDefault();
-            const selection = window.getSelection();
-            const selectedTxt = selection?.toString() || '';
-            console.log('selection >', selection);
-            console.log('selectedText >', selectedTxt);
+  // 드래그 : 직접 형광펜 기능
+  const dragText = (event: any) => {
+    if (isDraggable) {
+      // event.preventDefault();
+      const selection = window.getSelection();
+      const selectedTxt = selection?.toString() || '';
+      console.log('selection >', selection);
+      console.log('selectedText >', selectedTxt);
 
-            if (selection && selectedTxt) {
-                const range = selection.getRangeAt(0);
-    
-                // 추출된 내용
-                const extractedContents = range.extractContents();
-    
-                // 새로운 span 요소 생성
-                const span = document.createElement('span');
-                span.style.backgroundColor = 'yellow'; // 원하는 백그라운드 컬러로 변경
-                span.appendChild(extractedContents);
-    
-                // 추출된 내용 대신에 span 태그를 삽입
-                range.insertNode(span);
+      if (selection && selectedTxt) {
+        const range = selection.getRangeAt(0);
 
-                const saveMyHighlight = axios.post(process.env.REACT_APP_BACKSERVER + "/news/myHighlight",{
-                    //텍스트랑 뉴스아이디 보내야
-                    selectedTxt,
-                    news_id: data._id
+        // 추출된 내용
+        const extractedContents = range.extractContents();
+
+        // 새로운 span 요소 생성
+        const span = document.createElement('span');
+        span.style.backgroundColor = 'yellow'; // 원하는 백그라운드 컬러로 변경
+        span.appendChild(extractedContents);
+
+        // 추출된 내용 대신에 span 태그를 삽입
+        range.insertNode(span);
+
+        const saveMyHighlight = axios.post(
+          process.env.REACT_APP_BACKSERVER + '/news/myHighlight',
+          {
+            //텍스트랑 뉴스아이디 보내야
+            selectedTxt,
+            news_id: data._id,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
             },
-                {
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    withCredentials: true,
-                  })
-            }
-          
+            withCredentials: true,
+          }
+        );
+      }
     } else {
       // 드래그 불가능 상태일 때는 드래그 이벤트 무시
       event.preventDefault();
     }
   };
 
-  
   // 형광펜 텍스트 받아오기
-  useEffect(() => {
-    const myHighlights = async () => {
-      const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
-      if(tokenId) {
-        const highlightTxt = await axios.get(
-          process.env.REACT_APP_BACKSERVER + '/news/sendMyHighlight',
-          {
-            params: { news_id : data._id},
-            headers: {
-              'Content-Type': 'application/json',
-              // 'Authorization': `Bearer ${tokenId}`,
-            },
-            withCredentials: true,
-          }
-        );
-        console.log(highlightTxt.data.word);
-      }
-    };
-    myHighlights();
-  }, [cookies])
+  // useEffect(() => {
+  //   const myHighlights = async () => {
+  //     const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
+  //     if(tokenId) {
+  //       const highlightTxt = await axios.get(
+  //         process.env.REACT_APP_BACKSERVER + '/news/sendMyHighlight',
+  //         {
+  //           params: { news_id : data._id},
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //             // 'Authorization': `Bearer ${tokenId}`,
+  //           },
+  //           withCredentials: true,
+  //         }
+  //       );
+  //       console.log(highlightTxt.data.word);
+  //     }
+  //   };
+  //   myHighlights();
+  // }, [cookies])
 
   return (
     <>

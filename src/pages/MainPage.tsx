@@ -39,8 +39,8 @@ const MainPage = () => {
   const [translate, setTranslate] = useState(0);
 
   useEffect(() => {
-    console.log(newsData);
-    console.log(boardData);
+    // console.log(newsData);
+    // console.log(boardData);
   }, [newsData, boardData]);
 
   useEffect(() => {
@@ -58,21 +58,25 @@ const MainPage = () => {
   const getNews = async () => {
     const response = await mainNews();
     const data = response.news;
+    // console.log(data);
     setNewslist(data);
     if (response.success) {
-      const updateNews = data.map((news: any) => ({
-        thumbnail:
-          news.smallimg || process.env.PUBLIC_URL + 'board-default.png',
-        title: news.title,
-        content: news.content,
-        id: data._id,
-      }));
-      console.log(updateNews);
+      const updateNews = data.map((news: any) => {
+        // console.log('aaa', news._id);
+        return {
+          thumbnail:
+            news.smallimg || process.env.PUBLIC_URL + 'board-default.png',
+          title: news.title,
+          content: news.content,
+          id: news._id,
+        };
+      });
+      // console.log(updateNews);
       // const newsArray = updateNews;
       // console.log(newsArray);
 
       setNewsData(updateNews);
-      console.log(newsData);
+      // console.log(newsData);
     } else {
       const newsArray = [
         {
@@ -90,11 +94,11 @@ const MainPage = () => {
     const response = await mainBoards();
     const data = response.board;
     setBoardlist(data);
-    console.log('hihihiddddddd', data);
-    console.log(data[0].userId.user_nickname);
+    // console.log('hihihiddddddd', data);
+    // console.log(data[0].userId.user_nickname);
     if (response.success) {
       const updateBoard = data.map((boards: any) => {
-        console.log('boards:', boards);
+        // console.log('boards:', boards);
         return {
           image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
           title: boards.title,
@@ -137,9 +141,10 @@ const MainPage = () => {
       }
       setTranslate((prev) => prev - 67);
     }
-    console.log(translate);
+    // console.log(translate);
   };
-
+  // console.log('newslist', newslist);
+  // console.log('newsdata', newsData);
   return (
     <>
       <div className="outer-wrapper">

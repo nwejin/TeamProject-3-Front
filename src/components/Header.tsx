@@ -121,8 +121,8 @@ const Header = () => {
     };
     getUserInfo();
   }, []);
-  console.log(userInfos.userId);
-  console.log(userInfos.userNickName);
+  // console.log(userInfos.userId);
+  // console.log(userInfos.userNickName);
 
   return (
     <>
