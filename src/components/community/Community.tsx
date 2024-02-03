@@ -53,7 +53,6 @@ function Community() {
 
   const cookie = useCookies(['jwtCookie']);
 
-  const [commentCount, setCommentCount] = useState<number | null>(null);
   const fetchDataForPost = async (post: any) => {
     const commentArray = await getComment(post._id);
 
@@ -224,16 +223,10 @@ function Community() {
                 <div>
                   <span>
                     {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
-                    <button>
-                      <span
-                        onClick={() => plusLike(post._id)}
-                        className={`material-symbols-outlined heart ${
-                          post.isActive ? 'active' : ''
-                        }`}
-                      >
-                        heart_plus
+                    <button onClick={() => plusLike(post._id)}>
+                      <span className="material-symbols-outlined">
+                        favorite
                       </span>
-                      <span>좋아요</span>
                     </button>
                     <span>{post.likedUser.length}</span>
                   </span>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getComment } from '../../services/apiService';
+import { getComment, getReply } from '../../services/apiService';
 import ReplyWrite from './ReplyWrite';
 import { useCookies } from 'react-cookie';
 import ReplyComment from './ReplyComment';
@@ -44,10 +44,43 @@ function Comment({ data }: { data: any }) {
     }
   };
 
+  const fetchDataForPost = async (post: any) => {
+    const commentArray = await getComment(postId);
+
+    let replyCommentSum = 0;
+
+    for (const comment of commentArray) {
+      const replyComment = await getReply(comment._id);
+      replyCommentSum += replyComment.length;
+    }
+
+    const commentCount = commentArray.length;
+    const totalCommentCount = commentCount + replyCommentSum;
+
+    // 필요한 데이터를 가공하여 반환
+    return totalCommentCount;
+  };
+
+  const renderPost = async (post: any) => {
+    const commentsCount = await fetchDataForPost(post);
+
+    const commentsCountElement = document.getElementById(
+      `commentsCount_${postId}`
+    );
+    if (commentsCountElement) {
+      commentsCountElement.innerText = commentsCount.toString();
+    } else {
+      console.error(`Element with id 'commentsCount_${postId}' not found.`);
+    }
+  };
+
+  renderPost(postId);
+
   return (
     <>
       <div className="countComment">
-        <span>댓글</span> <span>{commentData.length}</span>
+        <span>댓글</span>{' '}
+        <span id={`commentsCount_${postId}`}> 로딩 중...</span>
       </div>
       {/* 댓글표시 */}
       {commentData.map((post: any) => {
@@ -112,16 +145,6 @@ function Comment({ data }: { data: any }) {
                 <span>
                   <button onClick={() => showModal(post._id)}>
                     <span>댓글 달기</span>
-                  </button>
-                </span>
-              </div>
-              <div className="report">
-                <span>
-                  <button>
-                    <span className="material-symbols-outlined">
-                      notification_important
-                    </span>
-                    <span>신고하기</span>
                   </button>
                 </span>
               </div>

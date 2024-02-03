@@ -7,6 +7,10 @@ import {
   modifyCommunity,
   updatePost,
   userInfo,
+  reportPost,
+  reportGet,
+  getComment,
+  getReply,
 } from '../../services/apiService';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
@@ -126,14 +130,16 @@ function CommunityRead() {
     }
   };
   const cookie = useCookies(['jwtCookie']);
-  // const plusLike = async (postId: string) => {
+  // const plusLike = async (postData._id: string) => {
   //   try {
   //     if (cookie[0].jwtCookie) {
-  //       const postIndex = posts.findIndex((post) => post._id === postId);
+  //       const postIndex = postData.findIndex(
+  //         (post: any) => post._id === postData._id
+  //       );
   //       if (postIndex !== -1) {
   //         const updatedPosts = [...posts];
   //         const like = updatedPosts[postIndex].isActive ? -1 : 1;
-  //         const likeData = { like, postId };
+  //         const likeData = { like, postData._id };
 
   //         const response = await addLike(likeData);
   //         console.log('response toggle', response);
@@ -174,22 +180,56 @@ function CommunityRead() {
 
   const deleteContent = async () => {
     try {
-      const result = await deleteCommunity(postData._id);
-      console.log('글 삭제 성공', result);
-      window.location.href = '/community';
+      if (window.confirm('삭제 후 복구가 불가능 합니다.')) {
+        alert('삭제되었습니다.');
+        const result = await deleteCommunity(postData._id);
+        console.log('글 삭제 성공', result);
+        window.location.href = '/community';
+      } else {
+        alert('취소되었습니다.');
+      }
     } catch (error) {
       console.log(error);
     }
   };
+  const [isReported, setIsReported] = useState(false);
 
-  const reportPost = async () => {
+  const reportContent = async () => {
     try {
-      console.log('신고 완료!');
+      const tokenId = jwtCookie['jwtCookie'];
+      const response = await userInfo({ id: tokenId });
+      console.log(response.info._id); // userid
+
+      const result = await reportPost(postData._id);
+      console.log('신고 완료', result);
+      console.log(result.active); // true/ false
+
+      window.location.href = `/community/${postData._id}`;
     } catch (err) {
       console.log(err);
     }
   };
-  console.log(postData);
+
+  useEffect(() => {
+    const getReportedUser = async () => {
+      try {
+        const tokenId = jwtCookie['jwtCookie'];
+        const response = await userInfo({ id: tokenId });
+        const userId = response.info._id; // userid
+
+        const result = await reportGet({
+          postId: postData._id,
+          userId: userId,
+        });
+        console.log(result.isUserReported);
+        setIsReported(result.isUserReported);
+      } catch (err) {
+        console.log(err);
+        return false; // 에러 발생 시 기본값으로 false 반환
+      }
+    };
+    getReportedUser();
+  }, []);
 
   return (
     <div className="postRead" key={postData._id}>
@@ -213,8 +253,12 @@ function CommunityRead() {
               alignItems: 'center',
             }}
           >
-            <button style={disabledAttr} onClick={showModal}>
-              수정
+            <button
+              style={disabledAttr}
+              onClick={showModal}
+              className="delModiBtn"
+            >
+              <span className="material-symbols-outlined">box_edit</span>
             </button>
             {openModal && (
               <ModifyPost
@@ -223,14 +267,14 @@ function CommunityRead() {
                 postData={postData}
               />
             )}
-            <button style={disabledAttr} onClick={deleteContent}>
-              삭제
+            <button
+              style={disabledAttr}
+              onClick={deleteContent}
+              className="delModiBtn"
+            >
+              <span className="material-symbols-outlined">delete</span>
             </button>
             <span className="category">{getSubject()}</span>
-            <button className="moreInfos" onClick={modifyToggle}>
-              <span className="material-symbols-outlined">more_vert</span>
-              {isToggle === true && <div className="modifyToggle"></div>}
-            </button>
           </div>
         </div>
 
@@ -250,9 +294,10 @@ function CommunityRead() {
         <div className="statusBox">
           <div>
             <span>
-              {/* <button onClick={() => plusLike(postData._id)}>
+              {/* onClick={() => plusLike(postData._id)} */}
+              <button>
                 <span className="material-symbols-outlined">favorite</span>
-              </button> */}
+              </button>
               <span>{postData.like}</span>
             </span>
 
@@ -264,14 +309,15 @@ function CommunityRead() {
             </span> */}
           </div>
           <div className="report">
-            <span>
-              <button onClick={reportPost}>
-                <span className="material-symbols-outlined">
-                  notification_important
-                </span>
-                <span>신고하기</span>
-              </button>
-            </span>
+            <button
+              onClick={reportContent}
+              className={isReported ? 'clicked' : ''}
+            >
+              <p>신고하기</p>
+              <span className="material-symbols-outlined">
+                notification_important
+              </span>
+            </button>
           </div>
         </div>
       </div>

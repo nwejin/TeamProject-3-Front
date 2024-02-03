@@ -724,3 +724,55 @@ export const adminGetUser = async () => {
     throw new Error('예상치 못한 오류가 발생했습니다! (관리자 페이지)');
   }
 };
+
+// 게시글 신고하기
+export const reportPost = async (reportData: string) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/report',
+      { reportData },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+// 신고 유저 가져오기
+export const reportGet = async ({
+  postId,
+  userId,
+}: {
+  postId: any;
+  userId: any;
+}) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/report',
+      { params: { postId, userId } }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (신고 가져오기)');
+  }
+};
+
+// 관리자 페이지 신고글 가져오기
+export const adminGetPost = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/admin/communityManage'
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (관리자 페이지)');
+  }
+};

@@ -113,16 +113,6 @@ function ReplyComment({ data }: any) {
                   </button> */}
                 </span>
               </div>
-              <div className="report">
-                <span>
-                  <button>
-                    <span className="material-symbols-outlined">
-                      notification_important
-                    </span>
-                    <span>신고하기</span>
-                  </button>
-                </span>
-              </div>
             </div>
             {openReply === post._id && <ReplyWrite data={data} />}
           </div>

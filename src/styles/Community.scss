@@ -286,8 +286,14 @@ button {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         height: 30px;
+        .delModiBtn {
+          background: none;
+          border: none;
+          span:hover {
+            color: $color-blue-1;
+          }
+        }
         .profile {
           display: flex;
           align-items: center;
@@ -295,10 +301,10 @@ button {
           height: 30px;
         }
         img {
-          width: auto;
-          height: 20px;
+          width: 25px;
+          height: 25px;
           border-radius: 50%;
-          margin-right: 2px;
+          margin-top: 15%;
           margin-right: 6px;
         }
         span {
@@ -356,7 +362,40 @@ button {
       }
     }
     .report {
-      width: auto;
+      width: fit-content;
+      // background-color: pink;
+      button {
+        display: flex;
+        align-items: center;
+        border: 1px solid $color-gray-1;
+        background-color: none;
+        padding: 4px 8px;
+        border-radius: 5px;
+        p {
+          font-size: 14px;
+          color: $color-gray-2;
+        }
+        span {
+          font-size: 14px;
+          color: $color-gray-2;
+        }
+      }
+      button:hover {
+        border: 1px solid $color-red-1;
+      }
+      button:hover p {
+        color: $color-red-1;
+      }
+      button:hover span {
+        color: $color-red-1;
+      }
+    }
+    .report button.clicked p,
+    .report button.clicked span {
+      color: $color-red-1;
+    }
+    button.clicked {
+      border: 1px solid $color-red-1;
     }
   }
   .readImgBox {
@@ -467,7 +506,6 @@ button {
   }
   .userProfile {
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -559,6 +597,15 @@ button {
     textarea {
       border: 1px solid $color-gray-1;
       border-radius: 5px;
+    }
+    Button {
+      border-radius: 5px;
+      width: 100px;
+      height: 30px;
+      background-color: #0056f3;
+      border: none;
+      font-size: 16px;
+      color: #ffffff;
     }
   }
 }
