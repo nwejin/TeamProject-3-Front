@@ -24,7 +24,7 @@ export const register = async (userData: any) => {
 // 로그인
 export const login = async (userData: any) => {
   console.log(userData);
-  console.log(process.env.REACT_APP_BACKSERVER);
+  // console.log(process.env.REACT_APP_BACKSERVER);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/login',
@@ -174,6 +174,20 @@ export const getCommunityPosts = async () => {
   } catch (error) {
     console.error(error); // 에러 메시지를 콘솔에 출력
     throw new Error('예상치 못한 오류가 발생했습니다! (게시글 불러오기)');
+  }
+};
+
+// 커뮤니티 게시글 검색
+export const searchPost = async (searchWord: string) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/search',
+      { params: { searchWord } }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (게시글 검색)');
   }
 };
 
@@ -408,6 +422,26 @@ export const calProfitAndLoss = async (useData: any) => {
     return response.data;
   } catch (error) {
     throw new Error('P&L 전송 중 오류 발생');
+  }
+};
+
+// 모의투자 랭킹보기
+export const showRank = async (useData: any) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/virtual/showRank',
+      useData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    throw new Error('모의투자 랭킹보기 실패!');
   }
 };
 
@@ -675,5 +709,18 @@ export const deleteWord = async (userData: any) => {
     return response.data;
   } catch (error) {
     throw new Error('예상치 못한 오류가 발생했습니다!');
+  }
+};
+
+// 관리자 페이지 유저 가져오기
+export const adminGetUser = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/admin'
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (관리자 페이지)');
   }
 };

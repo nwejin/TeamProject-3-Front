@@ -8,6 +8,7 @@ import Order from './BuyOrder';
 import Detail from './showDetail';
 import MyResponsiveLine from './userChart';
 
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { showRecord } from '../../services/apiService';
@@ -35,8 +36,8 @@ const Virtual = () => {
   const [index, setIndex] = useState(180); //시작 캔들 개수
   const [data, setData] = useState([]); //api로 가져온 데이터
   const [volume, setVolume] = useState([]); // api로 가져온 볼륨데이터
-  const [currentCost, setCurrentCost] = useState(); //현재 가격
-  const [currentProfit, setCurrentProfit] = useState(); //현재 이익
+  const [currentCost, setCurrentCost] = useState(0); //현재 가격
+  const [currentProfit, setCurrentProfit] = useState(0); //현재 이익
   const [prevInvest, setPrevInvest] = useState(0); // 이전 투자금액 -> profit 계산에 사용
 
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
@@ -44,6 +45,10 @@ const Virtual = () => {
   const [myturn, setMyturn] = useState(0); //현재까지 진행된 턴 계산
 
   const cookie = useCookies(['jwtCookie']);
+  const navigate = useNavigate(); //페이지 이동
+  const notLogin = () => {
+    navigate('/signin');
+  };
 
   //아래는 투자종목 다양화
   const [symbol, setSymbol] = useState(() => {
@@ -68,7 +73,6 @@ const Virtual = () => {
     const fetchData = async () => {
       try {
         const result = await getConvertData(symbol); // 데이터가 로딩될 때까지 대기
-        console.log('cccc> ', result);
         const resVol = await volumeArr;
         setData(result.slice(index, yearofDay));
         setVolume(resVol.slice(index, yearofDay));
@@ -150,10 +154,9 @@ const Virtual = () => {
   const [detailData, setDetailData] = useState({});
   const showDetailModal = async () => {
     setOpenDetailModal(true);
-
     // 모달 클릭 시 이벤트 -> axios 요청필요 -> apiService에서 가져오기 ('/virtual/record')
-    try {
-      if (cookie[0].jwtCookie) {
+    if (cookie[0].jwtCookie) {
+      try {
         const response = await showRecord();
         if (response) {
           const { profit, win, loss, profitArray } = response; //db 데이터 받아오기
@@ -166,9 +169,12 @@ const Virtual = () => {
           );
           setDetailData({ profit, win, loss, profitArray });
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      alert('로그인이 필요함');
+      notLogin();
     }
   };
 
@@ -205,7 +211,7 @@ const Virtual = () => {
         <div className="status-Box">
           <button onClick={showDetailModal} className="resetBtn">
             <p>
-              <span class="material-symbols-outlined"> 기록보기search</span>
+              <span className="material-symbols-outlined"> 기록보기search</span>
             </p>
           </button>
           {openDetailModal && (
@@ -255,8 +261,8 @@ const Virtual = () => {
             </div>
             <div className="nextBtnBox">
               <button className="next Btn" onClick={nextTurn}>
-                <p>
-                  다음<span class="material-symbols-outlined">skip_next</span>
+                <p style={{}}>
+                  <span className="material-symbols-outlined">skip_next</span>
                 </p>
 
                 <p>

@@ -8,7 +8,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   const account = useSelector((state) => state.account).toFixed(2); //잔고 (소수 둘째자리)
   const stock = useSelector((state) => state.stock); //보유주식 수
   const purchasePrice = useSelector((state) => state.purchasePrice); //보유주식 평단가
-  const [buyOrder, setBuyOrder] = useState(); // text로 입력 받은 주식 수
+  const [buyOrder, setBuyOrder] = useState(''); // text로 입력 받은 주식 수
   const dispatch = useDispatch();
 
   const cookie = useCookies(['jwtCookie']);
@@ -64,7 +64,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   // 퍼센트 범위 표시
   useEffect(() => {});
   const [range, setRange] = useState(50);
-  const [calPerVal, setCalPerVal] = useState();
+  const [calPerVal, setCalPerVal] = useState(0);
   const dataChange = (e) => {
     const perValue = e.target.value;
 

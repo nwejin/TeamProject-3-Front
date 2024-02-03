@@ -79,7 +79,7 @@ function ReplyComment({ data }: any) {
           <div
             className="commentInnerBox"
             key={post._id}
-            style={{ backgroundColor: '#eeeeee' }}
+            style={{ marginLeft: '10%' }}
           >
             {/* 유저 정보*/}
 
@@ -102,9 +102,9 @@ function ReplyComment({ data }: any) {
             <div className="statusBox">
               <div>
                 <span>
-                  <button>
+                  {/* <button>
                     <span className="material-symbols-outlined">favorite</span>
-                  </button>
+                  </button> */}
                 </span>
 
                 <span>

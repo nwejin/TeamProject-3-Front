@@ -13,7 +13,7 @@ body {
   position: relative;
   background-color: white;
 
-  img {
+  .main-logo {
     height: 28px;
     position: absolute;
     top: 50%;
@@ -46,34 +46,46 @@ body {
     text-align: center;
   }
   .Header-mypage-btn {
-    border-radius: 20px;
-    // border: 1px solid gray;
-    background-color: white;
-    border: 1px solid $color-gray-1;
-    width: 32px;
-    height: 32px;
-    top: 50%;
-    right: 15vw;
-    transform: translateY(-50%);
-    position: absolute;
-    line-height: 30px;
-    text-align: center;
-    cursor: pointer;
-
-    .material-symbols-rounded {
-      font-size: 26px;
-      vertical-align: middle;
-      color: white;
-      font-variation-settings: 'FILL' 1;
+    // border-radius: 20px;
+    // background-color: white;
+    // border: 1px solid $color-gray-1;
+    // width: 32px;
+    // height: 32px;
+    // top: 50%;
+    // right: 15vw;
+    // transform: translateY(-50%);
+    // position: absolute;
+    // line-height: 30px;
+    // text-align: center;
+    // cursor: pointer;
+    .mypage-profile {
+      border-radius: 20px;
+      background-color: white;
+      border: 1px solid $color-gray-1;
+      width: 36px;
+      height: 36px;
+      top: 50%;
+      right: 15vw;
+      transform: translateY(-50%);
+      position: absolute;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
     }
+    // .material-symbols-rounded {
+    //   font-size: 26px;
+    //   vertical-align: middle;
+    //   color: white;
+    //   font-variation-settings: 'FILL' 1;
+    // }
   }
   .Header-mypage {
-    border-radius: 5px;
-    background-color: #b3c9ff;
+    // border-radius: 5px;
+    background-color: white;
     // background-color: $color-white;
     width: 250px;
-    height: 120px;
-    top: 70%;
+    height: 150px;
+    top: 70px;
     right: 14.5vw;
     position: absolute;
     line-height: 30px;
@@ -82,14 +94,48 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    box-shadow: 1.5px 1.5px 1.5px 1.5px #afafafde;
+    .Header-nickname {
+      width: 230px;
+      margin: 0 auto;
+      background-color: #0056f31c;
+      color: $color-blue-1;
+      font-size: 14px;
+      padding: 0 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
     .logout-btn {
       margin: 0 auto;
       cursor: pointer;
       background-color: $color-white;
-      // border: 1px solid $color-gray-1;
+      border: 1px solid black;
       width: 90%;
     }
+    .Header-user {
+      font-size: 12px;
+      .Header-user-update {
+        color: gray;
+        display: inline-block;
+        cursor: pointer;
+      }
+      .Header-user-delete {
+        color: gray;
+        cursor: pointer;
+        display: inline-block;
+      }
+    }
   }
+}
+.help-box {
+  position: fixed;
+  z-index: 100;
+  bottom: 40px;
+  right: 110px;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  box-shadow: 1.5px 1.5px 1.5px 1.5px #afafafde;
 }
 .remote-btn {
   position: fixed;
@@ -106,6 +152,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     .material-symbols-rounded {
       font-variation-settings:

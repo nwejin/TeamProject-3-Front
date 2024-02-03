@@ -8,6 +8,7 @@ const Slider = ({ boardData, boardlist }: any) => {
         <Link
           to={`/community/${boardData[idx]._id}`}
           state={{ post: boardlist[idx] }}
+          key={board.id}
         >
           <div className="main-board" key={idx}>
             <img className="main-board-image" src={board.image} />

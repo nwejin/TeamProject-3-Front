@@ -8,6 +8,7 @@ export interface CommunityProp {
   title: string;
   userId: {
     user_nickname: string;
+    user_profile: string;
     _id: string;
   };
   _id: string;

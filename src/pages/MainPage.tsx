@@ -39,8 +39,8 @@ const MainPage = () => {
   const [translate, setTranslate] = useState(0);
 
   useEffect(() => {
-    console.log(newsData);
-    console.log(boardData);
+    // console.log(newsData);
+    // console.log(boardData);
   }, [newsData, boardData]);
 
   useEffect(() => {
@@ -67,12 +67,12 @@ const MainPage = () => {
         content: news.content,
         id: data._id,
       }));
-      console.log(updateNews);
+      // console.log(updateNews);
       // const newsArray = updateNews;
       // console.log(newsArray);
 
       setNewsData(updateNews);
-      console.log(newsData);
+      // console.log(newsData);
     } else {
       const newsArray = [
         {
@@ -90,21 +90,25 @@ const MainPage = () => {
     const response = await mainBoards();
     const data = response.board;
     setBoardlist(data);
-    console.log('hihihiddddddd', data);
+    // console.log('hihihiddddddd', data);
+    // console.log(dsata[0].userId.user_nickname);
     if (response.success) {
-      const updateBoard = data.map((boards: any) => ({
-        image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
-        title: boards.title,
-        content: boards.content,
-        writer: boards.userId.user_nickname + '님',
-        date: (boards.date as string).split('T')[0],
-        like: boards.like,
-        id: boards._id,
-      }));
+      const updateBoard = data.map((boards: any) => {
+        // console.log('boards:', boards);
+        return {
+          image: boards.image || process.env.PUBLIC_URL + 'board-default.png',
+          title: boards.title,
+          content: boards.content,
+          writer: boards.userId.user_nickname,
+          date: (boards.date as string).split('T')[0],
+          like: boards.like,
+          id: boards._id,
+        };
+      });
       // console.log(updateNews);
       // const boardArray = updateBoard;
       setBoardData(updateBoard);
-      console.log(boardData);
+      // console.log(boardData);
     } else {
       const boardArray = [
         {
@@ -151,7 +155,7 @@ const MainPage = () => {
             <img src={process.env.PUBLIC_URL + 'finance.jpg'} />
             <br />
             <Link to="/signin">
-              <button>개미운동 시작하기</button>
+              <button key="signin-button">개미운동 시작하기</button>
             </Link>
           </div>
           {newsData.length >= 2 && (
@@ -160,8 +164,9 @@ const MainPage = () => {
                 <Link
                   to={`/news/detail/${newslist[idx]._id}`}
                   state={{ data: newslist[idx] }}
+                  key={idx}
                 >
-                  <div className="main-news" key={news.id}>
+                  <div className="main-news" key={idx}>
                     <img className="main-news-thumbnail" src={news.thumbnail} />
                     <div className="main-news-text">
                       <div className="main-news-title">{news.title}</div>

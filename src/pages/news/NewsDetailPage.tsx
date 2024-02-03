@@ -329,6 +329,7 @@ const NewsDetailPage = () => {
             {wordsList.length > 0 ? highlightContent(data.content, wordsList, myHighlight) : data.content}
             {/* {content} */}
           </p>
+          <br />
           <p>출처 : {data.url}</p>
         </div>
 
