@@ -147,6 +147,9 @@ const MainPage = () => {
   // console.log('newsdata', newsData);
   return (
     <>
+      <div className="inner-wrapper">
+        <div style={{ height: '25vw', width: '100%' }}></div>
+      </div>
       <div className="outer-wrapper">
         <div className="inner-wrapper">
           <div className="section1">
@@ -191,9 +194,7 @@ const MainPage = () => {
           <div className="section3">
             <TrandingMiniWidget />
           </div>
-          <div className="section4">
-            <TrandingCryptoWidget />
-          </div>
+          <div className="section4">{/* <TrandingCryptoWidget /> */}</div>
         </div>
       </div>
       <div className="point-section">

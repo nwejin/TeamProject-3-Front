@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { adminGetPost } from '../../services/apiService';
+import { adminGetPost, deleteCommunity } from '../../services/apiService';
 import '../../styles/Admin.scss';
 
 const CommunityManage = () => {
@@ -39,6 +39,7 @@ const CommunityManage = () => {
   const paginate = (pageNumber: any) => {
     setPagination(pageNumber);
   };
+
   return (
     <>
       <div className="outer-wrapper">
@@ -52,28 +53,70 @@ const CommunityManage = () => {
           </Link>
         </ul>
         <div>
-          <h2>신고 게시글</h2>
           <div>
-            {currentPage.map((post: any) => {
+            {currentPage.map((post: any, index: number) => {
               console.log(post);
               const link = `/community/${post._id}`;
 
+              const utcDateString = post.date;
+              const utcDate = new Date(utcDateString);
+
+              const koreanTimeString1 = utcDate.toLocaleString('ko-KR', {
+                timeZone: 'Asia/Seoul',
+              });
+
+              const deleteContent = async () => {
+                try {
+                  if (window.confirm('삭제 후 복구가 불가능 합니다.')) {
+                    alert('삭제되었습니다.');
+                    const result = await deleteCommunity(post._id);
+                    console.log('글 삭제 성공', result);
+                    window.location.href = '/community';
+                  } else {
+                    alert('취소되었습니다.');
+                  }
+                } catch (error) {
+                  console.log(error);
+                }
+              };
+
               return (
-                <div className="adminUserBox">
-                  <Link to={link} state={{ post }}>
-                    <img src="" alt="" />
-                    <div key="" className="userBox">
-                      <div>
-                        <p>ID: {post.content} </p>
-                        <p>Email: </p>
+                <div className="adminCommunityBox">
+                  <div className="numBox">{index + 1}</div>
+                  <div key="" className="communityBox">
+                    <Link to={link} state={{ post }}>
+                      <div className="Box1">
+                        <p>
+                          <span>제목</span> {post.title}
+                        </p>
+                        <p>
+                          <span>내용</span>
+                          {post.content}{' '}
+                        </p>
                       </div>
-                      <div>
-                        <p>Nickname: </p>
+                      <div className="Box2">
+                        <p>
+                          <span>작성자</span>
+                          {post.userId.user_nickname}
+                        </p>
+                        <p>
+                          <span>작성시간</span>
+                          {koreanTimeString1}
+                        </p>
                       </div>
-                      <p></p>
-                      <button>삭제하기</button>
-                    </div>
-                  </Link>
+                      <div className="Box3">
+                        <p style={{ color: 'red' }}>
+                          <span>신고수</span>
+                          {post.reportedUser.length}
+                        </p>
+                        <p>
+                          <span>좋아요</span>
+                          {post.likedUser.length}
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                  <button onClick={deleteContent}>삭제하기</button>
                 </div>
               );
             })}

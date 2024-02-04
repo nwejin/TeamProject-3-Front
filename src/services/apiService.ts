@@ -776,3 +776,23 @@ export const adminGetPost = async () => {
     throw new Error('예상치 못한 오류가 발생했습니다! (관리자 페이지)');
   }
 };
+
+// 좋아요 가져오기 (파란색 효과)
+export const likeGet = async ({
+  postId,
+  userId,
+}: {
+  postId: any;
+  userId: any;
+}) => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/community/like',
+      { params: { postId, userId } }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (신고 가져오기)');
+  }
+};

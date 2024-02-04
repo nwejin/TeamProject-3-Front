@@ -1,7 +1,8 @@
 import '../../styles/Community.scss';
 import React, { useState, useEffect } from 'react';
-import { getCommunityRank } from '../../services/apiService';
+import { getCommunityRank, userInfo } from '../../services/apiService';
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 function PostRankList() {
   const [posts, setPosts] = useState([]);
@@ -20,9 +21,35 @@ function PostRankList() {
     fetchData();
   }, []);
 
+  const [jwtCookie] = useCookies(['jwtCookie']);
+
+  const [user, setuser] = useState('');
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const tokenId = jwtCookie['jwtCookie'];
+        const response = await userInfo({ id: tokenId });
+        setuser(response.info._id); // user
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, []);
+
   return (
     <>
       {posts.map((post: any) => {
+        console.log('랭크', post.likedUser);
+
+        let BtnStyle;
+        if (post.likedUser.includes(user)) {
+          BtnStyle = true;
+        } else {
+          BtnStyle = false;
+        }
+
         const formatTimeDifference = (dateString: any) => {
           // 분계산
           const postDate = new Date(dateString);
@@ -82,8 +109,16 @@ function PostRankList() {
                 </div>
               </div>
               <div className="listComment">
-                <span className="material-symbols-outlined">favorite</span>
-                <span>{post.like}</span>
+                <span
+                  className={
+                    BtnStyle
+                      ? 'material-symbols-outlined likeClick'
+                      : 'material-symbols-outlined'
+                  }
+                >
+                  favorite
+                </span>
+                <span>{post.likedUser.length}</span>
               </div>
             </Link>
           </li>
