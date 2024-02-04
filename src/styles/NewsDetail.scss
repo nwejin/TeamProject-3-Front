@@ -66,32 +66,31 @@
           color: $color-blue-1;
         }
       }
-      .detailDate {
-        color: grey;
-      }
-      .detailContent {
-        line-height: 1.8;
-        // margin-top: 30px;
-        white-space: pre-line;
-      }
-      .detailImg {
-        width: 100%;
-        height: 28vw;
-      }
-      .detailSrc {
-        
-      }
+      
+    }
+
+    .detailDate {
+      color: grey;
+    }
+    .detailContent {
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+    .detailImg {
+      width: 100%;
+      // height: 28vw;
+    }
+    .highlight {
+      background-color: $color-blue-2;
+      cursor: pointer;
+    }
+    .myHighlight {
+      background-color: lemonchiffon;
+      cursor: pointer;
     }
   }
 
-  .highlight {
-    background-color: $color-blue-2;
-    cursor: pointer;
-  }
-  .myHighlight {
-    background-color: lemonchiffon;
-    cursor: pointer;
-  }
+
 }
 
 .wordModal {
@@ -131,9 +130,3 @@
 //   'GRAD' 0,
 //   'opsz' 24
 // }
-
-.delete {
-  position: absolute;
-  background-color: white;
-  border: 1px solid $color-gray;
-}
