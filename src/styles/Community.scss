@@ -504,6 +504,12 @@ button {
           outline: 0;
           background: none;
         }
+        button:hover {
+          border: 1px solid $color-blue-1;
+        }
+        button span:hover {
+          color: $color-blue-1;
+        }
       }
       .report {
         width: auto;
@@ -512,7 +518,7 @@ button {
   }
 }
 .undo {
-  color: $color-black;
+  color: $color-gray-2;
   position: absolute;
   top: 1%;
   left: 2%;

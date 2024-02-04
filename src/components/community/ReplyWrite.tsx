@@ -63,7 +63,16 @@ function ReplyWrite({ data }: { data: any }) {
         <div className="userProfile">
           <span>
             <a href="/">
-              <img src={userProfile} alt="" />
+              <img
+                src={userProfile}
+                alt=""
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  marginTop: 0,
+                  marginLeft: 0,
+                }}
+              />
 
               <p style={{ fontWeight: '700' }}>
                 {userNickname}

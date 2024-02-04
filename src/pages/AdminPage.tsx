@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { adminGetUser, deleteKakao, deleteUser } from '../services/apiService';
 import { useNavigate } from 'react-router';
+import { useCookies } from 'react-cookie';
 import '../styles/Admin.scss';
 
 interface User {
@@ -18,49 +19,11 @@ interface User {
 }
 
 const AdminPage = () => {
-  //   const [isKakao, setisKakao, removeisKakao] = useCookies(['isKakao']);
-  // const deleteUserInfo = async (event: any) => {
-  //   try {
-  //     event.preventDefault();
-
-  //     if (isKakao['isKakao']) {
-  //       if (window.confirm('탈퇴하시겠습니까?')) {
-  //         const response = await deleteKakao(kakaoToken['kakaoToken']);
-  //         const response2 = await deleteUser(myId);
-  //         if (response2.success && response.success) {
-  //           alert('회원정보 삭제 성공!');
-  //           removejwtCookie('jwtCookie');
-  //           removeisKakao('isKakao');
-  //           removekakaoToken('kakaoToken');
-  //           console.log('회원정보 삭제 성공:', response, response2);
-  //           navigate('/');
-  //         } else {
-  //           console.error('회원정보 삭제 실패:', response, response2);
-  //         }
-  //       } else {
-  //         return;
-  //       }
-  //     } else {
-  //         if (window.confirm('탈퇴하시겠습니까?')) {
-  //           const response = await deleteUser(myId);
-  //           if (response.success) {
-  //             console.log('회원정보 삭제 성공:', response);
-  //             alert('회원정보 삭제 성공!');
-  //             removejwtCookie('jwtCookie');
-  //             removeisKakao('isKakao');
-  //             navigate('/admin');
-  //           } else {
-  //             console.error('회원정보 삭제 실패:', response);
-  //           }
-  //         } else {
-  //           return;
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('회원정보 삭제 실패:', error);
-  //   }
-  // };
+  const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
+  const [kakaoToken, setkakaoToken, removekakaoToken] = useCookies([
+    'kakaoToken',
+  ]);
+  const [isKakao, setisKakao, removeisKakao] = useCookies(['isKakao']);
 
   const [posts, setPosts] = useState<User[]>([]);
   // db에서 데이터 불러오기위해 useState
@@ -115,6 +78,33 @@ const AdminPage = () => {
             {currentPage.map((user) => {
               console.log(user);
 
+              const deleteUserInfo = async (event: any) => {
+                try {
+                  event.preventDefault();
+
+                  if (window.confirm('탈퇴하시겠습니까?')) {
+                    if (kakaoToken['kakaoToken']) {
+                      await deleteKakao(kakaoToken['kakaoToken']);
+                      removekakaoToken('kakaoToken');
+                    }
+                    const response = await deleteUser(user.user_id);
+                    if (response.success) {
+                      alert('회원정보 삭제 성공');
+                      removejwtCookie('jwtCookie');
+                      removeisKakao('isKakao');
+                      console.log('회원정보 삭제 성공');
+                      window.location.href = '/admin';
+                    } else {
+                      console.error('회원정보 삭제 실패');
+                    }
+                  } else {
+                    return;
+                  }
+                } catch (error) {
+                  console.error('회원정보 삭제 실패:', error);
+                }
+              };
+
               return (
                 <div className="adminUserBox">
                   <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
@@ -147,7 +137,7 @@ const AdminPage = () => {
                       </p>
                     </div>
                   </div>
-                  <button>삭제하기</button>
+                  <button onClick={deleteUserInfo}>삭제하기</button>
                 </div>
               );
             })}
