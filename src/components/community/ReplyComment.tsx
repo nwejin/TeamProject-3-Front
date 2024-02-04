@@ -79,39 +79,35 @@ function ReplyComment({ data }: any) {
           <div
             className="commentInnerBox"
             key={post._id}
-            style={{ marginLeft: '10%' }}
+            style={{
+              width: '100%',
+              backgroundColor: '#eeeeee',
+              position: 'relative',
+            }}
           >
             {/* 유저 정보*/}
-
-            <div className="userProfile">
-              <div className="profile">
-                <span>
-                  <img src={post.userId.user_profile} alt="" />
-                </span>
-                <p style={{ marginRight: '5px' }}>
-                  {post.userId.user_nickname}
-                </p>
-                <span style={{ fontSize: '10px' }}>•</span>
-                <span>{formatTimeDifference(post.date)}</span>
+            <span className="material-symbols-outlined undo">
+              prompt_suggestion
+            </span>
+            <div style={{ marginLeft: '5%' }}>
+              <div className="userProfile">
+                <div className="profile">
+                  <span>
+                    <img src={post.userId.user_profile} alt="" />
+                  </span>
+                  <p style={{ marginRight: '5px' }}>
+                    {post.userId.user_nickname}
+                  </p>
+                  <span style={{ fontSize: '10px' }}>•</span>
+                  <span>{formatTimeDifference(post.date)}</span>
+                </div>
               </div>
-            </div>
-            {/* 댓글 내용 */}
-            <div className="commentText">
-              <p className="text">{post.content}</p>
-            </div>
-            <div className="statusBox">
-              <div>
-                <span>
-                  {/* <button>
-                    <span className="material-symbols-outlined">favorite</span>
-                  </button> */}
-                </span>
-
-                <span>
-                  {/* <button onClick={() => showModal(post._id)}>
-                    <span>댓글 달기</span>
-                  </button> */}
-                </span>
+              {/* 댓글 내용 */}
+              <div className="commentText">
+                <p className="text">{post.content}</p>
+              </div>
+              <div className="statusBox">
+                <div></div>
               </div>
             </div>
             {openReply === post._id && <ReplyWrite data={data} />}

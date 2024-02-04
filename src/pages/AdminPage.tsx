@@ -11,6 +11,9 @@ interface User {
   user_email: string;
   isKakao: any;
   user_profile: string;
+  news_bookmark: any;
+  word_bookmark: any;
+
   // Add other properties based on your user schema
 }
 
@@ -108,25 +111,43 @@ const AdminPage = () => {
           </Link>
         </ul>
         <div className="getAllUser">
-          <h2>유저 정보</h2>
           <div>
             {currentPage.map((user) => {
               console.log(user);
 
               return (
                 <div className="adminUserBox">
+                  <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
                   <img src={user.user_profile} alt="" />
                   <div key={user._id} className="userBox">
-                    <div>
-                      <p>ID: {user.user_id}</p>
-                      <p>Email: {user.user_email}</p>
+                    <div className="userBox1">
+                      <p>
+                        <span>ID</span>
+                        {user.user_id}
+                      </p>
+                      <p>
+                        <span>Nickname</span>
+                        {user.user_nickname}
+                      </p>
                     </div>
-                    <div>
-                      <p>Nickname: {user.user_nickname}</p>
+                    <div className="userBox2">
+                      <p>
+                        <span>Eamil</span>
+                        {user.user_email}
+                      </p>
                     </div>
-                    <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
-                    <button>삭제하기</button>
+                    <div className="userBox2">
+                      <p>
+                        <span>뉴스 북마크</span>
+                        {user.news_bookmark.length}
+                      </p>
+                      <p>
+                        <span>단어장 북마크</span>
+                        {user.word_bookmark.length}
+                      </p>
+                    </div>
                   </div>
+                  <button>삭제하기</button>
                 </div>
               );
             })}

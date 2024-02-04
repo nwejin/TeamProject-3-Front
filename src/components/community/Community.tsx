@@ -6,6 +6,7 @@ import {
   getComment,
   getReply,
   userInfo,
+  likeGet,
 } from '../../services/apiService';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
@@ -49,8 +50,6 @@ function Community() {
     setPagination(pageNumber);
   };
 
-  const [isActive, setIsActive] = useState(false);
-
   const cookie = useCookies(['jwtCookie']);
 
   const fetchDataForPost = async (post: any) => {
@@ -83,13 +82,44 @@ function Community() {
     }
   };
 
+  const [jwtCookie] = useCookies(['jwtCookie']);
+
+  const [user, setuser] = useState('');
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const tokenId = jwtCookie['jwtCookie'];
+        const response = await userInfo({ id: tokenId });
+        setuser(response.info._id); // user
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, []);
+
   return (
     <>
       {/* 콘텐츠 박스*/}
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
-        console.log(post._id);
+
+        console.log(post.likedUser); // 좋아요 누른 사람
+        // console.log(post._id); // 게시글 아이디
+
+        console.log(user);
+
         renderPost(post);
+
+        let BtnStyle;
+        if (post.likedUser.includes(user)) {
+          BtnStyle = true;
+        } else {
+          BtnStyle = false;
+        }
+
+        console.log(BtnStyle);
 
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
@@ -163,9 +193,10 @@ function Community() {
                 const res = await userInfo({ id: cookie[0].jwtCookie }); //지금 로그인한 아이디 오브젝트
 
                 // post에서 하나씩 글 가져와서 likedUser 배열 안에 res가 있다면 좋아요를 누른 하트를 출력해야함
+
                 posts.map((item) => {
                   if (item.likedUser.includes(res.info._id)) {
-                    console.log('include', item); //여기 부분 파란하트로 채워주세요
+                    console.log('include', item);
                   }
                 });
 
@@ -223,7 +254,11 @@ function Community() {
                 <div>
                   <span>
                     {/* 이 버튼이 눌리면 DB Like에 1씩 증가 */}
-                    <button onClick={() => plusLike(post._id)}>
+                    <button
+                      onClick={() => plusLike(post._id)}
+                      className={BtnStyle ? 'likeClick' : ''}
+                      style={{ border: 'none' }}
+                    >
                       <span className="material-symbols-outlined">
                         favorite
                       </span>
@@ -232,7 +267,7 @@ function Community() {
                   </span>
 
                   <span>
-                    <button>
+                    <button style={{ border: 'none' }}>
                       <span className="material-symbols-outlined">
                         maps_ugc
                       </span>
