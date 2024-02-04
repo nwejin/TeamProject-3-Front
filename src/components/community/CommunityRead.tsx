@@ -23,7 +23,7 @@ import { report } from 'process';
 function CommunityRead() {
   const location = useLocation();
   const postData = location.state.post;
-  console.log(postData);
+  // console.log(postData);
   const [disabledAttr, setdisabledAttr] = useState({ display: 'none' });
   const [jwtCookie] = useCookies(['jwtCookie']);
 

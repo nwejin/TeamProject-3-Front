@@ -105,7 +105,7 @@ const MainPage = () => {
           content: boards.content,
           writer: boards.userId.user_nickname,
           date: (boards.date as string).split('T')[0],
-          like: boards.like,
+          like: boards.likedUser.length,
           id: boards._id,
         };
       });

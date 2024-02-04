@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { userInfo } from './services/apiService';
+
 import './styles/Component.scss';
 import './styles/Header.scss';
 import './styles/Signin.scss';
@@ -99,6 +102,41 @@ function App() {
     }
   };
 
+  const [jwtCookie] = useCookies(['jwtCookie']);
+
+  const [user, setuser] = useState('');
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const tokenId = jwtCookie['jwtCookie'];
+        const response = await userInfo({ id: tokenId });
+        setuser(response.info._id); // user
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, []);
+
+  console.log(user);
+
+  // admin 로그인 시에만 admin페이지가 나오게
+  const [isAdmin, setIsAdmin] = useState<Boolean>(false);
+  useEffect(() => {
+    const checkAdmin = () => {
+      try {
+        setIsAdmin(user === '65bf6b7cec13aa6787e6819a');
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    checkAdmin();
+    console.log(isAdmin);
+  }, [user]);
+
+  console.log(isAdmin);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -134,8 +172,17 @@ function App() {
           {/* 500 서버 에러 페이지 */}
           {errorNum === 500 && <Route path="*" element={<ServerError />} />}
 
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/admin/communityManage" element={<CommunityManage />} />
+          {isAdmin ? (
+            <>
+              <Route path="/admin" element={<AdminPage />} />
+              <Route
+                path="/admin/communityManage"
+                element={<CommunityManage />}
+              />
+            </>
+          ) : (
+            <Route path="*" element={<NotFound />} />
+          )}
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>

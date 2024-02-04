@@ -81,8 +81,9 @@ function ReplyComment({ data }: any) {
             key={post._id}
             style={{
               width: '100%',
-              backgroundColor: '#eeeeee',
+              backgroundColor: '#f0f3fa',
               position: 'relative',
+              borderTop: '1px solid #d9dadb',
             }}
           >
             {/* 유저 정보*/}

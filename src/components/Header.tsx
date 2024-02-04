@@ -147,6 +147,21 @@ const Header = () => {
     }
   };
 
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const checkAdmin = () => {
+      try {
+        setIsAdmin(userInfos.userId === 'admin');
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    checkAdmin();
+    console.log(isAdmin);
+  }, [userInfos.userId]);
+
+  console.log(isAdmin);
 
   return (
     <>
@@ -169,6 +184,13 @@ const Header = () => {
           <li>
             <Link to="/community">개미의 시선</Link>
           </li>
+          {isAdmin ? (
+            <li>
+              <Link to="/admin">관리자 페이지</Link>
+            </li>
+          ) : (
+            ''
+          )}
         </ul>
         {isLogin === true && (
           <>
