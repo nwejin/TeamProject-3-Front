@@ -320,7 +320,7 @@ const NewsDetailPage = () => {
           <h1>{data.title}</h1>
           <p className="detailDate">{data.date}</p>
 
-          <img className="detailImg" src={data.bigimg ? data.bigimg : ''} />
+          <img className="detailImg" src={data.bigimg || ''} />
           <h3>{data.subtitle}</h3>
 
           <p className="detailContent" onMouseUp={dragText}>

@@ -45,17 +45,15 @@ article {
         .dataImgCover {
             width: 220px;
             height: 150px;
-            // border: 1px solid $color-gray;
 
             .dataImg {
                 width: inherit ;
                 height: inherit ;
-                // border: 1px solid $color-gray;
+
             }
         }
 
         .dataTxt {
-            // width: 500px;
             white-space: nowrap;
             overflow: hidden;
             // text-overflow: ellipsis;
