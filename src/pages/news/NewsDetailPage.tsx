@@ -23,7 +23,7 @@ const NewsDetailPage = () => {
 
   const [isDraggable, setIsDraggable] = useState<boolean>(false);
   const [myHighlight, setMyHighlight] = useState<string[]>([]);
-  const [highlightTxt, setHighlightTxt] = useState<string>();
+  // const [highlightTxt, setHighlightTxt] = useState<string>();
 
   const navigate = useNavigate();
 
@@ -59,12 +59,11 @@ const NewsDetailPage = () => {
             }
           );
           const available = res.data.available;
-          console.log(available)
+          console.log(available);
           if (available) {
             setMyHighlight(res.data.highlight.word);
           }
-          // console.log(res.data.highlight.word);
-          // setMyHighlight(res.data.highlight.word);
+          console.log(res.data);
         }
       } catch (error) {
         console.error(error);
@@ -246,7 +245,7 @@ const NewsDetailPage = () => {
     } else {
       setIsDraggable(!isDraggable);
     }
-    setIsDraggable(!isDraggable);
+    // setIsDraggable(!isDraggable);
   };
 
   // 드래그 : 직접 형광펜 기능
@@ -321,7 +320,7 @@ const NewsDetailPage = () => {
           <h1>{data.title}</h1>
           <p className="detailDate">{data.date}</p>
 
-          <img className="detailImg" src={data.bigimg} alt={data.title} />
+          <img className="detailImg" src={data.bigimg || ''} />
           <h3>{data.subtitle}</h3>
 
           <p className="detailContent" onMouseUp={dragText}>
@@ -331,7 +330,7 @@ const NewsDetailPage = () => {
             {/* {content} */}
           </p>
           <br />
-          <p className='detailSrc'>출처 : {data.url}</p>
+          <div className="detailSrc">출처 : {data.url}</div>
           <br />
         </div>
 
