@@ -95,7 +95,7 @@ const StockGuidePage = () => {
                   className="market-price"
                   onClick={() => handleClick('stock Price')}
                 >
-                  74,100
+                  73,900
                 </div>
                 <div
                   className="daily-change"
