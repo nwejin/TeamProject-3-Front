@@ -19,6 +19,7 @@ const MyPage = () => {
   const navigate = useNavigate();
   const [myId, setMyId] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
+
   const [formData, setFormData] = React.useState({
     user_id: '',
     user_password: '',
@@ -27,6 +28,24 @@ const MyPage = () => {
     user_email: '',
     user_profile: '',
   });
+
+  const signupValidate = (inputType: string) => {
+    if (inputType === 'pw') {
+      if (formData.user_changepw.length < 8) {
+        return false;
+      }
+    }
+    if (inputType === 'nickname') {
+      if (formData.user_nickname.length < 4) {
+        return false;
+      }
+    }
+    if (inputType === 'email') {
+      if (!formData.user_email.includes('@')) {
+        return false;
+      }
+    }
+  };
 
   useEffect(() => {
     const tokenId = jwtCookie['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
@@ -72,7 +91,7 @@ const MyPage = () => {
       event.preventDefault();
       const response = await myPwChecker(formData, myId);
       // console.log(response);
-      const pwCheckBox = document.querySelector('.pwCheckBox');
+      const pwCheckBox = document.querySelector('.pwReCheckBox');
       if (response.success === true) {
         pwCheckBox?.classList.add('blue');
         pwCheckBox?.classList.remove('red');
@@ -95,6 +114,32 @@ const MyPage = () => {
     }
   };
 
+  // 변경할 비밀번호 유효성 검사
+  const [pwValiCheck, setValiPwCheck] = useState('');
+  const pwasswordValiCheck = async (event: any) => {
+    try {
+      event.preventDefault();
+      const pwCheckbox = document.querySelector('.pwCheckBox');
+
+      if (formData.user_changepw === '') {
+        pwCheckbox?.classList.remove('red');
+        pwCheckbox?.classList.remove('blue');
+        return setValiPwCheck('');
+      } else if (signupValidate('pw') === false) {
+        pwCheckbox?.classList.add('red');
+        pwCheckbox?.classList.remove('blue');
+        return setValiPwCheck(`ⓘ 비밀번호는 최소 8자리 이상입니다.`);
+      } else {
+        pwCheckbox?.classList.add('blue');
+        pwCheckbox?.classList.remove('red');
+        return setValiPwCheck('ⓘ 사용가능한 비밀번호입니다.');
+      }
+    } catch (error: any) {
+      // 에러 처리
+      console.error('아이디 유효성 검사 실패:', error.message);
+    }
+  };
+
   // 닉네임 중복 확인
   const [nicknameCheckString, setNicknameCheckString] = useState('');
   const [nicknameCheckState, setNicknameCheckState] = useState(true);
@@ -106,18 +151,23 @@ const MyPage = () => {
       // console.log(response);
       const nicknameCheckBox = document.querySelector('.nicknameCheckBox');
 
-      if (response.success) {
-        setNicknameCheckState(true);
-        nicknameCheckBox?.classList.add('blue');
+      if (formData.user_nickname.trim() === '') {
         nicknameCheckBox?.classList.remove('red');
-        return setNicknameCheckString(`ⓘ ${response.message}`);
-      } else if (response.success === false) {
-        setNicknameCheckState(false);
+        nicknameCheckBox?.classList.remove('blue');
+        return setNicknameCheckString('');
+      } else if (signupValidate('nickname') === false) {
         nicknameCheckBox?.classList.add('red');
         nicknameCheckBox?.classList.remove('blue');
-        return setNicknameCheckString(`ⓘ ${response.message}`);
+        return setNicknameCheckString(`ⓘ 닉네임은 최소 4자리 이상입니다.`);
+      } else if (response.success && !signupValidate('nickname') === true) {
+        nicknameCheckBox?.classList.add('blue');
+        nicknameCheckBox?.classList.remove('red');
+        return setNicknameCheckString(`ⓘ 사용가능한 닉네임입니다.`);
+      } else if (response.success === false) {
+        nicknameCheckBox?.classList.add('red');
+        nicknameCheckBox?.classList.remove('blue');
+        return setNicknameCheckString(`ⓘ 현재 사용 중인 닉네임입니다.`);
       } else {
-        setNicknameCheckState(false);
         nicknameCheckBox?.classList.remove('red');
         nicknameCheckBox?.classList.remove('blue');
         return setNicknameCheckString('');
@@ -125,6 +175,33 @@ const MyPage = () => {
     } catch (error: any) {
       // 에러 처리
       console.error('닉네임 유효성 검사 실패:', error.message);
+    }
+  };
+
+  // 이메일 유효성 검사
+  const emailRef = useRef<HTMLInputElement>(null);
+  const [emailCheck, setEmailCheck] = useState('');
+  const emailReCheck = async (event: any) => {
+    try {
+      event.preventDefault();
+      const emailBox = document.querySelector('.emailCheckBox');
+
+      if (formData.user_email === '') {
+        emailBox?.classList.remove('red');
+        emailBox?.classList.remove('blue');
+        return setEmailCheck('');
+      } else if (signupValidate('email') === false) {
+        emailBox?.classList.add('red');
+        emailBox?.classList.remove('blue');
+        return setEmailCheck(`ⓘ 이메일은 @를 포함해야 합니다.`);
+      } else {
+        emailBox?.classList.remove('red');
+        emailBox?.classList.add('blue');
+        return setEmailCheck('ⓘ 사용가능한 비밀번호입니다.');
+      }
+    } catch (error: any) {
+      // 에러 처리
+      console.error('아이디 유효성 검사 실패:', error.message);
     }
   };
 
@@ -200,52 +277,6 @@ const MyPage = () => {
       console.error('회원정보 수정 실패:', error);
     }
   };
-  // const deleteUserInfo = async (event: any) => {
-  //   try {
-  //     event.preventDefault();
-
-  //     if (isKakao['isKakao']) {
-  //       if (window.confirm('탈퇴하시겠습니까?')) {
-  //         const response = await deleteKakao(kakaoToken['kakaoToken']);
-  //         const response2 = await deleteUser(myId);
-  //         if (response2.success && response.success) {
-  //           alert('회원정보 삭제 성공!');
-  //           removejwtCookie('jwtCookie');
-  //           removeisKakao('isKakao');
-  //           removekakaoToken('kakaoToken');
-  //           console.log('회원정보 삭제 성공:', response, response2);
-  //           window.location.href = '/';
-  //         } else {
-  //           console.error('회원정보 삭제 실패:', response, response2);
-  //         }
-  //       } else {
-  //         return;
-  //       }
-  //     } else {
-  //       if (!pwCheckState) {
-  //         alert('비밀번호를 확인해주세요');
-  //       } else {
-  //         if (window.confirm('탈퇴하시겠습니까?')) {
-  //           console.log(myId);
-  //           const response = await deleteUser(myId);
-  //           if (response.success) {
-  //             console.log('회원정보 삭제 성공:', response);
-  //             alert('회원정보 삭제 성공!');
-  //             removejwtCookie('jwtCookie');
-  //             removeisKakao('isKakao');
-  //             window.location.href = '/';
-  //           } else {
-  //             console.error('회원정보 삭제 실패:', response);
-  //           }
-  //         } else {
-  //           return;
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('회원정보 삭제 실패:', error);
-  //   }
-  // };
 
   return (
     <>
@@ -306,7 +337,7 @@ const MyPage = () => {
                 disabled={isDisabled}
               />
             </div>
-            <div className="pwCheckBox">{pwCheckString}</div>
+            <div className="pwReCheckBox">{pwCheckString}</div>
             <div>
               <div className="input-label">변경 비밀번호</div>
               <input
@@ -315,10 +346,12 @@ const MyPage = () => {
                 name="user_changepw"
                 placeholder="변경 비밀번호"
                 className="input-box"
+                onKeyUp={pwasswordValiCheck}
                 onChange={handleInputChange}
                 disabled={isDisabled}
               />
             </div>
+            <div className="pwCheckBox">{pwValiCheck}</div>
 
             <div className="input-label">닉네임</div>
             <input
@@ -339,9 +372,11 @@ const MyPage = () => {
               placeholder="이메일"
               className="input-box"
               value={formData.user_email}
+              onKeyUp={emailReCheck}
               onChange={handleInputChange}
+              ref={emailRef}
             />
-            <br />
+            <div className="emailCheckBox">{emailCheck}</div>
             <div style={{ width: '100%' }}>
               <button className="resetBtn" onClick={modifyUserInfo}>
                 취소

@@ -59,7 +59,7 @@ const NewsDetailPage = () => {
             }
           );
           const available = res.data.available;
-          console.log(available)
+          console.log(available);
           if (available) {
             setMyHighlight(res.data.highlight.word);
           }
@@ -331,7 +331,7 @@ const NewsDetailPage = () => {
             {/* {content} */}
           </p>
           <br />
-          <p className='detailSrc'>출처 : {data.url}</p>
+          <div className="detailSrc">출처 : {data.url}</div>
           <br />
         </div>
 
