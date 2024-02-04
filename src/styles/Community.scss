@@ -144,7 +144,6 @@ button {
       align-items: center;
       width: 150px;
       button {
-        border: 0;
         outline: 0;
         background: none;
         span {
@@ -390,6 +389,7 @@ button {
         color: $color-red-1;
       }
     }
+
     .report button.clicked p,
     .report button.clicked span {
       color: $color-red-1;
@@ -406,6 +406,20 @@ button {
       width: 30%;
     }
   }
+}
+
+.likeBtn {
+  span:hover {
+    color: $color-blue-1;
+  }
+}
+.likeClick p,
+.likeClick span {
+  color: $color-blue-1;
+}
+
+.likeClick {
+  color: $color-blue-1;
 }
 
 .countComment {
@@ -452,10 +466,11 @@ button {
         align-items: center;
       }
       img {
-        width: auto;
+        width: 20px;
         height: 20px;
         border-radius: 50%;
         margin-right: 6px;
+        margin-top: 15%;
       }
       span {
         margin-right: 2px;
@@ -470,10 +485,12 @@ button {
       margin-top: 0.5rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       height: 30px;
+      // background-color: pink;
       span {
-        font-size: 16px;
+        font-size: 14px;
+        color: $color-gray-2;
       }
       div {
         display: flex;
@@ -481,7 +498,9 @@ button {
         align-items: center;
         width: 120px;
         button {
-          border: 0;
+          border: 1px solid $color-gray-1;
+          padding: 0.25rem 0.5rem;
+          border-radius: 5px;
           outline: 0;
           background: none;
         }
@@ -491,6 +510,12 @@ button {
       }
     }
   }
+}
+.undo {
+  color: $color-black;
+  position: absolute;
+  top: 1%;
+  left: 2%;
 }
 
 .commentWriteBox {
