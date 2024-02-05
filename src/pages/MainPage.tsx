@@ -6,6 +6,7 @@ import TrandingCryptoWidget from '../components/stockGuide/TrandingCryptoWidget'
 import { Link } from 'react-router-dom';
 import { NewsProp } from '../types/NewsProp';
 import { CommunityProp } from '../types/CommunityProp';
+import { useCookies } from 'react-cookie';
 
 const MainPage = () => {
   const [newsData, setNewsData] = React.useState([
@@ -16,6 +17,17 @@ const MainPage = () => {
       id: '',
     },
   ]);
+  const [isLogin, setIsLogin] = useState(false);
+  const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
+  useEffect(() => {
+    const tokenId = jwtCookie['jwtCookie'];
+    console.log(tokenId);
+    if (!tokenId) {
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+  }, []);
   const [boardData, setBoardData] = React.useState([
     {
       image: '',
@@ -178,9 +190,16 @@ const MainPage = () => {
             </div>
             <img src={process.env.PUBLIC_URL + 'finance.jpg'} />
             <br />
-            <Link to="/signin">
-              <button key="signin-button">개미운동 시작하기</button>
-            </Link>
+            {!isLogin && (
+              <Link to="/signin">
+                <button key="signin-button">개미운동 시작하기</button>
+              </Link>
+            )}
+            {isLogin && (
+              <Link to="/stockGuide">
+                <button key="signin-button">개미운동 시작하기</button>
+              </Link>
+            )}
           </div>
           {newsData.length >= 2 && (
             <div className="section2">

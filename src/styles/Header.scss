@@ -80,17 +80,16 @@ body {
     // }
   }
   .Header-mypage {
-    // border-radius: 5px;
     background-color: white;
-    // background-color: $color-white;
-    width: 250px;
-    height: 150px;
+    width: fit-content;
+    height: fit-content;
     top: 70px;
     right: 14.5vw;
     position: absolute;
     line-height: 30px;
     text-align: center;
     z-index: 100;
+    padding: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
