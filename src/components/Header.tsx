@@ -159,7 +159,7 @@ const Header = () => {
     };
     checkAdmin();
     console.log(isAdmin);
-  }, [userInfos.userId]);
+  }, [userInfos.userId, isAdmin]);
 
   console.log(isAdmin);
 
