@@ -80,7 +80,9 @@ function ReplyWrite({ data }: { data: any }) {
               </p>
             </a>
           </span>
-          <button onClick={uploadComment}>입력하기</button>
+          <button onClick={uploadComment}>
+            <span>입력하기</span>
+          </button>
         </div>
 
         <textarea

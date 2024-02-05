@@ -13,7 +13,9 @@ function PostRankList() {
     const fetchData = async () => {
       try {
         const rank = await getCommunityRank();
-        setPosts(rank);
+        rank.sort((a: any, b: any) => b.likedUser.length - a.likedUser.length);
+        const top5Posts = rank.slice(0, 5);
+        setPosts(top5Posts);
       } catch (error) {
         console.error(error);
       }
@@ -41,7 +43,7 @@ function PostRankList() {
   return (
     <>
       {posts.map((post: any) => {
-        console.log('랭크', post.likedUser);
+        console.log('랭크', post.likedUser.length);
 
         let BtnStyle;
         if (post.likedUser.includes(user)) {

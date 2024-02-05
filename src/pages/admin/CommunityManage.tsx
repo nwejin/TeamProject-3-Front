@@ -53,6 +53,32 @@ const CommunityManage = () => {
           </Link>
         </ul>
         <div>
+          <div className="heading">
+            <div className="cell">
+              <p>번호</p>
+            </div>
+            <div className="cell">
+              <p>제목</p>
+            </div>
+            <div className="cell">
+              <p>내용</p>
+            </div>
+            <div className="cell">
+              <p>작성자</p>
+            </div>
+            <div className="cell">
+              <p>작성시간</p>
+            </div>
+            <div className="cell">
+              <p>좋아요</p>
+            </div>
+            <div className="cell">
+              <p>신고수</p>
+            </div>
+            <div className="cell">
+              <p></p>
+            </div>
+          </div>
           <div>
             {currentPage.map((post: any, index: number) => {
               console.log(post);
@@ -81,43 +107,35 @@ const CommunityManage = () => {
               };
 
               return (
-                <div className="adminCommunityBox">
-                  <div className="numBox">{index + 1}</div>
-                  <div key="" className="communityBox">
-                    <Link to={link} state={{ post }}>
-                      <div className="Box1">
-                        <p>
-                          <span>제목</span>{' '}
-                          <span className="reportText">{post.title}</span>
-                        </p>
-                        <p>
-                          <span>내용</span>
-                          <span className="reportText">{post.content}</span>
-                        </p>
-                      </div>
-                      <div className="Box2">
-                        <p>
-                          <span>작성자</span>
-                          {post.userId.user_nickname}
-                        </p>
-                        <p style={{ fontSize: '12px' }}>
-                          <span>작성시간</span>
-                          {koreanTimeString1}
-                        </p>
-                      </div>
-                      <div className="Box3">
-                        <p style={{ color: 'red' }}>
-                          <span>신고수</span>
-                          {post.reportedUser.length}
-                        </p>
-                        <p>
-                          <span>좋아요</span>
-                          {post.likedUser.length}
-                        </p>
-                      </div>
-                    </Link>
-                  </div>
-                  <button onClick={deleteContent}>삭제하기</button>
+                <div className="adminUserBox">
+                  <Link to={link} state={{ post }}>
+                    <div className="cell">
+                      <p>{index + 1}</p>
+                    </div>
+                    <div className="cell postText">
+                      <p>{post.title}</p>
+                    </div>
+                    <div className="cell postText">
+                      <p> {post.content}</p>
+                    </div>
+                    <div className="cell">
+                      <p> {post.userId.user_nickname}</p>
+                    </div>
+                    <div className="cell">
+                      <p>{koreanTimeString1}</p>
+                    </div>
+                    <div className="cell">
+                      <p> {post.likedUser.length}</p>
+                    </div>
+                    <div className="cell reported">
+                      <p>{post.reportedUser.length} </p>
+                    </div>
+                    <div className="cell">
+                      <button onClick={deleteContent}>
+                        <span>삭제하기</span>
+                      </button>
+                    </div>
+                  </Link>
                 </div>
               );
             })}

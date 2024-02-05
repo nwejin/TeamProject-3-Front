@@ -74,6 +74,32 @@ const AdminPage = () => {
           </Link>
         </ul>
         <div className="getAllUser">
+          <div className="heading">
+            <div className="cell">
+              <p>가입 정보</p>
+            </div>
+            <div className="cell">
+              <p>프로필 이미지</p>
+            </div>
+            <div className="cell">
+              <p>아이디</p>
+            </div>
+            <div className="cell">
+              <p>닉네임</p>
+            </div>
+            <div className="cell">
+              <p>이메일</p>
+            </div>
+            <div className="cell">
+              <p>뉴스 북마크</p>
+            </div>
+            <div className="cell">
+              <p>단어장 북마크</p>
+            </div>
+            <div className="cell">
+              <p></p>
+            </div>
+          </div>
           <div>
             {currentPage.map((user) => {
               console.log(user);
@@ -106,37 +132,34 @@ const AdminPage = () => {
 
               return (
                 <div className="adminUserBox">
-                  <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
-                  <img src={user.user_profile} alt="" />
-                  <div key={user._id} className="userBox">
-                    <div className="userBox1">
-                      <p>
-                        <span>ID</span>
-                        {user.user_id}
-                      </p>
-                      <p>
-                        <span>Nickname</span>
-                        {user.user_nickname}
-                      </p>
-                    </div>
-                    <div className="userBox2">
-                      <p>
-                        <span>Eamil</span>
-                        {user.user_email}
-                      </p>
-                    </div>
-                    <div className="userBox2">
-                      <p>
-                        <span>뉴스 북마크</span>
-                        {user.news_bookmark.length}
-                      </p>
-                      <p>
-                        <span>단어장 북마크</span>
-                        {user.word_bookmark.length}
-                      </p>
-                    </div>
+                  <div className="cell">
+                    <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
                   </div>
-                  <button onClick={deleteUserInfo}>삭제하기</button>
+                  <div className="cell">
+                    <p>
+                      <img src={user.user_profile} alt="" />
+                    </p>
+                  </div>
+                  <div className="cell">
+                    <p> {user.user_id}</p>
+                  </div>
+                  <div className="cell">
+                    <p> {user.user_nickname}</p>
+                  </div>
+                  <div className="cell">
+                    <p>{user.user_email}</p>
+                  </div>
+                  <div className="cell">
+                    <p>{user.news_bookmark.length}</p>
+                  </div>
+                  <div className="cell">
+                    <p>{user.word_bookmark.length}</p>
+                  </div>
+                  <div className="cell">
+                    <button onClick={deleteUserInfo}>
+                      <span>삭제하기</span>
+                    </button>
+                  </div>
                 </div>
               );
             })}

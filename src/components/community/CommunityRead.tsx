@@ -197,8 +197,11 @@ function CommunityRead() {
     }
   };
 
+  const defaultLike = postData.likedUser.length;
+  console.log(defaultLike);
+
   const [isLiked, setIsLiked] = useState(false);
-  const [like, setLike] = useState('');
+  const [like, setLike] = useState(defaultLike);
   useEffect(() => {
     const getLike = async () => {
       try {

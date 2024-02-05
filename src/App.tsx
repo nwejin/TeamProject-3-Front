@@ -68,8 +68,10 @@ function App() {
   const notFoundError = async () => {
     try {
       console.log(window.location.pathname);
+
       const currentPath =
         process.env.REACT_APP_REDIRECT_URI + window.location.pathname;
+
 
       const response = await axios.get(currentPath, {
         withCredentials: true,

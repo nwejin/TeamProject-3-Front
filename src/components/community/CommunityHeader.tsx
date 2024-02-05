@@ -35,7 +35,9 @@ function CommuniutyHeader() {
         <h2> 커뮤니티</h2>
       </a>
 
-      <button onClick={showModal}>글 작성</button>
+      <button onClick={showModal}>
+        <span>글 작성</span>
+      </button>
       {openModal && <AddPost open={openModal} close={closeModal} />}
     </div>
   );
