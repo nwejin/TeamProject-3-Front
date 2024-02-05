@@ -90,7 +90,6 @@ const AdminPage = () => {
                     const response = await deleteUser(user.user_id);
                     if (response.success) {
                       alert('회원정보 삭제 성공');
-                      removejwtCookie('jwtCookie');
                       removeisKakao('isKakao');
                       console.log('회원정보 삭제 성공');
                       window.location.href = '/admin';

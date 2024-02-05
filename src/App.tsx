@@ -133,7 +133,7 @@ function App() {
     };
     checkAdmin();
     console.log(isAdmin);
-  }, [user]);
+  }, [user, isAdmin]);
 
   console.log(isAdmin);
 

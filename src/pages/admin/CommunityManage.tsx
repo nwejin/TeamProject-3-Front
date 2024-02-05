@@ -99,7 +99,7 @@ const CommunityManage = () => {
                           <span>작성자</span>
                           {post.userId.user_nickname}
                         </p>
-                        <p>
+                        <p style={{ fontSize: '12px' }}>
                           <span>작성시간</span>
                           {koreanTimeString1}
                         </p>

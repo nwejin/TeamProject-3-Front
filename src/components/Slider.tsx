@@ -66,7 +66,8 @@ const Slider = ({ boardData, boardlist }: any) => {
               `commentsCount_${postId}`
             );
             if (commentsCountElement) {
-              commentsCountElement.innerText = commentsCount;
+              commentsCountElement.innerText = String(commentsCount);
+              console.log(commentsCount);
             } else {
               console.error(
                 `Element with id 'commentsCount_${postId}' not found.`
