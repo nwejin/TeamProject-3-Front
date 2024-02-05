@@ -148,7 +148,23 @@ const MainPage = () => {
   return (
     <>
       <div className="inner-wrapper">
-        <div style={{ height: '25vw', width: '100%' }}></div>
+        <div className="main-banner">
+          <div className="main-banner-content">
+            <div className="main-highlight">쉬운 주식공부</div>
+            <div className="main-banner-title">
+              주식 호가창 보는 법부터
+              <br /> 모의투자까지!
+            </div>
+            <div className="main-banner-explain">
+              어디서부터 시작해야 할지 모르는
+              <br /> 당신을 위한 주식 길잡이
+            </div>
+          </div>
+          <img
+            style={{ height: '25vw', width: '100%' }}
+            src={process.env.PUBLIC_URL + 'Group 63.png'}
+          />
+        </div>
       </div>
       <div className="outer-wrapper">
         <div className="inner-wrapper">
