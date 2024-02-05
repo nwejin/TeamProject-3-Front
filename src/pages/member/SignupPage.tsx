@@ -235,7 +235,7 @@ const SignupPage = () => {
         formData.user_email.trim() === ''
       ) {
         alert('이메일은 @를 포함해야합니다.');
-        nickRef.current?.focus();
+        emailRef.current?.focus();
       } else {
         const response = await register(formData);
         if (response.success) {

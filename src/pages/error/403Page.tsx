@@ -1,13 +1,13 @@
 import '../../styles/Error.scss';
 
-const ErrorPage = () => {
+const AdminError = () => {
   return (
     <>
       <div className="outer-wrapper">
         <div className="error-wrapper">
           <img
             className="error-img"
-            src={process.env.PUBLIC_URL + '/500.png'}
+            src={process.env.PUBLIC_URL + '/403.png'}
             alt=""
           />
           <div className="error-msg">페이지를 찾을 수 없습니다.</div>
@@ -21,4 +21,4 @@ const ErrorPage = () => {
     </>
   );
 };
-export default ErrorPage;
+export default AdminError;
