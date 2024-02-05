@@ -319,6 +319,7 @@ const NewsDetailPage = () => {
 
           <h1>{data.title}</h1>
           <p className="detailDate">{data.date}</p>
+          <br />
 
           <img className="detailImg" src={data.bigimg || ''} />
           <h3>{data.subtitle}</h3>
@@ -330,7 +331,7 @@ const NewsDetailPage = () => {
             {/* {content} */}
           </p>
           <br />
-          <div className="detailSrc">출처 : {data.url}</div>
+          <p className="detailSrc">출처 : {data.url}</p>
           <br />
         </div>
 
