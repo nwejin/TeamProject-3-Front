@@ -71,7 +71,7 @@ const CommunityManage = () => {
                     alert('삭제되었습니다.');
                     const result = await deleteCommunity(post._id);
                     console.log('글 삭제 성공', result);
-                    window.location.href = '/community';
+                    window.location.href = '/admin/communityManage';
                   } else {
                     alert('취소되었습니다.');
                   }
@@ -87,11 +87,12 @@ const CommunityManage = () => {
                     <Link to={link} state={{ post }}>
                       <div className="Box1">
                         <p>
-                          <span>제목</span> {post.title}
+                          <span>제목</span>{' '}
+                          <span className="reportText">{post.title}</span>
                         </p>
                         <p>
                           <span>내용</span>
-                          {post.content}{' '}
+                          <span className="reportText">{post.content}</span>
                         </p>
                       </div>
                       <div className="Box2">

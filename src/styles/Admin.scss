@@ -81,9 +81,12 @@
       margin-right: 0.5rem;
     }
     .Box1 {
-      width: 100%;
+      width: 50%;
       // background-color: red;
       border-right: 2px solid $color-gray-1;
+      p {
+        display: flex;
+      }
     }
     .Box2 {
       width: 100%;
@@ -105,4 +108,14 @@
     padding: 0.5rem 1rem;
     border-radius: 10px;
   }
+}
+
+.reportText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  width: 80%;
 }
