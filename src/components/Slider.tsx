@@ -40,6 +40,7 @@ const Slider = ({ boardData, boardlist }: any) => {
             try {
               const commentArray = await getComment(postId);
 
+              console.log(commentArray);
               let replyCommentSum = 0;
 
               for (const comment of commentArray) {
@@ -58,23 +59,24 @@ const Slider = ({ boardData, boardlist }: any) => {
             }
           };
 
-          const renderPost = async (post: any) => {
-            console.log(post);
-            const commentsCount = await fetchDataForPost(post);
+          // const renderPost = async (post: any) => {
+          //   console.log(post);
+          //   const commentsCount = await fetchDataForPost(post);
 
-            const commentsCountElement = document.getElementById(
-              `commentsCount_${postId}`
-            );
-            if (commentsCountElement) {
-              commentsCountElement.innerText = String(commentsCount);
-              console.log(commentsCount);
-            } else {
-              console.error(
-                `Element with id 'commentsCount_${postId}' not found.`
-              );
-            }
-          };
-          renderPost(postId);
+          //   const commentsCountElement = document.getElementById(
+          //     `commentsCount_${postId}`
+          //   );
+          //   if (commentsCountElement) {
+          //     commentsCountElement.innerText = String(commentsCount);
+          //     console.log(commentsCount);
+          //     console.log('ㅁㅁㅁㅁㅁ', typeof commentsCount);
+          //   } else {
+          //     console.error(
+          //       `Element with id 'commentsCount_${postId}' not found.`
+          //     );
+          //   }
+          // };
+          // renderPost(postId);
 
           return (
             <Link
@@ -92,13 +94,13 @@ const Slider = ({ boardData, boardlist }: any) => {
                       <div className="main-board-nickname">{board.writer}</div>
                       <div className="main-board-date">{board.date}</div>
                     </div>
-                    <div className="main-board-comment">
+                    {/* <div className="main-board-comment">
                       <span className="material-symbols-rounded">comment</span>
                       <div className="main-icon">
                         {' '}
                         <span id={`commentsCount_${postId}`}> 로딩 중...</span>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="main-board-like">
                       <span className="material-symbols-rounded">favorite</span>
                       <div className="main-icon">{board.like}</div>
