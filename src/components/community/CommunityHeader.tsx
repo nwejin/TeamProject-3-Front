@@ -32,7 +32,7 @@ function CommuniutyHeader() {
   return (
     <div className="communityHeader">
       <a href="/community">
-        <h2> 커뮤니티</h2>
+        <div className="communityTitle">커뮤니티</div>
       </a>
 
       <button onClick={showModal}>

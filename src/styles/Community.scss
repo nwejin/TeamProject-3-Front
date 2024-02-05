@@ -30,6 +30,10 @@ button {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid $color-gray-1;
+  .communityTitle {
+    font-size: 24px;
+    margin: 2vw 0 1vw 0;
+  }
   //   background-color: pink;
   button {
     width: 100px;
@@ -145,7 +149,7 @@ button {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 150px;
+      width: 100px;
       button {
         outline: 0;
         background: none;
@@ -174,10 +178,10 @@ button {
   width: 28%;
   input {
     width: 70%;
-    height: 50px;
+    height: 46px;
     border: 1px solid $color-gray-1;
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
     padding: 15px;
   }
   .searchBox {
@@ -208,31 +212,34 @@ button {
   .postListBox {
     width: 100%;
     height: fit-content;
-    margin-top: 10%;
+    margin-top: 1vw;
     border: 1px solid $color-gray-1;
   }
   .postListTitle {
     width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.5em;
+    margin-top: 1vw;
+    margin-left: 1vw;
+    // padding: 1vw;
     span {
       font-weight: 700;
       font-size: 18px;
-      color: $color-blue-1;
+      // color: $color-blue-1;
+      // color: $color-blue-1;
     }
   }
   .postListContent {
     ul {
       list-style: none;
-      padding: 0.7em 0.5rem;
+      padding: 1vw;
       margin: 0;
       li:hover {
         filter: opacity(0.7);
       }
+
       li {
         margin-top: 0.5rem;
         width: 100%;
-        height: 50px;
+        height: 56px;
         border-bottom: 1px solid $color-gray-1;
         a {
           display: flex;
@@ -242,7 +249,7 @@ button {
           }
           .listTitle {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -257,6 +264,9 @@ button {
               font-size: 18px;
             }
           }
+        }
+        &:last-child {
+          border: none;
         }
       }
     }
@@ -281,6 +291,7 @@ button {
       margin-bottom: 1rem;
       flex-direction: column;
       justify-content: space-evenly;
+      padding: 10px 0;
       .userProfile {
         width: 100%;
         display: flex;
@@ -762,4 +773,8 @@ button {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+  margin-top: 8px;
+  &:first-of-type {
+    color: $color-blue-1;
+  }
 }

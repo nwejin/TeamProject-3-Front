@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../../styles/Error.scss';
 
 const ErrorPage = () => {
@@ -15,7 +16,9 @@ const ErrorPage = () => {
             원하시는 결과를 찾을 수 없습니다. 올바른 URL을 입력하였는지
             확인하세요. 자세한 내용은 사이트 소유자에게 문의하시기 바랍니다.
           </div>
-          <div className="back-to-main">메인으로 돌아가기</div>
+          <Link to="/">
+            <div className="back-to-main">메인으로 돌아가기</div>
+          </Link>
         </div>
       </div>
     </>

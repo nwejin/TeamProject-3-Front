@@ -100,8 +100,23 @@ function PostRankList() {
           <li key={post._id}>
             <Link to={`/community/${post._id}`} state={{ post }}>
               <div style={{ width: '80%' }}>
-                <div className="category">
-                  <span>{getSubject()}</span>
+                <div
+                  className="category"
+                  style={{
+                    backgroundColor: '#f0f3fa',
+                    width: 'fit-content',
+                    padding: '2px',
+                  }}
+                >
+                  <span
+                    style={{
+                      color: '#0056f3',
+                      fontWeight: '500',
+                      fontSize: '14px',
+                    }}
+                  >
+                    {getSubject()}
+                  </span>
                 </div>
                 <div className="listTitle">
                   {post.title}
