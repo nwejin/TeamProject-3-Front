@@ -79,14 +79,6 @@ const Header = () => {
       setIsToggle(true);
     }
   };
-  const helpToggle = () => {
-    setIstHelpToggle((prevIsToggle) => !prevIsToggle);
-    if (isHelpToggle) {
-      setIstHelpToggle(false);
-    } else {
-      setIstHelpToggle(true);
-    }
-  };
 
   useEffect(() => {
     setIstHelpToggle(false);
@@ -163,6 +155,9 @@ const Header = () => {
 
   console.log(isAdmin);
 
+  const moveTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <>
       <div className="header" id="top">
@@ -240,11 +235,11 @@ const Header = () => {
         {/* <div className="fix-icon" onClick={helpToggle}>
             <span className="material-symbols-rounded">question_mark</span>
           </div> */}
-        <a href="#top">
-          <div className="fix-icon">
-            <span className="material-symbols-rounded">vertical_align_top</span>
-          </div>
-        </a>
+        {/* <a href="#top"> */}
+        <div className="fix-icon" onClick={moveTop}>
+          <span className="material-symbols-rounded">vertical_align_top</span>
+        </div>
+        {/* </a> */}
       </div>
     </>
   );

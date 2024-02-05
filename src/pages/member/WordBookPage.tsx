@@ -80,7 +80,7 @@ const WordBookPage = () => {
     // redirect('/wordBook');
     // window.location.href = '';
   };
-
+  console.log(wordData);
   return (
     <>
       <div className="outer-wrapper">
@@ -115,6 +115,7 @@ const WordBookPage = () => {
         </div>
         <div className="wordBook-hr"></div>
         <div className="wordBook">
+          {wordData.length === 0 && <div>저장된 단어가 없습니다.</div>}
           <Word wordData={wordData} />
         </div>
       </div>
