@@ -7,7 +7,7 @@ const KakaoCallback = () => {
     const code = params.get('code');
     // 사용자 정보 요청
     axios
-      .get('http://localhost:8000/kakao/login', {
+      .get('http://43.200.179.141:8000/kakao/login', {
         params: { code },
         withCredentials: true,
         headers: {
@@ -25,7 +25,7 @@ const KakaoCallback = () => {
 
   const logOut = async () => {
     axios
-      .get('http://localhost:8000/kakao/logout', {
+      .get('http://43.200.179.141:8000/kakao/logout', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const KakaoCallback = () => {
   };
   const disConnect = async () => {
     axios
-      .get('http://localhost:8000/kakao/exit', {
+      .get('http://43.200.179.141:8000/kakao/exit', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',

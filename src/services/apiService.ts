@@ -448,7 +448,7 @@ export const showRank = async (useData: any) => {
 // 카카오
 export const kakaoLogin = async (code: any) => {
   axios
-    .get('http://localhost:8000/kakao/login', {
+    .get('http://43.200.179.141:8000/kakao/login', {
       params: { code },
       withCredentials: true,
       headers: {
