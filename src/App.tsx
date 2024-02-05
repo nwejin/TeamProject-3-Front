@@ -68,7 +68,7 @@ function App() {
     try {
       console.log(window.location.pathname);
       const currentPath =
-        'http://43.200.179.141:3000' + window.location.pathname;
+        'http://localhost:3000' + window.location.pathname;
       const response = await axios.get(currentPath, {
         withCredentials: true,
         headers: {
