@@ -9,6 +9,8 @@ import {
 } from '../../services/apiService';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFire } from '@fortawesome/free-solid-svg-icons';
 
 function PostRank() {
   const [searchWord, setSearchWord] = useState('');
@@ -268,7 +270,9 @@ function PostRank() {
 
       <div className="postListBox">
         <div className="postListTitle">
-          <span>인기글</span>
+          <FontAwesomeIcon icon={faFire} style={{ color: '#f00000' }} />
+          &ensp;
+          <span>실시간 인기글</span>
         </div>
         <div className="postListContent">
           <ul>
