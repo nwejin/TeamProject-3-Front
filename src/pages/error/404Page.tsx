@@ -7,7 +7,7 @@ const ErrorPage = () => {
         <div className="error-wrapper">
           <img
             className="error-img"
-            src={process.env.PUBLIC_URL + '404.png'}
+            src={process.env.PUBLIC_URL + '/404.png'}
             alt=""
           />
           <div className="error-msg">페이지를 찾을 수 없습니다.</div>

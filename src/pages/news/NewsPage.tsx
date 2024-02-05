@@ -5,6 +5,7 @@ import NewsList from "../../components/news/NewsList";
 import { Link, useParams, NavLink } from "react-router-dom";
 import '../../styles/NewsPage.scss'
 import Loading from "../../components/news/Loading";
+import NotFound from '../error/404Page';
 
 function NewsPage() {
     const { group } = useParams();
@@ -54,7 +55,8 @@ function NewsPage() {
     
 
     return (<>
-    <div className="outer-wrapper">
+    {group ? (
+        <div className="outer-wrapper">
         <div>
             <div className="page-title">뉴스룸</div>
                 <div className="newsNav">
@@ -62,21 +64,21 @@ function NewsPage() {
                         <li><NavLink to="/news/economy"
                         style={({ isActive }) => {
                             return {
-                              color: isActive ? "#0056F3" : "#333",
+                                color: isActive ? "#0056F3" : "#333",
                             };
-                          }}>경제</NavLink></li>
+                        }}>경제</NavLink></li>
                         <li><NavLink to="/news/stock"
                         style={({ isActive }) => {
                             return {
-                              color: isActive ? "#0056F3" : "#333",
+                                color: isActive ? "#0056F3" : "#333",
                             };
-                          }} >주식</NavLink></li>
+                        }} >주식</NavLink></li>
                         <li><NavLink to="/news/coin"
                         style={({ isActive }) => {
                             return {
-                              color: isActive ? "#0056F3" : "#333",
+                                color: isActive ? "#0056F3" : "#333",
                             };
-                          }} >코인</NavLink></li>
+                        }} >코인</NavLink></li>
                     </ul>
                     <ul className="refresh-btn">
                         <li className="material-symbols-outlined" onClick={refresh}>cached</li>
@@ -90,6 +92,8 @@ function NewsPage() {
                 );
             })}
         </div>
+    )
+: <NotFound />}
 
     </>
   );
