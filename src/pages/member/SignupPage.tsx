@@ -52,7 +52,7 @@ const SignupPage = () => {
       }
     }
     if (inputType === 'nickname') {
-      if (formData.user_nickname.length < 4) {
+      if (formData.user_nickname.length < 2) {
         return false;
       }
     }
@@ -160,7 +160,7 @@ const SignupPage = () => {
       } else if (signupValidate('nickname') === false) {
         nicknameCheckBox?.classList.add('red');
         nicknameCheckBox?.classList.remove('blue');
-        return setNicknameCheck(`ⓘ 닉네임은 최소 4자리 이상입니다.`);
+        return setNicknameCheck(`ⓘ 닉네임은 최소 두자리 이상입니다.`);
       } else if (response.success && !signupValidate('nickname') === true) {
         nicknameCheckBox?.classList.add('blue');
         nicknameCheckBox?.classList.remove('red');
@@ -218,6 +218,7 @@ const SignupPage = () => {
         formData.user_password.trim() === ''
       ) {
         alert('비밀번호는 최소 8글자 이상입니다.');
+        pwRef.current?.focus();
       } else if (pwCheck.includes('일치')) {
         alert('비밀번호가 일치하지 않습니다.');
         pwRef.current?.focus();
@@ -225,10 +226,10 @@ const SignupPage = () => {
         alert('중복되는 닉네임입니다.');
         nickRef.current?.focus();
       } else if (
-        nicknameCheck.includes('글자') ||
+        nicknameCheck.includes('최소') ||
         formData.user_nickname.trim() === ''
       ) {
-        alert('닉네임은 최소 4글자 이상입니다.');
+        alert('닉네임은 최소 두글자 이상입니다.');
         nickRef.current?.focus();
       } else if (
         emailCheck.includes('@') ||

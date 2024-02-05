@@ -211,7 +211,7 @@ const Header = () => {
                   <div>단어장</div>
                 </Link>
                 <Link to="/savedNews">
-                  <div>저장한 뉴스</div>
+                  <div>뉴스 스크랩</div>
                 </Link>
                 <div className="logout-btn" onClick={handleLogout}>
                   로그아웃
