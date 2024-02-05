@@ -1,11 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { kakaoLogin, mainBoards, mainNews } from '../services/apiService';
+import {
+  kakaoLogin,
+  mainBoards,
+  mainNews,
+  showRank,
+} from '../services/apiService';
 import Slider from '../components/Slider';
 import TrandingMiniWidget from '../components/stockGuide/TrandingMiniWidget';
 import TrandingCryptoWidget from '../components/stockGuide/TrandingCryptoWidget';
 import { Link } from 'react-router-dom';
 import { NewsProp } from '../types/NewsProp';
 import { CommunityProp } from '../types/CommunityProp';
+import MainVirtualRanking from '../components/MainVirtualRanking';
+import RankModal from '../components/VirtualInvest/RankModal';
 
 const MainPage = () => {
   const [newsData, setNewsData] = React.useState([
@@ -145,6 +152,31 @@ const MainPage = () => {
   };
   // console.log('newslist', newslist);
   // console.log('newsdata', newsData);
+
+  const [userRank, setUserRank] = useState<
+    Array<{ userid: string; profit: number; win: number; profile: string }>
+  >([]);
+  console.log('userRank', userRank);
+
+  useEffect(() => {
+    const showRanking = async () => {
+      try {
+        const response = await showRank({});
+        if (response) {
+          console.log('show rank response 전송 성공');
+          console.log('respone', response);
+          // 여기에서 response를 처리하거나 다른 작업을 수행할 수 있습니다.
+          setUserRank(response.rank);
+        }
+      } catch (error) {
+        console.error('API 호출 에러:', error);
+      }
+    };
+    // fetchData 함수를 호출하여 데이터를 가져오도록 설정
+
+    showRanking();
+  }, []);
+
   return (
     <>
       <div className="inner-wrapper">
@@ -210,7 +242,9 @@ const MainPage = () => {
           <div className="section3">
             <TrandingMiniWidget />
           </div>
-          <div className="section4">{/* <TrandingCryptoWidget /> */}</div>
+          <div className="section4">
+            <MainVirtualRanking data={userRank} />
+          </div>
         </div>
       </div>
       <div className="point-section">

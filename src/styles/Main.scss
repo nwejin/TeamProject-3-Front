@@ -305,3 +305,29 @@
     }
   }
 }
+
+.mainRankingBox {
+  .innerBox {
+    // background-color: pink;
+    height: 90%;
+  }
+  h3 {
+    margin: 1rem;
+  }
+  text-align: center;
+
+  height: 95%;
+  position: relative;
+  button {
+    position: absolute;
+    width: 30%;
+    height: 10%;
+    background: none;
+    background-color: $color-blue-1;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    top: 90%;
+    margin-left: 15%;
+  }
+}

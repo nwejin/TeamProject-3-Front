@@ -443,17 +443,17 @@ p {
 .rankModalBtn {
   font-size: 14px;
   width: fit-content;
-  padding: 0.5rem 0.2rem;
+  padding: 0.5rem 0.5rem;
   margin: auto;
   margin-top: 1rem;
   text-align: center;
   position: relative;
-  border: 1px solid $color-gray-1;
+  background-color: $color-blue-3;
+  // border: 1px solid $color-gray-1;
   span {
-    color: $color-gray-2;
+    color: $color-black;
   }
   &.active {
-    border: 1px solid $color-blue-1;
     span {
       color: $color-blue-1;
     }

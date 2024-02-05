@@ -67,8 +67,7 @@ function App() {
   const notFoundError = async () => {
     try {
       console.log(window.location.pathname);
-      const currentPath =
-        'http://43.200.179.141:3000' + window.location.pathname;
+      const currentPath = 'http://localhost:3000' + window.location.pathname;
       const response = await axios.get(currentPath, {
         withCredentials: true,
         headers: {

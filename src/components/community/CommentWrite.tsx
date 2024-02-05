@@ -35,7 +35,6 @@ function CommentWrite({ data }: { data: any }) {
     }
   };
 
-
   const [userProfile, setuserProfile] = useState('');
   const [userNickname, setuserNickname] = useState('');
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
@@ -52,7 +51,6 @@ function CommentWrite({ data }: { data: any }) {
         console.log('response', response.info);
         setuserNickname(response.info.user_nickname);
         setuserProfile(response.info.user_profile);
-
       } catch (error) {
         console.log('사용자 정보 가져오기 에러', error);
       }
@@ -60,9 +58,7 @@ function CommentWrite({ data }: { data: any }) {
     getUserInfo();
   }, []);
 
-
   // console.log(loginUserData);
-
 
   return (
     <div className="commentWriteBox">
@@ -70,7 +66,6 @@ function CommentWrite({ data }: { data: any }) {
         <div className="userProfile">
           <span>
             <a href="/">
-
               <img src={userProfile} alt="" />
 
               <p style={{ fontWeight: '700' }}>
@@ -79,7 +74,9 @@ function CommentWrite({ data }: { data: any }) {
               </p>
             </a>
           </span>
-          <button onClick={uploadComment}>입력하기</button>
+          <button onClick={uploadComment}>
+            <span>입력하기</span>
+          </button>
         </div>
 
         <textarea
