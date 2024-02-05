@@ -189,7 +189,7 @@ function App() {
               />
             </>
           ) : (
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<AdminError />} />
           )}
         </Routes>
       </BrowserRouter>
