@@ -133,7 +133,7 @@ function CommunityRead() {
         alert('삭제되었습니다.');
         const result = await deleteCommunity(postData._id);
         console.log('글 삭제 성공', result);
-        window.location.href = '/admin/communityManage';
+        window.location.href = '/community';
       } else {
         alert('취소되었습니다.');
       }
