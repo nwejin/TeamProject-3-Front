@@ -35,29 +35,30 @@ const Slider = ({ boardData, boardlist }: any) => {
         boardData.map((board: any, idx: number) => {
           const postId = boardData[idx].id;
           console.log(postId);
+          const link = `/community/${postId}`;
 
-          const fetchDataForPost = async (post: any) => {
-            try {
-              const commentArray = await getComment(postId);
+          // const fetchDataForPost = async (post: any) => {
+          //   try {
+          //     const commentArray = await getComment(postId);
 
-              console.log(commentArray);
-              let replyCommentSum = 0;
+          //     console.log(commentArray);
+          //     let replyCommentSum = 0;
 
-              for (const comment of commentArray) {
-                console.log(comment);
-                console.log(comment._id);
-                const replyComment = await getReply(comment._id);
-                replyCommentSum += replyComment.length;
-              }
+          //     for (const comment of commentArray) {
+          //       console.log(comment);
+          //       console.log(comment._id);
+          //       const replyComment = await getReply(comment._id);
+          //       replyCommentSum += replyComment.length;
+          //     }
 
-              const commentCount = commentArray.length;
-              const totalCommentCount = commentCount + replyCommentSum;
-              // 필요한 데이터를 가공하여 반환
-              return totalCommentCount;
-            } catch (err) {
-              console.log(err);
-            }
-          };
+          //     const commentCount = commentArray.length;
+          //     const totalCommentCount = commentCount + replyCommentSum;
+          //     // 필요한 데이터를 가공하여 반환
+          //     return totalCommentCount;
+          //   } catch (err) {
+          //     console.log(err);
+          //   }
+          // };
 
           // const renderPost = async (post: any) => {
           //   console.log(post);
@@ -79,11 +80,7 @@ const Slider = ({ boardData, boardlist }: any) => {
           // renderPost(postId);
 
           return (
-            <Link
-              to={`/community/${boardData[idx]._id}`}
-              state={{ post: boardlist[idx] }}
-              key={board.id}
-            >
+            <Link to={link} state={{ post: boardlist[idx] }} key={board.id}>
               <div className="main-board" key={idx}>
                 <img className="main-board-image" src={board.image} />
                 <div className="main-board-title">{board.title}</div>

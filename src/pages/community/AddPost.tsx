@@ -164,7 +164,7 @@ const AddPost = (props: props): ReactElement => {
               }}
             >
               <button onClick={uploadPost} type="button">
-                작성하기
+                <span>작성하기</span>
               </button>
             </div>
           </form>

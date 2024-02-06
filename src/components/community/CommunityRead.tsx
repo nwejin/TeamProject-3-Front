@@ -133,7 +133,7 @@ function CommunityRead() {
         alert('삭제되었습니다.');
         const result = await deleteCommunity(postData._id);
         console.log('글 삭제 성공', result);
-        window.location.href = '/admin/communityManage';
+        window.location.href = '/community';
       } else {
         alert('취소되었습니다.');
       }
@@ -197,8 +197,11 @@ function CommunityRead() {
     }
   };
 
+  const defaultLike = postData.likedUser.length;
+  console.log(defaultLike);
+
   const [isLiked, setIsLiked] = useState(false);
-  const [like, setLike] = useState('');
+  const [like, setLike] = useState(defaultLike);
   useEffect(() => {
     const getLike = async () => {
       try {

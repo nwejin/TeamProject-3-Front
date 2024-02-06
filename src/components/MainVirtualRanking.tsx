@@ -1,12 +1,23 @@
-import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCrown } from '@fortawesome/free-solid-svg-icons';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const RankModal = ({ data }) => {
-  //   console.log(data);
-  const [rank, setRank] = useState([]);
+interface userData {
+  userid: string;
+  profile: string;
+  profit: Number;
+  win: any;
+}
 
-  console.log('rank', rank);
+interface props {
+  data: userData[];
+}
+
+const MainVirtualRanking = ({ data }: props) => {
+  const [rank, setRank] = useState<userData[]>([]);
+
+  //   console.log('rank', rank);
 
   useEffect(() => {
     try {
@@ -14,44 +25,17 @@ const RankModal = ({ data }) => {
     } catch (err) {
       console.log(err);
     }
-  }, []);
-
-  console.log(data);
-
-  const myRank = rank.findIndex((rank) => rank.userid === data.user) + 1;
-  console.log(myRank);
+  }, [data]);
 
   return (
-    <div
-      style={{
-        backgroundColor: 'white',
-        width: '25%',
-        height: '60%',
-        right: '5.5%',
-        bottom: '20%',
-        position: 'absolute',
-        zIndex: '100',
-        // border: '1px solid #d9dadb',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-      }}
-      className="userRankBox"
-    >
-      <h3 style={{ margin: '0.3rem auto', color: '#0056f3' }}>Top 3 랭킹</h3>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '90%',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-        }}
-      >
+    <div className="mainRankingBox">
+      <div className="innerBox">
+        <h3>모의투자 Top 3 투자자</h3>
         {rank.slice(0, 3).map((data, index) => {
+          // console.log(data);
           const myRank =
             rank.findIndex((rank) => rank.userid === data.userid) + 1;
-          console.log(myRank);
+          // console.log(myRank);
 
           const iconClass = `crown num${myRank}`;
           const RankClass = `ranking number${myRank}`;
@@ -67,7 +51,8 @@ const RankModal = ({ data }) => {
                 width: '95%',
                 height: '30%',
                 alignItems: 'center',
-                // border: '1px solid #d9dadb',
+                position: 'relative',
+                marginTop: '0.5rem',
                 boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 5px',
               }}
             >
@@ -78,7 +63,6 @@ const RankModal = ({ data }) => {
                   position: 'relative',
                   textAlign: 'left',
                   display: 'flex',
-                  flexDirection: '',
                   alignItems: 'center',
                   justifyContent: 'space-around',
                 }}
@@ -87,27 +71,36 @@ const RankModal = ({ data }) => {
                   icon={faCrown}
                   className={iconClass}
                   size="2x"
+                  style={{ left: '-5%', top: '6%' }}
                 />
-                <div className={RankClass}>No. {myRank}</div>
+                <div className={RankClass} style={{ fontSize: '22px' }}>
+                  No. {myRank}
+                </div>
 
-                <div className={userImg}>
+                <div
+                  className={userImg}
+                  style={{ width: '70px', height: '70px' }}
+                >
                   <img src={data.profile} alt="" />
                 </div>
 
                 <div className="userInfo">
                   <p className={userRank}>{data.userid}</p>
-                  <span style={{ fontSize: '14px' }}>누적 수익 {profit} $</span>
-                  <span style={{ fontSize: '12px', color: '#808080' }}>
-                    {data.win}승{' '}
+                  <span style={{ fontSize: '2vh' }}>누적 수익 {profit} $</span>
+                  <span style={{ fontSize: '1.7vh', color: '#808080' }}>
+                    {data.win}승
                   </span>
                 </div>
               </div>
             </div>
           );
         })}
+        <Link to="/virtual">
+          <button>모의 투자 바로가기</button>
+        </Link>
       </div>
     </div>
   );
 };
 
-export default RankModal;
+export default MainVirtualRanking;

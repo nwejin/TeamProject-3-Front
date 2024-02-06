@@ -30,22 +30,28 @@ button {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid $color-gray-1;
+  .communityTitle {
+    font-size: 24px;
+    margin: 2vw 0 1vw 0;
+  }
   //   background-color: pink;
   button {
-    // border: 1px solid blue;
-    border-radius: 5px;
     width: 100px;
     height: 30px;
-    background-color: $color-blue-1;
+    background-color: $color-blue-3;
     border: none;
-    font-size: 16px;
-    color: $color-white;
+    font-size: 18px;
+
+    color: $color-black;
+    span:hover {
+      color: $color-blue-1;
+    }
   }
 }
 
 .communityContentBox {
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   display: flex;
   margin-top: 1rem;
   justify-content: space-between;
@@ -58,8 +64,9 @@ button {
   height: 170px;
   display: flex;
   justify-content: center;
-  border-radius: 10px;
-  border: 1px solid $color-gray-1;
+  // border-radius: 10px;
+  // border-top: 1px solid $color-gray-1;
+  border-bottom: 1px solid $color-gray-1;
   align-items: space-around;
   margin-bottom: 1rem;
 
@@ -142,7 +149,7 @@ button {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 150px;
+      width: 100px;
       button {
         outline: 0;
         background: none;
@@ -171,11 +178,10 @@ button {
   width: 28%;
   input {
     width: 70%;
-    height: 50px;
-    border-radius: 5px 0px 0px 5px;
+    height: 46px;
     border: 1px solid $color-gray-1;
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
     padding: 15px;
   }
   .searchBox {
@@ -206,32 +212,34 @@ button {
   .postListBox {
     width: 100%;
     height: fit-content;
-    margin-top: 10%;
-    border-radius: 5px;
+    margin-top: 1vw;
     border: 1px solid $color-gray-1;
   }
   .postListTitle {
     width: 100%;
-    margin-top: 0.5rem;
-    padding: 0.5em;
+    margin-top: 1vw;
+    margin-left: 1vw;
+    // padding: 1vw;
     span {
       font-weight: 700;
       font-size: 18px;
-      color: $color-blue-1;
+      // color: $color-blue-1;
+      // color: $color-blue-1;
     }
   }
   .postListContent {
     ul {
       list-style: none;
-      padding: 0.7em 0.5rem;
+      padding: 1vw;
       margin: 0;
       li:hover {
         filter: opacity(0.7);
       }
+
       li {
         margin-top: 0.5rem;
         width: 100%;
-        height: 50px;
+        height: 56px;
         border-bottom: 1px solid $color-gray-1;
         a {
           display: flex;
@@ -241,7 +249,7 @@ button {
           }
           .listTitle {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -256,6 +264,9 @@ button {
               font-size: 18px;
             }
           }
+        }
+        &:last-child {
+          border: none;
         }
       }
     }
@@ -280,6 +291,7 @@ button {
       margin-bottom: 1rem;
       flex-direction: column;
       justify-content: space-evenly;
+      padding: 10px 0;
       .userProfile {
         width: 100%;
         display: flex;
@@ -346,7 +358,6 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     height: 30px;
 
     div {
@@ -380,22 +391,22 @@ button {
         }
       }
       button:hover {
-        border: 1px solid $color-red-1;
+        border: 1px solid $color-red-2;
       }
       button:hover p {
-        color: $color-red-1;
+        color: $color-red-2;
       }
       button:hover span {
-        color: $color-red-1;
+        color: $color-red-2;
       }
     }
 
     .report button.clicked p,
     .report button.clicked span {
-      color: $color-red-1;
+      color: $color-red-2;
     }
     button.clicked {
-      border: 1px solid $color-red-1;
+      border: 1px solid $color-red-2;
     }
   }
   .readImgBox {
@@ -498,14 +509,14 @@ button {
         align-items: center;
         width: 120px;
         button {
-          border: 1px solid $color-gray-1;
+          // border: 1px solid $color-gray-1;
           padding: 0.25rem 0.5rem;
-          border-radius: 5px;
+          // border-radius: 5px;
           outline: 0;
-          background: none;
-        }
-        button:hover {
-          border: 1px solid $color-blue-1;
+          background-color: $color-blue-3;
+          span {
+            color: $color-black;
+          }
         }
         button span:hover {
           color: $color-blue-1;
@@ -559,10 +570,15 @@ button {
     button {
       border: 0;
       outline: 0;
-      background: $color-blue-1;
+      background: $color-blue-3;
       color: $color-white;
-      border-radius: 5px;
       padding: 0.5rem;
+      span {
+        color: $color-black;
+      }
+    }
+    span:hover {
+      color: $color-blue-1;
     }
   }
   textarea {
@@ -608,6 +624,11 @@ button {
     justify-content: space-between;
     align-items: center;
     // background-color: pink;
+    button {
+      span:hover {
+        color: $color-blue-1;
+      }
+    }
   }
   .postContentBox {
     display: flex;
@@ -630,13 +651,14 @@ button {
       border-radius: 5px;
     }
     Button {
-      border-radius: 5px;
       width: 100px;
       height: 30px;
-      background-color: #0056f3;
+      background-color: $color-blue-3;
       border: none;
       font-size: 16px;
-      color: #ffffff;
+      span:hover {
+        color: $color-blue-1;
+      }
     }
   }
 }
@@ -751,4 +773,8 @@ button {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+  margin-top: 8px;
+  &:first-of-type {
+    color: $color-blue-1;
+  }
 }

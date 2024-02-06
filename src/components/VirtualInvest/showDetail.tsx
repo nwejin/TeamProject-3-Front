@@ -10,9 +10,10 @@ interface props {
   close: () => void;
   response: any;
   user: any;
+  userid: any;
 }
 
-const ShowDetail = ({ response, close, user }: props): ReactElement => {
+const ShowDetail = ({ response, close, user, userid }: props): ReactElement => {
   const { profit, win, loss, profitArray } = response;
   const rate = ((win / (win + loss)) * 100).toFixed(2);
   const totalGame = win + loss;
@@ -51,8 +52,12 @@ const ShowDetail = ({ response, close, user }: props): ReactElement => {
 
   // const selectRank = userRank.filter((userid) => userid === user);
   // console.log(selectRank);
-  const myRank = userRank.findIndex((userRank) => userRank.userid === user) + 1;
+  const myRank =
+    userRank.findIndex((userRank) => userRank.userid === userid) + 1;
   console.log('내 순위', myRank + 1);
+
+  console.log(userid);
+  console.log(userRank);
 
   const [openRank, setOpenRank] = useState<string | null>(null);
   const showModal = (user: string) => {

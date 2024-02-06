@@ -1,34 +1,48 @@
 @import './Component.scss';
 
-.adminUserBox {
-  border: 1px solid $color-gray-1;
+.heading {
   display: flex;
-  height: 5vh;
-  width: 80%;
-  padding: 2rem;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: auto;
+  font-weight: bold;
+  text-align: center;
+  .cell {
+    background-color: $color-blue-2;
+    color: white;
+  }
+}
 
-  .userBox {
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $color-gray-1;
+  border-width: thin;
+  height: 5vh;
+  width: 20%;
+}
+
+.postText {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.reported {
+  p {
+    color: $color-red-2;
+  }
+}
+
+.adminUserBox {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  a {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 70%;
-    span {
-      font-weight: 700;
-      color: $color-gray-2;
-      font-size: 14px;
-      margin-right: 0.5rem;
-    }
-    .userBox1 {
-      width: 30%;
-    }
-    .userBox2 {
-      width: 40%;
-    }
+    width: 100%;
   }
   img {
     width: 36px;
@@ -37,72 +51,23 @@
   }
   button {
     border: none;
-    background-color: $color-blue-1;
-    color: $color-white;
+    background-color: $color-blue-3;
+    color: $color-black;
     padding: 0.5rem 1rem;
-    border-radius: 10px;
+    span:hover {
+      color: $color-blue-1;
+    }
+  }
+  .reportText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    width: 80%;
   }
 }
-
 .paginationBox {
   margin-top: 3%;
-}
-
-.adminCommunityBox {
-  border: 1px solid $color-gray-1;
-  display: flex;
-  height: 5vh;
-  width: 90%;
-  padding: 2rem;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: auto;
-  a {
-    display: flex;
-    width: 100%;
-  }
-  .numBox {
-    width: 3%;
-    text-align: center;
-    font-weight: 700;
-  }
-  .communityBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 80%;
-    // background-color: pink;
-    span {
-      font-weight: 700;
-      color: $color-gray-2;
-      font-size: 14px;
-      margin-right: 0.5rem;
-    }
-    .Box1 {
-      width: 100%;
-      // background-color: red;
-      border-right: 2px solid $color-gray-1;
-    }
-    .Box2 {
-      width: 100%;
-      padding-left: 1rem;
-      border-right: 2px solid $color-gray-1;
-      // background-color: blue;
-    }
-    .Box3 {
-      padding-left: 1rem;
-      width: 50%;
-      // background-color: white;
-    }
-  }
-
-  button {
-    border: none;
-    background-color: $color-blue-1;
-    color: $color-white;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-  }
 }

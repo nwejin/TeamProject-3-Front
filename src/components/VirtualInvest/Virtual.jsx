@@ -186,6 +186,7 @@ const Virtual = () => {
   const purchasePrice = useSelector((state) => state.purchasePrice); //보유주식 평단가
 
   const [userNickname, setuserNickname] = useState('');
+  const [userId, setUserId] = useState('');
   const jwtCookie = useCookies(['jwtCookie']);
   useEffect(() => {
     const tokenId = jwtCookie['jwtCookie'];
@@ -194,6 +195,7 @@ const Virtual = () => {
       try {
         const response = await userInfo({ id: tokenId });
         setuserNickname(response.info.user_nickname);
+        setUserId(response.info.user_id);
       } catch (error) {
         console.log('사용자 정보 가져오기 에러', error);
       }
@@ -219,6 +221,7 @@ const Virtual = () => {
               close={closeDetailModal}
               response={detailData}
               user={userNickname}
+              userid={userId}
             />
           )}
           <ProfitAndLoss />

@@ -73,7 +73,7 @@
     }
     .detailContent {
       line-height: 1.8;
-      white-space: pre-line;
+      // white-space: pre-line;
     }
     .detailImg {
       width: 100%;
@@ -86,6 +86,9 @@
     .myHighlight {
       background-color: lemonchiffon;
       cursor: pointer;
+    }
+    .detailSrc {
+      word-wrap: break-word;
     }
   }
 
@@ -122,7 +125,10 @@
       }
     }
   }
-
+  .wordEx{
+    line-height: 1.5;
+    white-space: pre-line;
+  }
   .defaultTxt {
     color: gray;
     font-size: 14px;

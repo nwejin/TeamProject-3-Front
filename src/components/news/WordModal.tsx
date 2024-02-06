@@ -87,7 +87,7 @@ function WordModal({ modalWord, closeModal, modalPosition }: ModalProps) {
             close
           </span>
         </div>
-        <p>{modalWord.explanation}</p>
+        <p className='wordEx'>{modalWord.explanation}</p>
         <br />
         <p className="defaultTxt">
           사전 결과 자동 추출로 오류가 있을 수 있습니다.

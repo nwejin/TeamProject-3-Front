@@ -24,6 +24,7 @@ import StockGuidePage from './pages/stockGuide/StockGuidePage';
 import MyPage from './pages/member/MyPage';
 import WordBookPage from './pages/member/WordBookPage';
 import NotFound from './pages/error/404Page';
+import AdminError from './pages/error/403Page';
 import ServerError from './pages/error/500Page';
 import Virtual from './components/VirtualInvest/Virtual';
 import StockVirtualPage from './pages/stockGuide/StockVirtualPage';
@@ -67,7 +68,11 @@ function App() {
   const notFoundError = async () => {
     try {
       console.log(window.location.pathname);
-      const currentPath = 'http://localhost:3000' + window.location.pathname;
+
+      const currentPath =
+        process.env.REACT_APP_REDIRECT_URI + window.location.pathname;
+
+
       const response = await axios.get(currentPath, {
         withCredentials: true,
         headers: {
@@ -90,6 +95,8 @@ function App() {
         const err = axiosError.response.status;
         if (err === 200) {
           return;
+        } else if (err === 403) {
+          setErrorNum(403);
         } else if (err === 500) {
           setErrorNum(500);
           // window.location.href = '/500';
@@ -170,6 +177,9 @@ function App() {
           {errorNum === 404 && <Route path="*" element={<NotFound />} />}
 
           {/* 500 서버 에러 페이지 */}
+          {errorNum === 403 && <Route path="*" element={<AdminError />} />}
+
+          {/* 500 서버 에러 페이지 */}
           {errorNum === 500 && <Route path="*" element={<ServerError />} />}
 
           {isAdmin ? (
@@ -181,7 +191,7 @@ function App() {
               />
             </>
           ) : (
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<AdminError />} />
           )}
         </Routes>
       </BrowserRouter>

@@ -13,7 +13,9 @@ function PostRankList() {
     const fetchData = async () => {
       try {
         const rank = await getCommunityRank();
-        setPosts(rank);
+        rank.sort((a: any, b: any) => b.likedUser.length - a.likedUser.length);
+        const top5Posts = rank.slice(0, 5);
+        setPosts(top5Posts);
       } catch (error) {
         console.error(error);
       }
@@ -41,7 +43,7 @@ function PostRankList() {
   return (
     <>
       {posts.map((post: any) => {
-        console.log('랭크', post.likedUser);
+        console.log('랭크', post.likedUser.length);
 
         let BtnStyle;
         if (post.likedUser.includes(user)) {
@@ -98,8 +100,23 @@ function PostRankList() {
           <li key={post._id}>
             <Link to={`/community/${post._id}`} state={{ post }}>
               <div style={{ width: '80%' }}>
-                <div className="category">
-                  <span>{getSubject()}</span>
+                <div
+                  className="category"
+                  style={{
+                    backgroundColor: '#f0f3fa',
+                    width: 'fit-content',
+                    padding: '2px',
+                  }}
+                >
+                  <span
+                    style={{
+                      color: '#0056f3',
+                      fontWeight: '500',
+                      fontSize: '14px',
+                    }}
+                  >
+                    {getSubject()}
+                  </span>
                 </div>
                 <div className="listTitle">
                   {post.title}

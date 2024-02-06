@@ -116,6 +116,7 @@ const MyPage = () => {
 
   // 변경할 비밀번호 유효성 검사
   const [pwValiCheck, setValiPwCheck] = useState('');
+  const pwReRef = useRef<HTMLInputElement>(null);
   const pwasswordValiCheck = async (event: any) => {
     try {
       event.preventDefault();
@@ -197,7 +198,7 @@ const MyPage = () => {
       } else {
         emailBox?.classList.remove('red');
         emailBox?.classList.add('blue');
-        return setEmailCheck('ⓘ 사용가능한 비밀번호입니다.');
+        return setEmailCheck('ⓘ 사용가능한 이메일입니다.');
       }
     } catch (error: any) {
       // 에러 처리
@@ -259,8 +260,28 @@ const MyPage = () => {
       } else {
         if (!pwCheckState) {
           alert('비밀번호를 확인해주세요');
+          pwRef.current?.focus();
+        } else if (
+          pwValiCheck.includes('최소') ||
+          formData.user_password.trim() === ''
+        ) {
+          alert('비밀번호는 최소 8자리 이상입니다.');
+          pwReRef.current?.focus();
         } else if (!nicknameCheckState) {
           alert('닉네임 중복을 확인해주세요');
+          nickRef.current?.focus();
+        } else if (
+          nicknameCheckString.includes('글자') ||
+          formData.user_nickname.trim() === ''
+        ) {
+          alert('닉네임은 최소 8자리 이상입니다.');
+          nickRef.current?.focus();
+        } else if (
+          emailCheck.includes('@') ||
+          formData.user_email.trim() === ''
+        ) {
+          alert('이메일은 @를 포함해야합니다.');
+          nickRef.current?.focus();
         } else {
           const response = await modifyUser(formData, myId);
           if (response.success) {
@@ -346,6 +367,7 @@ const MyPage = () => {
                 name="user_changepw"
                 placeholder="변경 비밀번호"
                 className="input-box"
+                ref={pwReRef}
                 onKeyUp={pwasswordValiCheck}
                 onChange={handleInputChange}
                 disabled={isDisabled}
