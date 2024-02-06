@@ -32,7 +32,7 @@ const BannerSlider = () => {
       setCurrentBanner((prevBanner) =>
         prevBanner === banners.length - 1 ? 0 : prevBanner + 1
       );
-    }, 6000);
+    }, 4000);
 
     return () => clearInterval(intervalId);
   }, []);

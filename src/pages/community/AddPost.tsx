@@ -136,6 +136,8 @@ const AddPost = (props: props): ReactElement => {
                   textAlign: 'center',
                   alignItems: 'center',
                   lineHeight: '30px',
+                  border: '1px solid #d9dadb',
+                  fontSize: '14px',
                 }}
               >
                 파일 찾기
@@ -145,11 +147,11 @@ const AddPost = (props: props): ReactElement => {
                 name="file"
                 id="file"
                 style={{
-                  border: 0,
                   borderRadius: 0,
                   width: 0,
                   height: 0,
                   padding: 0,
+                  border: 'none',
                 }}
                 onChange={postDataChange}
               />

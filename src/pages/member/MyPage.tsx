@@ -263,7 +263,7 @@ const MyPage = () => {
           pwRef.current?.focus();
         } else if (
           pwValiCheck.includes('최소') ||
-          formData.user_password.trim() === ''
+          formData.user_changepw.trim() === ''
         ) {
           alert('비밀번호는 최소 8자리 이상입니다.');
           pwReRef.current?.focus();
