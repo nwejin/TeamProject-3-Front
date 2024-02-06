@@ -17,7 +17,12 @@ const ErrorPage = () => {
             확인하세요. 자세한 내용은 사이트 소유자에게 문의하시기 바랍니다.
           </div>
           <Link to="/">
-            <div className="back-to-main">메인으로 돌아가기</div>
+            <div
+              style={{ backgroundColor: '#F30000' }}
+              className="back-to-main"
+            >
+              메인으로 돌아가기
+            </div>
           </Link>
         </div>
       </div>
