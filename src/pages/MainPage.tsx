@@ -210,7 +210,7 @@ const MainPage = () => {
           <div className="section3">
             <TrandingMiniWidget />
           </div>
-          <div className="section4">{/* <TrandingCryptoWidget /> */}</div>
+          <div className="section4">{}</div>
         </div>
       </div>
       <div className="point-section">

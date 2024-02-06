@@ -30,7 +30,7 @@ const ShowDetail = ({ response, close, user }: props): ReactElement => {
         const response = await showRank({});
         if (response) {
           console.log('show rank response 전송 성공');
-          console.log('respone', response);
+          console.log('respone', response.rank);
           // 여기에서 response를 처리하거나 다른 작업을 수행할 수 있습니다.
           setUserRank(response.rank);
         }
