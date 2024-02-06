@@ -38,7 +38,7 @@ function SavedNews() {
   return (
     <>
       <div className="outer-wrapper">
-        <div className="page-title">저장한 뉴스</div>
+        <div className="page-title">뉴스 스크랩</div>
         <div className="wordBook-hr"></div>
 
         {/* {news.length > 0 ? news.map((data, index)=> {

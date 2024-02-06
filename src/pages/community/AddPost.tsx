@@ -138,6 +138,7 @@ const AddPost = (props: props): ReactElement => {
                   lineHeight: '30px',
                   border: '1px solid #d9dadb',
                   fontSize: '14px',
+                  fontWeight: 500,
                 }}
               >
                 파일 찾기
