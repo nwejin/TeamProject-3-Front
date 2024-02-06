@@ -72,7 +72,6 @@ function App() {
       const currentPath =
         process.env.REACT_APP_REDIRECT_URI + window.location.pathname;
 
-
       const response = await axios.get(currentPath, {
         withCredentials: true,
         headers: {
@@ -184,7 +183,7 @@ function App() {
 
           {isAdmin ? (
             <>
-              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/admin" element={<AdminPage data={isAdmin} />} />
               <Route
                 path="/admin/communityManage"
                 element={<CommunityManage />}
