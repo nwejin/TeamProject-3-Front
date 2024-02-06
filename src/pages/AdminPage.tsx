@@ -18,7 +18,7 @@ interface User {
   // Add other properties based on your user schema
 }
 
-const AdminPage = () => {
+const AdminPage = ({ data }: any) => {
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
   const [kakaoToken, setkakaoToken, removekakaoToken] = useCookies([
     'kakaoToken',
@@ -105,6 +105,9 @@ const AdminPage = () => {
               console.log(user);
 
               const deleteUserInfo = async (event: any) => {
+                if (data) {
+                  window.location.reload();
+                }
                 try {
                   event.preventDefault();
 
