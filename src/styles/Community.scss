@@ -30,6 +30,7 @@ button {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid $color-gray-1;
+  font-weight: 600;
   .communityTitle {
     font-size: 24px;
     margin: 2vw 0 1vw 0;
@@ -448,6 +449,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 4vw;
   .commentInnerBox {
     width: 90%;
 
@@ -587,6 +589,7 @@ button {
     resize: none;
     width: 100%;
     margin-top: 1rem;
+    padding: 10px;
   }
 }
 
@@ -600,14 +603,13 @@ button {
   z-index: 1;
   position: absolute;
   .modalBox {
-    position: absolute;
-    // width: 100vh;
+    position: fixed;
     width: 60%;
-    height: 60%;
-    background-color: $color-white;
-    border-radius: 20px;
+    height: 80%;
+    background-color: #ffffff;
+    border-radius: 10px;
     z-index: 100;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
   }
@@ -617,7 +619,8 @@ button {
     flex-direction: column;
     width: 95%;
     height: 90%;
-    margin: 30px auto;
+    margin: 0 auto;
+    padding: 2vw;
   }
   .modalHeader {
     display: flex;
@@ -644,11 +647,13 @@ button {
     input {
       height: 2rem;
       border: 1px solid $color-gray-1;
-      border-radius: 5px;
+      padding: 0 10px;
+      // border-radius: 5px;
     }
     textarea {
       border: 1px solid $color-gray-1;
-      border-radius: 5px;
+      padding: 10px;
+      // border-radius: 5px;
     }
     Button {
       width: 100px;
@@ -657,6 +662,7 @@ button {
       border: none;
       font-size: 16px;
       span:hover {
+        font-weight: 600;
         color: $color-blue-1;
       }
     }
