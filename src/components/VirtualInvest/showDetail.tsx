@@ -87,7 +87,7 @@ const ShowDetail = ({ response, close, user, userid }: props): ReactElement => {
             <div className="subTitle">현재 순 이익</div>
             <div>
               <div className={profit > 0 ? 'profitSurplus' : 'profitDeficit'}>
-                <span>{profit > 0 ? '+' : '-'} </span>
+                <span>{profit > 0 ? '+' : ''} </span>
                 <span style={{ fontSize: '22px' }}>{profitLimit}</span>
                 <span style={{ color: '#333' }}> $</span>
               </div>
