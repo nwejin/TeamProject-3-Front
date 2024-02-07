@@ -44,9 +44,9 @@
         &.active {
           color: $color-blue-1;
         }
-        &:hover {
-          color: $color-blue-1;
-        }
+        // &:hover {
+        //   color: $color-blue-1;
+        // }
       }
       .saveNews {
         border-top: 1px solid $color-gray-1;
@@ -59,9 +59,9 @@
         background-color: white;
         font-size: 14px;
         display: inline-block;
-        &:hover {
-          color: $color-blue-1;
-        }
+        // &:hover {
+        //   color: $color-blue-1;
+        // }
         &.active {
           color: $color-blue-1;
         }
