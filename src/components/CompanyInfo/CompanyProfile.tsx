@@ -13,7 +13,7 @@ const CompanyProfile: React.FC<CompanyProfileProps> = (props) => {
   // console.log(search);
 
   const symbol = search;
-  console.log(symbol);
+  // console.log(symbol);
 
   // useEffect(() => {
 

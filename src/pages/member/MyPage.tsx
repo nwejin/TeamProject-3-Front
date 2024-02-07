@@ -49,7 +49,6 @@ const MyPage = () => {
 
   useEffect(() => {
     const tokenId = jwtCookie['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
-    console.log(tokenId);
     if (!tokenId) {
       alert('로그인 후 사용가능한 기능입니다.');
       navigate('/signin');
@@ -208,8 +207,6 @@ const MyPage = () => {
 
   const handleInputChange = (e: any) => {
     const { name, value, files } = e.target;
-    console.log(name);
-    console.log(value);
 
     // 회원 프로필 관련
     if (name === 'user_profile' && files && files.length > 0) {
@@ -250,7 +247,6 @@ const MyPage = () => {
         } else {
           const response = await modifyUser(formData, myId);
           if (response.success) {
-            console.log('회원정보 수정 성공:', response);
             alert('회원정보 수정 성공!');
             window.location.href = '/mypage';
           } else {
@@ -285,7 +281,6 @@ const MyPage = () => {
         } else {
           const response = await modifyUser(formData, myId);
           if (response.success) {
-            console.log('회원정보 수정 성공:', response);
             alert('회원정보 수정 성공!');
             // navigate('/mypage');
             window.location.href = '/mypage';

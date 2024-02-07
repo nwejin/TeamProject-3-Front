@@ -18,7 +18,7 @@ const StockGuidePage = () => {
   const handleClick = async (word: string) => {
     try {
       const response = await GetWord(word);
-      console.log(response.data.explanation);
+      // console.log(response.data.explanation);
       // return response.data.explanation;
       setExplain(response.data.explanation);
     } catch (error: any) {

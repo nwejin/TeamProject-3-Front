@@ -160,13 +160,13 @@ const Virtual = () => {
         const response = await showRecord();
         if (response) {
           const { profit, win, loss, profitArray } = response; //db 데이터 받아오기
-          console.log(
-            'profit, win, loss, ProfitAndLoss',
-            profit,
-            win,
-            loss,
-            profitArray
-          );
+          // console.log(
+          //   'profit, win, loss, ProfitAndLoss',
+          //   profit,
+          //   win,
+          //   loss,
+          //   profitArray
+          // );
           setDetailData({ profit, win, loss, profitArray });
         }
       } catch (error) {

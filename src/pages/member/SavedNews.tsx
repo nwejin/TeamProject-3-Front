@@ -26,7 +26,7 @@ function SavedNews() {
           withCredentials: true,
         }
       );
-      // console.log('-----------',myNews.data.news);
+
       setNews(myNews.data.news);
     }
   };
@@ -40,10 +40,6 @@ function SavedNews() {
       <div className="outer-wrapper">
         <div className="page-title">뉴스 스크랩</div>
         <div className="wordBook-hr"></div>
-
-        {/* {news.length > 0 ? news.map((data, index)=> {
-            return (<NewsList key={index} data={data}/>)
-        }) : <div>저장한 뉴스가 없습니다.</div>  } */}
 
         {!cookies['jwtCookie'] ? (
           <div></div>

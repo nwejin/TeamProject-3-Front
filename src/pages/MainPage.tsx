@@ -79,11 +79,9 @@ const MainPage = () => {
   const getNews = async () => {
     const response = await mainNews();
     const data = response.news;
-    // console.log(data);
     setNewslist(data);
     if (response.success) {
       const updateNews = data.map((news: any) => {
-        // console.log('aaa', news._id);
         return {
           thumbnail:
             news.smallimg || process.env.PUBLIC_URL + 'board-default.png',
@@ -92,13 +90,7 @@ const MainPage = () => {
           id: news._id,
         };
       });
-
-      // console.log(updateNews);
-      // const newsArray = updateNews;
-      // console.log(newsArray);
-
       setNewsData(updateNews);
-      // console.log(newsData);
     } else {
       const newsArray = [
         {

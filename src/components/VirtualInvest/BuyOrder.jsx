@@ -18,7 +18,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   };
 
   useEffect(() => {
-    console.log('purchase', purchasePrice);
+    // console.log('purchase', purchasePrice);
   }, [purchasePrice]);
 
   const CalculatorOrder = () => {
@@ -27,7 +27,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
 
       // 주문 총 금액이 잔고보다 많을 때만 적용
       if (account - cal >= 0) {
-        console.log('buyorder', buyOrder);
+        // console.log('buyorder', buyOrder);
         dispatch({ type: 'SET_ACCOUNT', payload: account - cal });
         const newStock = Number(stock) + Number(buyOrder);
 
@@ -68,7 +68,7 @@ const Order = ({ currentVal, prevInvest, updatePrevInvest, close }) => {
   const dataChange = (e) => {
     const perValue = e.target.value;
 
-    console.log(perValue);
+    // console.log(perValue);
     setRange(Number(perValue));
     // console.log(perValue);
     // console.log('def', range);

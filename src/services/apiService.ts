@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // 회원가입
 export const register = async (userData: any) => {
-  console.log(userData);
+  // console.log(userData);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/register',
@@ -23,7 +23,7 @@ export const register = async (userData: any) => {
 
 // 로그인
 export const login = async (userData: any) => {
-  console.log(userData);
+  // console.log(userData);
   // console.log(process.env.REACT_APP_BACKSERVER);
   try {
     const response = await axios.post(
@@ -43,8 +43,8 @@ export const login = async (userData: any) => {
 };
 
 export const idChecker = async (userData: any) => {
-  console.log(userData);
-  console.log(process.env.REACT_APP_BACKSERVER);
+  // console.log(userData);
+  // console.log(process.env.REACT_APP_BACKSERVER);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/idValidate',
@@ -63,8 +63,8 @@ export const idChecker = async (userData: any) => {
 };
 
 export const nicknameChecker = async (userData: any) => {
-  console.log(userData);
-  console.log(process.env.REACT_APP_BACKSERVER);
+  // console.log(userData);
+  // console.log(process.env.REACT_APP_BACKSERVER);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/nicknameValidate',
@@ -83,7 +83,7 @@ export const nicknameChecker = async (userData: any) => {
 };
 
 export const FindId = async (userData: any) => {
-  console.log(userData);
+  // console.log(userData);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/findId',
@@ -103,7 +103,7 @@ export const FindId = async (userData: any) => {
 };
 
 export const FindPw = async (userData: any) => {
-  console.log(userData);
+  // console.log(userData);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/findPw',
@@ -122,7 +122,7 @@ export const FindPw = async (userData: any) => {
 };
 
 export const ChangePw = async (userData: any) => {
-  console.log(userData);
+  // console.log(userData);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/changePw',
@@ -142,8 +142,8 @@ export const ChangePw = async (userData: any) => {
 
 // 커뮤니티 게시글 생성
 export const newPost = async (communityData: any) => {
-  console.log('communityData>', communityData);
-  console.log('Sending POST request to /community/write');
+  // console.log('communityData>', communityData);
+  // console.log('Sending POST request to /community/write');
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/community/write',
@@ -193,8 +193,8 @@ export const searchPost = async (searchWord: string) => {
 
 // 댓글 서버로 보내기
 export const postComment = async (commentData: any) => {
-  console.log('commentData >', commentData);
-  console.log('Sending POST request to /community/comment');
+  // console.log('commentData >', commentData);
+  // console.log('Sending POST request to /community/comment');
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/community/commentWrite',
@@ -261,8 +261,8 @@ export const getCommunityRank = async () => {
 
 // 대댓글 작성
 export const postReply = async (replyData: any) => {
-  console.log('replyData >', replyData);
-  console.log('Sending POST request to /community/replyWrite');
+  // console.log('replyData >', replyData);
+  // console.log('Sending POST request to /community/replyWrite');
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/community/replyWrite',
@@ -298,7 +298,7 @@ export const getReply = async (data: any) => {
 // 커뮤니티 글 수정
 export const modifyCommunity = async (postData: any) => {
   try {
-    console.log('게시글 정보', postData);
+    // console.log('게시글 정보', postData);
 
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/community/modify',
@@ -339,7 +339,7 @@ export const updatePost = async (postid: String) => {
       process.env.REACT_APP_BACKSERVER + '/community/update',
       { params: { postid } }
     );
-    console.log('수정 내용 불러오기', response.data);
+    // console.log('수정 내용 불러오기', response.data);
 
     return response.data;
   } catch (error) {
@@ -349,7 +349,7 @@ export const updatePost = async (postid: String) => {
 
 // 클릭한 단어의 설명 출력하기
 export const GetWord = async (word: string) => {
-  console.log(word);
+  // console.log(word);
   try {
     const response = await axios.get(
       process.env.REACT_APP_BACKSERVER + '/virtual/vocabulary',
@@ -472,7 +472,7 @@ export const kakaoLogout = async (uri: any, data: any, headers: any) => {
       data: data,
       headers: headers,
     });
-    console.log('카카오 로그아웃 아이디', rtn.data);
+    // console.log('카카오 로그아웃 아이디', rtn.data);
   } catch (error) {
     console.log('카카오 로그아웃 실패');
     console.log(error);
@@ -481,8 +481,8 @@ export const kakaoLogout = async (uri: any, data: any, headers: any) => {
 
 export const getKakaoId = async (token: String) => {
   try {
-    console.log('카카오 아이디 찾기 시작');
-    console.log(token);
+    // console.log('카카오 아이디 찾기 시작');
+    // console.log(token);
     const uri = process.env.REACT_APP_API_HOST + '/v2/user/me';
     const param = {};
     const header = {
@@ -495,7 +495,7 @@ export const getKakaoId = async (token: String) => {
       data: param,
       headers: header,
     });
-    console.log('카카오 토큰으로 아이디 찾기', rtn);
+    // console.log('카카오 토큰으로 아이디 찾기', rtn);
     // return rtn.data.id;
   } catch (error) {
     console.log('카카오 아이디 찾기 에러', error);
@@ -514,8 +514,8 @@ export const deleteKakao = async (kakaoToken: String) => {
         },
       }
     );
-    console.log(rtn.data);
-    console.log('카카오 회원탈퇴');
+    // console.log(rtn.data);
+    // console.log('카카오 회원탈퇴');
     return rtn.data;
   } catch (error) {
     console.log(error);
@@ -545,8 +545,8 @@ export const myNicknameChecker = async (
   userData: any,
   currentUserId: String
 ) => {
-  console.log(userData);
-  console.log(currentUserId);
+  // console.log(userData);
+  // console.log(currentUserId);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/checkUserNickname',
@@ -565,8 +565,8 @@ export const myNicknameChecker = async (
 };
 
 export const myPwChecker = async (userData: any, currentUserId: String) => {
-  console.log(userData);
-  console.log(currentUserId);
+  // console.log(userData);
+  // console.log(currentUserId);
   try {
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/checkUserPassword',
@@ -585,10 +585,10 @@ export const myPwChecker = async (userData: any, currentUserId: String) => {
 };
 
 export const modifyUser = async (userData: any, currentUserId: String) => {
-  console.log(userData);
-  console.log(userData.user_id);
-  console.log(currentUserId);
-  console.log(userData.user_profile);
+  // console.log(userData);
+  // console.log(userData.user_id);
+  // console.log(currentUserId);
+  // console.log(userData.user_profile);
   try {
     const userFormData = new FormData();
 
@@ -622,7 +622,7 @@ export const modifyUser = async (userData: any, currentUserId: String) => {
 
 export const deleteUser = async (currentUserId: String) => {
   try {
-    console.log('일반 회원 탈퇴 요청', currentUserId);
+    // console.log('일반 회원 탈퇴 요청', currentUserId);
     const response = await axios.post(
       process.env.REACT_APP_BACKSERVER + '/mypage/deleteUserinfo',
       { currentUserId },

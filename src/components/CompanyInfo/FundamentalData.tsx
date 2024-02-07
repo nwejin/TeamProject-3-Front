@@ -11,9 +11,9 @@ const FundamentalData: React.FC<FundamentalDataProps> = (props) => {
   // TSLA
   // AAPL
   const search = props.search;
-  console.log(search);
+  // console.log(search);
   const symbol = search;
-  console.log(symbol);
+  // console.log(symbol);
 
   // console.log(symbol);
 
