@@ -21,7 +21,7 @@ function NewsPage() {
             await axios
                 .get(url)
                 .then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     setNews(res.data);
                     // setLoading(true) // 로딩창 확인 위해
                 });
@@ -31,7 +31,7 @@ function NewsPage() {
     };
     useEffect(() => {
         fetchDataFromServer();
-        console.log(group)
+        // console.log(group)
     }, [group]
     // []
     );
@@ -44,7 +44,7 @@ function NewsPage() {
             const newData = await axios.get(url2);
             // setLoading(false);
             // setNews(newData.data);
-            console.log(newData);
+            // console.log(newData);
             setLoading(false)
             window.location.reload();
 

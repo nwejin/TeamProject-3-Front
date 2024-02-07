@@ -32,7 +32,7 @@ function WordModal({ modalWord, closeModal, modalPosition }: ModalProps) {
             withCredentials: true,
           }
         );
-        console.log(checkWord.data);
+        // console.log(checkWord.data);
         setIsActive(checkWord.data.isSavedWord);
       }
     };
