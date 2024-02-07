@@ -248,6 +248,34 @@ const NewsDetailPage = () => {
     // setIsDraggable(!isDraggable);
   };
 
+  // 형광펜 on 상태에서 형광펜 삭제
+  const removeSpan = async (selectedTxt: string) => {
+    try{
+      const res = await axios.post(
+        process.env.REACT_APP_BACKSERVER + '/news/deleteHighlight',
+        {
+          news_id: data._id,
+          highlightTxt: selectedTxt,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        }
+      );
+      // console.log('--------', res);
+      if (res.data.success) {
+        alert('형광펜이 삭제되었습니다!');
+      } else {
+        alert('형광펜 삭제 실패: 관리자에게 문의하세요');
+      }
+      
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
   // 드래그 : 직접 형광펜 기능
   const dragText = (event: any) => {
     if (isDraggable) {
@@ -268,6 +296,11 @@ const NewsDetailPage = () => {
         span.style.backgroundColor = 'lemonchiffon'; // 원하는 백그라운드 컬러로 변경
         span.appendChild(extractedContents);
 
+        span.addEventListener('click', () => {
+          removeSpan(selectedTxt); // 형광펜 삭제 함수 호출
+          span.outerHTML = span.innerHTML;
+        });
+
         // 추출된 내용 대신에 span 태그를 삽입
         range.insertNode(span);
 
@@ -284,7 +317,7 @@ const NewsDetailPage = () => {
             withCredentials: true,
           }
         );
-        window.location.reload();
+        // window.location.reload();
       }
     } else {
       // 드래그 불가능 상태일 때는 드래그 이벤트 무시
