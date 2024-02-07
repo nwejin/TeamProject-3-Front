@@ -23,8 +23,8 @@ function Comment({ data }: { data: any }) {
     fetchData();
   }, [postId]);
 
-  console.log(commentData.length);
-  console.log(commentData);
+  // console.log(commentData.length);
+  // console.log(commentData);
 
   // 댓글창 추가
 

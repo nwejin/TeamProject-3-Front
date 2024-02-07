@@ -6,7 +6,7 @@ import '../../styles/Admin.scss';
 const CommunityManage = () => {
   const [posts, setPosts] = useState([]);
   // db에서 데이터 불러오기위해 useState
-  console.log('post', posts);
+  // console.log('post', posts);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -26,10 +26,10 @@ const CommunityManage = () => {
 
   // 마지막 페이지 (1*5)
   const lastPage = pagination * defaultPage;
-  console.log('lastPage', lastPage);
+  // console.log('lastPage', lastPage);
   // 첫 페이지 ((1*5)- 5)
   const firstPage = lastPage - defaultPage;
-  console.log('firstPage', firstPage);
+  // console.log('firstPage', firstPage);
   // 현재 페이지 데이터 나누기
   const currentPage = posts.slice(firstPage, lastPage);
 
@@ -81,7 +81,7 @@ const CommunityManage = () => {
           </div>
           <div>
             {currentPage.map((post: any, index: number) => {
-              console.log(post);
+              // console.log(post);
               const link = `/community/${post._id}`;
 
               const utcDateString = post.date;
@@ -96,7 +96,7 @@ const CommunityManage = () => {
                   if (window.confirm('삭제 후 복구가 불가능 합니다.')) {
                     alert('삭제되었습니다.');
                     const result = await deleteCommunity(post._id);
-                    console.log('글 삭제 성공', result);
+                    // console.log('글 삭제 성공', result);
                     window.location.href = '/admin/communityManage';
                   } else {
                     alert('취소되었습니다.');

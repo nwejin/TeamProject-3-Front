@@ -45,7 +45,7 @@ function CommunityRead() {
     try {
       const tokenId = jwtCookie['jwtCookie'];
       const response = await userInfo({ id: tokenId });
-      console.log(response.info.user_id);
+      // console.log(response.info.user_id);
       if (response.info.user_nickname === postData.userId.user_nickname) {
         setdisabledAttr({ display: 'block' });
       }
@@ -69,7 +69,7 @@ function CommunityRead() {
   useEffect(() => {
     setButton();
     updateContent(postData._id);
-    console.log('변경 후 postData', postData);
+    // console.log('변경 후 postData', postData);
   }, []);
 
   const formatTimeDifference = (dateString: any) => {
@@ -132,7 +132,7 @@ function CommunityRead() {
       if (window.confirm('삭제 후 복구가 불가능 합니다.')) {
         alert('삭제되었습니다.');
         const result = await deleteCommunity(postData._id);
-        console.log('글 삭제 성공', result);
+        // console.log('글 삭제 성공', result);
         window.location.href = '/community';
       } else {
         alert('취소되었습니다.');
@@ -147,12 +147,10 @@ function CommunityRead() {
     try {
       const tokenId = jwtCookie['jwtCookie'];
       const response = await userInfo({ id: tokenId });
-      console.log(response.info._id); // userid
-
+      // console.log(response.info._id); // userid
       const result = await reportPost(postData._id);
-      console.log('신고 완료', result);
-      console.log(result.active); // true/ false
-
+      // console.log('신고 완료', result);
+      // console.log(result.active); // true/ false
       window.location.href = `/community/${postData._id}`;
     } catch (err) {
       console.log(err);
@@ -170,7 +168,7 @@ function CommunityRead() {
           postId: postData._id,
           userId: userId,
         });
-        console.log(result.isUserReported);
+        // console.log(result.isUserReported);
         setIsReported(result.isUserReported);
       } catch (err) {
         console.log(err);
@@ -186,11 +184,11 @@ function CommunityRead() {
     try {
       const tokenId = jwtCookie['jwtCookie'];
       const response = await userInfo({ id: tokenId });
-      console.log(response.info._id); // userid
+      // console.log(response.info._id); // userid
 
-      console.log(postId);
+      // console.log(postId);
       const result = await addLike({ postId });
-      console.log(result);
+      // console.log(result);
       window.location.href = `/community/${postData._id}`;
     } catch (err) {
       console.log(err);
@@ -198,7 +196,7 @@ function CommunityRead() {
   };
 
   const defaultLike = postData.likedUser.length;
-  console.log(defaultLike);
+  // console.log(defaultLike);
 
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(defaultLike);
@@ -213,7 +211,7 @@ function CommunityRead() {
           postId: postData._id,
           userId: userId,
         });
-        console.log(result.isUserliked);
+        // console.log(result.isUserliked);
         setIsLiked(result.isUserliked);
         setLike(result.like);
       } catch (err) {

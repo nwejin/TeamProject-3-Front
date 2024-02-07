@@ -4,7 +4,7 @@ import { postReply, userInfo } from '../../services/apiService';
 
 function ReplyWrite({ data }: { data: any }) {
   // 게시글 정보 불러오기
-  console.log('data', data);
+  // console.log('data', data);
   // 게시글 id
   //   console.log('대댓글', data);
 
@@ -29,7 +29,7 @@ function ReplyWrite({ data }: { data: any }) {
         content: commentData,
       };
       const response = await postReply(replyData);
-      console.log(response);
+      // console.log(response);
       window.location.reload();
     } catch (err) {
       console.log(err);
