@@ -27,8 +27,8 @@ const ModifyPost = (props: props): ReactElement => {
   // 각 input창 입력 값 가져오기
   const postDataChange = (e: any) => {
     const { name, value, files } = e.target;
-    console.log(name); //  input창 이름
-    console.log(value); // 입력값
+    // console.log(name); //  input창 이름
+    // console.log(value); // 입력값
     setFormData({
       ...formData,
       [name]: name === 'file' ? files[0] : value,
@@ -49,7 +49,7 @@ const ModifyPost = (props: props): ReactElement => {
       // const imgUrl = response.imageUrl;
       // console.log(imgUrl);
 
-      console.log(response);
+      // console.log(response);
       //   alert('글 수정 완료!');
       //   console.log(formData);
       // 창 닫기 및 페이지 새로 고침

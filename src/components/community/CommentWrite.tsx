@@ -8,7 +8,7 @@ function CommentWrite({ data }: { data: any }) {
   const postId = data._id;
   // console.log(postId); // 게시글 id
   // 게시글 id
-  console.log(data);
+  // console.log(data);
 
   // 댓글 작성 및 서버 전달
   const [commentData, setCommentData] = useState('');
@@ -28,7 +28,7 @@ function CommentWrite({ data }: { data: any }) {
         content: commentData,
       };
       const response = await postComment(commentPostData);
-      console.log(response);
+      // console.log(response);
       window.location.reload();
     } catch (err) {
       console.log(err);
@@ -48,7 +48,7 @@ function CommentWrite({ data }: { data: any }) {
       try {
         const response = await userInfo({ id: tokenId });
 
-        console.log('response', response.info);
+        // console.log('response', response.info);
         setuserNickname(response.info.user_nickname);
         setuserProfile(response.info.user_profile);
       } catch (error) {

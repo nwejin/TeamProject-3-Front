@@ -5,7 +5,7 @@ import ReplyWrite from './ReplyWrite';
 
 function ReplyComment({ data }: any) {
   //   const postId = data._id;
-  console.log('data', data); // 게시글 id
+  // console.log('data', data); // 게시글 id
   const [replyData, setReplyData] = useState([]);
 
   // 대댓글 가져오기
@@ -22,7 +22,7 @@ function ReplyComment({ data }: any) {
     fetchData();
   }, [data]);
 
-  console.log(replyData);
+  // console.log(replyData);
 
   // 댓글창 추가
   const [openReply, setOpenReply] = useState<any>();

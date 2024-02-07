@@ -16,7 +16,7 @@ import { useCookies } from 'react-cookie';
 function Community() {
   const [posts, setPosts] = useState<any[]>([]);
   // db에서 데이터 불러오기위해 useState
-  console.log('post', posts);
+  // console.log('post', posts);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -36,10 +36,10 @@ function Community() {
 
   // 마지막 페이지 (1*5)
   const lastPage = pagination * defaultPage;
-  console.log('lastPage', lastPage);
+  // console.log('lastPage', lastPage);
   // 첫 페이지 ((1*5)- 5)
   const firstPage = lastPage - defaultPage;
-  console.log('firstPage', firstPage);
+  // console.log('firstPage', firstPage);
   // 현재 페이지 데이터 나누기
   const currentPage = posts.slice(firstPage, lastPage);
 
@@ -105,10 +105,10 @@ function Community() {
       {currentPage.map((post: any) => {
         // console.log(minutesAgo)
 
-        console.log(post.likedUser); // 좋아요 누른 사람
+        // console.log(post.likedUser); // 좋아요 누른 사람
         // console.log(post._id); // 게시글 아이디
 
-        console.log(user);
+        // console.log(user);
 
         renderPost(post);
 
@@ -119,7 +119,7 @@ function Community() {
           BtnStyle = false;
         }
 
-        console.log(BtnStyle);
+        // console.log(BtnStyle);
 
         // 시간 계산 (~분전)
         const formatTimeDifference = (dateString: any) => {
@@ -181,7 +181,7 @@ function Community() {
                 const likeData = { like, postId };
 
                 const response = await addLike(likeData);
-                console.log('response toggle', response);
+                // console.log('response toggle', response);
 
                 // 좋아요 토글
                 updatedPosts[postIndex].isActive =
@@ -196,7 +196,7 @@ function Community() {
 
                 posts.map((item) => {
                   if (item.likedUser.includes(res.info._id)) {
-                    console.log('include', item);
+                    // console.log('include', item);
                   }
                 });
 

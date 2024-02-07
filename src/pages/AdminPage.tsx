@@ -27,7 +27,19 @@ const AdminPage = ({ data }: any) => {
 
   const [posts, setPosts] = useState<User[]>([]);
   // db에서 데이터 불러오기위해 useState
-  console.log('post', posts);
+  // console.log('post', posts);
+
+  // useEffect(() => {
+  //   const reload = async () => {
+  //     try {
+  //       if (data) {
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   reload();
+  // }, []);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -47,10 +59,10 @@ const AdminPage = ({ data }: any) => {
 
   // 마지막 페이지 (1*5)
   const lastPage = pagination * defaultPage;
-  console.log('lastPage', lastPage);
+  // console.log('lastPage', lastPage);
   // 첫 페이지 ((1*5)- 5)
   const firstPage = lastPage - defaultPage;
-  console.log('firstPage', firstPage);
+  // console.log('firstPage', firstPage);
   // 현재 페이지 데이터 나누기
   const currentPage = posts.slice(firstPage, lastPage);
 
@@ -102,12 +114,9 @@ const AdminPage = ({ data }: any) => {
           </div>
           <div>
             {currentPage.map((user) => {
-              console.log(user);
+              // console.log(user);
 
               const deleteUserInfo = async (event: any) => {
-                if (data) {
-                  window.location.reload();
-                }
                 try {
                   event.preventDefault();
 
@@ -120,7 +129,7 @@ const AdminPage = ({ data }: any) => {
                     if (response.success) {
                       alert('회원정보 삭제 성공');
                       removeisKakao('isKakao');
-                      console.log('회원정보 삭제 성공');
+                      // console.log('회원정보 삭제 성공');
                       window.location.href = '/admin';
                     } else {
                       console.error('회원정보 삭제 실패');
@@ -159,9 +168,13 @@ const AdminPage = ({ data }: any) => {
                     <p>{user.word_bookmark.length}</p>
                   </div>
                   <div className="cell">
-                    <button onClick={deleteUserInfo}>
-                      <span>삭제하기</span>
-                    </button>
+                    {user.isKakao === 0 ? (
+                      <button onClick={deleteUserInfo}>
+                        <span>삭제하기</span>
+                      </button>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </div>
               );

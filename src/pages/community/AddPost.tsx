@@ -20,8 +20,8 @@ const AddPost = (props: props): ReactElement => {
   // 각 input창 입력 값 가져오기
   const postDataChange = (e: any) => {
     const { name, value, files } = e.target;
-    console.log(name); //  input창 이름
-    console.log(value); // 입력값
+    // console.log(name); //  input창 이름
+    // console.log(value); // 입력값
     setFormData({
       ...formData,
       [name]: name === 'file' ? files[0] : value,
@@ -42,14 +42,14 @@ const AddPost = (props: props): ReactElement => {
       // const imgUrl = response.imageUrl;
       // console.log(imgUrl);
 
-      console.log(response);
+      // console.log(response);
       // alert('글작성 완료!');
-      console.log(formData);
+      // console.log(formData);
       // 창 닫기 및 페이지 새로 고침
       props.close();
       window.location.reload();
     } catch (err) {
-      console.log(FormData);
+      // console.log(FormData);
       console.log(err);
       alert('작성에 실패했습니다!');
     }

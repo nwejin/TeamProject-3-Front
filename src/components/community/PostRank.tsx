@@ -197,7 +197,7 @@ function PostRank() {
                           <Link to={`/community/${post._id}`} state={{ post }}>
                             <p
                               className="title"
-                              onClick={() => console.log('포스트임', post)}
+                              onClick={() => console.log('')}
                             >
                               {post.title}
                             </p>

@@ -170,7 +170,7 @@ const MainPage = () => {
   const [userRank, setUserRank] = useState<
     Array<{ userid: string; profit: number; win: number; profile: string }>
   >([]);
-  console.log('userRank', userRank);
+  // console.log('userRank', userRank);
 
   useEffect(() => {
     const showRanking = async () => {

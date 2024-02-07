@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 
 function PostRankList() {
   const [posts, setPosts] = useState([]);
-  console.log('랭크', posts);
+  // console.log('랭크', posts);
 
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -43,7 +43,7 @@ function PostRankList() {
   return (
     <>
       {posts.map((post: any) => {
-        console.log('랭크', post.likedUser.length);
+        // console.log('랭크', post.likedUser.length);
 
         let BtnStyle;
         if (post.likedUser.includes(user)) {
