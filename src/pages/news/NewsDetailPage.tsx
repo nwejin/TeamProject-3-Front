@@ -222,6 +222,7 @@ const NewsDetailPage = () => {
     const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
     if (!tokenId) {
       alert('로그인 후 사용가능한 기능입니다.');
+      navigate('/signin')
     } else {
       setIsSaved(!isSaved);
       const saveMyNews = await axios.post(
@@ -242,6 +243,7 @@ const NewsDetailPage = () => {
     const tokenId = cookies['jwtCookie'];
     if (!tokenId) {
       alert('로그인 후 사용가능한 기능입니다.');
+      navigate('/signin')
     } else {
       setIsDraggable(!isDraggable);
     }
