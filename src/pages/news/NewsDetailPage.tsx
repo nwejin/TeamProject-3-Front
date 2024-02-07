@@ -59,11 +59,11 @@ const NewsDetailPage = () => {
             }
           );
           const available = res.data.available;
-          console.log(available);
+          // console.log(available);
           if (available) {
             setMyHighlight(res.data.highlight.word);
           }
-          console.log(res.data);
+          // console.log(res.data);
         }
       } catch (error) {
         console.error(error);
@@ -126,7 +126,7 @@ const NewsDetailPage = () => {
           withCredentials: true,
         }
       );
-      console.log('--------', res);
+      // console.log('--------', res);
       if (res.data.success) {
         alert('형광펜이 삭제되었습니다!');
       } else {
@@ -210,7 +210,7 @@ const NewsDetailPage = () => {
             withCredentials: true,
           }
         );
-        console.log(checkNews.data);
+        // console.log(checkNews.data);
         setIsSaved(checkNews.data.isSavedNews);
       }
     };
@@ -254,8 +254,8 @@ const NewsDetailPage = () => {
       // event.preventDefault();
       const selection = window.getSelection();
       const selectedTxt = selection?.toString() || '';
-      console.log('selection >', selection);
-      console.log('selectedText >', selectedTxt);
+      // console.log('selection >', selection);
+      // console.log('selectedText >', selectedTxt);
 
       if (selection && selectedTxt) {
         const range = selection.getRangeAt(0);
