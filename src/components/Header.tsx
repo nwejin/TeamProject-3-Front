@@ -29,7 +29,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('useEffect 실행');
+    // console.log('useEffect 실행');
 
     setUserInfos({
       userId: '',
@@ -126,7 +126,7 @@ const Header = () => {
           alert('회원정보 삭제 성공');
           removejwtCookie('jwtCookie');
           removeisKakao('isKakao');
-          console.log('회원정보 삭제 성공');
+          // console.log('회원정보 삭제 성공');
           window.location.href = '/';
         } else {
           console.error('회원정보 삭제 실패');
@@ -150,10 +150,10 @@ const Header = () => {
       }
     };
     checkAdmin();
-    console.log(isAdmin);
+    // console.log(isAdmin);
   }, [userInfos.userId, isAdmin]);
 
-  console.log(isAdmin);
+  // console.log(isAdmin);
 
   const moveTop = () => {
     window.scrollTo(0, 0);

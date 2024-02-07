@@ -43,7 +43,7 @@ const FindIdPage = () => {
         setFindResult(result.slice(0, result.length - 2) + '**');
       } else {
         alert('입력하신 정보와 일치하는 아이디가 없습니다.');
-        console.error('아이디 찾기 실패:', response);
+        // console.error('아이디 찾기 실패:', response);
       }
     } catch (error: any) {
       console.error('아이디 찾기 실패:', error.message);
@@ -62,10 +62,10 @@ const FindIdPage = () => {
           user_password: '',
         }));
         alert('비밀번호를 재설정합니다.');
-        console.error('비밀번호 찾기 실패:', response);
+        // console.error('비밀번호 찾기 실패:', response);
       } else {
         alert('입력하신 정보와 일치하는 비밀번호가 없습니다.');
-        console.error('비밀번호 찾기 실패:', response);
+        // console.error('비밀번호 찾기 실패:', response);
       }
     } catch (error: any) {
       console.error('비밀번호 찾기 실패:', error.message);
@@ -94,7 +94,7 @@ const FindIdPage = () => {
 
   const handlePwReset = async (event: any) => {
     try {
-      console.log(formData.user_id);
+      // console.log(formData.user_id);
       event.preventDefault(); // 이벤트의 기본 동작을 취소합니다.
       if (pwCheck.includes('사용가능')) {
         const response = await ChangePw(formData);
@@ -103,7 +103,7 @@ const FindIdPage = () => {
           navigate('/signin');
         } else {
           alert('비밀번호 재설정에 실패했습니다. 다시 시도해주세요');
-          console.error('비밀번호 찾기 실패:', response);
+          // console.error('비밀번호 찾기 실패:', response);
         }
       } else {
         alert('비밀번호가 일치하지 않습니다.');

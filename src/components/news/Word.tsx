@@ -1,10 +1,10 @@
 import { deleteWord } from '../../services/apiService';
 
 const Word = ({ wordData }: any) => {
-  console.log(wordData);
+  // console.log(wordData);
 
   const handleDelete = async (num: number) => {
-    console.log(num);
+    // console.log(num);
     const response = await deleteWord({ no: num });
     // console.log(response.success);
     if (response.success) {

@@ -30,7 +30,7 @@ const MainPage = () => {
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
   useEffect(() => {
     const tokenId = jwtCookie['jwtCookie'];
-    console.log(tokenId);
+    // console.log(tokenId);
     if (!tokenId) {
       setIsLogin(false);
     } else {
@@ -170,15 +170,15 @@ const MainPage = () => {
   const [userRank, setUserRank] = useState<
     Array<{ userid: string; profit: number; win: number; profile: string }>
   >([]);
-  console.log('userRank', userRank);
+  // console.log('userRank', userRank);
 
   useEffect(() => {
     const showRanking = async () => {
       try {
         const response = await showRank({});
         if (response) {
-          console.log('show rank response 전송 성공');
-          console.log('respone', response);
+          // console.log('show rank response 전송 성공');
+          // console.log('respone', response);
           // 여기에서 response를 처리하거나 다른 작업을 수행할 수 있습니다.
           setUserRank(response.rank);
         }

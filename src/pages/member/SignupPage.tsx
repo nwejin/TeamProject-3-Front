@@ -42,7 +42,7 @@ const SignupPage = () => {
   const signupValidate = (inputType: string) => {
     if (inputType === 'id') {
       if (formData.user_id.length < 4) {
-        console.log(formData.user_id.length);
+        // console.log(formData.user_id.length);
         return false;
       }
     }
@@ -67,7 +67,7 @@ const SignupPage = () => {
       event.preventDefault();
 
       const response = await idChecker(formData);
-      console.log(response);
+      // console.log(response);
       const idCheckBox = document.querySelector('.idCheckBox');
 
       // 서버에서의 응답에 따라 처리
@@ -82,7 +82,7 @@ const SignupPage = () => {
       } else if (response.success && !signupValidate('id') === true) {
         idCheckBox?.classList.add('blue');
         idCheckBox?.classList.remove('red');
-        console.log(response);
+        // console.log(response);
         return setIdCheck(`ⓘ 사용가능한 아이디입니다.`);
       } else if (response.success === false) {
         idCheckBox?.classList.add('red');
@@ -164,7 +164,7 @@ const SignupPage = () => {
       } else if (response.success && !signupValidate('nickname') === true) {
         nicknameCheckBox?.classList.add('blue');
         nicknameCheckBox?.classList.remove('red');
-        console.log(response);
+        // console.log(response);
         return setNicknameCheck(`ⓘ ${response.message}`);
       } else if (response.success === false) {
         nicknameCheckBox?.classList.add('red');
@@ -240,12 +240,12 @@ const SignupPage = () => {
       } else {
         const response = await register(formData);
         if (response.success) {
-          console.log('회원가입 성공:', response);
+          // console.log('회원가입 성공:', response);
           alert('회원가입 성공!');
           navigate('/signin');
           // 성공 메시지 출력 또는 리다이렉트 등 필요한 처리
         } else {
-          console.error('회원가입 실패:', response);
+          // console.error('회원가입 실패:', response);
           // 실패 메시지 출력 또는 필요한 처리
         }
       }

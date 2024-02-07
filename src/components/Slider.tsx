@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { getComment, getReply } from '../services/apiService';
 
 const Slider = ({ boardData, boardlist }: any) => {
-  console.log('boardData', boardData);
-  console.log('boardlist', boardlist);
+  // console.log('boardData', boardData);
+  // console.log('boardlist', boardlist);
 
   return (
     <>
@@ -34,7 +34,7 @@ const Slider = ({ boardData, boardlist }: any) => {
       {boardlist === undefined ||
         boardData.map((board: any, idx: number) => {
           const postId = boardData[idx].id;
-          console.log(postId);
+          // console.log(postId);
           const link = `/community/${postId}`;
 
           // const fetchDataForPost = async (post: any) => {
