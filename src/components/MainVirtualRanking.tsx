@@ -55,6 +55,7 @@ const MainVirtualRanking = ({ data }: props) => {
                 marginTop: '0.5rem',
                 boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 5px',
               }}
+              key={data.userid}
             >
               <div
                 style={{

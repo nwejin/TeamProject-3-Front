@@ -3,7 +3,7 @@ import { ResponsiveLine } from '@nivo/line';
 const MyResponsiveLine = ({ data }: any) => {
   //   const profitArray = data;
   const profitArray = Array.isArray(data) ? data : [];
-  console.log(profitArray);
+  // console.log(profitArray);
 
   const chartData = [
     {

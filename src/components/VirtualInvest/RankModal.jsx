@@ -6,7 +6,7 @@ const RankModal = ({ data }) => {
   //   console.log(data);
   const [rank, setRank] = useState([]);
 
-  console.log('rank', rank);
+  // console.log('rank', rank);
 
   useEffect(() => {
     try {
@@ -16,10 +16,10 @@ const RankModal = ({ data }) => {
     }
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
   const myRank = rank.findIndex((rank) => rank.userid === data.user) + 1;
-  console.log(myRank);
+  // console.log(myRank);
 
   return (
     <div
@@ -51,7 +51,7 @@ const RankModal = ({ data }) => {
         {rank.slice(0, 3).map((data, index) => {
           const myRank =
             rank.findIndex((rank) => rank.userid === data.userid) + 1;
-          console.log(myRank);
+          // console.log(myRank);
 
           const iconClass = `crown num${myRank}`;
           const RankClass = `ranking number${myRank}`;
@@ -70,6 +70,7 @@ const RankModal = ({ data }) => {
                 // border: '1px solid #d9dadb',
                 boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 5px',
               }}
+              key={data.userid}
             >
               <div
                 style={{

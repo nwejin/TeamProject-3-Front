@@ -67,7 +67,7 @@ const SignupPage = () => {
       event.preventDefault();
 
       const response = await idChecker(formData);
-      // console.log(response);
+
       const idCheckBox = document.querySelector('.idCheckBox');
 
       // 서버에서의 응답에 따라 처리

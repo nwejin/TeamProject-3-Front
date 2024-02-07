@@ -34,7 +34,7 @@ const WordBookPage = () => {
   const getWords = async () => {
     const response = await wordBook({ word: jwtCookie['jwtCookie'] });
     const data = response.user[0].word_bookmark;
-    console.log(data);
+    // console.log(data);
     if (type === 'abc') {
       data.sort((a: any, b: any) => {
         const wordA = a.word.toUpperCase(); // 대소문자 구분 없이 정렬
@@ -61,7 +61,7 @@ const WordBookPage = () => {
       // console.log(wordArray);
 
       setWordData(wordArray);
-      console.log(wordData);
+      // console.log(wordData);
     } else {
       const wordArray = [
         {
@@ -75,12 +75,12 @@ const WordBookPage = () => {
   };
   const handleType = (str: string) => {
     setType(str);
-    console.log(type);
+    // console.log(type);
     getWords();
     // redirect('/wordBook');
     // window.location.href = '';
   };
-  console.log(wordData);
+  // console.log(wordData);
   return (
     <>
       <div className="outer-wrapper">

@@ -23,15 +23,15 @@ const ShowDetail = ({ response, close, user, userid }: props): ReactElement => {
   const [userRank, setUserRank] = useState<
     Array<{ userid: string; profit: number; win: number; profile: string }>
   >([]);
-  console.log('userRank', userRank);
+  // console.log('userRank', userRank);
 
   useEffect(() => {
     const showRanking = async () => {
       try {
         const response = await showRank({});
         if (response) {
-          console.log('show rank response 전송 성공');
-          console.log('respone', response.rank);
+          // console.log('show rank response 전송 성공');
+          // console.log('respone', response.rank);
           // 여기에서 response를 처리하거나 다른 작업을 수행할 수 있습니다.
           setUserRank(response.rank);
         }
@@ -44,20 +44,20 @@ const ShowDetail = ({ response, close, user, userid }: props): ReactElement => {
     showRanking();
   }, []); // 빈 의존성 배열은 컴포넌트가 마운트될 때 한 번만 실행
 
-  console.log('rank', userRank);
+  // console.log('rank', userRank);
   const total = userRank.length;
-  console.log(total);
-  console.log('user>', user); // 사용자
+  // console.log(total);
+  // console.log('user>', user); // 사용자
   // const rank = userRank.indexOf(user, 0);
 
   // const selectRank = userRank.filter((userid) => userid === user);
   // console.log(selectRank);
   const myRank =
     userRank.findIndex((userRank) => userRank.userid === userid) + 1;
-  console.log('내 순위', myRank + 1);
+  // console.log('내 순위', myRank + 1);
 
-  console.log(userid);
-  console.log(userRank);
+  // console.log(userid);
+  // console.log(userRank);
 
   const [openRank, setOpenRank] = useState<string | null>(null);
   const showModal = (user: string) => {

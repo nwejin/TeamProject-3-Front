@@ -8,7 +8,6 @@ import CompanyProfile from '../../components/CompanyInfo/CompanyProfile';
 
 import './../../styles/StockRate.scss';
 import './../../styles/StockGuide.scss';
-import SearchCompany from '../../components/CompanyInfo/SearchCompany';
 
 const StockRate = () => {
   const [searchSymbol, setSearchSymbol] = useState('NASDAQ:AAPL');
