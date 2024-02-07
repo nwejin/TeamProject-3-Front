@@ -26,7 +26,7 @@ const SigninPage = () => {
         isChecked: true,
       }));
     }
-    console.log('Saved ID:', savedId);
+    // console.log('Saved ID:', savedId);
   }, []);
 
   const handleInputChange = (e: any) => {
@@ -55,12 +55,12 @@ const SigninPage = () => {
       }
 
       if (response.success) {
-        console.log('로그인 성공:', response);
+        // console.log('로그인 성공:', response);
         alert('로그인 성공!');
         navigate('/');
         // window.location.reload();
       } else {
-        console.error('로그인 실패:', response);
+        // console.error('로그인 실패:', response);
         alert(response.message);
         navigate('/signin');
         // 실패 메시지 출력 또는 필요한 처리

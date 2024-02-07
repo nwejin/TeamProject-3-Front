@@ -55,7 +55,7 @@ function App() {
           },
         });
 
-        console.log(response.data);
+        // console.log(response.data);
         setServerData(response.data.message);
       } catch (error) {
         console.error('Error fetching data with axios:', error);
@@ -67,7 +67,7 @@ function App() {
 
   const notFoundError = async () => {
     try {
-      console.log(window.location.pathname);
+      // console.log(window.location.pathname);
 
       const currentPath =
         process.env.REACT_APP_REDIRECT_URI + window.location.pathname;
@@ -78,7 +78,7 @@ function App() {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         return;
       } else if (response.status === 500) {
@@ -104,7 +104,7 @@ function App() {
           // window.location.href = '/404';
         }
       }
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -125,7 +125,7 @@ function App() {
     getUser();
   }, []);
 
-  console.log(user);
+  // console.log(user);
 
   // admin 로그인 시에만 admin페이지가 나오게
   const [isAdmin, setIsAdmin] = useState<Boolean>(false);
@@ -138,10 +138,10 @@ function App() {
       }
     };
     checkAdmin();
-    console.log(isAdmin);
+    // console.log(isAdmin);
   }, [user, isAdmin]);
 
-  console.log(isAdmin);
+  // console.log(isAdmin);
 
   return (
     <div className="App">
