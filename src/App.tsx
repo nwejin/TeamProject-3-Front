@@ -41,7 +41,7 @@ function App() {
   useEffect(() => {
     // React 컴포넌트가 마운트될 때 한 번 실행
     fetchDataFromServer();
-    notFoundError();
+    // notFoundError();
   }, []);
 
   const fetchDataFromServer = async () => {
@@ -70,8 +70,8 @@ function App() {
       // console.log(window.location.pathname);
 
       const currentPath =
-        process.env.REACT_APP_REDIRECT_URI + window.location.pathname;
-
+        process.env.REACT_APP_BACKSERVER + window.location.pathname;
+      console.log(currentPath)
       const response = await axios.get(currentPath, {
         withCredentials: true,
         headers: {
@@ -116,8 +116,10 @@ function App() {
     const getUser = async () => {
       try {
         const tokenId = jwtCookie['jwtCookie'];
-        const response = await userInfo({ id: tokenId });
-        setuser(response.info._id); // user
+        if(tokenId) {
+          const response = await userInfo({ id: tokenId });
+          setuser(response.info._id); // user
+        }
       } catch (err) {
         console.log(err);
       }
@@ -148,6 +150,16 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
+
+          {/* 404 에러 페이지 */}
+          {errorNum === 404 && <Route path="*" element={<NotFound />} />}
+
+          {/* 500 서버 에러 페이지 */}
+          {errorNum === 403 && <Route path="*" element={<AdminError />} />}
+
+          {/* 500 서버 에러 페이지 */}
+          {errorNum === 500 && <Route path="*" element={<ServerError />} />}
+
           <Route path="/" element={<MainPage />} />
 
           <Route path="/news/:group?" element={<NewsPage />} />
@@ -172,15 +184,6 @@ function App() {
           {/* <Route path="/virtual" element={<Virtual />} /> */}
           <Route path="/virtual" element={<StockVirtualPage />} />
 
-          {/* 404 에러 페이지 */}
-          {errorNum === 404 && <Route path="*" element={<NotFound />} />}
-
-          {/* 500 서버 에러 페이지 */}
-          {errorNum === 403 && <Route path="*" element={<AdminError />} />}
-
-          {/* 500 서버 에러 페이지 */}
-          {errorNum === 500 && <Route path="*" element={<ServerError />} />}
-
           {isAdmin ? (
             <>
               <Route path="/admin" element={<AdminPage data={isAdmin} />} />
@@ -190,8 +193,15 @@ function App() {
               />
             </>
           ) : (
-            <Route path="*" element={<AdminError />} />
+            <>
+            <Route path="/admin" element={<AdminError />} />
+            <Route
+                path="/admin/communityManage"
+                element={<AdminError />}
+                />
+                </>
           )}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>
