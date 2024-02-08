@@ -6,9 +6,10 @@ import '../../styles/NewsDetail.scss';
 import WordModal from '../../components/news/WordModal';
 import { useCookies } from 'react-cookie';
 import { NewsProp } from '../../types/NewsProp';
+import ErrorPage from '../error/404Page';
 
 const NewsDetailPage = () => {
-  const paramas = useParams();
+  const params = useParams();
   const [data, setData] = useState<NewsProp>();
 
   const [wordsList, setWordsList] = useState<string[]>([]);
@@ -24,6 +25,8 @@ const NewsDetailPage = () => {
   const [isDraggable, setIsDraggable] = useState<boolean>(false);
   const [myHighlight, setMyHighlight] = useState<string[]>([]);
 
+  const [validParams, setValidParams] = useState<boolean>(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,16 +34,21 @@ const NewsDetailPage = () => {
       try {
         const res = await axios.get(
           process.env.REACT_APP_BACKSERVER + '/news/getDetail',
-          { params: paramas }
+          { params: params }
         );
-        // console.log(res.data);
-        setData(res.data);
+        const isValid = res.data.isValid;
+        if(!isValid) {
+          setValidParams(false);
+        } else {
+          setData(res.data.detail);
+        }
       } catch (error) {
         console.error(error);
       }
     };
     getData();
   }, []);
+
 
   useEffect(() => {
     // 시사경제용어 데이터 가져오기
@@ -264,8 +272,7 @@ const NewsDetailPage = () => {
       navigate('/signin')
     } else {
       setIsDraggable(!isDraggable);
-    }
-    // setIsDraggable(!isDraggable);
+    } 
   };
 
   // 형광펜 on 상태에서 형광펜 삭제
@@ -316,6 +323,7 @@ const NewsDetailPage = () => {
         // 새로운 span 요소 생성
         const span = document.createElement('span');
         span.style.backgroundColor = 'lemonchiffon'; // 원하는 백그라운드 컬러로 변경
+        span.style.cursor = 'pointer';
         span.appendChild(extractedContents);
 
         span.addEventListener('click', () => {
@@ -346,10 +354,12 @@ const NewsDetailPage = () => {
       event.preventDefault();
     }
   };
-
+  
   return (
     <>
-      <main className="outer-wrapper">
+    {!validParams ? <ErrorPage /> : 
+    <>
+        <main className="outer-wrapper">
         <div className="detailWrapper">
           <div className="tool">
             <div className="goBackBtn" onClick={() => navigate(-1)}>
@@ -360,18 +370,19 @@ const NewsDetailPage = () => {
 
             <div
               className={`pen ${isDraggable ? 'active' : ''}`}
-              // onClick={draggable}
-            >
+              onClick={draggable}
+              >
               형광펜
             </div>
             <div
               className={`saveNews ${isSaved ? 'active' : ''}`}
-              // onClick={myNews}
-            >
+              onClick={myNews}
+              >
               저장
             </div>
           </div>
 
+        
           {data ? (
             <>
               <h1>{data.title}</h1>
@@ -386,24 +397,26 @@ const NewsDetailPage = () => {
                   ? highlightContent(data.content, wordsList, myHighlight)
                   : data.content}
               </p>
-
+              <br />
               <p className="detailSrc">출처 : {data.url}</p>
             </>
           ) : (
             <div></div>
-          )}
-          <br />
+            )}
         </div>
+  
 
         {/* 모달 */}
         {openModal && modalWord && (
           <WordModal
-            modalWord={modalWord}
-            closeModal={closeModal}
-            modalPosition={modalPosition}
+          modalWord={modalWord}
+          closeModal={closeModal}
+          modalPosition={modalPosition}
           />
-        )}
+          )}
       </main>
+          </>
+        }
     </>
   );
 };
