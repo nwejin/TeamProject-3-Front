@@ -1,15 +1,16 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { WordsProp } from '../../types/WordsProp';
 import '../../styles/NewsDetail.scss';
 import WordModal from '../../components/news/WordModal';
 import { useCookies } from 'react-cookie';
+import { NewsProp } from '../../types/NewsProp';
+import ErrorPage from '../error/404Page';
 
 const NewsDetailPage = () => {
-  const location = useLocation();
-  const data = location.state.data;
-  const [content, setContent] = useState(data.content);
+  const params = useParams();
+  const [data, setData] = useState<NewsProp>();
 
   const [wordsList, setWordsList] = useState<string[]>([]);
   const [wordsDb, setWordsDb] = useState<WordsProp[]>([]);
@@ -23,9 +24,31 @@ const NewsDetailPage = () => {
 
   const [isDraggable, setIsDraggable] = useState<boolean>(false);
   const [myHighlight, setMyHighlight] = useState<string[]>([]);
-  // const [highlightTxt, setHighlightTxt] = useState<string>();
+
+  const [validParams, setValidParams] = useState<boolean>(true);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKSERVER + '/news/getDetail',
+          { params: params }
+        );
+        const isValid = res.data.isValid;
+        if(!isValid) {
+          setValidParams(false);
+        } else {
+          setData(res.data.detail);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
+  }, []);
+
 
   useEffect(() => {
     // 시사경제용어 데이터 가져오기
@@ -45,6 +68,7 @@ const NewsDetailPage = () => {
 
     // 형광펜 했던 텍스트 가져오기
     const getHighlight = async () => {
+      if(!data) return
       try {
         const tokenId = cookies['jwtCookie'];
         if (tokenId) {
@@ -70,12 +94,12 @@ const NewsDetailPage = () => {
       }
     };
 
+    getWordsDb();
     const tokenId = cookies['jwtCookie'];
     if (tokenId) {
       getHighlight();
     }
-    getWordsDb();
-  }, [cookies, data._id]);
+  }, [cookies, data]);
 
   // 시사경제용어 형광펜 클릭
   const handleWordClick = async (
@@ -110,6 +134,7 @@ const NewsDetailPage = () => {
 
   // 형광펜 삭제
   const highlightClick = async (word: string) => {
+    if(!data) return
     try {
       // 클릭한 단어와 관련된 데이터를 가져오고 필요에 따라 처리
       const hData = myHighlight.find((h) => h === word);
@@ -196,6 +221,7 @@ const NewsDetailPage = () => {
   // 기사 저장 유무
   useEffect(() => {
     const checkMyNews = async () => {
+      if(!data) return
       const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
       // console.log(tokenId);
       if (tokenId) {
@@ -222,6 +248,7 @@ const NewsDetailPage = () => {
     const tokenId = cookies['jwtCookie']; // 대괄호를 사용하여 속성에 액세스합니다.
     if (!tokenId) {
       alert('로그인 후 사용가능한 기능입니다.');
+      navigate('/signin')
     } else {
       setIsSaved(!isSaved);
       const saveMyNews = await axios.post(
@@ -242,14 +269,44 @@ const NewsDetailPage = () => {
     const tokenId = cookies['jwtCookie'];
     if (!tokenId) {
       alert('로그인 후 사용가능한 기능입니다.');
+      navigate('/signin')
     } else {
       setIsDraggable(!isDraggable);
-    }
-    // setIsDraggable(!isDraggable);
+    } 
   };
+
+  // 형광펜 on 상태에서 형광펜 삭제
+  const removeSpan = async (selectedTxt: string) => {
+    if(!data) return
+    try{
+      const res = await axios.post(
+        process.env.REACT_APP_BACKSERVER + '/news/deleteHighlight',
+        {
+          news_id: data._id,
+          highlightTxt: selectedTxt,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        }
+      );
+      // console.log('--------', res);
+      if (res.data.success) {
+        alert('형광펜이 삭제되었습니다!');
+      } else {
+        alert('형광펜 삭제 실패: 관리자에게 문의하세요');
+      }
+
+    } catch(error) {
+      console.error(error);
+    }
+  }
 
   // 드래그 : 직접 형광펜 기능
   const dragText = (event: any) => {
+    if(!data) return
     if (isDraggable) {
       // event.preventDefault();
       const selection = window.getSelection();
@@ -266,7 +323,13 @@ const NewsDetailPage = () => {
         // 새로운 span 요소 생성
         const span = document.createElement('span');
         span.style.backgroundColor = 'lemonchiffon'; // 원하는 백그라운드 컬러로 변경
+        span.style.cursor = 'pointer';
         span.appendChild(extractedContents);
+
+        span.addEventListener('click', () => {
+          removeSpan(selectedTxt); // 형광펜 삭제 함수 호출
+          span.outerHTML = span.innerHTML;
+        });
 
         // 추출된 내용 대신에 span 태그를 삽입
         range.insertNode(span);
@@ -284,17 +347,19 @@ const NewsDetailPage = () => {
             withCredentials: true,
           }
         );
-        window.location.reload();
+        // window.location.reload();
       }
     } else {
       // 드래그 불가능 상태일 때는 드래그 이벤트 무시
       event.preventDefault();
     }
   };
-
+  
   return (
     <>
-      <main className="outer-wrapper">
+    {!validParams ? <ErrorPage /> : 
+    <>
+        <main className="outer-wrapper">
         <div className="detailWrapper">
           <div className="tool">
             <div className="goBackBtn" onClick={() => navigate(-1)}>
@@ -306,44 +371,52 @@ const NewsDetailPage = () => {
             <div
               className={`pen ${isDraggable ? 'active' : ''}`}
               onClick={draggable}
-            >
+              >
               형광펜
             </div>
             <div
               className={`saveNews ${isSaved ? 'active' : ''}`}
               onClick={myNews}
-            >
+              >
               저장
             </div>
           </div>
 
-          <h1>{data.title}</h1>
-          <p className="detailDate">{data.date}</p>
-          <br />
+        
+          {data ? (
+            <>
+              <h1>{data.title}</h1>
+              <p className="detailDate">{data.date}</p>
+              <br />
 
-          <img className="detailImg" src={data.bigimg || ''} />
-          <h3>{data.subtitle}</h3>
+              <img className="detailImg" src={data.bigimg || ''} />
+              <h3>{data.subtitle}</h3>
 
-          <p className="detailContent" onMouseUp={dragText}>
-            {wordsList.length > 0
-              ? highlightContent(data.content, wordsList, myHighlight)
-              : data.content}
-            {/* {content} */}
-          </p>
-          <br />
-          <p className="detailSrc">출처 : {data.url}</p>
-          <br />
+              <p className="detailContent" onMouseUp={dragText}>
+                {wordsList.length > 0
+                  ? highlightContent(data.content, wordsList, myHighlight)
+                  : data.content}
+              </p>
+              <br />
+              <p className="detailSrc">출처 : {data.url}</p>
+            </>
+          ) : (
+            <div></div>
+            )}
         </div>
+  
 
         {/* 모달 */}
         {openModal && modalWord && (
           <WordModal
-            modalWord={modalWord}
-            closeModal={closeModal}
-            modalPosition={modalPosition}
+          modalWord={modalWord}
+          closeModal={closeModal}
+          modalPosition={modalPosition}
           />
-        )}
+          )}
       </main>
+          </>
+        }
     </>
   );
 };

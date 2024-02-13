@@ -9,10 +9,10 @@ interface NewsListProp {
 function NewsList({data}: NewsListProp) {
     // console.log('data >',data)
     return ( <>
-     <Link to={`/news/detail/${data._id}`} state={{data}}>
+     <Link to={`/news/detail/${data._id}`}>
          <article>
             <div className="newsData">
-                <div className="dataImgCover">                
+                <div className="dataImgCover">
                 <img className="dataImg" src={data.smallimg || process.env.PUBLIC_URL + "/Group 51.png"} alt={data.title} />
                 </div>
 
