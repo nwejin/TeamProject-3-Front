@@ -71,7 +71,7 @@ function App() {
 
       const currentPath =
         process.env.REACT_APP_BACKSERVER + window.location.pathname;
-      console.log(currentPath)
+      console.log(currentPath);
       const response = await axios.get(currentPath, {
         withCredentials: true,
         headers: {
@@ -116,7 +116,7 @@ function App() {
     const getUser = async () => {
       try {
         const tokenId = jwtCookie['jwtCookie'];
-        if(tokenId) {
+        if (tokenId) {
           const response = await userInfo({ id: tokenId });
           setuser(response.info._id); // user
         }
@@ -130,7 +130,7 @@ function App() {
   // console.log(user);
 
   // admin 로그인 시에만 admin페이지가 나오게
-  const [isAdmin, setIsAdmin] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState<any>(false);
   useEffect(() => {
     const checkAdmin = () => {
       try {
@@ -140,17 +140,24 @@ function App() {
       }
     };
     checkAdmin();
-    // console.log(isAdmin);
-  }, [user, isAdmin]);
+    console.log(isAdmin);
+  }, [user]);
 
-  // console.log(isAdmin);
+  // isAdmin 값을 로컬스토리지에 저장
+  localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+  useEffect(() => {
+    const localAdmin = localStorage.getItem('isAdmin');
+    if (localAdmin !== null) {
+      const storedAdmin = JSON.parse(localAdmin);
+      setIsAdmin(storedAdmin);
+    }
+  }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Routes>
-
           {/* 404 에러 페이지 */}
           {errorNum === 404 && <Route path="*" element={<NotFound />} />}
 
@@ -184,18 +191,17 @@ function App() {
           {/* <Route path="/virtual" element={<Virtual />} /> */}
           <Route path="/virtual" element={<StockVirtualPage />} />
 
-          {isAdmin !== null && (
+          {isAdmin ? (
             <>
               <Route path="/admin" element={<AdminPage data={isAdmin} />} />
               <Route
                 path="/admin/communityManage"
                 element={<CommunityManage />}
               />
-              <Route path="/admin/*" element={<AdminError />} />
             </>
-
+          ) : (
+            <Route path="*" element={<AdminError />} />
           )}
-
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>
