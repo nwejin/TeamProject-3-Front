@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { getReply } from '../../services/apiService';
+import { getReply, deleteReComment } from '../../services/apiService';
 import { useCookies } from 'react-cookie';
 import ReplyWrite from './ReplyWrite';
 
-function ReplyComment({ data }: any) {
-  //   const postId = data._id;
+function ReplyComment({ data, id, userNick, nick }: any) {
   // console.log('data', data); // 게시글 id
   const [replyData, setReplyData] = useState([]);
-
+  console.log('댓글 닉', nick);
+  console.log(userNick);
+  console.log(id);
   // 대댓글 가져오기
   useEffect(() => {
     // 서버에서 데이터를 불러와서 posts 상태 업데이트
@@ -22,7 +23,7 @@ function ReplyComment({ data }: any) {
     fetchData();
   }, [data]);
 
-  // console.log(replyData);
+  // console.log(data);
 
   // 댓글창 추가
   const [openReply, setOpenReply] = useState<any>();
@@ -44,6 +45,23 @@ function ReplyComment({ data }: any) {
       <div className="countComment"></div>
       {/* 댓글표시 */}
       {replyData.map((post: any) => {
+        console.log(post.userId.user_nickname);
+
+        const deleteContent = async () => {
+          try {
+            if (window.confirm('삭제 후 복구가 불가능 합니다.')) {
+              alert('삭제되었습니다.');
+              const result = await deleteReComment(post._id);
+              console.log('대댓글 삭제 성공', result);
+              window.location.href = `/community/${id}`;
+            } else {
+              alert('취소되었습니다.');
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        };
+
         const formatTimeDifference = (dateString: any) => {
           // 분계산
           const postDate = new Date(dateString);
@@ -105,13 +123,27 @@ function ReplyComment({ data }: any) {
               </div>
               {/* 댓글 내용 */}
               <div className="commentText">
-                <p className="text">{post.content}</p>
+                <p className="text">
+                  <span className="replyNick">@{nick}</span>
+                  {post.content}
+                </p>
               </div>
               <div className="statusBox">
-                <div></div>
+                <div style={{ width: '3%' }}>
+                  <button
+                    onClick={deleteContent}
+                    style={{
+                      visibility:
+                        userNick === post.userId.user_nickname
+                          ? 'visible'
+                          : 'hidden',
+                    }}
+                  >
+                    <span className="material-symbols-outlined">delete</span>
+                  </button>
+                </div>
               </div>
             </div>
-            {openReply === post._id && <ReplyWrite data={data} />}
           </div>
         );
       })}

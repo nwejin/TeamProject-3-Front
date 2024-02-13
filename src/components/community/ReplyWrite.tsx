@@ -55,6 +55,13 @@ function ReplyWrite({ data }: { data: any }) {
     getUserInfo();
   }, []);
 
+  const enter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      uploadComment();
+    }
+  };
+
   //   console.log(loginUserData);
 
   return (
@@ -92,6 +99,7 @@ function ReplyWrite({ data }: { data: any }) {
           cols={20}
           rows={7}
           onChange={commentChange}
+          onKeyDown={enter}
         ></textarea>
       </div>
     </div>

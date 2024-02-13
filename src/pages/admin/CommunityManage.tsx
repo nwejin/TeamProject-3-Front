@@ -121,7 +121,7 @@ const CommunityManage = () => {
                     <div className="cell">
                       <p> {post.userId.user_nickname}</p>
                     </div>
-                    <div className="cell">
+                    <div className="cell postText">
                       <p>{koreanTimeString1}</p>
                     </div>
                     <div className="cell">

@@ -332,6 +332,32 @@ export const deleteCommunity = async (communityId: String) => {
   }
 };
 
+// 댓글 삭제
+export const deleteComment = async (commentId: string) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/deleteCommnet',
+      { commentId }
+    );
+    return response.data;
+  } catch (error) {
+    console.log('댓글 삭제 실패');
+  }
+};
+
+// 대댓글 삭제
+export const deleteReComment = async (reCommentId: string) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/community/deleteReCommnet',
+      { reCommentId }
+    );
+    return response.data;
+  } catch (error) {
+    console.log('대댓글 삭제 실패!');
+  }
+};
+
 // 커뮤니티 글 수정 후 수정내용 업데이트
 export const updatePost = async (postid: String) => {
   try {
