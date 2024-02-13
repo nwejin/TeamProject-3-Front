@@ -18,6 +18,7 @@
   border-width: thin;
   height: 5vh;
   width: 20%;
+  max-width: 20%;
 }
 
 .postText {
@@ -27,6 +28,10 @@
   -webkit-line-clamp: 2;
   white-space: normal;
   line-height: 1.4;
+}
+
+.adminUser {
+  display: flex;
 }
 
 .reported {

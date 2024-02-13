@@ -128,7 +128,7 @@ function App() {
   // console.log(user);
 
   // admin 로그인 시에만 admin페이지가 나오게
-  const [isAdmin, setIsAdmin] = useState<Boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<any>(null);
   useEffect(() => {
     const checkAdmin = () => {
       try {
@@ -181,17 +181,17 @@ function App() {
           {/* 500 서버 에러 페이지 */}
           {errorNum === 500 && <Route path="*" element={<ServerError />} />}
 
-          {isAdmin ? (
+          {isAdmin !== null && (
             <>
               <Route path="/admin" element={<AdminPage data={isAdmin} />} />
               <Route
                 path="/admin/communityManage"
                 element={<CommunityManage />}
               />
+              <Route path="/admin/*" element={<AdminError />} />
             </>
-          ) : (
-            <Route path="*" element={<AdminError />} />
           )}
+          <Route path="*" element={<AdminError />} />
         </Routes>
       </BrowserRouter>
       <div>{serverData}</div>

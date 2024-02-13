@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { getComment, getReply } from '../../services/apiService';
+import {
+  getComment,
+  getReply,
+  deleteComment,
+  userInfo,
+} from '../../services/apiService';
 import ReplyWrite from './ReplyWrite';
 import { useCookies } from 'react-cookie';
 import ReplyComment from './ReplyComment';
 
 function Comment({ data }: { data: any }) {
-  const postId = data._id;
+  const postId = data._id; // 게시글 아이디
 
   const [commentData, setCommentData] = useState([]);
 
@@ -22,6 +27,8 @@ function Comment({ data }: { data: any }) {
     };
     fetchData();
   }, [postId]);
+
+  console.log(commentData);
 
   // console.log(commentData.length);
   // console.log(commentData);
@@ -76,14 +83,48 @@ function Comment({ data }: { data: any }) {
 
   renderPost(postId);
 
+  const [jwtCookie] = useCookies(['jwtCookie']);
+
+  const [userNick, setUserNick] = useState('');
+
+  useEffect(() => {
+    const setButton = async () => {
+      try {
+        const tokenId = jwtCookie['jwtCookie'];
+        const response = await userInfo({ id: tokenId });
+        setUserNick(response.info.user_nickname);
+      } catch (error) {
+        console.log('사용자 정보 가져오기 에러', error);
+      }
+    };
+    setButton();
+  }, []);
+
+  console.log(userNick);
+
   return (
     <>
       <div className="countComment">
-        <span>댓글</span>{' '}
+        <span>댓글 </span>
         <span id={`commentsCount_${postId}`}> 로딩 중...</span>
       </div>
       {/* 댓글표시 */}
       {commentData.map((post: any) => {
+        const deleteContent = async () => {
+          try {
+            if (window.confirm('삭제 후 복구가 불가능 합니다.')) {
+              alert('삭제되었습니다.');
+              const result = await deleteComment(post._id);
+              console.log('글 삭제 성공', result);
+              window.location.href = `/community/${postId}`;
+            } else {
+              alert('취소되었습니다.');
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        };
+
         const formatTimeDifference = (dateString: any) => {
           // 분계산
           const postDate = new Date(dateString);
@@ -135,22 +176,32 @@ function Comment({ data }: { data: any }) {
               <p className="text">{post.content}</p>
             </div>
             <div className="statusBox">
-              <div>
-                <span>
-                  {/* <button>
-                    <span className="material-symbols-outlined">favorite</span>
-                  </button> */}
-                </span>
+              <div className="editBox">
+                <button
+                  style={{
+                    visibility:
+                      userNick === post.userId.user_nickname
+                        ? 'visible'
+                        : 'hidden',
+                  }}
+                  onClick={deleteContent}
+                >
+                  <span className="material-symbols-outlined">delete</span>
+                </button>
 
-                <span>
-                  <button onClick={() => showModal(post._id)}>
-                    <span>댓글 달기</span>
-                  </button>
-                </span>
+                <button onClick={() => showModal(post._id)}>
+                  <span>댓글 달기</span>
+                </button>
               </div>
             </div>
             {openReply === post._id && <ReplyWrite data={commentId} />}
-            <ReplyComment data={post._id} openReply={openReply} />
+            <ReplyComment
+              nick={post.userId.user_nickname}
+              data={post._id}
+              openReply={openReply}
+              id={postId}
+              userNick={userNick}
+            />
             {/* {commentId && <ReplyWrite data={commentId} />} */}
           </div>
         );

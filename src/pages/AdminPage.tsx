@@ -144,27 +144,27 @@ const AdminPage = ({ data }: any) => {
 
               return (
                 <div className="adminUserBox">
-                  <div className="cell">
+                  <div className="cell postText adminUser">
                     <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
                   </div>
-                  <div className="cell">
+                  <div className="cell postText adminUser">
                     <p>
                       <img src={user.user_profile} alt="" />
                     </p>
                   </div>
-                  <div className="cell">
+                  <div className="cell postText adminUser">
                     <p> {user.user_id}</p>
                   </div>
-                  <div className="cell">
+                  <div className="cell postText adminUser">
                     <p> {user.user_nickname}</p>
                   </div>
-                  <div className="cell">
+                  <div className="cell postText adminUser">
                     <p>{user.user_email}</p>
                   </div>
-                  <div className="cell">
+                  <div className="cell postText adminUser">
                     <p>{user.news_bookmark.length}</p>
                   </div>
-                  <div className="cell">
+                  <div className="cell postText adminUser">
                     <p>{user.word_bookmark.length}</p>
                   </div>
                   <div className="cell">
