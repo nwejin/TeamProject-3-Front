@@ -21,21 +21,20 @@ const Header = () => {
   const [isHelpToggle, setIstHelpToggle] = useState(false);
   const location = useLocation();
 
-  const [userInfos, setUserInfos] = useState({
-    userId: '',
-    userNickName: '',
-    userProfile: '',
+  const [userInfos, setUserInfos] = useState<UserData>({
+    user_id: '',
+    user_password: '',
+    user_pwCheck: '',
+    user_email: '',
+    isAdmin: 0,
+    user_nickname: '',
+    user_profile: '',
   });
   const navigate = useNavigate();
 
   useEffect(() => {
     // console.log('useEffect 실행');
 
-    setUserInfos({
-      userId: '',
-      userNickName: '',
-      userProfile: '',
-    });
     const getUserInfo = async () => {
       try {
         const params = new URL(document.location.toString()).searchParams;
@@ -54,13 +53,14 @@ const Header = () => {
           setIsLogin(true);
           const response = await userInfo({ id: tokenId });
           // console.log('사용자 정보', response.info);
-          setUserInfos({
-            userId: response.info.user_id,
-            userNickName: response.info.user_nickname,
-            userProfile:
+          setUserInfos((prevState) => ({
+            ...prevState,
+            user_id: response.info.user_id,
+            user_nickname: response.info.user_nickname,
+            user_profile:
               response.info.user_profile ||
               process.env.PUBLIC_URL + 'mypage.png',
-          });
+          }));
         } else {
           setIsLogin(false);
         }
@@ -87,9 +87,13 @@ const Header = () => {
 
   const handleLogout = async () => {
     setUserInfos({
-      userId: '',
-      userNickName: '',
-      userProfile: '',
+      user_id: '',
+      user_password: '',
+      user_pwCheck: '',
+      user_email: '',
+      isAdmin: 0,
+      user_nickname: '',
+      user_profile: '',
     });
     // console.log(kakaoToken['kakaoToken']);
     if (kakaoToken['kakaoToken']) {
@@ -106,7 +110,8 @@ const Header = () => {
 
     alert('로그아웃 되었습니다.');
     setIsToggle(false);
-    navigate('/');
+    // navigate('/');
+    redirectMain();
   };
 
   const redirectMain = () => {
@@ -122,7 +127,7 @@ const Header = () => {
           await deleteKakao(kakaoToken['kakaoToken']);
           removekakaoToken('kakaoToken');
         }
-        const response = await deleteUser(userInfos.userId);
+        const response = await deleteUser(userInfos.user_id);
         if (response.success) {
           alert('회원정보 삭제 성공');
           removejwtCookie('jwtCookie');
@@ -145,14 +150,14 @@ const Header = () => {
   useEffect(() => {
     const checkAdmin = () => {
       try {
-        setIsAdmin(userInfos.userId === 'admin');
+        setIsAdmin(userInfos.isAdmin === 1);
       } catch (err) {
         console.log(err);
       }
     };
     checkAdmin();
     // console.log(isAdmin);
-  }, [userInfos.userId, isAdmin]);
+  }, [userInfos.user_id, isAdmin]);
 
   // console.log(isAdmin);
 
@@ -193,7 +198,7 @@ const Header = () => {
             <div className="Header-mypage-btn" onClick={mypageToggle}>
               <img
                 className="mypage-profile"
-                src={userInfos.userProfile}
+                src={userInfos.user_profile}
                 alt=""
                 style={{}}
               />
@@ -201,7 +206,7 @@ const Header = () => {
             {isToggle === true && (
               <div className="Header-mypage">
                 <div className="Header-nickname">
-                  {userInfos.userNickName}&nbsp;님의 투자 여정을 응원합니다!
+                  {userInfos.user_nickname}&nbsp;님의 투자 여정을 응원합니다!
                 </div>
                 <Link to="/wordBook">
                   <div>단어장</div>

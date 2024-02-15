@@ -34,6 +34,7 @@ import CommunityManage from './pages/admin/CommunityManage';
 import DeleteManage from './pages/admin/DeleteManage';
 
 import SavedNews from './pages/member/SavedNews';
+import { UserData } from './types/types';
 
 function App() {
   const [serverData, setServerData] = useState('');
@@ -111,7 +112,7 @@ function App() {
 
   const [jwtCookie] = useCookies(['jwtCookie']);
 
-  const [user, setuser] = useState('');
+  const [user, setuser] = useState<UserData>();
 
   useEffect(() => {
     const getUser = async () => {
@@ -119,14 +120,14 @@ function App() {
         const tokenId = jwtCookie['jwtCookie'];
         if (tokenId) {
           const response = await userInfo({ id: tokenId });
-          setuser(response.info._id); // user
+          setuser(response.info); // user
         }
       } catch (err) {
         console.log(err);
       }
     };
     getUser();
-  }, []);
+  }, [jwtCookie]);
 
   // console.log(user);
 
@@ -135,7 +136,7 @@ function App() {
   useEffect(() => {
     const checkAdmin = () => {
       try {
-        setIsAdmin(user === '65bf6b7cec13aa6787e6819a');
+        setIsAdmin(user?.isAdmin === 1);
       } catch (err) {
         console.log(err);
       }

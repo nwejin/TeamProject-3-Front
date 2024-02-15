@@ -243,6 +243,7 @@ const SignupPage = () => {
           // console.log('회원가입 성공:', response);
           alert('회원가입 성공!');
           navigate('/signin');
+          window.location.href = '/';
           // 성공 메시지 출력 또는 리다이렉트 등 필요한 처리
         } else {
           // console.error('회원가입 실패:', response);
