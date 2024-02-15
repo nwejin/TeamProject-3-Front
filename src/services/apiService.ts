@@ -853,7 +853,7 @@ export const recoverPost = async (postId: String) => {
 export const readDelete = async (postId: String) => {
   try {
     const response = await axios.post(
-      process.env.REACT_APP_BACKSERVER + '/admin/deleteManage/reatDelete',
+      process.env.REACT_APP_BACKSERVER + '/admin/deleteManage/realDelete',
       { postId }
     );
     return response.data;
