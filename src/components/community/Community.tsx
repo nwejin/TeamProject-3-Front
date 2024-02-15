@@ -140,9 +140,9 @@ function Community() {
           } else {
             // 한국 시간으로 표시
             const formattedDate = postDate.toLocaleString('ko-KR', {
-              hour: 'numeric',
-              minute: 'numeric',
-              second: 'numeric',
+              // hour: 'numeric',
+              // minute: 'numeric',
+              // second: 'numeric',
               year: 'numeric',
               month: 'numeric',
               day: 'numeric',

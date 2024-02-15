@@ -77,7 +77,7 @@ const ShowDetail = ({ response, close, user, userid }: props): ReactElement => {
         </p>
       </div>
       <div className="innerContent">
-        <div style={{ width: '100%', height: '100%' }}>
+        <div id="detailChart1">
           <MyResponsiveLine data={profitArray} />
         </div>
 

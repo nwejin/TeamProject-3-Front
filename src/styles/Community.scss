@@ -150,9 +150,10 @@ button {
     height: 30px;
     div {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      width: 100px;
+      width: 7vw;
+      justify-content: space-between;
+
       button {
         outline: 0;
         background: none;
@@ -178,7 +179,7 @@ button {
   width: 70%;
   height: fit-content;
   margin-bottom: 3vw;
-  //   background-color: red;
+  // background-color: red;
 }
 .rankingBox {
   width: 28%;
@@ -511,7 +512,6 @@ button {
       align-items: center;
       justify-content: flex-end;
       height: 30px;
-      // background-color: pink;
       span {
         font-size: 14px;
         color: $color-gray-2;
@@ -520,7 +520,7 @@ button {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 9%;
+        width: 11vh;
         button {
           // border: 1px solid $color-gray-1;
           padding: 0.25rem 0.5rem;
@@ -545,7 +545,7 @@ button {
   color: $color-gray-2;
   position: absolute;
   top: 1%;
-  left: 2%;
+  // left: 2%;
 }
 
 .commentWriteBox {
@@ -758,6 +758,12 @@ button {
   // border: 1px solid $color-gray-1;
   width: 253%;
   height: 105vh;
+  .statusBox {
+    div {
+      width: 25%;
+      justify-content: space-around;
+    }
+  }
   ul {
     list-style: none;
     padding: 0.7em 0.5rem;
@@ -800,4 +806,132 @@ button {
 .replyNick {
   color: $color-gray-2;
   margin-right: 1%;
+}
+
+#deleteBox1 {
+  width: 3vw;
+}
+
+// $breakpoint-mobile: 335px;
+// $breakpoint-tablet: 758px;
+// $breakpoint-desktop: 1024px;
+
+// 모바일
+@media (min-width: 335px) and (max-width: 757px) {
+  .main {
+    // background-color: pink;
+  }
+  .postBox {
+    width: 100%;
+  }
+  .rankingBox {
+    position: absolute;
+    top: 170%;
+    width: 60%;
+    // background-color: pink;
+  }
+  #postSearch {
+    position: relative;
+    margin: auto;
+  }
+  .postListBox {
+    display: none;
+  }
+  .searchModal {
+    top: -2150%;
+    height: 137vh;
+    left: 0;
+    width: 120%;
+    // background-color: pink;
+    .post {
+      .statusBox {
+        div {
+          width: 40vw;
+        }
+      }
+    }
+  }
+  .post {
+    .statusBox {
+      div {
+        width: 30vw;
+      }
+    }
+  }
+  .modalBackGround {
+    .modalBox {
+      width: 80%;
+    }
+  }
+  .commentBox {
+    .commentInnerBox {
+      .statusBox {
+        div {
+          width: 28vw;
+        }
+      }
+    }
+  }
+  #deleteBox1 {
+    width: 8vw;
+  }
+
+  .delModiBtn {
+    span {
+      font-size: 0.8rem;
+    }
+  }
+
+  .profile {
+    p {
+      font-size: 0.8rem;
+    }
+    span {
+      font-size: 0.5rem;
+    }
+  }
+}
+
+// 태블릿
+@media (min-width: 758px) and (max-width: 1023px) {
+  .main {
+    // background-color: gray;
+  }
+
+  .modalBackGround {
+    .modalBox {
+      width: 80%;
+    }
+  }
+  .post {
+    .statusBox {
+      div {
+        width: 25%;
+      }
+    }
+  }
+
+  .searchModal {
+    .post {
+      .statusBox {
+        div {
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  .commentBox {
+    .commentInnerBox {
+      .statusBox {
+        div {
+          width: 12vw;
+        }
+      }
+    }
+  }
+
+  #deleteBox1 {
+    width: 4vw;
+  }
 }

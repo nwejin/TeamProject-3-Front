@@ -568,3 +568,48 @@ p {
 // .nickName3 {
 //   color: #cd7f32;
 // }
+
+#detailChart1 {
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 335px) and (max-width: 757px) {
+  .invest-wrapper {
+    // background-color: pink;
+    flex-direction: column;
+    justify-content: center;
+    .invest-chart {
+      width: 100%;
+    }
+    .invest-input {
+      margin-top: 10%;
+      width: 100%;
+      height: 50vh;
+    }
+  }
+  .invest-wrapper {
+    height: 110vh;
+    .invest-input {
+      .btn-wapper {
+        .Btn {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .detail-wrapper {
+    // background-color: pink;
+    top: -100%;
+    left: -5%;
+    width: 100%;
+    height: 110vh;
+    .innerContent {
+      display: flex;
+      flex-direction: column;
+      #detailChart1 {
+        height: 40%;
+      }
+    }
+  }
+}
