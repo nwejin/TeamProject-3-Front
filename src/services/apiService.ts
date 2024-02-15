@@ -822,3 +822,42 @@ export const likeGet = async ({
     throw new Error('예상치 못한 오류가 발생했습니다! (신고 가져오기)');
   }
 };
+
+// 삭제 게시글 불러오기
+export const getDeletePost = async () => {
+  try {
+    const response = await axios.get(
+      process.env.REACT_APP_BACKSERVER + '/admin/deleteManage'
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error('예상치 못한 오류가 발생했습니다! (게시글 불러오기)');
+  }
+};
+
+// 복구
+export const recoverPost = async (postId: String) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/admin/deleteManage/recover',
+      { postId }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// 삭제
+export const readDelete = async (postId: String) => {
+  try {
+    const response = await axios.post(
+      process.env.REACT_APP_BACKSERVER + '/admin/deleteManage/reatDelete',
+      { postId }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,7 +1,40 @@
 import '../../styles/Admin.scss';
 import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import {
+  getDeletePost,
+  recoverPost,
+  readDelete,
+} from '../../services/apiService';
 
 const DeleteManage = () => {
+  const [posts, setPosts] = useState([]);
+
+  // 삭제 데이터 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const postData = await getDeletePost();
+        setPosts(postData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  console.log(posts);
+
+  // const realDelete = async () => {
+  //   try {
+
+  //       const result = await
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <>
       <div className="outer-wrapper">
@@ -29,23 +62,55 @@ const DeleteManage = () => {
               <p>내용</p>
             </div>
             <div className="cell">
-              <p>작성자</p>
-            </div>
-            <div className="cell">
-              <p>작성시간</p>
-            </div>
-            <div className="cell">
-              <p>좋아요</p>
-            </div>
-            <div className="cell">
-              <p>신고수</p>
-            </div>
-            <div className="cell">
               <p>복원</p>
             </div>
             <div className="cell">
               <p>영구 삭제</p>
             </div>
+          </div>
+          <div>
+            {posts.map((post: any) => {
+              console.log(post._id);
+              const recoverContent = async () => {
+                try {
+                  const result = await recoverPost(post._id);
+                } catch (error) {
+                  console.log(error);
+                }
+              };
+
+              const realDelete = async () => {
+                try {
+                  const result = await readDelete(post._id);
+                } catch (error) {
+                  console.log(error);
+                }
+              };
+
+              return (
+                <div className="adminUserBox">
+                  <div className="cell">
+                    <p>1</p>
+                  </div>
+                  <div className="cell postText">
+                    <p>{post.title}</p>
+                  </div>
+                  <div className="cell postText">
+                    <p> {post.content}</p>
+                  </div>
+                  <div className="cell">
+                    <button onClick={recoverContent}>
+                      <span>복원하기</span>
+                    </button>
+                  </div>
+                  <div className="cell">
+                    <button onClick={realDelete}>
+                      <span>영구 삭제 하기</span>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
