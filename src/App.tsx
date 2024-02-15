@@ -31,6 +31,7 @@ import StockVirtualPage from './pages/stockGuide/StockVirtualPage';
 import StockRatePage from './pages/stockGuide/StockRatePage';
 import AdminPage from './pages/AdminPage';
 import CommunityManage from './pages/admin/CommunityManage';
+import DeleteManage from './pages/admin/DeleteManage';
 
 import SavedNews from './pages/member/SavedNews';
 
@@ -198,6 +199,7 @@ function App() {
                 path="/admin/communityManage"
                 element={<CommunityManage />}
               />
+              <Route path="/admin/deleteManage" element={<DeleteManage />} />
             </>
           ) : (
             <Route path="*" element={<AdminError />} />

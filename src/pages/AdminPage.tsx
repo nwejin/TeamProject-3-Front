@@ -82,7 +82,10 @@ const AdminPage = ({ data }: any) => {
             <li className="selected-blue">회원 관리</li>
           </Link>
           <Link to="/admin/communityManage">
-            <li>게시글 관리</li>
+            <li>신고글 관리</li>
+          </Link>
+          <Link to="/admin/deleteManage">
+            <li>삭제 관리</li>
           </Link>
         </ul>
         <div className="getAllUser">

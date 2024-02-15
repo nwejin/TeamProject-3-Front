@@ -49,7 +49,10 @@ const CommunityManage = () => {
             <li>회원 관리</li>
           </Link>
           <Link to="/admin/communityManage">
-            <li className="selected-blue">게시글 관리</li>
+            <li className="selected-blue">신고글 관리</li>
+          </Link>
+          <Link to="/admin/deleteManage">
+            <li>게시글 관리</li>
           </Link>
         </ul>
         <div>
