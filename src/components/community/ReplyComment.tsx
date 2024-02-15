@@ -80,9 +80,9 @@ function ReplyComment({ data, id, userNick, nick }: any) {
           } else {
             // 한국 시간으로 표시
             const formattedDate = postDate.toLocaleString('ko-KR', {
-              hour: 'numeric',
-              minute: 'numeric',
-              second: 'numeric',
+              // hour: 'numeric',
+              // minute: 'numeric',
+              // second: 'numeric',
               year: 'numeric',
               month: 'numeric',
               day: 'numeric',
@@ -108,7 +108,7 @@ function ReplyComment({ data, id, userNick, nick }: any) {
             <span className="material-symbols-outlined undo">
               prompt_suggestion
             </span>
-            <div style={{ marginLeft: '5%' }}>
+            <div style={{ marginLeft: '3vh' }}>
               <div className="userProfile">
                 <div className="profile">
                   <span>
@@ -129,7 +129,7 @@ function ReplyComment({ data, id, userNick, nick }: any) {
                 </p>
               </div>
               <div className="statusBox">
-                <div style={{ width: '3%' }}>
+                <div id="deleteBox1">
                   <button
                     onClick={deleteContent}
                     style={{

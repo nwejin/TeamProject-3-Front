@@ -89,9 +89,9 @@ function CommunityRead() {
     } else {
       // 한국 시간으로 표시
       const formattedDate = postDate.toLocaleString('ko-KR', {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
+        // hour: 'numeric',
+        // minute: 'numeric',
+        // second: 'numeric',
         year: 'numeric',
         month: 'numeric',
         day: 'numeric',
@@ -236,7 +236,7 @@ function CommunityRead() {
               {postData.userId.user_nickname}
             </p>
             <span style={{ fontSize: '10px' }}>•</span>
-            <span>{formatTimeDifference(postData.date)}</span>
+            <span className="time">{formatTimeDifference(postData.date)}</span>
           </div>
           <div
             style={{
