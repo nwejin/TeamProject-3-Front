@@ -74,14 +74,9 @@ const MainVirtualRanking = ({ data }: props) => {
                   size="2x"
                   style={{ left: '-5%', top: '6%' }}
                 />
-                <div className={RankClass} style={{ fontSize: '22px' }}>
-                  No. {myRank}
-                </div>
+                <div className={RankClass}>No. {myRank}</div>
 
-                <div
-                  className={userImg}
-                  style={{ width: '70px', height: '70px' }}
-                >
+                <div className={userImg}>
                   <img src={data.profile} alt="" />
                 </div>
 

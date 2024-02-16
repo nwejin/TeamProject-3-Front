@@ -29,6 +29,9 @@ const MyPage = () => {
     user_profile: '',
   });
 
+  useEffect(() => {
+    console.log(formData);
+  }, []);
   const signupValidate = (inputType: string) => {
     if (inputType === 'pw') {
       if (formData.user_changepw.length < 8) {
@@ -75,10 +78,29 @@ const MyPage = () => {
         user_password: response.info.user_password,
         user_profile: response.info.user_profile,
       }));
+      console.log(formData);
     } catch (error) {
       navigate('/');
       console.log('사용자 정보 가져오기 에러', error);
     }
+  };
+
+  const handleReset = async () => {
+    const tokenId = jwtCookie['jwtCookie'];
+    const response = await userInfo({ id: tokenId });
+
+    console.log(response.info);
+    setMyId(response.info.user_id);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      user_email: response.info.user_email,
+      user_nickname: response.info.user_nickname,
+      // user_changepw: '',
+      // user_password: '',
+      user_profile: response.info.user_profile,
+    }));
+    console.log('Reset:', formData);
   };
 
   // 현재 비밀번호 일치 확인
@@ -258,8 +280,8 @@ const MyPage = () => {
           alert('비밀번호를 확인해주세요');
           pwRef.current?.focus();
         } else if (
-          pwValiCheck.includes('최소') ||
-          formData.user_changepw.trim() === ''
+          pwValiCheck.includes('최소')
+          // || formData.user_changepw.trim() === ''
         ) {
           alert('비밀번호는 최소 8자리 이상입니다.');
           pwReRef.current?.focus();
@@ -346,7 +368,6 @@ const MyPage = () => {
                 name="user_password"
                 placeholder="현재 비밀번호"
                 ref={pwRef}
-                // value={formData.user_password}
                 className="input-box"
                 onChange={handleInputChange}
                 onKeyUp={passwordCheck}
@@ -395,18 +416,13 @@ const MyPage = () => {
             />
             <div className="emailCheckBox">{emailCheck}</div>
             <div style={{ width: '100%' }}>
-              <button className="resetBtn" onClick={modifyUserInfo}>
+              <button className="resetBtn" type="reset" onClick={handleReset}>
                 취소
               </button>
               <button className="modifyBtn" onClick={modifyUserInfo}>
                 수정
               </button>
             </div>
-            <br />
-
-            {/* <button className="signinBtn" onClick={deleteUserInfo}>
-              회원탈퇴
-            </button> */}
           </div>
         </form>
       </div>
