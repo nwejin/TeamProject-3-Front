@@ -188,6 +188,27 @@ const MainPage = () => {
       <div className="inner-wrapper">
         <Banner />
       </div>
+      <div className="inner-wrapper">
+        <div className="section0">
+          <span>주식을 시작하고 싶은 당신을 위해</span>
+          {!isLogin && (
+            <Link to="/signin">
+              <img
+                className="section1-img2"
+                src={process.env.PUBLIC_URL + 'back.png'}
+              />
+            </Link>
+          )}
+          {isLogin && (
+            <Link to="/stockGuide">
+              <img
+                className="section1-img2"
+                src={process.env.PUBLIC_URL + 'back.png'}
+              />
+            </Link>
+          )}
+        </div>
+      </div>
       <div className="outer-wrapper">
         <div className="inner-wrapper">
           <div className="section1">
@@ -199,28 +220,15 @@ const MainPage = () => {
               당신을 위해
             </div>
             <span>주식을 시작하고 싶은 당신을 위해</span>
-            {!isLogin && (
-              <Link to="/signin">
-                <img
-                  className="section1-img1"
-                  src={process.env.PUBLIC_URL + 'finance.jpg'}
-                />
-                <img
-                  className="section1-img2"
-                  src={process.env.PUBLIC_URL + 'back.png'}
-                />
-              </Link>
-            )}
+
+            <img
+              className="section1-img1"
+              src={process.env.PUBLIC_URL + 'finance.jpg'}
+            />
+
             {isLogin && (
               <Link to="/stockGuide">
-                <img
-                  className="section1-img1"
-                  src={process.env.PUBLIC_URL + 'finance.jpg'}
-                />
-                <img
-                  className="section1-img2"
-                  src={process.env.PUBLIC_URL + 'back.png'}
-                />
+                <button key="signin-button">개미운동 시작하기</button>
               </Link>
             )}
 

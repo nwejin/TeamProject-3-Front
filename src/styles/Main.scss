@@ -437,6 +437,9 @@
 .ranking {
   font-size: 1.5vw;
 }
+.section0 {
+  display: none;
+}
 
 @media screen and (max-width: 1024px) and (min-width: 758px) {
   .main-news-content {
@@ -584,34 +587,50 @@
   }
 }
 @media screen and (max-width: 757px) {
+  .inner-wrapper {
+    .section0 {
+      width: 100%;
+      height: 6vh;
+      margin: 0 auto;
+      display: block;
+      div {
+        display: none;
+      }
+      span {
+        display: block;
+        position: absolute;
+        margin: calc((6vh - 14px) / 2) 5vw;
+        font-size: 14px;
+        font-weight: 500;
+        color: white;
+      }
+      .section1-img1 {
+        display: none;
+      }
+      .section1-img2 {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      button {
+        display: none;
+        // right: 5vw;
+      }
+    }
+  }
+
   .outer-wrapper {
     // width: calc(100% - 10vw);
-    width: 100%;
+    width: 90%;
+
     .inner-wrapper {
       display: block;
       .section1 {
-        width: 100%;
-        height: 6vh;
-        margin: 0 auto;
+        display: none;
         div {
           display: none;
         }
-        span {
-          display: block;
-          position: absolute;
-          margin: calc((6vh - 14px) / 2) 5vw;
-          font-size: 14px;
-          font-weight: 500;
-          color: white;
-        }
-        .section1-img1 {
-          display: none;
-        }
-        .section1-img2 {
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
+
         button {
           display: none;
           // right: 5vw;
@@ -619,16 +638,16 @@
       }
       .section2 {
         height: 35vh;
-        width: 90%;
+        width: 100%;
         margin: 4vh auto;
       }
       .section3 {
-        width: 90%;
+        width: 100%;
         margin: 0 auto 4vh auto;
         height: 35vh;
       }
       .section4 {
-        width: 90%;
+        width: 100%;
         height: 40vh;
         margin: 0 auto;
         border: none;
@@ -761,7 +780,7 @@
   }
   .point-section {
     height: 56vh;
-    padding: 0 5vw;
+    // padding: 0 5vw;
     .outer-wrapper {
       // margin-top: 12vh;
     }

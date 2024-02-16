@@ -474,3 +474,108 @@
     opacity: 1;
   }
 }
+@media screen and (max-width: 1024px) and (min-width: 758px) {
+}
+@media screen and (max-width: 757px) {
+  .outer-wrapper {
+    .guide-title {
+      margin: 2vh 0;
+      font-size: 22px;
+    }
+    .stock-guide {
+      display: block;
+      .trade-control {
+        width: 100%;
+        margin-bottom: 25vh;
+        height: 70vh;
+        .stock-info {
+          // padding: 0 0 2vh 2vh;
+          padding: 3vh;
+          font-size: 16px;
+
+          .market {
+            .company {
+              margin: 1vh 0 2vh 0;
+              font-size: 20px;
+            }
+
+            .market-price {
+              font-size: 18px;
+            }
+            .daily-change {
+              font-size: 14px;
+              margin-top: 1vh;
+            }
+          }
+          .volume {
+            font-size: 14px;
+            margin-left: 0;
+            text-align: right;
+            position: relative;
+            right: -8vh;
+
+            .graph-btn {
+              span {
+                .bar-graph-btn,
+                .candle-graph-btn {
+                  width: 8vh;
+                  height: 5vh;
+                  border: 1px solid $color-gray-1;
+                  border-radius: 5px;
+                  padding: 2px;
+                }
+              }
+            }
+          }
+        }
+        .order {
+          height: calc(70vh - (20px + 10.1vw));
+          .order-book {
+            height: calc(70vh - (20px + 10.1vw));
+            .order-wrapper-scroll {
+              height: calc(70vh - (20px + 10.1vw));
+            }
+          }
+        }
+      }
+      .stock-section {
+        width: 100%;
+        height: 55vh;
+        .stock-chart {
+          height: 54vh;
+        }
+        .stock-explain {
+          margin: 0;
+          position: fixed;
+          bottom: 6vh;
+          width: 90%;
+          height: 18vh;
+          background-color: white;
+          z-index: 90;
+        }
+      }
+    }
+  }
+  .trade-tab {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid $color-gray-1;
+    font-size: 16px;
+    .btn-selected {
+      border-bottom: 2px solid #333;
+    }
+    .tradeBtn {
+      width: calc(100% / 3);
+      padding: 1vh 0;
+      text-align: center;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(0.7);
+        font-weight: bold;
+        // border: 1px solid black;
+        background-color: #fff;
+        opacity: 1;
+      }
+    }
+  }
+}
