@@ -132,21 +132,17 @@ function App() {
   // console.log(user);
 
   // admin 로그인 시에만 admin페이지가 나오게
-  const [isAdmin, setIsAdmin] = useState<any>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   useEffect(() => {
-    const checkAdmin = () => {
-      try {
-        setIsAdmin(user?.isAdmin === 1);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    checkAdmin();
-    console.log(isAdmin);
+    if (user) {
+      setIsAdmin(user.isAdmin === 1);
+    }
   }, [user]);
 
-  // isAdmin 값을 로컬스토리지에 저장
-  localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+  useEffect(() => {
+    localStorage.setItem('isAdmin', JSON.stringify(isAdmin));
+  }, [isAdmin]);
+
   useEffect(() => {
     const localAdmin = localStorage.getItem('isAdmin');
     if (localAdmin !== null) {
