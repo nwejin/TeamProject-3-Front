@@ -23,7 +23,7 @@ const DeleteManage = () => {
     fetchData();
   }, []);
 
-  console.log(posts);
+  // console.log(posts);
 
   // const realDelete = async () => {
   //   try {

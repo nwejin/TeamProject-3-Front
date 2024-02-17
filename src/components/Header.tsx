@@ -20,6 +20,7 @@ const Header = () => {
   const [isToggle, setIsToggle] = useState(false);
   const [isHelpToggle, setIstHelpToggle] = useState(false);
   const location = useLocation();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const [userInfos, setUserInfos] = useState<UserData>({
     user_id: '',
@@ -61,6 +62,7 @@ const Header = () => {
               response.info.user_profile ||
               process.env.PUBLIC_URL + 'mypage.png',
           }));
+          setIsAdmin(response.info.isAdmin === 1);
         } else {
           setIsLogin(false);
         }
@@ -110,7 +112,6 @@ const Header = () => {
 
     alert('로그아웃 되었습니다.');
     setIsToggle(false);
-    // navigate('/');
     redirectMain();
   };
 
@@ -145,19 +146,25 @@ const Header = () => {
     }
   };
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  // useEffect(() => {
+  //   const localAdmin = localStorage.getItem('isAdmin');
+  //   if (localAdmin !== null) {
+  //     const storedAdmin = JSON.parse(localAdmin);
+  //     setIsAdmin(storedAdmin);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    const checkAdmin = () => {
-      try {
-        setIsAdmin(userInfos.isAdmin === 1);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    checkAdmin();
-    // console.log(isAdmin);
-  }, [userInfos.user_id, isAdmin]);
+  // useEffect(() => {
+  //   const checkAdmin = () => {
+  //     try {
+  //       setIsAdmin(userInfos.isAdmin === 1);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   checkAdmin();
+  //   // console.log(isAdmin);
+  // }, [userInfos.user_id, isAdmin]);
 
   // console.log(isAdmin);
 
