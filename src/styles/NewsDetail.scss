@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     display: wi;
-    width: 48vw;
+    width: 70%;
     margin: 0 auto;
     justify-content: center;
     margin-bottom: 6vw;
@@ -30,7 +30,7 @@
       }
       .pen {
         // color: $color-gray-1;
-        border: 1px solid $color-gray-1;
+        border: 1px solid grey;
         width: 70px;
         padding: 6px;
         text-align: center;
@@ -49,9 +49,9 @@
         // }
       }
       .saveNews {
-        border-top: 1px solid $color-gray-1;
-        border-bottom: 1px solid $color-gray-1;
-        border-right: 1px solid $color-gray-1;
+        border-top: 1px solid grey;
+        border-bottom: 1px solid grey;
+        border-right: 1px solid grey;
         width: 70px;
         padding: 6px;
         text-align: center;
@@ -68,12 +68,20 @@
       }
     }
 
+    .detailTitle {
+      font-weight: 600;
+    }
     .detailDate {
       color: grey;
     }
+    .detailSubT {
+      font-weight: 600;
+    }
     .detailContent {
-      line-height: 1.8;
+      line-height: 1.6;
       // white-space: pre-line;
+      cursor: text;
+      
     }
     .detailImg {
       width: 100%;
@@ -82,13 +90,16 @@
     .highlight {
       background-color: $color-blue-2;
       cursor: pointer;
+      // cursor: help;
     }
     .myHighlight {
       background-color: lemonchiffon;
       cursor: pointer;
     }
     .detailSrc {
+      word-break: break-all;
       word-wrap: break-word;
+      font-size: 15px;
     }
   }
 
@@ -141,3 +152,58 @@
 //   'GRAD' 0,
 //   'opsz' 24
 // }
+
+
+@media screen and (max-width: 768px){
+  .outer-wrapper {
+    .detailWrapper {
+      width: 80%;
+
+      .tool {
+        .pen{
+          width: 55px;
+          font-size: 13px;
+        }
+        .saveNews{
+          width: 55px;
+          font-size: 13px;
+        }
+      }
+      .detailTitle {
+        font-weight: 500;
+        font-size: 28px;
+      }
+      .detailSubT {
+        font-weight: 500;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 430px){
+  .outer-wrapper {
+    .detailWrapper {
+      width: 100%;
+
+      .tool {
+        .pen{
+          width: 50px;
+          font-size: 12px;
+        }
+        .saveNews{
+          width: 50px;
+          font-size: 12px;
+        }
+      }
+      .detailTitle {
+        font-weight: 400;
+        font-size: 24px;
+      }
+      .detailSubT {
+        font-weight: 400;
+      }
+    }
+  }
+
+}

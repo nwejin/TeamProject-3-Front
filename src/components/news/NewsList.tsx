@@ -19,7 +19,7 @@ function NewsList({data}: NewsListProp) {
                 <div className="dataTxt">
                     <p className="dataTitle">{data.title}</p>
                     <p className="dataContent">{data.content}</p>
-                    {/* <p className="dataDate">{data.date}</p> */}
+                    <p className="dataDate">{data.date}</p>
                 </div>
                 
             </div>
