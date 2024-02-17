@@ -25,9 +25,13 @@
 
 
 .refresh-btn {
-    .material-symbols-outlined:hover {
-        color: $color-blue-1;;
+    .material-symbols-outlined {
+        // font-size: 16px;
+        &:hover {
+            color: $color-blue-1;
+        }
     }
+        
 }
 
 
@@ -43,12 +47,15 @@ article {
         margin: 15px 0 15px 0;
 
         .dataImgCover {
-            width: 220px;
-            height: 150px;
+            width: 220px ;
+            height: 150px ;
+            // object-fit: contain;
 
             .dataImg {
-                width: inherit ;
-                height: inherit ;
+                width: inherit;
+                height: inherit;
+                // object-fit: contain;
+                border: 1px solid $color-gray;
 
             }
         }
@@ -66,7 +73,7 @@ article {
                 -webkit-line-clamp: 1;
                 white-space: normal;
                 line-height: 1.4;
-                margin-bottom: 5px;
+                margin-bottom: 10px;
                 font-weight: 600;
                 font-size: 19px;
             }
@@ -81,18 +88,81 @@ article {
                 // margin: 0;
                 color: grey;
             }
+            .dataDate {
+                display: none;
+                color: grey;
+                font-weight: 300;
+            }
     
         }
     }    
 }
 
-@media screen and (max-width: 390px){
+@media screen and (max-width: 1024px){
+    article {
+        .newsData {
+            .dataImgCover {
+                width: 170px;
+                height: 116px;
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 768px){
+    article {
+        .newsData {
+            .dataImgCover {
+                width: 145px;
+                height: 99px;
+            }
+            .dataTxt{
+                .dataTitle{
+                    -webkit-line-clamp: 2;
+                    line-height: 1.3;
+                    margin-bottom: 6px;
+                    font-weight: 500;
+                    font-size: 18px;
+                }
+                .dataContent {
+                    font-size: 14px;
+                }
+                
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: 430px){
     article {
         .newsData {
             .dataImgCover {
                 width: 100px;
-                height: auto;
+                height: 68px;
             }
+            .dataTxt{
+                .dataTitle{
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    white-space: normal;
+                    line-height: 1.3;
+                    margin-bottom: 5px;
+                    font-weight: 400;
+                    font-size: 17px;
+                }
+                .dataContent {
+                    display: none;
+                }
+                .dataDate {
+                    display: block;
+                    font-size: 12px;
+                }
+            }
+            
         }
     }
 
