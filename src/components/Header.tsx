@@ -18,7 +18,7 @@ const Header = () => {
   const [isKakao, setisKakao, removeisKakao] = useCookies(['isKakao']);
   const [isLogin, setIsLogin] = useState(false);
   const [isToggle, setIsToggle] = useState(false);
-  const [isHelpToggle, setIstHelpToggle] = useState(false);
+  const [menuToggle, setMenuToggle] = useState(false);
   const location = useLocation();
 
   const [userInfos, setUserInfos] = useState<UserData>({
@@ -52,7 +52,7 @@ const Header = () => {
         if (tokenId) {
           setIsLogin(true);
           const response = await userInfo({ id: tokenId });
-          // console.log('사용자 정보', response.info);
+          console.log('사용자 정보', response.info);
           setUserInfos((prevState) => ({
             ...prevState,
             user_id: response.info.user_id,
@@ -80,8 +80,17 @@ const Header = () => {
     }
   };
 
+  const menuTabToggle = () => {
+    setMenuToggle((prevIsToggle) => !prevIsToggle);
+    if (menuToggle) {
+      setMenuToggle(false);
+    } else {
+      setMenuToggle(true);
+    }
+  };
+
   useEffect(() => {
-    setIstHelpToggle(false);
+    setMenuToggle(false);
     setIsToggle(false);
   }, [location.pathname]);
 
@@ -150,16 +159,15 @@ const Header = () => {
   useEffect(() => {
     const checkAdmin = () => {
       try {
+        console.log(userInfo);
         setIsAdmin(userInfos.isAdmin === 1);
       } catch (err) {
         console.log(err);
       }
     };
     checkAdmin();
-    // console.log(isAdmin);
+    console.log(isAdmin);
   }, [userInfos.user_id, isAdmin]);
-
-  // console.log(isAdmin);
 
   const moveTop = () => {
     window.scrollTo(0, 0);
@@ -235,17 +243,93 @@ const Header = () => {
             <div className="Header-login-btn">로그인</div>
           </Link>
         )}
+
+        <div className="menu-bar" onClick={menuTabToggle}>
+          <span className="material-symbols-outlined">menu</span>
+        </div>
       </div>
-      {isHelpToggle === true && <div className="help-box"></div>}
+
       <div className="remote-btn">
-        {/* <div className="fix-icon" onClick={helpToggle}>
-            <span className="material-symbols-rounded">question_mark</span>
-          </div> */}
-        {/* <a href="#top"> */}
         <div className="fix-icon" onClick={moveTop}>
           <span className="material-symbols-rounded">vertical_align_top</span>
         </div>
-        {/* </a> */}
+      </div>
+      <div className={`responsive-tab ${menuToggle ? 'visible' : ''}`}>
+        {isLogin === true && (
+          <>
+            <div className="Header-mypage-btn">
+              <img
+                className="mypage-profile"
+                src={userInfos.user_profile}
+                alt=""
+                style={{}}
+              />
+            </div>
+            <div className="Header-mypage">
+              <div className="Header-nickname">
+                {userInfos.user_nickname}&nbsp;님의 투자 여정을 응원합니다!
+              </div>
+              <Link to="/wordBook">
+                <div>단어장</div>
+              </Link>
+              <Link to="/savedNews">
+                <div>뉴스 스크랩</div>
+              </Link>
+            </div>
+          </>
+        )}
+        {isLogin === false && (
+          <>
+            <div className="Header-mypage-btn">
+              <img
+                className="mypage-profile"
+                src={userInfos.user_profile}
+                alt=""
+                style={{}}
+              />
+            </div>
+            <div className="Header-notuser">
+              아직 개미운동에 가입하지 않으셨나요?
+            </div>
+            <Link to="/signin">
+              <div className="Header-login-btn">로그인</div>
+            </Link>
+          </>
+        )}
+        <ul>
+          <li>
+            <Link to="/news/economy">뉴스룸</Link>
+          </li>
+          <li>
+            <Link to="/stockGuide">주식 길잡이</Link>
+          </li>
+          <li>
+            <Link to="/community">개미의 시선</Link>
+          </li>
+          {isAdmin ? (
+            <li>
+              <Link to="/admin">관리자 페이지</Link>
+            </li>
+          ) : (
+            ''
+          )}
+        </ul>
+        {isLogin === true && (
+          <>
+            <div className="logout-btn" onClick={handleLogout}>
+              로그아웃
+            </div>
+            <div className="Header-user">
+              <Link to="/mypage">
+                <div className="Header-user-update">회원정보수정</div>
+              </Link>
+              &nbsp;&nbsp;·&nbsp;&nbsp;
+              <div className="Header-user-delete" onClick={deleteUserInfo}>
+                회원탈퇴
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

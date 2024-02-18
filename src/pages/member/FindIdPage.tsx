@@ -74,17 +74,21 @@ const FindIdPage = () => {
 
   const passwordReCheck = (e: any) => {
     const pwCheckBox = document.querySelector('.pwCheckBox');
-    if (
+    if (formData.user_password.length < 8) {
+      pwCheckBox?.classList.add('red');
+      pwCheckBox?.classList.remove('blue');
+      return setPwCheck('ⓘ 비밀번호는 최소 4자리 이상입니다.');
+    } else if (formData.user_password !== formData.user_pwCheck) {
+      pwCheckBox?.classList.add('red');
+      pwCheckBox?.classList.remove('blue');
+      return setPwCheck('ⓘ 비밀번호가 일치하지 않습니다.');
+    } else if (
       formData.user_password === formData.user_pwCheck &&
       formData.user_password !== ''
     ) {
       pwCheckBox?.classList.add('blue');
       pwCheckBox?.classList.remove('red');
       return setPwCheck('ⓘ 사용가능한 비밀번호입니다.');
-    } else if (formData.user_password !== formData.user_pwCheck) {
-      pwCheckBox?.classList.add('red');
-      pwCheckBox?.classList.remove('blue');
-      return setPwCheck('ⓘ 비밀번호가 일치하지 않습니다.');
     } else {
       pwCheckBox?.classList.remove('red');
       pwCheckBox?.classList.remove('blue');
@@ -105,6 +109,9 @@ const FindIdPage = () => {
           alert('비밀번호 재설정에 실패했습니다. 다시 시도해주세요');
           // console.error('비밀번호 찾기 실패:', response);
         }
+      } else if (pwCheck.includes('최소')) {
+        alert('비밀번호는 최소 8자리 이상입니다.');
+        pwRef.current?.focus();
       } else {
         alert('비밀번호가 일치하지 않습니다.');
         pwRef.current?.focus();
