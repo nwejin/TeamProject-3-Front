@@ -359,7 +359,7 @@ const NewsDetailPage = () => {
     <>
     {!validParams ? <ErrorPage /> : 
     <>
-        <main className="outer-wrapper">
+      <main className="outer-wrapper">
         <div className="detailWrapper">
           <div className="tool">
             <div className="goBackBtn" onClick={() => navigate(-1)}>
