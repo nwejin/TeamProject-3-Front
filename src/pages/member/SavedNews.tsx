@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import NewsList from '../../components/news/NewsList';
 import { useNavigate, Link } from 'react-router-dom';
+import '../../styles/SavedNews.scss'
 
 function SavedNews() {
   const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
@@ -49,7 +50,7 @@ function SavedNews() {
               news.map((data, index) => <NewsList key={index} data={data} />)
             ) : (
               <>
-              <div>
+              <div className='savedMsg'>
                 <p>아직 저장한 뉴스가 없습니다.</p>
                 <p>저장하기를 눌러 뉴스를 저장해보세요!</p>
               </div>
