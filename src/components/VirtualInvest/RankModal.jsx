@@ -22,32 +22,9 @@ const RankModal = ({ data }) => {
   // console.log(myRank);
 
   return (
-    <div
-      style={{
-        backgroundColor: 'white',
-        width: '25%',
-        height: '60%',
-        right: '5.5%',
-        bottom: '20%',
-        position: 'absolute',
-        zIndex: '100',
-        // border: '1px solid #d9dadb',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-      }}
-      className="userRankBox"
-    >
+    <div className="userRankBox">
       <h3 style={{ margin: '0.3rem auto', color: '#0056f3' }}>Top 3 랭킹</h3>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '90%',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-        }}
-      >
+      <div className="RankingBox0">
         {rank.slice(0, 3).map((data, index) => {
           const myRank =
             rank.findIndex((rank) => rank.userid === data.userid) + 1;
@@ -60,30 +37,8 @@ const RankModal = ({ data }) => {
           const profit = data.profit.toFixed(2);
 
           return (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                width: '95%',
-                height: '30%',
-                alignItems: 'center',
-                // border: '1px solid #d9dadb',
-                boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 5px',
-              }}
-              key={data.userid}
-            >
-              <div
-                style={{
-                  width: '90%',
-                  height: '100%',
-                  position: 'relative',
-                  textAlign: 'left',
-                  display: 'flex',
-                  flexDirection: '',
-                  alignItems: 'center',
-                  justifyContent: 'space-around',
-                }}
-              >
+            <div className="RankingBox1" key={data.userid}>
+              <div className="RankingBox2">
                 <FontAwesomeIcon
                   icon={faCrown}
                   className={iconClass}

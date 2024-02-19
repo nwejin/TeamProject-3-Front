@@ -66,6 +66,7 @@ const StockRate = () => {
           </Link>
         </ul>
         <div
+          className="mainCompanyBox"
           style={{
             // backgroundColor: 'pink',
             display: 'flex',
@@ -85,31 +86,13 @@ const StockRate = () => {
               <option value="NASDAQ:NFLX">넷플릭스 (NFLX)</option>
               <option value="NYSE:ORCL">오라클 (ORCL)</option>
             </select>
-            {/* <button onClick={Search}>기업 정보 조회하기</button> */}
           </div>
-          <div
-            style={{
-              // backgroundColor: 'blue',
-              display: 'flex',
-              height: '800px',
-              flexDirection: 'row',
-            }}
-          >
-            <div style={{ width: '60%', height: '100%' }}>
-              <div
-                style={{
-                  width: '100%',
-                  height: '50%',
-                }}
-              >
+          <div className="companyInfoBox">
+            <div className="CompanyInfoInner">
+              <div className="TickerBox">
                 <Ticker />
               </div>
-              <div
-                style={{
-                  width: '100%',
-                  height: '50%',
-                }}
-              >
+              <div className="CProfileBox">
                 <CompanyProfile search={searchSymbol} />
               </div>
               {/* <MarketData /> */}
