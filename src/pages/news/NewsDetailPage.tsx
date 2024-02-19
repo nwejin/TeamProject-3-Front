@@ -385,12 +385,12 @@ const NewsDetailPage = () => {
         
           {data ? (
             <>
-              <h1>{data.title}</h1>
+              <h1 className='detailTitle'>{data.title}</h1>
               <p className="detailDate">{data.date}</p>
               <br />
 
               <img className="detailImg" src={data.bigimg || ''} />
-              <h3>{data.subtitle}</h3>
+              <h3 className='detailSubT'>{data.subtitle}</h3>
 
               <p className="detailContent" onMouseUp={dragText}>
                 {wordsList.length > 0

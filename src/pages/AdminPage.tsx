@@ -146,7 +146,7 @@ const AdminPage = ({ data }: any) => {
               };
 
               return (
-                <div className="adminUserBox">
+                <div className="adminUserBox" key={user._id}>
                   <div className="cell postText adminUser">
                     <p>{user.isKakao === 0 ? '일반 유저' : '카카오 로그인'}</p>
                   </div>
