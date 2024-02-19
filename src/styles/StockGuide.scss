@@ -476,18 +476,34 @@
 }
 @media screen and (max-width: 1024px) and (min-width: 758px) {
 }
-@media screen and (max-width: 757px) {
+@media screen and (max-width: 758px) {
   .outer-wrapper {
     .guide-title {
       margin: 2vh 0;
       font-size: 22px;
+      .guide-help-box {
+        position: absolute;
+        padding: 20px;
+        z-index: 100;
+        top: -20px;
+        right: 50px;
+        font-weight: 400;
+        width: 50vw;
+        height: fit-content;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0px 0px 6px #b2b2b2;
+
+        font-size: 14px;
+      }
     }
     .stock-guide {
       display: block;
+
       .trade-control {
         width: 100%;
-        margin-bottom: 25vh;
-        height: 70vh;
+        margin-bottom: 30vh;
+        height: 85vh;
         .stock-info {
           // padding: 0 0 2vh 2vh;
           padding: 3vh;
@@ -529,11 +545,65 @@
           }
         }
         .order {
-          height: calc(70vh - (20px + 10.1vw));
+          height: 58.3vh;
           .order-book {
-            height: calc(70vh - (20px + 10.1vw));
+            height: 58vh;
+            .max-price {
+              font-size: 16px;
+              padding: 5px 0;
+            }
+            .min-price {
+              font-size: 16px;
+              padding: 5px 0;
+            }
+            .order-wrapper {
+              font-size: 16px;
+              padding: 5px 0;
+              align-items: center;
+              .daily {
+                font-size: 14px;
+              }
+            }
             .order-wrapper-scroll {
-              height: calc(70vh - (20px + 10.1vw));
+              height: 48.5vh;
+            }
+          }
+          .order-content {
+            font-size: 16px;
+            .order-method {
+              font-size: 16px;
+              .order-cash,
+              .order-credit,
+              .order-margin {
+                padding: 5px 0;
+              }
+            }
+            .order-price {
+              select {
+                padding: 5px;
+                font-size: 16px;
+              }
+              .order-market-price {
+                padding: 5px 0;
+                font-size: 16px;
+              }
+            }
+            .order-market-sell {
+              padding: 5px 0;
+              margin: 5px 0;
+              .order-market-value {
+                width: 10vw;
+                border-bottom: 1px #d9dadb solid;
+                text-align: right;
+                padding-bottom: 5px;
+              }
+            }
+            .buy-btn,
+            .sell-btn,
+            .modify-btn {
+              font-size: 16px;
+              padding: 5px;
+              margin-top: 20vh;
             }
           }
         }
@@ -549,7 +619,7 @@
           position: fixed;
           bottom: 6vh;
           width: 90%;
-          height: 18vh;
+          height: 23vh;
           background-color: white;
           z-index: 90;
         }
