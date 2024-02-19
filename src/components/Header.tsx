@@ -159,14 +159,17 @@ const Header = () => {
   useEffect(() => {
     const checkAdmin = () => {
       try {
-        console.log(userInfo);
+        // console.log(userInfos);
+        // if (userInfos.user_id == 'admin') {
+        //   setIsAdmin(true);
+        // }
         setIsAdmin(userInfos.isAdmin === 1);
       } catch (err) {
         console.log(err);
       }
     };
     checkAdmin();
-    console.log(isAdmin);
+    // console.log(isAdmin);
   }, [userInfos.user_id, isAdmin]);
 
   const moveTop = () => {

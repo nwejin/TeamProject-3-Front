@@ -481,9 +481,25 @@
     .guide-title {
       margin: 2vh 0;
       font-size: 22px;
+      .guide-help-box {
+        position: absolute;
+        padding: 20px;
+        z-index: 100;
+        top: -20px;
+        right: 50px;
+        font-weight: 400;
+        width: 50vw;
+        height: fit-content;
+        background-color: white;
+        border-radius: 5px;
+        box-shadow: 0px 0px 6px #b2b2b2;
+
+        font-size: 14px;
+      }
     }
     .stock-guide {
       display: block;
+
       .trade-control {
         width: 100%;
         margin-bottom: 30vh;

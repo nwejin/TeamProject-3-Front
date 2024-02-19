@@ -320,8 +320,8 @@ body {
       background-color: white;
       width: fit-content;
       height: fit-content;
-      top: 70px;
-      right: 14.5vw;
+      top: 57px;
+      right: 9.5vw;
       position: absolute;
       line-height: 30px;
       text-align: center;
@@ -409,7 +409,7 @@ body {
     width: 80%;
     transform: translate(0);
     transition: transform 0.3s ease;
-    box-shadow: 10px 0 10px rgba(0, 0, 0, 0.1);
+
     // box-shadow: 6px 0 0 0 rgba(0, 0, 0, 0.1);
     ul {
       list-style-type: none;
@@ -506,7 +506,7 @@ body {
   }
   .visible {
     display: block;
-    // left: 0;
     transform: translateX(100%);
+    box-shadow: 10px 0 10px rgba(0, 0, 0, 0.1);
   }
 }
