@@ -4,6 +4,7 @@ import { adminGetUser, deleteKakao, deleteUser } from '../services/apiService';
 import { useNavigate } from 'react-router';
 import { useCookies } from 'react-cookie';
 import '../styles/Admin.scss';
+import { Helmet } from 'react-helmet';
 
 interface User {
   _id: string;
@@ -75,6 +76,9 @@ const AdminPage = ({ data }: any) => {
 
   return (
     <>
+      <Helmet>
+        <title>개미운동 : 관리자페이지</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="page-title">관리자 페이지</div>
         <ul>

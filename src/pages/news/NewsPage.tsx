@@ -6,6 +6,7 @@ import { Link, useParams, NavLink } from 'react-router-dom';
 import '../../styles/NewsPage.scss';
 import Loading from '../../components/news/Loading';
 import NotFound from '../error/404Page';
+import { Helmet } from 'react-helmet';
 
 function NewsPage() {
   const { group } = useParams();
@@ -54,7 +55,12 @@ function NewsPage() {
 
   return (
     <>
-      {group && group === 'economy' || group === 'stock' || group === 'coin' ? (
+      <Helmet>
+        <title>개미운동 : 뉴스룸</title>
+      </Helmet>
+      {(group && group === 'economy') ||
+      group === 'stock' ||
+      group === 'coin' ? (
         <main className="outer-wrapper">
           <div>
             <div className="page-title">뉴스룸</div>

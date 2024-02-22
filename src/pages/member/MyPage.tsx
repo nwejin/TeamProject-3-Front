@@ -10,6 +10,7 @@ import {
   myPwChecker,
   userInfo,
 } from '../../services/apiService';
+import { Helmet } from 'react-helmet';
 const MyPage = () => {
   const [jwtCookie, setjwtCookie, removejwtCookie] = useCookies(['jwtCookie']);
   const [kakaoToken, setkakaoToken, removekakaoToken] = useCookies([
@@ -318,6 +319,9 @@ const MyPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>회원정보수정 : 개미운동</title>
+      </Helmet>
       <div className="mypage-wrapper ">
         <form name="register-form" method="post">
           <div className="mypage-title">회원 정보 수정</div>

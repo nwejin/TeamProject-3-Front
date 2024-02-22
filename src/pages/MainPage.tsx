@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import {
   kakaoLogin,
   mainBoards,
@@ -185,6 +186,9 @@ const MainPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>개미운동</title>
+      </Helmet>
       <div className="inner-wrapper">
         <Banner />
       </div>

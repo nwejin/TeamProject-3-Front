@@ -7,6 +7,7 @@ import {
   nicknameChecker,
   register,
 } from '../../services/apiService';
+import { Helmet } from 'react-helmet';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -260,6 +261,9 @@ const SignupPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>개미운동 : 회원가입</title>
+      </Helmet>
       <div className="form-box">
         <div className="page-title">회원가입</div>
         <form name="register-form" method="post">

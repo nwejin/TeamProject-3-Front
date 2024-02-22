@@ -8,6 +8,7 @@ import TradeBuy from '../../components/stockGuide/TradeBuy';
 import TradeSell from '../../components/stockGuide/TradeSell';
 import TradeModify from '../../components/stockGuide/TradeModify';
 import { Link, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const StockGuidePage = () => {
   const [isToggle, setIsToggle] = useState(false);
@@ -40,6 +41,9 @@ const StockGuidePage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>개미운동 : 주식길잡이</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="guide-title">
           주식 길잡이{' '}

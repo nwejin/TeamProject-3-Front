@@ -1,16 +1,23 @@
 import '../../styles/Community.scss';
 import CommuniutyHeader from '../../components/community/CommunityHeader';
 import CommunityRead from '../../components/community/CommunityRead';
+import { Helmet } from 'react-helmet';
 
 function CommunityReadPage() {
   return (
-    <div className="main">
-      <CommuniutyHeader />
+    <>
+      <Helmet>
+        <title>개미운동 : 커뮤니티</title>
+      </Helmet>
 
-      <div className="communityReadBox">
-        <CommunityRead />
+      <div className="main">
+        <CommuniutyHeader />
+
+        <div className="communityReadBox">
+          <CommunityRead />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

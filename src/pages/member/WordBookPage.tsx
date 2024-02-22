@@ -4,6 +4,7 @@ import '../../styles/WordBook.scss';
 import { deleteWord, wordBook } from '../../services/apiService';
 import { useCookies } from 'react-cookie';
 import { redirect, useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 const WordBookPage = () => {
   const [wordData, setWordData] = React.useState([
@@ -83,6 +84,9 @@ const WordBookPage = () => {
   // console.log(wordData);
   return (
     <>
+      <Helmet>
+        <title>단어장 : 개미운동</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="page-title">
           단어장
