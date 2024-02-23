@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import '../../styles/Error.scss';
+import { Helmet } from 'react-helmet';
 
 const AdminError = () => {
   return (
     <>
+      <Helmet>
+        <title>접근제한</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="error-wrapper">
           <img

@@ -6,6 +6,7 @@ import {
   recoverPost,
   readDelete,
 } from '../../services/apiService';
+import { Helmet } from 'react-helmet';
 
 const DeleteManage = () => {
   const [posts, setPosts] = useState([]);
@@ -37,6 +38,9 @@ const DeleteManage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>개미운동 : 관리자페이지</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="page-title">관리자 페이지</div>
         <ul>

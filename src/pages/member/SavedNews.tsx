@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import NewsList from '../../components/news/NewsList';
 import { useNavigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import '../../styles/SavedNews.scss'
+
 
 function SavedNews() {
   const [cookies, setCookie, removeCookie] = useCookies(['jwtCookie']);
@@ -38,6 +40,9 @@ function SavedNews() {
 
   return (
     <>
+      <Helmet>
+        <title>뉴스스크랩 : 개미운동</title>
+      </Helmet>
       <main className="outer-wrapper">
         <div className="page-title">뉴스 스크랩</div>
         <div className="wordBook-hr"></div>
@@ -50,14 +55,16 @@ function SavedNews() {
               news.map((data, index) => <NewsList key={index} data={data} />)
             ) : (
               <>
+
               <div className='savedMsg'>
                 <p>아직 저장한 뉴스가 없습니다.</p>
                 <p>저장하기를 눌러 뉴스를 저장해보세요!</p>
               </div>
 
-              <Link to='/news/economy'>
-                <div className='toNews'>뉴스룸 바로가기</div>
-              </Link>
+
+                <Link to="/news/economy">
+                  <div className="toNews">뉴스룸 바로가기</div>
+                </Link>
               </>
             )}
           </>

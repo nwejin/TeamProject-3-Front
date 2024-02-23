@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { adminGetPost, deleteCommunity } from '../../services/apiService';
 import '../../styles/Admin.scss';
+import { Helmet } from 'react-helmet';
 
 const CommunityManage = () => {
   const [posts, setPosts] = useState([]);
@@ -42,6 +43,9 @@ const CommunityManage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>개미운동 : 관리자페이지</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="page-title">관리자 페이지</div>
         <ul>

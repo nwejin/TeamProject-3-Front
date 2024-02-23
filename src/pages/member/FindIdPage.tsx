@@ -3,6 +3,7 @@
 import { useNavigate } from 'react-router';
 import { ChangePw, FindId, FindPw } from '../../services/apiService';
 import React, { useRef, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 const FindIdPage = () => {
   const navigate = useNavigate();
@@ -123,6 +124,9 @@ const FindIdPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>아이디/비밀번호 찾기 : 개미운동</title>
+      </Helmet>
       <div className="form-box">
         <div className="page-title">아이디 / 비밀번호 찾기</div>
         {findType === 'id' && (

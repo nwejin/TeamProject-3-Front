@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './../../styles/StockGuide.scss';
 import Virtual from '../../components/VirtualInvest/Virtual';
 import { Link, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const StockVirtualPage = () => {
   const [isToggle, setIsToggle] = useState(false);
@@ -20,6 +21,9 @@ const StockVirtualPage = () => {
   }, [location.pathname]);
   return (
     <>
+      <Helmet>
+        <title>개미운동 : 모의투자</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="guide-title">
           주식 길잡이{' '}

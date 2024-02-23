@@ -820,6 +820,7 @@ button {
 @media (min-width: 335px) and (max-width: 757px) {
   .main {
     // background-color: pink;
+    max-width: 90%;
   }
   .postBox {
     width: 100%;
@@ -896,6 +897,7 @@ button {
 @media (min-width: 758px) and (max-width: 1023px) {
   .main {
     // background-color: gray;
+    max-width: 80%;
   }
 
   .modalBackGround {

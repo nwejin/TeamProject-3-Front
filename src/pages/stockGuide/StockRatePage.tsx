@@ -8,6 +8,7 @@ import CompanyProfile from '../../components/CompanyInfo/CompanyProfile';
 
 import './../../styles/StockRate.scss';
 import './../../styles/StockGuide.scss';
+import { Helmet } from 'react-helmet';
 
 const StockRate = () => {
   const [searchSymbol, setSearchSymbol] = useState('NASDAQ:AAPL');
@@ -40,6 +41,9 @@ const StockRate = () => {
   }, [location.pathname]);
   return (
     <>
+      <Helmet>
+        <title>개미운동 : 기업정보</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="guide-title">
           주식 길잡이{' '}

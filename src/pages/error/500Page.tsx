@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import '../../styles/Error.scss';
+import { Helmet } from 'react-helmet';
 
 const ErrorPage = () => {
   return (
     <>
+      <Helmet>
+        <title>서버오류</title>
+      </Helmet>
       <div className="outer-wrapper">
         <div className="error-wrapper">
           <img
