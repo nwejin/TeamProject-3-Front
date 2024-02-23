@@ -26,7 +26,8 @@
 
 .refresh-btn {
     .material-symbols-outlined {
-        // font-size: 16px;
+        font-size: 19.5px;
+        font-optical-sizing: none;
         &:hover {
             color: $color-blue-1;
         }
@@ -172,11 +173,13 @@ article {
 
 
 .loading { 
-    display: flex;
-    height: 65vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // height: 65vh;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    text-align: center;
+    margin-top: 20vh;
 }
 
 .loading > p {

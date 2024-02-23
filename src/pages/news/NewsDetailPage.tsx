@@ -356,6 +356,7 @@ const NewsDetailPage = () => {
 
   return (
     <>
+
       <Helmet>
         <title>개미운동 : 뉴스룸</title>
       </Helmet>
@@ -406,6 +407,7 @@ const NewsDetailPage = () => {
               ) : (
                 <div></div>
               )}
+
             </div>
 
             {/* 모달 */}

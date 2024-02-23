@@ -575,6 +575,46 @@ p {
   height: 100%;
 }
 
+.userRankBox {
+  background-color: white;
+  width: 25%;
+  height: 60%;
+  right: 5.5%;
+  bottom: 20%;
+  position: absolute;
+  z-index: 100;
+  // border: 1px solid #d9dadb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.RankingBox0 {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  align-items: center;
+  justify-content: space-evenly;
+  .RankingBox1 {
+    display: flex;
+    justify-content: center;
+    width: 95%;
+    height: 30%;
+    align-items: center;
+    // border: 1px solid #d9dadb;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px;
+    .RankingBox2 {
+      width: 90%;
+      height: 100%;
+      position: relative;
+      text-align: left;
+      display: flex;
+
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+}
+
 @media (min-width: 335px) and (max-width: 757px) {
   .invest-wrapper {
     // background-color: pink;
@@ -603,14 +643,26 @@ p {
     // background-color: pink;
     top: -100%;
     left: -5%;
-    width: 100%;
-    height: 110vh;
+    width: 110%;
+    height: 90vh;
     .innerContent {
       display: flex;
       flex-direction: column;
       #detailChart1 {
         height: 40%;
       }
+
+      .historyBox {
+        width: 100%;
+      }
+    }
+    .userRankBox {
+      width: 90%;
+      top: 22%;
+    }
+
+    .RankingBox1 {
+      width: 100%;
     }
   }
 }
