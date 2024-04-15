@@ -14,7 +14,7 @@
 | 프로젝트 명 | 개미운동(AntMovement) |
 | --- | --- |
 | 개발 기간 | 2024.01.15 ~ 2024.02.05 (34일) |
-| 팀명 / 팀원 |  / 5명 ( 프론트 3명, 백 2명) |
+| 팀명 / 팀원 | 5명 ( 프론트 3명, 백 2명) |
 | github 주소 | - |
 | 배포 주소 |-|
 
@@ -92,12 +92,20 @@
 ## 🧑🏻‍💻 페이지별 상세 설명
 
 ### 메인 페이지
+<div> <span>페이지 소개: </span> 각 메뉴 이동 버튼 및 뉴스룸, 커뮤니티 게시글 정보 제공 </div>
+<br />
 <img src="https://github.com/nwejin/TeamProject-3-Front/assets/147528674/c971da3f-8b96-42a8-88d9-52154bfa8da1">
 
 ### 뉴스룸
+<div> <span>페이지 소개: </span> 카테고리 별 뉴스 게시글 제공 </div>
+<div> <span>주요 기능: </span> 뉴스 스크랩, 뉴스 내 모르는 단어 의미를 확인하고 나만의 단어장 등록 </div>
+<br />
 <img src="https://github.com/nwejin/TeamProject-3-Front/assets/147528674/81dad29a-66e0-49b3-9a1a-a80ed0921ec8"/>
 
 ### 주식길잡이 (주식)
+<div> <span>페이지 소개: </span> 주식 차트창 정보 제공</div>
+<div> <span>주요 기능: </span> 뉴스 스크랩, 뉴스 내 모르는 단어 의미를 확인하고 나만의 단어장 등록 </div>
+<br />
 <img src="https://github.com/nwejin/TeamProject-3-Front/assets/147528674/17b66b63-4f05-44f4-90cc-f6cb80e850a4"/>
 
 ### 주식길잡이 (기업정보)
@@ -130,6 +138,11 @@
 | 최예지 | 백엔드 | 카카오로그인, 뉴스 크롤링 |
 
 <br />
+
+## 🧑🏻‍💻 담당 역할
+커뮤니티 CRUD 기능
+모의투자 페이지 디자인
+
 
 ## 🧑🏻‍💻 실행 방법
 
