@@ -169,7 +169,7 @@ npm install
 # 6. info
 <br>
 
-문의사항 및 사용중 문제 발생 시, chlwls4m@gmail.com 으로 문의 바랍니다.
+문의사항 및 사용중 문제 발생 시, wonluvv229@gmail.com 으로 문의 바랍니다.
 
 
 
