@@ -85,7 +85,6 @@
 
 <img width="1009" alt="스크린샷 2024-04-12 오후 4 23 36" src="https://github.com/nwejin/TeamProject-3-Front/assets/147528674/5800db83-cec9-46b8-9b7c-ad55b2764f22">
 
-
 <br />
 
 
@@ -124,12 +123,4 @@
 
 ### 관리자 페이지
 <img src="https://github.com/nwejin/TeamProject-3-Front/assets/147528674/85d67873-36d2-4437-a0e9-39d79fd53748"/>
-
-<br />
-
-
-
-문의사항 및 사용중 문제 발생 시, chlwls4m@gmail.com 으로 문의 바랍니다.
-
-
 
