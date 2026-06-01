@@ -1,36 +1,3 @@
-<
-  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
-  <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
-  <img src="https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white">
-</div>
-
-### **BackEnd**
-<div>
- <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
- <img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
- <img src="https://img.shields.io/badge/.env-ECD53F?style=for-the-badge&logo=.env&logoColor=white">
- <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
-</div>
-
-### **Server**
-<div>
- <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
- <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
- <img src="https://img.shields.io/badge/amazonec2-FF9900?style=for-the-badge&logo=amazonec2s&logoColor=white">
-</div>
-
-### **DataBase**
-<div>
- <img src="https://img.shields.io/badge/mongoDB-47A248?style=for-the-badge&logo=mongoDB&logoColor=white"> 
- <img src="https://img.shields.io/badge/mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white">
-</div>
-
-### **ETC**
-<div>
- <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
- <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
- <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notions&logoColor=white">
-</div>
 
 <br />
 
